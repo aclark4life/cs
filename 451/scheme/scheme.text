@@ -1,0 +1,249 @@
+**** Getting in and out of Scheme
+
+To start up the Scheme interpreter type "scheme" at the unix command
+interpreter prompt.  Scheme will load itself, clear the screen, and print
+something like this:
+
+	Scheme saved on Monday July 24, 1989 at 6:29:15 PM
+	  Release 7.0.0 (beta)
+	  Microcode 10.86
+	  Runtime 14.46
+	  SF 4.8
+
+You can leave the Scheme interpreter by typing "(exit)" or "(quit)".
+
+	(exit)
+
+will halt the Scheme system; any information that was in the interpreter is
+lost, so this should not be done lightly.  Typing 
+
+	(quit)
+
+suspends the interpreter.  
+
+
+**** Files and Loading
+
+To load files of Scheme code, use the procedure LOAD, 
+
+	(LOAD-NOISILY '<file-name>)
+
+MIT Scheme extends the definition of LOAD in several ways:
+
+** The first argument to LOAD may be a list of filenames rather than a single
+filename, in which case it loads them all in order.
+
+** There is an optional second argument which specifies the environment in
+which the file is to be loaded.
+
+** There is an optional third argument which specifies the syntax table to use
+when syntaxing source code.
+
+** Load determines whether the file to be loaded is binary or source code, and
+performs the appropriate action.  By convention, files of source code have a
+pathname-type of "scm", and files of binary SCode have pathname-type "bin". 
+Native code binaries have pathname-type "com".
+
+** If the pathname given to LOAD does not specify the type or version of the
+file, it tries the following files in this order:
+
+	1.  The exact name given	"<name>"
+	2.  Type = "com"		"<name>.com"
+	3.  Type = "bin"		"<name>.bin"
+	4.  Type = "scm"		"<name>.scm"
+
+Filenames are interpreted relative to a working directory, which is initialized
+to the default directory at the time the interpreter was started.  The working
+directory can be obtained or modified with the following procedures:
+
+	(WORKING-DIRECTORY-PATHNAME)
+	(SET-WORKING-DIRECTORY-PATHNAME! <new-working-directory>)
+
+For typing convenience, there are aliases for these procedures, called PWD and
+CD, respectively.  The long versions of the names are intended to be used in
+programs, the short names for interactive use.
+
+**** The Read-Eval-Print Loop
+
+When you first start up Scheme, you will be typing at a program called the
+"Read-Eval-Print Loop" (abbreviated REPL).  It displays a prompt at the left
+hand side of the screen whenever it is waiting for input.  You then type an
+expression (terminating it with RETURN).  Scheme evaluates the expression,
+prints the result, and gives you another prompt.
+
+** The prompt and level number
+
+That prompt normally has the form
+
+	1 ]=>
+
+The "1" in the prompt is a "level number", which is always a positive
+integer.  This number is incremented under certain circumstances, the most
+common being an error.  For example, here is what you will see if you type 
+"f o o RETURN" after starting Scheme:
+
+	1 ]=> foo
+
+	Unbound Variable FOO
+
+	2 Error->
+
+In this case, the level number has been incremented to "2", which indicates
+that a new REPL has been started (also the prompt string has been changed to
+remind you that the REPL was started because of an error).  The "2" means that
+this new REPL is "over" the old one.  The original REPL still exists, and is
+waiting for you to return to it.  Meanwhile, any changes you make to this REPL
+will not affect the original one.  Furthermore, if an error occurs while you
+are in this REPL, yet another REPL will be started, and the level number will
+be increased to "3".  This can continue ad infinitum, but normally it is rare
+to use more than a few levels.
+
+The normal way to get out of an error REPL and back to the top level REPL is to
+use the C-G interrupt.  This is a single keystroke command executed by holding
+down the "CTRL" key and pressing the "G" key.  C-G always terminates whatever
+is running and returns you to the top level REPL immediately.
+
+NOTE: The appearance of the Error prompt does not mean that the Scheme system
+is in some funny inconsistent state which you should avoid.  It is merely a
+reminder that your program was in error (an illegal operation was attempted,
+but it was detected and avoided, so Scheme is fine).  Often the best way to
+find out what is in error is to do some "poking around" in the error REPL.  If
+you abort out of it, the context of the error will be destroyed, and you may
+not be able to find out what happened.
+
+
+**** Interrupts
+
+This brings up the subject of interrupts.  Scheme has two interrupt keys under
+Unix (other systems may have more than two): C-G and C-C.  The C-G key causes
+the current Scheme program to stop immediately and returns you to the top level
+REPL.  C-C prompts you for another character and performs some action based on
+that character.  It is not necessary to type RETURN after C-G or C-C, nor is it
+needed after the character that C-C will ask you for.  
+
+
+**** PROCEED
+
+Another way of exiting REPLs is to use the PROCEED procedure.  There are two
+ways to use this procedure from inside an error REPL (usage from other kinds of
+REPL is not necessarily the same):
+
+** (PROCEED) means to retry the expression that caused the error.  Unless you
+have done something to fix the error condition, this will just cause the error
+to happen all over again.  In the example above with the unbound variable FOO,
+the proper way to use PROCEED is to first define FOO to have a value, then
+evaluate (PROCEED).  Your program should then continue from that point
+normally.
+
+** (PROCEED <value>) means to return <value> in place of the expression that
+caused the error.  Thus, if you cannot easily fix a particular bug, but you
+know what the proper value for the expression is, you can continue the
+computation this way.
+
+
+* SF (Syntax File - compiling for fast loading)
+
+SF is the program which transforms source code files into binary SCode
+form.  It performs numerous optimizations which can make your programs
+run considerably faster.  Also, binary files load very quickly
+compared to source files.
+
+The simplest way to use SF is just to say:
+
+	(SF <filename>)
+
+This will cause your file to be transformed, and the new binary file
+to be written out with the same name, but with pathname-type "bin".
+If you do not specify a pathname-type on the input file, "scm" is
+assumed.  Version numbers are preserved, that is, if the input file
+has a version number, the output file will have the same version
+number.
+
+Like LOAD, the first argument to SF may be a list of filenames instead
+of a single filename.
+
+SF takes an optional second argument, which is the filename of the
+output file.  If this argument is a directory, then the output file
+has its normal name but uses that directory instead.
+
+SF takes an optional third argument, which if given, causes an extra
+file to be written containing some information about the compilation
+of your file.  The third argument is a filename, which is treated just
+like the second argument.  Currently this is not too useful, but when
+SF is connected to the native code compiler it will produce
+considerably more information.
+
+If either the second or third argument is the empty string, the normal
+default filename is used.
+
+By default the information file is written to the same directory as
+the output file, except that the pathname-type is "unf".  If you want
+information files to be generated all the time, set the variable SFU?
+to true -- otherwise they will not be generated unless you supply a
+third argument to SF.
+
+* GNU Emacs interface
+
+There is an interface library, called "xscheme", distributed with both
+MIT Scheme and GNU Emacs, which facilitates running Scheme as a
+subprocess of Emacs.  If you wish to use this interface, please
+install the version of "xscheme.el" that comes with MIT Scheme, as it
+is guaranteed to be correct for your version of Scheme.
+
+To invoke Scheme from Emacs, use M-x run-scheme, which is defined when
+the library "scheme" is loaded.  You can also give run-scheme a prefix
+argument, in which case it will allow you to edit the command line
+which is used to invoke Scheme.  DO NOT remove the "-emacs" option!
+
+Scheme will be started up as a subprocess in a buffer called
+"*scheme*".  This buffer will be in scheme-interaction-mode and all
+output from the Scheme process will go there.  Also, the mode line
+will be changed to have information like the following in it between
+the filename and the mode information:
+
+	1 [Evaluator]		(Scheme Interaction: input)
+
+The first field is the level number.
+
+The second field describes the type of REPL that is running.  Other
+values include:
+
+	[Debugger]
+	[Where]
+
+The mode after Scheme Interaction is one of:
+	input	Scheme is waiting for input
+	run	Scheme is running your code
+	gc	Scheme is garbage collecting
+
+When "xscheme" is loaded, scheme-mode is extended to include commands
+for evaluating expressions (please do a <HELP>-M in the *scheme*
+buffer for more up-to-date information):
+
+** M-o (xscheme-send-buffer) evaluates the current buffer.  This has
+no effect in the "*scheme*" buffer.
+
+** M-z (xscheme-send-definition) evaluates the current definition.
+This is also bound to M-C-x.
+
+** M-C-z (xscheme-send-region) evaluates the current region.
+
+** C-x C-e (xscheme-send-previous-expression) evaluates the expression
+to the left of point.  This is also bound to M-RET.
+
+** C-c C-y (xscheme-yank-previous-send) yanks the last text that was
+evaluated.
+
+Also, the following commands provide interrupt capability:
+
+** C-c C-c (xscheme-send-control-g-interrupt) is like typing C-g when
+running Scheme without Emacs.
+
+** C-c C-x (xscheme-send-control-x-interrupt) is like typing C-c X
+when running Scheme without Emacs.
+
+** C-c C-u (xscheme-send-control-u-interrupt) is like typing C-c U
+when running Scheme without Emacs.
+
+** C-c C-b (xscheme-send-breakpoint-interrupt) is like typing C-c B
+when running Scheme without Emacs.

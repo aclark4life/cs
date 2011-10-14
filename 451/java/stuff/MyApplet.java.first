@@ -1,0 +1,57 @@
+import java.applet.Applet;
+import java.awt.*;
+        
+  public class MyApplet extends Applet implements Runnable
+  {
+      Thread t;
+	int x=0,y=0;
+	public void start()
+	{
+		t = new Thread(this);
+		t.start();
+	}
+        /*public void init()
+        {
+        } */
+
+        /* public final static color cyan; */
+
+	public void run()
+	{
+		while (true)
+		{
+			repaint();
+			try 
+			{
+				t.sleep(10);
+			} 
+			catch (Exception e) 
+			{
+			}
+		}
+	}
+
+      public void paint(Graphics g)
+      {
+	/*  public abstract void loop() 
+  	    public abstract void stop()
+	*/
+           g.drawString("A     L     E     X", 230,250 ); 
+
+	    for ( i = 0; i < 250 ; i++) {
+
+	   	x=(int)Math.sin(x);y=y+1;
+	    	g.drawOval(x,y,11,11);
+            	x+=1;
+
+	    } 
+	   /* x=x+1;y=y+1; */
+	   /* if ((x==230) && (y==250))y=y-1; */
+
+	    if (x==230)x=0;
+	    if (y==230)y=0;
+		
+/*	    if (x=250) stop(); */
+/*          while (x<250) repaint();*/
+      }
+  }

@@ -1,0 +1,10 @@
+Just when you thought it was safe to return a token:
+some tokens to add to your list
+
+ID_TOKEN
+FLOATING_POINT_LITERAL_TOKEN
+INTEGER_LITERAL_TOKEN 
+BOOLEAN_LITERAL_TOKEN
+CHARACTER_LITERAL_TOKEN
+STRING_LITERAL_TOKEN
+

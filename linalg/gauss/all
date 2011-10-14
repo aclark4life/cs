@@ -1,0 +1,16 @@
+#!/bin/sh
+g < ex10p59.hom
+g < ex11p59.hom
+g < ex5p50
+g < ex6p54
+g < ex7p56.choke
+g < ex8p57.choke
+g < ex9p57.nosol
+g < in/in
+g < in/in2
+g < in/in3
+g < in/in4
+g < in/in5
+g < in/in6
+g < in/in7
+g < in/in8

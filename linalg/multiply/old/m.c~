@@ -1,0 +1,133 @@
+/* m.c - Multiply Two mxn Matrices 
+ * Alex Clark - August 1998  
+ */
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int m,p,n;
+int **A,**B,**C;
+
+void get_first();
+void get_matrices();
+void multiply_matrices();
+void print_answer();
+void handle_memory();
+
+
+void main(int argc, char *argv[]) {
+        if (argc!=1) {
+                printf("Sorry, I don't take command line arguments.\n");
+                exit(-1);
+	}
+        else {
+		get_first();
+		get_matrices();
+		multiply_matrices();
+		print_answer();
+	}
+}
+void multiply_matrices() {
+        int i,j,k;
+	int s = 0;
+
+        for (k=1;k<=    n    ;k++){                 // THREE 
+                for (i=1;i<=   m    ;i++){          // ONE 
+                        for (j=1;j<=  p   ;j++){    // TWO 
+                                s=s+((A[i][j])*(B[j][k]));
+
+
+
+				//printf ("%d * %d = %d\n",A[i][j],B[j][k],s);
+				//printf ("%d ",B[j][k]);
+				//printf ("%d %d\n",i,j);
+				//printf ("%d ",A[1][1]);
+				//printf ("%d ",A[1][2]);
+				//printf ("%d ",A[2][1]);
+				//printf ("%d ",A[2][2]);
+
+
+                                if (j==p)
+				{
+                                	C[k][i]=s;
+					//printf ("%d ",C[k][i] );
+					//printf ("[%d %d]", k,i );
+                                }
+                        }
+			//printf ("\n");
+			s=0;
+                }
+	}
+}
+void get_matrices()
+{
+        int i,j;
+        char *string=(char *)malloc(1024*sizeof(char));
+        char *tokenPtr;
+	handle_memory();
+        for (i=1;i<=m;i++){
+                fgets(string,1024,stdin);
+                tokenPtr=strtok(string," ");
+                for (j=1;tokenPtr!=NULL;j++)
+		{
+                        A[i][j]=atoi(tokenPtr);
+			//printf("%d ",A[i][j]);
+                        tokenPtr=strtok(NULL," ");
+		}
+		//printf ("\n");
+        }
+        for (i=1;i<=p;i++){
+                fgets(string,1024,stdin);
+                tokenPtr=strtok(string," ");
+                for (j=1;tokenPtr!=NULL;j++)
+		{
+                        B[i][j]=atoi(tokenPtr);
+			//printf("%d ",B[i][j]);
+                        tokenPtr=strtok(NULL," ");
+		}
+		//printf ("\n");
+        }
+}
+void get_first()
+{
+	int i;
+	int in[4];
+	char *tokenPtr;
+        char *string=(char *)malloc(1024*sizeof(char));
+	fgets(string,1024,stdin);
+        tokenPtr=strtok(string," ");
+        for (i=1;tokenPtr!=NULL;i++)
+	{
+        	in[i]=atoi(tokenPtr);
+		//printf("%d ",in[i]);
+                tokenPtr=strtok(NULL," ");
+		m=in[1]; p=in[2]; n=in[3];
+	}
+	//printf ("\n");
+}
+void handle_memory()
+{
+	int i,j;
+	A=(int **)malloc(m*sizeof(int *));
+        C=(int **)malloc(m*sizeof(int *));
+        B=(int **)malloc(p*sizeof(int *));
+        for (i=1;i<=p;i++){
+                A[i]=(int *)malloc(p*sizeof(int));
+        }
+        for (i=1;i<=n;i++){
+                B[i]=(int *)malloc(n*sizeof(int));
+        }
+        for (i=1;i<=n;i++){
+                C[i]=(int *)malloc(n*sizeof(int));
+        }
+}
+void print_answer() {
+        int i,j;
+        for (i=1;i<=m;i++) {
+                for (j=1;j<=n;j++) {
+                        printf ("%d ",C[j][i]);
+                }
+        	printf ("\n");
+        }
+}

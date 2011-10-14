@@ -1,0 +1,35 @@
+
+
+
+                           CS 451
+                 Programming Assignment #5
+                 Logic Programming: Prolog
+                       Magic Squares
+
+                   Due 10/30/96, in class
+
+
+The goal of this assignment is to get  acquainted  with  the
+Prolog  programming  language.   Write two generate and test
+style Prolog programs.  The  first  should  output  a  magic
+square  of  size three.  The second should counts the number
+of magic squares of size 3.
+
+
+What to hand in
+
+(1)  A listing of your program.
+
+(2)  A printout of the output.
+
+
+
+
+
+
+
+
+CS451, Fall '96             -1-           Assignment #5
+
+
+

@@ -1,0 +1,32 @@
+  for (i = j = 1;  i <= M && j <= N;  j ++)
+     {
+      for  (k = i;  k <= M && A [k][j] == 0;  k ++)
+        /* Do nothing */ ;
+      if  (k == M + 1)
+          {
+           None found;
+           Mark j as a free variable;
+           continue;
+          } 
+        else
+          {
+           if  (i != k)
+               Swap rows i and k;
+           Divide every entry in row i by A [i] [j];
+           for  (k = 1;  k <= M;  k ++)
+             if  (k != i)
+                 Subtract A[k][j] times row i from row k;
+           i++;
+          }
+     }
+   if  (i<=M and any of the entries A [i .. M] [N + 1] are not zero)
+       There are no solutions;
+      else
+        for  (Each row)
+          {
+           The variable repesented by the first non-zero entry
+           in that row is equal to the last column minus all  
+           the other non-zero entries in that row times their 
+           corresponding free variable.
+          }
+

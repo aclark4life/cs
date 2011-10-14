@@ -1,0 +1,102 @@
+From kbg@peace Tue Apr  1 09:09:07 1997
+Return-Path: <gfurr@csmaster.loyola.edu>
+Received: from peace.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id JAA24090; Tue, 1 Apr 1997 09:09:06 -0500
+Received: by peace.loyola.edu (SMI-8.6/SMI-SVR4)
+	id JAA28353; Tue, 1 Apr 1997 09:10:25 -0500
+Received: from peace.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id LAA02207; Mon, 10 Feb 1997 11:05:00 -0500
+Received: by peace.loyola.edu (SMI-8.6/SMI-SVR4)
+	id LAA09236; Mon, 10 Feb 1997 11:10:49 -0500
+Date: Mon, 10 Feb 1997 11:10:49 -0500
+Message-Id: <199702101610.LAA09236@peace.loyola.edu>
+From: keith brian gallagher <kbg@peace>
+To: darnett@csmaster.loyola.edu, gfurr@csmaster.loyola.edu,
+        dpapouli@csmaster.loyola.edu, srivera@csmaster.loyola.edu,
+        jruggier@csmaster.loyola.edu, mstone@csmaster.loyola.edu,
+        mbarkett@csmaster.loyola.edu, vbekkerm@csmaster.loyola.edu,
+        jgregoir@csmaster.loyola.edu, dharmon@csmaster.loyola.edu,
+        thorky@csmaster.loyola.edu, ehubbard@csmaster.loyola.edu,
+        mmachore@csmaster.loyola.edu, rbecker@csmaster.loyola.edu,
+        dsundell@csmaster.loyola.edu, kbg@csmaster.loyola.edu
+Subject: next.
+Sender: gfurr@csmaster.loyola.edu
+Content-Length: 1911
+Status: OR
+
+
+
+CS 364                                                           Spring 97 
+
+                              Assignment 2
+
+
+                       Due on ___________ by email to kbg
+
+
+The objective of this assignment is get more practice writing, debugging
+and testing C programs in the C/Unix/Emacs Environment. You will also
+learn how to write C programs that process arbitrary files. And write
+Unix shell scripts.
+
+Part 0:
+
+Write a C program that accepts the name of a file of integers from
+stdin or as a command line argument and then writes each sorted run to a
+separate, distinct file.  A "run" is a sorted subsequence of maximal length.
+
+   
+For example, if the file "numbers" has the contents 1 2 3 1 2 4 1 2 1 2,
+the output would be to 4 files with contents 1 2 3; 1 2 3; 1 2; and 1 2.
+You will not know how many runs are in a file until the processing is completed.
+
+The program can be run in two distinct modes:
+
+ 1. splitter < numbers
+
+or 
+
+ 2. splitter numbers
+
+Restriction:
+
+    For the output, only one call to fopen and fclose is permitted;
+    they may be used repeatedly. See the tmpnam function in your C reference.
+
+
+See files ~kbg/364/C/stdin.c,  ~kbg/364/C/tmpnam.c and man page on "ln."
+
+Part 1:
+
+Write a C program that merges 2 files of runs into a third sorted file.
+You may assume that the only files in the current working directory are the
+ones to be merged and the executable image of the merging program.
+
+For example, if the files are as follows:
+
+  f1:  2 3 4 5 6
+  f2:  3 4 6 9
+  f3:  1 5 7 9
+
+An intermediate output, combing f1 and f2, would be:
+
+  ???: 2 3 3 4 4 5 6 6 9 
+
+The final output would be one file, named ???, with contents 1 2 3 3 4 4 5 5
+6 6 7 9 9.  Repeats are to managed reasonably.
+
+
+Part 2:
+
+Use the program of part 1 to sort a family of files of runs by
+repeated merging. 
+
+   HINT: Write a shell script.
+
+This document is in ~kbg/364/adm/2.97  rev 2/97
+
+
+
+
+
+

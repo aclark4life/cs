@@ -1,0 +1,53 @@
+> 
+> I have started adding RCS dirs everywhere.....this means we are using RCS as a
+> version control.  Gwennie and Alex, I have photo copies of the RCS page from
+> the emacs manual for using emacs....man rcs to find out how to use it with vi,
+> if you wish...
+> 
+
+consider adding 
+   make checkin 
+and
+   make checkout
+
+
+- dave
+> matt
+> -- 
+> --------------------------Matthew Aloysious Brannigan-------------------------
+> |				mab@acm.org				     |
+> |                     http://www.cs.loyola.edu/~mbrannig                     |
+> ---- "The average hacker could....." Me --------------------------------------
+> 
+
+
+From mab@justice.loyola.edu Wed Feb  5 13:30:24 1997
+Return-Path: <mab@foundation.loyola.edu>
+Received: from foundation.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id NAA09436; Wed, 5 Feb 1997 13:30:23 -0500
+Received: (from mab@localhost)
+          by foundation.loyola.edu (8.8.4/8.8.4)
+	  id NAA04103; Wed, 5 Feb 1997 13:36:36 -0500
+From: "Matthew A. Brannigan" <mab@justice.loyola.edu>
+Message-Id: <199702051836.NAA04103@foundation.loyola.edu>
+Subject: RCS
+To: gfurr@csmaster.loyola.edu, aclark@csmaster.loyola.edu,
+        bduncan@csmaster.loyola.edu, binkley@csmaster.loyola.edu
+Date: Wed, 5 Feb 1997 13:36:36 -0500 (EST)
+Reply-To: "Matthew A. Brannigan" <mab@acm.org>
+Content-Type: text
+Content-Length: 524
+Status: OR
+
+I have started adding RCS dirs everywhere.....this means we are using RCS as a
+version control.  Gwennie and Alex, I have photo copies of the RCS page from
+the emacs manual for using emacs....man rcs to find out how to use it with vi,
+if you wish...
+
+matt
+-- 
+--------------------------Matthew Aloysious Brannigan-------------------------
+|				mab@acm.org				     |
+|                     http://www.cs.loyola.edu/~mbrannig                     |
+---- "The average hacker could....." Me --------------------------------------
+

@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<string.h>
+#include <stdlib.h>
+
+int n;
+int **A,**B,**C;
+void get_n();
+void get_matrices();
+void prove_it();
+
+void main(int argc, char *argv[])
+{
+        if (argc!=1)
+        {
+                printf("Sorry, I don't take command line arguments.\n");
+                exit(-1);
+	}
+        else
+	{
+		get_n();
+		get_matrices();
+//		prove_it();
+	}
+}
+void get_n()
+{
+	char *string=(char *)malloc(1024*sizeof(char)); //scanf("%d",&n);                                 
+	fgets(string,1024,stdin);	
+	//printf ("%s\n",string);
+	n=atoi(string);
+	printf("%d\n",n);
+}
+void get_matrices()
+{
+	int i,j;
+	char *string=(char *)malloc(1024*sizeof(char));
+	char *tokenPtr;
+
+	A=(int **)malloc(n*sizeof(int *));
+	B=(int **)malloc(n*sizeof(int *));
+	C=(int **)malloc(n*sizeof(int *));
+
+	for (i=1;i<=n;i++)		
+        {
+                A[i]=(int *)malloc(n*sizeof(int));
+                B[i]=(int *)malloc(n*sizeof(int));
+                C[i]=(int *)malloc(n*sizeof(int));
+        }
+
+	for (i=1;i<=n;i++)				//GET A
+	{ 
+		fgets(string,1024,stdin); //while(fgets(string,1024,stdin))
+        	{
+			tokenPtr=strtok(string," "); //printf("%s",string);
+			while (tokenPtr!=NULL)
+			{
+				printf("%d",atoi(tokenPtr)); //A[i][j]=atoi(tokenPtr); 
+				printf("i=%d\n",i); 
+				tokenPtr=strtok(NULL," ");
+			}
+			printf("\n");
+			//for (i=1;i<=n;i++){ for (j=1;j<=n;j++)		{ } }
+        	}
+	}
+
+
+	for (i=1;i<=n;i++)				// GET B
+	{ 
+		fgets(string,1024,stdin); 
+        	{
+			tokenPtr=strtok(string," "); 
+			while (tokenPtr!=NULL)
+			{
+				printf("%d",atoi(tokenPtr)); 
+				tokenPtr=strtok(NULL," ");
+			}
+			printf("\n");
+        	}
+	}
+}
+void prove_it()
+{
+	int i,j;
+	for (i=1;i<=n;i++)		
+        {
+		for (j=1;j<=n;j++)		
+		{
+                	A[i][j]=0;
+			printf ( "%d",A[i][j]);	
+//                	B[i][j]=0;
+//			printf ( "%d",B[i][j]);	
+ //               	C[i][j]=0;
+//			printf ( "%d",C[i][j]);	
+		}
+		printf ( "\n");	
+        }
+}

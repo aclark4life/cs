@@ -1,0 +1,129 @@
+cs:ml
+Standard ML of New Jersey, Version 75, November 11, 1991
+Arrays have changed; see Release Notes
+val it = () : unit
+- use "examples.ml";
+[opening examples.ml]
+val add = fn : int -> int -> int
+val add2 = fn : int * int -> int
+examples.ml:14.6-14.25 Warning: binding not exhaustive
+        head :: tail = ...
+val last = fn : 'a list -> 'a list
+val length = fn : 'a list -> int
+val length = fn : 'a list -> int
+val length = fn : 'a list -> int
+val append = fn : 'a list -> 'a list -> 'a list
+val reverse = fn : 'a list -> 'a list
+val reverse2_helper = fn : 'a list -> 'a list -> 'a list
+val reverse2 = fn : 'a list -> 'a list
+val map = fn : ('a -> 'b) -> 'a list -> 'b list
+[closing examples.ml]
+val it = () : unit
+
+- add 4 5;
+val it = 9 : int
+
+- add 5;
+val it = fn : int -> int
+
+- val l = [1,2,3,4,4,1,2,2];
+val l = [1,2,3,4,4,1,2,2] : int list
+
+- last l;
+val it = [2] : int list
+
+**** try last [[1], [3,4,5], [2]] ;
+**** Can you first predict the answer?  do the same for length (see below).
+
+
+- length l;
+val it = 8 : int
+
+- length [1,2,5];
+val it = 3 : int
+
+- append [1,2] [5,6];
+val it = [1,2,5,6] : int list
+
+- val l2 = append [1,2] [7,8,9];
+val l2 = [1,2,7,8,9] : int list
+
+- reverse l2;
+val it = [9,8,7,2,1] : int list
+
+- reverse2 l2
+= ;
+val it = [9,8,7,2,1] : int list
+
+- reverse (append l l2);
+val it = [9,8,7,2,1,2,2,1,4,4,3,2,...] : int list
+
+- use "examples2.ml";
+[opening examples2.ml]
+val length = fn : 'a list -> int
+val length2_helper = fn : 'a list -> int -> int
+val length2 = fn : 'a list -> int
+val factorial1 = fn : int -> int
+val factorial_helper = fn : int -> int -> int
+val factorial2 = fn : int -> int
+val fix_first_argument = fn : ('a -> 'b) -> 'a -> 'b
+val increment = fn : int -> int
+val plus2 = fn : int -> int
+[closing examples2.ml]
+val it = () : unit
+
+- length2 l;
+val it = 8 : int
+
+- factorial1 5;
+val it = 120 : int
+
+- factorial2 6;
+val it = 720 : int
+
+**** for what value of 'n' is there a difference in execution time between
+**** factorial1 and factorial2?  Is the value different from the one for Scheme?
+
+
+- increment 4;
+val it = 5 : int
+
+- map increment l;
+val it = [2,3,4,5,5,2,3,3] : int list
+
+- l;
+val it = [1,2,3,4,4,1,2,2] : int list
+
+- plus2;
+val it = fn : int -> int
+
+- plus2 5;
+val it = 7 : int
+
+- use "7-1P.ml";
+[opening 7-1P.ml]
+val remove_dups_helper = fn : ''a list -> ''a list -> ''a list
+val remove_dups = fn : ''a list -> ''a list
+val remove_dups2 = fn : ''a list -> ''a list
+val inc_count = fn : 'a * int -> 'a * int
+val add_to_counts = fn : ''a -> (''a * int) list -> (''a * int) list
+val counts_helper = fn : ''a list -> (''a * int) list -> (''a * int) list
+val counts = fn : ''a list -> (''a * int) list
+[closing 7-1P.ml]
+val it = () : unit
+
+- remove_dups [1,1,2,3,3,3,4,5,5,5,5] ;
+val it = [5,4,3,2,1] : int list
+
+- remove_dups2 [1,1,2,3,3,3,4,5,5,5,5] ;
+val it = [1,2,3,4,5] : int list
+
+- counts [1,1,2,3,3,3,4,5,5,5,5] ;
+val it = [(1,2),(2,1),(3,3),(4,1),(5,4)] : (int * int) list
+
+- counts [[1],[1],[1,2]] ;
+val it = [([1],2),([1,2],1)] : (int list * int) list
+
+- counts;
+val it = fn : ''a list -> (''a * int) list
+- ^D

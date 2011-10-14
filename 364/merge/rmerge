@@ -1,0 +1,3 @@
+#!/bin/csh
+exec merge
+end

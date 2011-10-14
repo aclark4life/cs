@@ -1,0 +1,3 @@
+#/bin/tcsh
+echo st.c
+echo symbol.c

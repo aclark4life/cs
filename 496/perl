@@ -1,0 +1,4 @@
+* the following is perl script used to run the Bootp Web Tool
+
+* it lives in /usr/local/etc/httpd/cgi-bin
+

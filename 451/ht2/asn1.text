@@ -1,0 +1,129 @@
+
+
+                           CS 451
+              Programming Assignment #1 and #2
+                 Imperative programming: C
+            Compiler Identifiers in a Hash Table
+      Due 9/11/96 (part 1), 9/18/96 (part 2), in class
+
+
+Introduction
+
+     The  goal  of  this  assignment  is  to  get  (further)
+acquainted  with  the  C programming language. There are two
+parts to this assignment: the writing of a  hash  table  and
+the  writing  of  a  compiler symbol table based on the hash
+table.
+
+Part 1:
+
+                      Pervasive idea:
+the hash table functions should work for any (pointer) data type.
+
+
+A hash table has six parts: an array of  "buckets",  a  con-
+structor,  a  destructor,  and  three access functions.  For
+debugging, we will also include a print function,  ht_print.
+A  bucket  is simply a pointer to a linked list.  All values
+having the same "hash value" are stored in the  same  linked
+list.   Hash values are computed from the data records to be
+stored in the hash table by a hash function.  To be indepen-
+dent  of  the  type  of  data  in  the hash table, the table
+requires a hash function and  a  comparison  function.   The
+hash  function  converts  a  data item into an integer.  The
+comparison function compares two data items.
+
+     The constructor ht_initialize allocates  space  for  an
+empty  hash  table,  initializes the size, and hash and com-
+parison functions, and sets all  buckets  to  empty  (NULL).
+The  destructor  ht_free  frees  all memory allocated by the
+hash table code for a hash table.  The  three  access  func-
+tions  ht_delete, ht_insert, and ht_lookup perform the obvi-
+ous operations.
+
+     Your implementation must use the  type  definitions  in
+htP.h.   I  have  also  provided  a simple driver program in
+main.c that you should use to test your program. I will  use
+the interface provided by this driver to grade your program.
+Finally, you must use the files  ht.h,  ht.c  and  Makefile.
+Only  ht.c  requires  modification.  Don't  modify the other
+files.
+
+What to Hand in
+
+(1)  Place a stripped copy of the  executable-named hash in
+     your  home  directory until the project is graded (type
+     "strip hash ; mv hash ~" when you are done).
+
+(2)  In class, hand in the  source  listing  for  ht.c  only
+     (printed with enscript -2r or alike).
+
+Part 2: Symbol Table
+
+If you implemented Part 1 correctly,  this  part  should  be
+trivial!   You  cannot  change  any  of your hash table code
+without my approval.
+
+     A symbol table has eight parts: a stack of scopes  (yes
+you  can  create  a stack ADT), a constructor, a destructor,
+and five functions.  You can limit the stack of scopes to  a
+maximum depth if you like.  Each scope contains a hash table
+of symbols.  Each symbol can have a name (a string), a  kind
+(perhaps coded as an integer), and any thing else you like.
+
+     The  symbol  table  functions  are   st_add,   st_dump,
+st_lookup, st_open_scope, and st_close_scope.  st_add adds a
+symbol to the  current  scope.   st_dump  prints  each  open
+scope.   st_lookup returns the scope level for a symbol or -1
+if not found.  st_open_scope  pushes  a  new  scope  on  the
+stack.   st_close_scope  pops  the  current  scope  from the
+stack.
+
+     I have provided some of the code for Part 2.   You  can
+copy-but  not modify-the files main2.c, stP.h, st.h, util.h,
+and util.c.  You can copy and  modify  the  files  st.c  and
+Makefile2.   You  must  create  the files for the symbol ADT
+(symbol.h, symbolP.h, and symbol.c).  By way of  example,  I
+included my symbol.h.
+
+Notes
+
+(1)  You must use the driver in main2.c to develop your pro-
+     gram; I will use it's interface to grade your program.
+
+(2)  If you think you need to modify any  other  files,  you
+     must first get my permission!
+
+What to Hand in
+
+(1)  Place a stripped copy  of  the  executable-named  st-it
+     your home directory until the project is graded.
+
+(2)  In  class,  hand  in  the  source  listing  for   st.c,
+     symbol.h,  symbolP.h, symbol.c, and any other files you
+     create (printed with enscript -2r or alike).
+
+Security
+
+You should secure your source code.  I suggest  the  follow-
+ing:
+Initially issue the following commands from your home directory
+    md ~/cs451
+    md ~/cs451/assignment.1
+    chmod 700 ~/cs451 ~/cs451/assignment.1
+    < get ht.c, ht.h, @...@.>
+
+To work on your program issue the following commands
+    cd ~/cs451/assignment.1
+    < develop your program >
+
+To place the final copy of your executable program  in  your
+home directory issue the following commands
+    strip <your executable program's name>
+    cp <your executable program's name> ~/hash
+    chmod 711 ~/hash
+
+If this is unclear please read the man pages or come to talk
+to me.
+
+

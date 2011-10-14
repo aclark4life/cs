@@ -1,0 +1,13 @@
+#!/usr/local/bin/perl
+
+open(IN,"+</home/aclark/bootp/bootptab");
+
+$line=<IN>;
+while((!($line eq "# WebAdditions")) && (!(eof(IN))))
+{
+	$line=<IN>;
+}
+
+print IN "# Addition!\n";
+exit;
+

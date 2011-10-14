@@ -1,0 +1,77 @@
+From delcher@csmaster.loyola.edu  Thu Jul  9 18:58:29 1998
+Received: from csmaster (csmaster.loyola.edu [144.126.178.25])
+	by fellspt.charm.net (8.8.8/8.8.5) with SMTP id SAA01443
+	for <aclark@charm.net>; Thu, 9 Jul 1998 18:58:28 -0400 (EDT)
+From: delcher@csmaster.loyola.edu
+Received: from sanity by csmaster (SMI-8.6/SMI-SVR4)
+	id SAA15202; Thu, 9 Jul 1998 18:58:27 -0400
+Received: by sanity (SMI-8.6/SMI-SVR4)
+	id SAA17028; Thu, 9 Jul 1998 18:58:27 -0400
+Message-Id: <199807092258.SAA17028@sanity>
+Subject: Re: reminder
+To: aclark@charm.net (Alex Clark)
+Date: Thu, 9 Jul 1998 18:58:26 -0400 (EDT)
+In-Reply-To: <19980709142829.64777@fellspt.charm.net> from "Alex Clark" at Jul 9, 98 02:28:29 pm
+X-Mailer: ELM [version 2.4 PL25]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Status: RO
+Content-Length: 1532
+Lines: 54
+
+> just a reminder to send me the next asn plz!
+
+    I forget how much I've already sent.  Here's my complete
+    list:
+
+      Chapt 1:
+        1.1:  10, 14, 22
+        1.2:  4
+        1.3:  4, 6, 24
+        1.4:  8, 18
+        1.5:  6, 10, 12, 18
+        1.6:  4, 10, 24
+
+      Chapt 2:
+        2.1:  2, 18, 20
+        2.2:  6, 8, 12, 14, 20
+
+      Chapt 3:
+        3.1:  4, 6, 8, 10a), 12a), 20a), 22a), 26
+        3.2:  2, 10a), 12b), 14, 20a), 24, 28c), 34
+        3.3:  2, 4, 14, 24
+        3.5:  2, 10
+        3.6:  2b), 4, 6b), 8, 10b), 14, 20
+
+      Chapt 4:
+        4.1:  12, 16, 18
+        4.2:  2, 4, 22
+        4.3:  2, 4, 10
+        4.4:  2, 10, 14, 22
+        4.5:  2, 6, 10, 14, 18
+        4.6:  2, 12, 14, 32
+        4.7:  2, 4, 20
+        4.8:  2, 8
+        4.9:  2
+
+      Programs:
+        1.  Multiply 2 matrices
+        2.  Solve systems of equations by Gauss-Jordan elimination
+            (including case with infinite numbers of solutions,
+            i.e., parametrized solutions)
+        3.  Find inverse of a matrix
+        4.  Find determinant of a matrix
+        5.  Construct an orthonormal basis for the subspace
+            spanned by an input set of vectors.
+
+> when i take the test, i'll be responsible for all
+> material covered in the course. does this include 
+> the programs ? will have to write code on the test ? 
+> or can i give the programs a lower priority than the
+> actual material ? 
+
+    No programming on the test (unless you want it).
+
+                                          -- ALD
+

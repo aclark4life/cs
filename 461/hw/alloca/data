@@ -1,0 +1,21 @@
+here's the program with alloca running a few times:
+
+sanity:~/461>time alloca
+0.33u 0.04s 0:00.42 88.0%
+sanity:~/461>time alloca
+0.35u 0.04s 0:00.39 100.0%
+sanity:~/461>time alloca
+0.35u 0.04s 0:00.45 86.6%
+sanity:~/461>
+ 
+here's the program with malloc running a few times:
+
+sanity:~/461>time malloc
+3.32u 1.70s 0:06.20 80.9%
+sanity:~/461>time malloc
+3.30u 1.51s 0:05.26 91.4%
+sanity:~/461>time malloc
+3.14u 1.70s 0:05.12 94.5%
+
+hmmm... looks like alloca is a LOT faster...
+

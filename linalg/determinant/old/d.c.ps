@@ -1,0 +1,145 @@
+%!PS-Adobe-
+%%Creator: aclark
+%%CreationDate: Tue Aug 25 22:28:51 1998
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+/showuline {
+	/CurPointSize exch def
+	dup stringwidth pop
+	gsave
+	currentfont /FontInfo get dup
+	/UnderlinePosition get CurPointSize mul 1000 div 0 exch rmoveto exch 0 rlineto
+	/UnderlineThickness get CurPointSize mul 1000 div setlinewidth stroke
+	grestore
+	show
+} def
+/mv {moveto} def
+%%EndProlog
+%%Page: ? 1
+/pg save def
+1.00000 0.99083 scale
+/Courier findfont 12 scalefont setfont
+0 0 translate
+18 769 mv (/* d.c - Find the Determinant of an n x n Matrix. )show
+18 757 mv (   Alex Clark - August 1998  */)show
+18 733 mv (#include<stdio.h>)show
+18 721 mv (#include<string.h>)show
+18 709 mv (#include<assert.h>)show
+18 685 mv (void read\(\);)show
+18 673 mv (void easy\(\);)show
+18 661 mv (double find\(double **a\);)show
+18 649 mv (double **mem\(double **a\);)show
+18 625 mv (int N;)show
+18 613 mv (double **A;)show
+18 601 mv (double Ans;)show
+18 577 mv (void main\(\))show
+18 565 mv ({)show
+18 553 mv (        read\(\);)show
+18 541 mv (        Ans=find\(A\);)show
+18 529 mv (})show
+18 517 mv (double find\(double **a\))show
+18 505 mv ({)show
+18 493 mv (        double **b=NULL;)show
+18 481 mv (        double ans;)show
+18 469 mv (        int c, i , k , j,p ;)show
+18 445 mv (        if \(N <= 3\) )show
+18 433 mv (        {)show
+18 421 mv (                easy\(\);)show
+18 409 mv (        })show
+18 397 mv (        else)show
+18 385 mv (        {)show
+18 373 mv (                b=mem\(b\);)show
+18 361 mv (                assert \(b!=NULL\);)show
+18 349 mv (                ans=0;)show
+18 337 mv (                for \( i = 1 ; i <= N ; i++\))show
+18 325 mv (                {)show
+18 313 mv (                        c = 0 ;)show
+18 301 mv (                        for \(j= 1 ; j <= N; j++\))show
+18 289 mv (                        {)show
+18 277 mv (                                if \(j==1\)       )show
+18 265 mv (                                {)show
+18 253 mv (                                        //printf \("[%d][%d]\\n",i,j\);)show
+18 241 mv (                                })show
+18 229 mv (                                for \(k= 1 ; k <= N; k++\))show
+18 217 mv (                                {)show
+18 205 mv (                                        //printf \( "[%d][%d][%d]\\n" , i,j,k \) ;)show
+18 193 mv (                                        if \(k != i \)    )show
+18 181 mv (                                        {)show
+18 169 mv (                                                //try to assign minor of a to b!)show
+18 157 mv (                                                //b[c++][k] = a[j][k];)show
+18 145 mv (                                                //printf \( "%f " , a[j][k] \) ;)show
+18 133 mv (                                        })show
+18 121 mv (                                })show
+18 109 mv (                                        //printf \("\\n"\);)show
+18 97 mv (                                        //printf \( "[%d][%d][%d]\\n" , i,j,k \) ;)show
+18 85 mv (                        })show
+18 73 mv (                                        //printf \("\\n"\);)show
+18 61 mv (                })show
+18 49 mv (                //Ans += a[i][j] * p * find\(b\);)show
+18 37 mv (        })show
+18 25 mv (        free \(b\);)show
+showpage pg restore
+%%Page: ? 2
+/pg save def
+1.00000 0.99083 scale
+/Courier findfont 12 scalefont setfont
+0 0 translate
+18 769 mv (        return \(ans\);)show
+18 757 mv (})show
+18 745 mv (void read\(\))show
+18 733 mv ({)show
+18 721 mv (        int i,j ;)show
+18 709 mv (        char *line = \(char *\)malloc\(1024*sizeof\(char\)\);)show
+18 697 mv (        char *tok;)show
+18 673 mv (        fgets\( line, 1024, stdin\);)show
+18 661 mv (        N = atoi \(line\);)show
+18 637 mv (        A=mem\(A\);)show
+18 613 mv (        for\(i=1;i<=N;i++\))show
+18 601 mv (        {)show
+18 589 mv (                fgets \(line , 1024 , stdin \) ;)show
+18 577 mv (                tok=strtok\(line, " "\);)show
+18 565 mv (                for \(j=1; tok !=NULL; j++\))show
+18 553 mv (                {)show
+18 541 mv (                        A[i][j]=atoi\(tok\);)show
+18 529 mv (                        //printf \("%f ",A[i][j]\);)show
+18 517 mv (                        tok=strtok \(NULL, " "\);)show
+18 505 mv (                } //printf \("\\n"\);)show
+18 493 mv (        })show
+18 481 mv (                 //printf \("\\n"\);)show
+18 469 mv (})show
+18 457 mv (double **mem\(double **a\))show
+18 445 mv ({)show
+18 433 mv (        int i;)show
+18 421 mv (        a = \(double **\)malloc\(\(N+1\)*sizeof\(double *\)\);)show
+18 409 mv (        for \(i = 1;i<=\(N+1\);i++\))show
+18 397 mv (        { )show
+18 385 mv (                a[i]= \(double *\) malloc \(\(N+1\)*sizeof\(double\)\); )show
+18 373 mv (        })show
+18 361 mv (        return \(a\);)show
+18 349 mv (})show
+18 325 mv (void easy\(\))show
+18 313 mv ({)show
+18 301 mv (        switch\(N\))show
+18 289 mv (        {)show
+18 277 mv (               case 1:          printf \("%f\\n",A[1][1] \) ; //if A=[a11] is a 1x1)show
+18 265 mv (                                                     matrix, then det \(A\) = a11.)show
+18 253 mv (                                break;)show
+18 241 mv (               case 2:          printf \("%f\\n",\(A[1][1]*A[2][2]\)-\(A[1][2]*A[2][1)show
+18 229 mv (                                                   ]\) \) ; //if A=[a22] is a 2x2 )show
+18 217 mv (                                                                //   matrix, the)show
+18 205 mv (                                                 n det\(A\) = a11*a22 - a12*a21 . )show
+18 193 mv (                                break;)show
+18 181 mv (               case 3:          printf \("%f\\n",\(\(A[1][1]*A[2][2]*A[3][3]\) + )show
+18 169 mv (                                       \(A[1][2]*A[2][3]*A[3][1]\) +)show
+18 157 mv (                                       \(A[1][3]*A[2][1]*A[3][2]\) -)show
+18 145 mv (                                       \(A[1][1]*A[2][3]*A[3][2]\) -)show
+18 133 mv (                                       \(A[1][2]*A[2][1]*A[3][3]\) -)show
+18 121 mv (                                       \(A[1][3]*A[2][2]*A[3][1]\)  \) \);)show
+18 109 mv (                                break;)show
+18 97 mv (        })show
+18 85 mv (} )show
+showpage pg restore
+%%Trailer
+%%DocumentFonts: Courier
+%%Pages: 2

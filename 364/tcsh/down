@@ -1,0 +1,15 @@
+#!/bin/tcsh
+set f=`ls`
+set c=0
+foreach x ($f)
+    	if (-d $x) then
+        	@ c++
+        	set f[$c]=$x
+        	echo $c. $x
+    	endif
+end
+echo -n whereto "? " ;set indx=$<
+echo changing to $cwd/${f[$indx]}
+chdir $cwd/${f[$indx]}
+#set prompt="<\!> $cwd >"
+set prompt = "%m:%~>"

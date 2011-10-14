@@ -1,0 +1,75 @@
+class point 
+{
+    protected int x;
+    protected int y;
+    point add(point p2)
+    {
+	return(    new point(x + p2.x, y+p2.y)    );
+    }
+    /* no return type*/ point()
+    {
+	x = y = 0;
+    }
+    public String toString()
+    {
+	return(  "(" + x + "," + y + ")"  );
+    }
+    point(int x0, int y0)
+    {
+	x = x0;
+	y = y0;
+    }
+    void moveby(point p)
+    {
+	 x += p.x;
+	 y += p.y;
+    }
+}
+
+
+
+
+
+abstract class shape
+{
+    protected point center;			// an attribute
+    void translate(int x_by, int y_by)		// a method
+    {
+	center.moveby( new point(x_by, y_by) );
+    }
+
+    public abstract String toString();
+    shape(int x, int y)
+    {
+	center = new point(x,y);
+    }
+
+}
+
+class square extends shape
+{
+    protected int dimension;
+    square(int dim, int x, int y)
+    {
+       super(x, y);
+       dimension = dim;
+    }
+
+    public String toString()
+    {
+	return("a square dimension " + dimension + " at " + center);
+    }
+    public static void main(String args[])
+    {
+	System.out.println("a = " + 5 + 6);
+	System.out.println( 5 + 6 + " = a");
+
+	point p = new point(1,2);
+	System.out.println("p = " + p);
+
+	shape s ;
+	s = new square(10, 4, 2);
+	System.out.println("s = " + s);
+    }
+}
+

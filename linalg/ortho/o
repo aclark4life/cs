@@ -1,0 +1,74 @@
+%!PS-Adobe-
+%%Creator: aclark
+%%CreationDate: Fri Aug 28 01:58:17 1998
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+/showuline {
+	/CurPointSize exch def
+	dup stringwidth pop
+	gsave
+	currentfont /FontInfo get dup
+	/UnderlinePosition get CurPointSize mul 1000 div 0 exch rmoveto exch 0 rlineto
+	/UnderlineThickness get CurPointSize mul 1000 div setlinewidth stroke
+	grestore
+	show
+} def
+/mv {moveto} def
+%%EndProlog
+%%Page: ? 1
+/pg save def
+1.00000 0.99083 scale
+/Courier findfont 12 scalefont setfont
+0 0 translate
+18 769 mv (/* m.c - Construct an orthonormal basis for the subspace spanned by an)show
+18 757 mv ( * input set of vectors \(where m is the number of vectors and n is the )show
+18 745 mv ( * number of elements in each vector\). )show
+18 733 mv ( * Alex Clark - August 1998  .)show
+18 721 mv ( */)show
+18 697 mv (#include<stdio.h>)show
+18 685 mv (#include<string.h>)show
+18 673 mv (#include<stdlib.h>)show
+18 649 mv (int **A,m,n;)show
+18 637 mv (void get_mn\(\);)show
+18 625 mv (void get_mem\(\);)show
+18 613 mv (void get_mtrx\(\);)show
+18 589 mv (void main\(int argc\) {)show
+18 577 mv (        if \(argc!=1\) { exit\(-1\); })show
+18 565 mv (        else {)show
+18 553 mv (                get_mn\(\);)show
+18 541 mv (                get_mem\(\);)show
+18 529 mv (                get_mtrx\(\);)show
+18 517 mv (        })show
+18 505 mv (})show
+18 493 mv (void get_mn\(\))show
+18 481 mv ({)show
+18 469 mv (        int i,j;)show
+18 457 mv (        scanf \("%d %d\\n",&m,&n\);)show
+18 445 mv (        printf \("%d %d\\n",m,n\);)show
+18 433 mv (})show
+18 421 mv (void get_mem\(\))show
+18 409 mv ({)show
+18 397 mv (        int i,j;)show
+18 385 mv (        A=\(int **\)malloc\(\(m+1\)*sizeof\(int *\)\);)show
+18 373 mv (        for \(i=1;i<=m;i++\){)show
+18 361 mv (                A[i]=\(int *\)malloc\(\(n+1\)*sizeof\(int\)\);)show
+18 349 mv (        })show
+18 337 mv (})show
+18 325 mv (void get_mtrx\(\))show
+18 313 mv ({)show
+18 301 mv (        int i,j;)show
+18 289 mv (        char *tok,*line=\(char *\)malloc\(1024*sizeof\(char\)\);)show
+18 277 mv (        for \(i=1;i<=m;i++\) {)show
+18 265 mv (                fgets\(line,1024,stdin\);)show
+18 253 mv (                tok=strtok\(line," "\);)show
+18 241 mv (                for \(j=1;tok!=NULL;j++\) {)show
+18 229 mv (                        A[i][j]=atoi\(tok\); printf \("%d ",A[i][j]\);)show
+18 217 mv (                        tok=strtok\(NULL," "\);)show
+18 205 mv (                } printf \("\\n"\);)show
+18 193 mv (        })show
+18 181 mv (})show
+showpage pg restore
+%%Trailer
+%%DocumentFonts: Courier
+%%Pages: 1

@@ -1,0 +1,9 @@
+1. make sure all command line entries are digits
+2. make sure digits are a triangle
+        ie. the sum of two sides is greater than the third
+3. make sure that digits don't exceed boundaries
+
+#define INT_MIN         (-2147483647-1)
+#define INT_MAX         2147483647
+
+4. write atoi -> check MAX_INT; reject negatives

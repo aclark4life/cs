@@ -1,0 +1,56 @@
+
+                           CS 451
+                 Programming Assignment #3
+                           Scheme
+                    A Postfix Evaluator
+                   Due 9/27/96, in class
+
+
+Introduction
+
+     The goal of this assignment is to get  acquainted  with
+the programming language Scheme.  You are to write a postfix
+expression evaluator in Scheme.  For example, the evaluation
+of (1  2  3  +  4  +  *) proceeds as follows:
+
+ Remaining Expression      Stack       Notes
+_______________________________________________________
+ (1  2  3  +  4  +  *)   empty
+ (2  3  +  4  +  *)      1         values are simple pushed onto the stack
+ (3  +  4  +  *)         2  1      note that 2 is the top of the stack
+ (+  4  +  *)            3  2  1
+ (4  +  *)               5  1      5 = 3+2 (the sum of the top two elements of the stack)
+ (+  *)                  4  5  1
+ (*)                     9  1      9 = 4 + 5
+ empty                   9         9 = 9 * 1
+
+
+
+The result (9 in this example) is the top of the stack  when
+the expression is empty (i.e., "()").
+
+     There are two key parts to the evaluation: (1) deciding
+what  action  to  take  based  on  the  first element of the
+remaining expression, and (2)  application  of  an  operator
+(you  must  include  the  operators  +,  *, -, and /) to two
+numbers.  I suggest you write at least two functions, one to
+handle the car of the expression being null, a number, or an
+operator (part 1) and  one  to  apply  an  operator  to  two
+numbers  (part 2).  Don't worry about expressions that cause
+the stack to underflow (have to few values).
+
+Notes
+
+(1)  My solution is 21 lines of code.  This should give  you
+     some  coding  guidelines  and prevent you from creating
+     100 line Scheme programs.
+
+(2)  Note that in Scheme stacks can be represented simply as
+     lists  where The functions top, push and pop are car,
+     cons, and cdr, respectively.)
+
+
+CS451, Fall '96             -1-           Assignment #3
+
+
+

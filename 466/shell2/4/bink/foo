@@ -1,0 +1,476 @@
+Makefile010064400135600000012000000001210626444110300133410ustar00binkleystaff00002430000005
+
+.c.o:
+	gcc -c -g $*.c -o $*.o
+
+t: t.o util.o run.o
+	gcc -o t t.o util.o run.o
+
+jobs.h010064400135600000012000000001510626444110300130120ustar00binkleystaff00002430000005/* jobs.h */
+
+static const int MAX_PROCESSES = 5;
+
+typedef struct
+{
+    int pid;
+    char *name;
+} tJob;
+l.c010064400135600000012000000000340626444110300123030ustar00binkleystaff00002430000005
+main()
+{
+    sleep(100);
+}
+run.c010064400135600000012000000133410631007635200126630ustar00binkleystaff00002430000005/* run.c */
+/* note: does no error checking for "foo < i < j", "foo >d >g", etc. */
+
+#include <stdio.h>
+#include <ctype.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include "util.h"
+#include "jobs.h"
+
+static char **check_handle_pipe(char **tokenv);
+static int  is_background_job(char **tokenv);
+static void kill_job(int job, tJob background_processes[]);
+static void print_jobs(tJob background_processes[]);
+static void record_background_job(char *job_name, 
+				  tJob background_processes[], int pid);
+static void note_finished_jobs(tJob background_processes[], int pid);
+static void shift_tokenv_by_2(char **tokenv);
+static void check_redirect_stdin(char **tokenv);
+static void check_redirect_stdout(char **tokenv);
+static void external_command(char **tokenv, tJob background_processes[]);
+
+
+static dump_tokens(char **t)
+{
+    fprintf(stderr, "tokens: ");
+    while (*t)
+        fprintf(stderr,"  '%s' ", *t++);
+    fprintf(stderr, "\n");
+}
+
+
+void run(char **tokenv, tJob background_processes[])
+{
+    if (strcmp(tokenv[0], "jobs") == 0)
+    {
+        print_jobs(background_processes);
+        note_finished_jobs(background_processes,0);
+    }
+    else if (strcmp(tokenv[0], "kill") == 0)
+    {
+	if isdigit((*tokenv[1]))
+            kill_job(atoi(tokenv[1]), background_processes);
+	else
+	    printf("usage: kill <job number>\n");
+        note_finished_jobs(background_processes,0);
+    }
+    else
+    {
+        external_command(tokenv, background_processes);
+    }
+}
+
+
+static void print_jobs(tJob background_processes[])
+{
+    int i;
+
+    for(i=0; background_processes[i].pid != -1; i++)
+    {
+        if (background_processes[i].pid != 0)
+        {
+            printf("%d %d %s\n", i, background_processes[i].pid,
+                                 background_processes[i].name);
+        }
+    }
+}
+
+
+static void kill_job(int job, tJob background_processes[])
+{
+    if (job < 0 || job >= MAX_PROCESSES || background_processes[job].pid == 0)
+	printf("invalid job number\n");
+    else
+    {
+        if (kill(background_processes[job].pid, SIGTERM) == -1)
+	    perror("kill");
+        background_processes[job].pid = 0;
+    }
+}
+
+
+static void external_command(char **tokenv, tJob background_processes[])
+{
+    int pid;
+    int back_ground = is_background_job(tokenv);  /* removes '&' */
+    
+    if (tokenv[0] == NULL)			  /* input = "& " */
+	return;
+
+    pid = fork();
+    if (pid < 0)
+        die ("fork error");
+
+    if (pid == 0)                        /* child */
+    {
+	check_redirect_stdin(tokenv);
+	check_redirect_stdout(tokenv);
+        if (tokenv[0] == NULL)			  /* input = "> f   or  < f" */
+	    exit(0);
+
+	tokenv = check_handle_pipe(tokenv);
+        if (tokenv[0] == NULL)			  /* input = "> f   or  < f" */
+	    exit(0);
+
+        execvp(tokenv[0], tokenv);
+	perror("execvp");
+        printf("can't run %s\n", tokenv[0]);
+        die("bye");
+    }
+    else
+    {
+	if (back_ground)
+	{
+            record_background_job(tokenv[0], background_processes, pid);
+	    note_finished_jobs(background_processes,0);
+	}
+	else
+	{
+	    note_finished_jobs(background_processes,pid);
+	}
+    }
+}
+
+
+static int is_background_job(char **tokenv)
+{
+    int i;
+
+    for(i=0; tokenv[i] != NULL; i++)   /* assumes & is last */
+    {
+        if (strcmp("&", tokenv[i]) == 0)
+	{
+	    tokenv[i] = NULL;
+	    return (TRUE);
+	}
+    }
+
+    return(FALSE);
+}
+
+
+static void record_background_job(char *job_name,   
+				  tJob background_processes[], 
+				  int pid)
+{
+    int i;
+    for(i=0; background_processes[i].pid != -1; i++)
+    {
+        if (background_processes[i].pid == 0)
+        {
+            background_processes[i].pid = pid;
+            background_processes[i].name = string_copy(job_name);
+            break;
+        }
+    }
+
+    if (background_processes[i].pid == -1)
+        printf("process table overflow.  Have fun.\n");
+}
+
+
+/* record jobs that finish, wait for pid to finish if pid != 0  */
+static void note_finished_jobs(tJob background_processes[], int pid)
+{
+    int child_pid;
+
+    do
+    {
+        child_pid = wait3(0, WNOHANG, 0);
+
+	if (child_pid == -1)  /* no unwaited for childred */
+	    break;
+
+	if (child_pid != 0) 
+	{
+            int i;
+
+            for(i=0; background_processes[i].pid != -1; i++)
+            {
+                if (background_processes[i].pid == child_pid)
+                {
+                    background_processes[i].pid = 0;
+                    break;
+                }
+            }
+	    printf("--- child %d exited\n", child_pid);
+	}
+    } while (pid != child_pid);
+}
+
+
+static void shift_tokenv_by_2(char **tokenv)
+{
+    while(*tokenv = *(tokenv + 2))
+	tokenv++;
+}
+
+
+static void check_redirect_stdin(char **tokenv)
+{
+    int i;
+
+    for(i=0; tokenv[i] != NULL; i++)  
+    {
+        if (strcmp("<", tokenv[i]) == 0)
+	{
+	     close(0);
+	    if (open(tokenv[i+1], O_RDONLY) != 0)
+	      die("open input");
+	    shift_tokenv_by_2(&tokenv[i]);
+	}
+    }
+}
+
+
+static void check_redirect_stdout(char **tokenv)
+{
+    int i;
+
+    for(i=0; tokenv[i] != NULL; i++)  
+    {
+        if (strcmp(">", tokenv[i]) == 0)
+	{
+	    close(1);
+	    if (open(tokenv[i+1], O_CREAT | O_WRONLY, 0666) != 1)
+	      die("open output");
+
+	    shift_tokenv_by_2(&tokenv[i]);
+	}
+    }
+}
+
+
+static char **check_handle_pipe(char **tokenv)
+{
+    int i;
+
+    for(i=0; tokenv[i] != NULL; i++)   /* assumes & is last */
+    {
+        if (strcmp("|", tokenv[i]) == 0)
+	{
+	    int fds[2];
+	    tokenv[i] = NULL;
+
+	    if (pipe(fds))
+		die("pipe");
+
+            switch (fork())
+	    {
+		case -1: die("fork");
+		case 0:
+		    close(1);
+		    if (dup(fds[1]) != 1)
+			die("dup");
+		    close(fds[0]);
+		    close(fds[1]);
+		    return (tokenv);
+
+		default:
+		    close(0);
+		    if (dup(fds[0]) != 0)
+			die("dup");
+		    close(fds[0]);
+		    close(fds[1]);
+		    return (check_handle_pipe(&tokenv[i+1]));
+	    }
+	}
+    }
+    return (tokenv);
+}
+
+
+s.c010064400135600000012000000000330626444110300123110ustar00binkleystaff00002430000005
+
+main()
+{
+    sleep(5);
+}
+t.c010064400135600000012000000012230626444110200123130ustar00binkleystaff00002430000005/* main */
+
+#include "jobs.h"
+
+#include "stdio.h"
+extern char *read_long();
+extern char **tokenize();
+static char *prompt();
+
+
+main()
+{
+    char *input;
+    char **tokenv;
+    int i;
+    tJob background_processes[MAX_PROCESSES+1];
+
+    for(i=0; i<MAX_PROCESSES; i++)
+	background_processes[i].pid = 0;
+    background_processes[MAX_PROCESSES].pid = -1;
+
+    input = prompt();
+    while (input != NULL)
+    {
+        tokenv = tokenize(input);
+
+        if (tokenv[0] != NULL)
+            run(tokenv, background_processes);
+
+	free(tokenv);
+	free(input);
+        input = prompt();
+    }
+}
+
+static char *prompt()
+{
+    printf("command:");
+    return(read_long());
+}
+util.c010064400135600000012000000035010626444110300130270ustar00binkleystaff00002430000005/* utils.c */
+
+static char *cr = "copyright (c) David Binkley 1993";
+
+#include <stdio.h>
+#include "strings.h"
+
+
+
+int die(char *s)
+{
+    printf("%s\n", s);
+    exit(-1);
+}
+
+
+char *check_malloc(size)
+int size ;
+{
+    char *cp, *malloc() ;
+    /*printf("check malloc allocating %d bytes\n", size) ;*/
+
+    cp = malloc(size) ;
+    if (cp == NULL)
+	die("check_malloc: No Core") ;
+
+    return (cp) ;
+}
+
+void *check_realloc(void *p, int size)
+{
+    p = (void *)realloc(p, size);
+    if (p == NULL)
+        die("check_realloc: No Core") ;
+    return(p);
+}
+
+char *string_copy(s)
+char *s;
+{
+    char *s_copy;
+
+    s_copy = (char *) check_malloc(strlen(s) + 1);
+    strcpy(s_copy, s);
+    return(s_copy);
+}
+
+
+
+/* purpose: read a string of indeterminate length 
+ * input:  nothing
+ * output: string read 
+ */
+char *read_long()
+{
+    char c, *buff;
+    int len;
+
+    buff = check_malloc(1);
+    *buff = '\0';
+
+    for(len = 0; ((c = getchar()) != EOF); len++)
+    {
+        if (c == '\n')
+        {
+            buff[len] = '\0';
+            return(buff);
+        }
+        buff = check_realloc(buff, len+1);
+
+        buff[len] = c;
+    }
+
+    if (len == 0)
+    {
+        free(buff);
+        return(NULL);
+    }
+    else
+        return(buff);
+} 
+
+
+
+/* purpose: parse string into argument vector
+ * input:   the string to parse, str
+ * output:  a argument vector (array of pointers to the non-white space 
+ *	    strings in str)
+ */
+char **tokenize(char *str)
+{
+    char **tokens, *tmp;
+    int tc;
+
+    tokens = (char **) check_malloc(sizeof(char *));
+    if (tokens == NULL)
+        die("No Core");
+    *tokens = NULL;
+
+    for(tmp=strtok(str, " \t"), tc=0; tmp; tmp=strtok(NULL, " \t"), tc++)
+    {
+        tokens = (char ** ) check_realloc(tokens, (tc+2)*sizeof(char *));  /* why +2 */
+        tokens[tc] = tmp;
+    }
+
+    tokens[tc] = NULL;
+    return(tokens);
+} 
+
+
+util.h010064400135600000012000000004520626444110300130360ustar00binkleystaff00002430000005/* util.h */
+
+#define printd      if (DEBUG) printf
+
+#ifndef _MISC
+#define _MISC
+
+#define TRUE 1
+#define FALSE 0
+#define BOOLEAN int
+#define EQUAL 0
+
+#ifndef NULL
+#define NULL 0
+#endif
+
+void die(char *);
+char *check_malloc(int);
+void *check_realloc(void *, int);
+char *string_copy(char*);
+
+#endif
+
+

@@ -1,0 +1,1062 @@
+From binkley Wed Oct 11 14:05:03 1995
+Subject: assignment
+To: 3, part, 2, aclark (J. Alexander Clark), bduncan (Cousin Brucie),
+        bwu (Bin Wu), bjubb (Brennan Jubb), colive (Christopher Olive),
+        ghall (George Hall), kmcguire (Kelly McGuire), pmcgee (Patti McGee),
+        rhaber (Ryan Haber), gfurr (Gwendolyn Furr), hliu@love, tbennett@love,
+        awielgosz@loyola.edu, ddobisch@loyola.edu, dzaudtke@loyola.edu,
+        kmetzler@loyola.edu, lhopkins@loyola.edu, nrusso@loyola.edu,
+        mdubin@loyola.edu, rhemling@loyola.edu
+Date: Wed, 11 Oct 1995 14:04:59 -0400 (EDT)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 3624      
+Status: OR
+
+; assignment 3 part 2
+;
+; this program adds hex number read from the keyboard until zero is entered.
+; if a overflow or underflow occurs it prints a message.
+;
+
+CR	equ	0dH
+LF	equ	0aH
+
+DOS_SERVICE	equ	21H
+DOS_PRINT	equ	09H
+DOS_READ	equ	0aH
+DOS_TERMINATE	equ	4cH
+
+MAX_READ_LENGTH	equ	 5
+STATUS_OK	equ	 0
+
+
+stack	segment	stack
+	db	100 dup('stack')
+stack	ends
+
+data	segment	byte public
+sum			dw   0
+number_as_string        db   MAX_READ_LENGTH+1,
+actual_length           db   ?
+buffer                  db   MAX_READ_LENGTH+1 dup(?)
+
+oops_overflow_message	db   'Oops overflow',CR,LF,'$'
+oops_underflow_message	db   'Oops underflow',CR,LF,'$'
+byebye_message		db   'Bye now!',CR,LF,'$'
+crlf_message		db   CR,LF,'$'
+data	ends
+
+	extrn	printAXhex:near
+
+code	segment public byte 'code'
+	assume  cs:code, ds:data, ss:stack
+	
+main	proc	near
+	mov	ax,seg data
+	mov	ds,ax
+
+loop:
+        call	read_number
+	or	ax,ax
+	jz	done
+
+	add	sum,ax
+	jno	print_number			; jmp no overflow
+
+        js 	overflow			; pos + pos results in neg 
+						; sign bit on = neg number
+
+	lea	dx,oops_underflow_message
+	jmp	print_message
+
+overflow:
+	lea	dx,oops_overflow_message
+print_message:
+	mov	ah, DOS_PRINT
+	int	DOS_SERVICE	
+
+print_number:
+	mov	ax,sum
+	call	printAXhex
+	lea	dx,crlf_message
+	mov	ah,DOS_PRINT
+	int	DOS_SERVICE
+	jmp 	loop
+
+done:
+	lea	dx,byebye_message
+	mov	ah, DOS_PRINT
+	int	DOS_SERVICE
+	mov	ah, DOS_TERMINATE
+	mov	al, STATUS_OK
+	int	DOS_SERVICE
+main	endp
+
+;
+; purpose:  read a hex number from the keyboard
+; input:    nothing (the number is read from the keyboard)
+; output:   the number in AX
+; destroys: nothing
+;
+read_number	proc	near
+	push	di
+	push	si
+
+	lea	dx,number_as_string
+	call	read_string
+
+	lea	si,number_as_string+1
+	call	string_to_number  		; convert from [si] to AX
+
+	pop	si
+	pop	di
+	ret
+read_number	endp
+
+
+
+;
+; purpose:  convert ascii character representation of digit to hex representation
+; input:    ascii character in al
+; output:   hex digit in al
+; destroys: nothing
+;
+convert_digit	proc near 	
+	cmp	al,'9'
+        jle	small2
+        and	al,0dfH  			; [[ ask me ]]
+	sub	al,'A' - 10D
+        jmp	endif2
+small2:
+	sub	al,'0'
+endif2:
+        ret
+convert_digit	endp
+
+
+;
+; purpose:  read a 16 bit number as a string
+; input:    dx points to the string in dos read format
+; output:   [dx] = contains the string read in
+; destroys: nothing
+;
+read_string proc	near
+	push	ax
+        push	dx
+
+	mov 	ah, DOS_READ
+	int 	DOS_SERVICE
+
+        pop	dx
+	pop	ax
+	ret
+read_string endp
+
+
+;
+; purpose:  convert a string to a hex number 
+; input:    si points to the string (first byte is the strings length,
+;           which number be <= 4)
+; output:   hex number in AX  
+; destroys: nothing
+;
+; should check the a 5 digit number is not entered
+;
+string_to_number	proc near
+	push	bx
+	push	cx
+	push	dx
+	push	si
+
+        mov 	cl,[si]				; get string length 
+	xor 	ch,ch				; unsigned convert cl to cx
+	inc 	si				; point past length
+	xor 	bx,bx				; [[ fast zero AX ]]
+
+	mov	dx,1				; flag for positive
+        cmp 	byte ptr [si], '-'		; leading minus sign
+	jne	positive
+	mov	dx,-1				; flag for negative
+	inc	si				; skip sign
+	dec	cl
+	jmp	next_digit
+
+positive:
+	cmp	cl,4
+	jle	next_digit
+	mov	cl,4				; limit positive number to 4 digits
+
+next_digit:
+        push	cx				; save digit count
+	mov 	cl,4				; compute number * 16
+	shl 	bx,cl				; (makes room for next digit)
+        pop 	cx
+	lodsb
+	call	convert_digit
+	or  	bl, al				; or in new low nibble 
+        loop	next_digit
+        
+	mov	ax,bx
+	cmp	dx,-1				; change sign?
+	jne	no
+	neg	ax				; 2's comp!
+no:	
+	pop 	si
+	pop	dx
+	pop 	cx
+	pop	bx
+	ret
+string_to_number	endp
+
+code	ends
+	end 	main
+
+From binkley Wed Oct 11 14:04:54 1995
+Subject: assignment
+To: 3, part, 1, aclark (J. Alexander Clark), bduncan (Cousin Brucie),
+        bwu (Bin Wu), bjubb (Brennan Jubb), colive (Christopher Olive),
+        ghall (George Hall), kmcguire (Kelly McGuire), pmcgee (Patti McGee),
+        rhaber (Ryan Haber), gfurr (Gwendolyn Furr), hliu@love, tbennett@love,
+        awielgosz@loyola.edu, ddobisch@loyola.edu, dzaudtke@loyola.edu,
+        kmetzler@loyola.edu, lhopkins@loyola.edu, nrusso@loyola.edu,
+        mdubin@loyola.edu, rhemling@loyola.edu
+Date: Wed, 11 Oct 1995 14:04:51 -0400 (EDT)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 2922      
+Status: OR
+
+; assignment 3 part 1 
+;
+; this program adds hex number read from the keyboard until zero is entered.
+; if a carry occurs it prints a message.
+;
+
+CR		equ	0dH
+LF		equ	0aH
+
+DOS_SERVICE	equ	21H
+DOS_PRINT	equ	09H
+DOS_READ	equ	0aH
+DOS_TERMINATE	equ	4cH
+
+MAX_READ_LENGTH	equ	 4
+
+STATUS_OK	equ	 0
+
+
+stack	segment	stack
+	db	100 dup('stack');
+stack	ends
+
+data	segment	byte public
+sum			dw   0
+number_as_string	db   MAX_READ_LENGTH+1, 
+actual_length		db   ?
+buffer			db   MAX_READ_LENGTH+1 dup(?)
+oops_carry_message	db   'Oops carry',CR,LF,'$'
+byebye_message		db   'Bye now!',CR,LF,'$'
+crlf_message		db   CR,LF,'$'
+data	ends
+
+	extrn	printAXhex:near
+
+code	segment public byte 'code'
+	assume 	cs:code, ds:data, ss:stack
+	
+main	proc	near
+	mov	ax,seg data
+	mov	ds,ax
+
+loop:
+        call	read_number
+	or	ax,ax
+	jz	done
+
+	add	sum,ax
+	jnc	print_number
+
+	lea	dx,oops_carry_message
+	mov	ah, DOS_PRINT
+	int	DOS_SERVICE	
+
+print_number:
+	mov	ax,sum
+	call	printAXhex
+	lea	dx,crlf_message
+	mov	ah,DOS_PRINT
+	int	DOS_SERVICE
+	jmp 	loop
+
+done:
+	lea	dx,byebye_message
+	mov	ah, DOS_PRINT
+	int	DOS_SERVICE
+	mov	ah, DOS_TERMINATE
+	mov	al, STATUS_OK
+	int	DOS_SERVICE
+main	endp
+
+;
+; purpose:  read a hex number from the keyboard
+; input:    nothing (the number is read from the keyboard)
+; output:   the number in AX
+; destroys: nothing
+;
+read_number	proc	near
+	push	di
+	push	si
+
+	lea	dx,number_as_string
+	call	read_string
+
+	lea	si,actual_length
+	call	string_to_number  		; convert from [si] to AX
+
+	pop	si
+	pop	di
+	ret
+read_number	endp
+
+
+
+;
+; purpose:  convert ascii character representation of digit to hex representation
+; input:    ascii character in al
+; output:   hex digit in al
+; destroys: nothing
+;
+convert_digit	proc near 	
+	cmp	al,'9'
+        jle	small2
+        and	al,0dfH  			; [[ ask me ]]
+	sub	al,'A' - 10D
+        jmp	endif2
+small2:
+	sub	al,'0'
+endif2:
+        ret
+convert_digit	endp
+
+
+;
+; purpose:  read a 16 bit number as a string
+; input:    dx points to the string in dos read format
+; output:   [dx] = contains the string read in
+; destroys: nothing
+;
+read_string proc	near
+	push	ax
+        push	dx
+
+	mov	ah, DOS_READ
+	int	DOS_SERVICE
+
+        pop	dx
+	pop	ax
+	ret
+read_string endp
+
+
+;
+; purpose:  convert a string to a hex number 
+; input:    si points to the string (first byte is the strings length,
+;           which number be <= 4)
+; output:   hex number in AX  
+; destroys: nothing
+;
+string_to_number	proc near
+	push	si
+	push	cx
+	push	bx
+
+        mov	cl,[si]				; get string length 
+	xor	ch,ch				; unsigned convert cl to cx
+	inc	si				; point past length
+	xor	bx,bx				; [[ fast zero BX ]]
+
+next_digit:
+        push	cx				; save digit count
+	mov 	cl,4				; compute number * 16
+	shl 	bx,cl				; (makes room for next digit)
+        pop 	cx
+	lodsb
+	call	convert_digit
+	or  	bl, al				; or in new low nibble 
+        loop	next_digit
+        
+	mov	ax,bx
+	pop	bx
+	pop 	cx
+	pop 	si
+	ret
+string_to_number	endp
+
+code	ends
+	end 	main
+
+From binkley Wed Oct 25 13:46:14 1995
+Subject: echo (fwd)
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Wed, 25 Oct 1995 13:46:11 -0400 (EDT)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1287      
+Status: RO
+
+Forwarded message:
+>From binkley Wed Oct 25 13:15:13 1995
+Subject: echo
+To: cs36
+Date: Wed, 25 Oct 1995 13:15:13 -0400 (EDT)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1083      
+
+; echo.asn
+
+CR 	EQU	0dH
+LF	EQU	0aH
+
+
+data segment
+buffer	db	80,?,80 dup('#')
+	db	'$'
+byebye	db	'bye now!$'
+crlf_msg	db	CR, LF, '$'
+data ends
+
+code segment byte public 'code'
+	assume cs:code
+main	proc	near
+	mov	ax, seg data
+	mov	ds,ax
+	assume	ds:data
+
+	mov	ah,0aH
+	lea	dx, buffer    		; ds:dx points to buffer
+	int	21H
+
+	mov 	bl,buffer+1
+	xor	bh,bh			; i.e.   mov bh, 0  FAST
+	mov	buffer+2[bx], '$'    
+   
+        ; add a '$'
+	
+	call	crlf
+
+        ;mov	ah, 09H
+	lea	dx, buffer+2
+	call	binkleys_dos_print
+	;int	21H
+
+	mov 	ah, 09H
+	lea	dx, byebye
+	int	21H
+
+	mov	ah,4cH
+	int	21H
+
+
+	
+main	endp
+
+; input: ds:dx points to a string to print
+; output: nothing (prints to the screen)
+
+binkleys_dos_print	proc near
+	push	ax
+	push	dx
+	push	si
+
+	mov	si,dx
+; loop through the string printing each character until a '$' is reached
+loop:
+	mov	al,[si]
+	inc	si
+	cmp	al,'$'
+	je	done
+	mov	ah, 0EH
+	int	10H
+	jmp 	loop
+
+done:
+	pop	si
+	pop	dx
+	pop	ax
+	ret
+binkleys_dos_print	endp
+
+
+crlf	proc	near
+	push	ax
+	push	dx
+
+	lea	dx, crlf_msg
+	mov	ah, 09H
+	int	21H
+
+	pop	dx
+	pop	ax
+	ret
+crlf	endp
+
+code	ends
+	end
+
+
+From binkley Fri Nov 10 15:56:41 1995
+Subject: random
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Fri, 10 Nov 1995 15:56:38 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 162       
+Status: OR
+
+
+
+FYI
+
+i found this in some prolog code:
+
+ seed := (seed * 31415821) + 1    bitAnd    16r3FFFFFFF
+
+you might choose these K and N values in random.asm
+
+- dave
+
+
+
+
+From binkley Wed Nov 15 08:16:31 1995
+Subject: lest we forget
+To: all-users
+Date: Wed, 15 Nov 1995 08:14:49 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 393       
+Status: OR
+
+				net guru quiz
+
+what do 
+
+  WWW
+  FTP
+  RTF
+  GIF
+  HTML
+  HTTP
+  URL
+
+stand for?
+
+
+
+
+
+
+
+
+
+
+
+  FTP	- file transfer protocol (not file transfer program)
+  RTF	- rich text format
+  GIF	- graphics interchange format
+  HTML 	- hypertext markup language
+  HTTP	- hypertext transfer protocol
+  WWW	- world wide web
+  URL	- uniform resource locator
+
+Any of you net guru's get 7 out of 7?
+
+- dave
+
+From binkley Wed Nov 15 07:51:03 1995
+Subject: no subject (file transmission)
+To: aclark, (J., Alexander, Clark), bduncan, (Cousin, Brucie), bwu, (Bin,
+	Wu),
+        bjubb, (Brennan, Jubb), colive, (Christopher, Olive), ghall,
+        (George, Hall), kmcguire, (Kelly, McGuire), pmcgee, (Patti, McGee),
+        rhaber, (Ryan, Haber), gfurr, (Gwendolyn, Furr), hliu@love,
+        tbennett@love, awielgosz@loyola.edu, ddobisch@loyola.edu,
+        dzaudtke@loyola.edu, kmetzler@loyola.edu, lhopkins@loyola.edu,
+        nrusso@loyola.edu, mdubin@loyola.edu, rhemling@loyola.edu, tri.adm
+Date: Wed, 15 Nov 1995 07:51:01 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 2006      
+Status: OR
+
+; fract.asm
+;
+; purpose: draw the triangle fractial:
+;            p = random point
+;            while not done
+;                move p half way to one of the triangles vertices
+;                draw a dot there
+;            endwhile
+;
+BIG_NUMBER	equ	0FFFFH			; draw this many dots
+	include	screen.h
+	include point.h
+	include	dos.h
+	include	random.h
+
+
+stack	segment	stack
+	db	100 dup('stack');
+stack	ends
+
+data	segment	public
+vertices	dd	3 dup(?)
+current_point	dd	?
+press_message	db	07,'$'
+oldpress_message	db	'Press any key to continue$'
+data	ends
+
+
+code	segment public byte 'code'
+	assume cs:code, ss:stack
+	
+main	proc	near
+	mov	ax,seg data
+	mov	ds,ax
+	assume  ds:data
+
+	call	screen_get_cursor_location
+	push	dx
+
+	mov	al, SCREEN_GRAPHICS_MODE
+	call	screen_set_mode
+
+	mov	ax, SCREEN_GRAPHICS_HEIGHT	; random initial point (x coordinate)
+	call	random
+	mov	bx,ax
+	mov	ax, SCREEN_GRAPHICS_WIDTH	; (y coordinate)
+	call	random
+	lea	di, current_point
+	call	point_initialize
+
+	mov	ax, 0				; build triangle
+	mov	bx, 0
+	lea	di, vertices + 0  		; vertices[0]
+	call	point_initialize
+
+	mov	ax, SCREEN_GRAPHICS_WIDTH
+	mov	bx, 0
+	lea	di, vertices + 4		; vertices[1]
+	call	point_initialize
+
+	mov	ax, SCREEN_GRAPHICS_WIDTH/2
+	mov	bx, SCREEN_GRAPHICS_HEIGHT
+	lea	di, vertices + 8		; vertices[2]
+	call	point_initialize
+
+	mov	cx,BIG_NUMBER			; do it lots
+
+main_loop:
+	mov	ax,3				; compute:  si = &vertices[random(3)]
+	call	random
+	dec	ax				; adjust 1-3 to 0-2
+	shl	ax,1				; convert to array index (i.e.,  *4)
+	shl	ax,1
+	mov	si,ax			
+	add	si, offset vertices
+
+	lea	di, current_point		; di = p = (p + vertices[random(3)])/2
+	call	point_add
+	call	point_half			
+
+	call	point_draw
+	loop	main_loop
+
+	lea	dx, press_message		; prompt, wait for key, then exit
+	mov	ah, DOS_PRINT
+	int	DOS_SERVICE
+
+	mov	ah, DOS_READ_ONE_CHAR
+	int	DOS_SERVICE
+
+	mov	al, SCREEN_TEXT_MODE		; restore screen
+	call	screen_set_mode
+
+	pop	dx
+	call	screen_locate
+
+	mov	ah, DOS_TERMINATE
+	mov	al, STATUS_OK
+	int	DOS_SERVICE
+main	endp
+
+
+code	ends
+	end 	main
+
+From binkley Wed Nov 15 07:50:47 1995
+Subject: no subject (file transmission)
+To: aclark, (J., Alexander, Clark), bduncan, (Cousin, Brucie), bwu, (Bin,
+	Wu),
+        bjubb, (Brennan, Jubb), colive, (Christopher, Olive), ghall,
+        (George, Hall), kmcguire, (Kelly, McGuire), pmcgee, (Patti, McGee),
+        rhaber, (Ryan, Haber), gfurr, (Gwendolyn, Furr), hliu@love,
+        tbennett@love, awielgosz@loyola.edu, ddobisch@loyola.edu,
+        dzaudtke@loyola.edu, kmetzler@loyola.edu, lhopkins@loyola.edu,
+        nrusso@loyola.edu, mdubin@loyola.edu, rhemling@loyola.edu, point.asm
+Date: Wed, 15 Nov 1995 07:50:45 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1692      
+Status: OR
+
+; point.asm
+;
+X	equ	0		; offsets in a point structure for X
+Y	equ	2		; and Y
+
+	include screen.h
+	public	point_initialize
+	public	point_x
+	public	point_y
+	public	point_draw
+	public	point_add
+	public	point_half
+
+
+code	segment	byte public 'code'
+	assume	cs:code, ds:nothing
+
+;
+; purpose:  to initialize a point structure
+; input:    ax holds x, bx holds y, di points to the point
+; output:   [ds:di] is initialized to x, y
+; destroys: nothing
+;
+point_initialize	proc	near
+	mov	X[di], ax
+	mov	Y[di], bx
+	ret
+point_initialize	endp
+
+
+; purpose:  draw a point on the screen
+; input:    di points to the point
+; output:   nothing (the screen is updated)
+; destroys: nothing
+point_draw	proc	near
+	push	ax
+	push	cx
+	push	dx
+
+	mov	al, SCREEN_DOT_FULL_WHITE
+	mov	cx, X[di]				; column
+	mov	dx, Y[di]				; row
+	call	screen_write_dot
+
+	pop	dx
+	pop	cx
+	pop	ax
+	ret
+point_draw	endp
+
+; purpose:  to add two points
+; input:    di, si point to two points
+; output:   di's point is updated
+; destroys: nothing
+point_add	proc	near
+	push	ax
+
+	mov	ax,X[si]
+	add	X[di], ax
+
+	mov	ax,Y[si]
+	add	Y[di], ax
+
+	pop	ax
+	ret
+point_add	endp
+
+; purpose:  to divide a point by 2 
+; input:    di points to the point
+; output:   di's point is halved
+; destroys: nothing
+point_half	proc	near
+	shr 	word ptr X[di], 1
+	shr 	word ptr Y[di], 1
+	ret
+point_half	endp
+
+; purpose:  to divide a point by 3 
+; input:    di points to the point, p
+; output:   p = (p.x/3, p.y/3) 
+; destroys: nothing
+point_third	proc	near
+	push	bx
+	push	dx
+	push	ax
+
+	mov	bx,3					; thanks 80x86
+
+	mov	ax, X[di]
+	xor	dx,dx
+	div	bx
+	mov	X[di], ax
+
+	mov	ax, Y[di]
+	xor	dx,dx
+	div	bx
+	mov	Y[di], ax
+
+	pop	ax
+	pop	dx
+	pop	bx
+	ret
+point_third	endp
+
+code	ends
+	end
+
+From binkley Mon Nov 20 08:17:12 1995
+Subject: my_macro.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Mon, 20 Nov 1995 08:17:09 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 593       
+Status: OR
+
+
+;
+; macros.h
+;
+; my favorite macros
+; CS366 
+; Fall 1995
+;
+
+exit	MACRO   exit_code
+	mov     al, exit_code
+	mov	ah, DOS_TERMINATE
+	int     DOS_SERVICE
+	endm
+
+mod     macro   p1, p2
+	push dx
+	mov  ax,p1
+	xor  dx,dx
+	div  p2
+	mov  ax,dx
+	pop  dx
+	endm
+
+print	MACRO	str
+	push 	dx
+	push	ax
+	mov	ah, DOS_PRINT
+	lea	dx, str
+	int 	DOS_SERVICE
+	pop	ax
+	pop	dx
+	endm
+
+read	MACRO	str
+	push    dx
+	push    ax
+	mov     ah, DOS_READ
+	lea     dx, str
+	int     DOS_SERVICE
+        mov     dl, LF				; finish line with LF
+	mov     ah, DOS_WRITE_CHAR
+        int     DOS_SERVICE
+	pop     ax
+	pop     dx
+	endm
+
+
+From binkley Fri Dec  1 12:22:56 1995
+Subject: rename.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Fri, 1 Dec 1995 12:22:53 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 999       
+Status: OR
+
+        .radix 16
+
+COMMAND_LINE_PARAMETERS_START  equ 82H
+
+data	segment
+errm    db    'Error$'
+data	ends
+
+code    segment
+        assume	es:code,cs:code
+        mov  	ax,ds
+        mov  	es,ax
+
+        mov  	cl,ds:[80]              ; calc len
+        xor  	ch,ch
+        dec  	cx                      ; ignore return
+        jle  	error
+
+        mov 	di,COMMAND_LINE_PARAMETERS_START
+	mov	al, ' '
+	repz	scasb			; skip initial blanks
+	lea	dx, -1[di]		; start of first argument
+
+	repnz	scasb			; skip over argument string
+	mov	byte ptr -1[di], 0	; terminate with '\0'
+
+	repz	scasb			; skip blanks
+
+ 	mov	bx,di
+	add	bx,cx	
+	mov	byte ptr [bx], 0	; terminate s2 with '\0'
+	dec	di			; point to start of second string
+
+        mov  	ah,56                   ; rename   ds:dx to es:di
+        int  	21
+        jc   	error
+exit:
+        mov  	ah,4c
+        int  	21
+
+error:
+	mov	ax, seg data
+	mov	ds, ax
+        lea  	dx,errm
+        mov  	ah,09
+        int  	21
+        jmp  	exit
+
+
+code    ends
+        end
+
+From binkley Mon Feb 26 09:18:39 1996
+Subject: disk usage
+To: mbarkett (The Cunning Linguist), jaycock (Jamie Aycock),
+        aclark (J. Alexander Clark), merb (Michael Erb), nrusso (Nick Russo),
+        jsnyder (Joseph J. Snyder III), dsmith (David Smith),
+        mbrannig (Matthew A. Brannigan), mmalates (Matthew J. Malatesta),
+        wschimme (William Schimmel), bduncan (Cousin Brucie),
+        bsmith (Brian Smith), rmcilhar (Robert McIlhargie),
+        mrizzo (Michael A. Rizzo), fsung (Felix E. Sung), kbass (Kellie Bass),
+        jsquire (Jonathan Squire), ebirrane (Edward J. Birrane)
+Date: Mon, 26 Feb 1996 09:18:35 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 490       
+Status: OR
+
+
+
+You are using tooooo much disk space.
+Either you decide what to download/delete or the system does.
+Please shoot for 10Meg.
+send me mail (binkley) if you think you need more the 10Meg.
+ 
+
+ thanks
+ - dave
+
+10146   mbarkett
+10342   jaycock
+10417   aclark
+11490   merb
+11563   nrusso
+12892   jsnyder
+13748   dsmith
+17067   mbrannig
+19310   mmalates
+22804   wschimme
+23677   bduncan
+23999   bsmith
+27669   rmcilhar
+33242   mrizzo
+36282   fsung
+45826   kbass
+53769   jsquire
+63040   ebirrane
+
+
+From binkley Tue Feb 27 17:37:15 1996
+Subject: machine names
+To: cs-students, cs-faculty
+Date: Tue, 27 Feb 1996 17:36:24 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 213       
+Status: OR
+
+
+
+
+Soon new machine will arrive.  They need names.
+Try for short names that share a theme (i.e. love. hope, ...)
+
+send your ideas to acm@cs.loyola.edu.
+
+after collecting ideas, we will have a vote.
+
+- Dr. Binkley
+
+From binkley Tue Feb 27 17:48:43 1996
+Subject: Re: machine names
+To: colive@lust.loyola.edu (Christopher Olive)
+Date: Tue, 27 Feb 1996 17:47:41 -0500 (EST)
+Cc: cs-students, cs-faculty
+In-Reply-To: <9602272241.AA15358@lust.loyola.edu> from "Christopher Olive" at Feb 27, 96 05:41:45 pm
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 389       
+Status: OR
+
+> 
+> > 
+> > Soon new machine will arrive.  They need names.
+> > Try for short names that share a theme (i.e. love. hope, ...)
+> > 
+> > send your ideas to acm@cs.loyola.edu.
+> > 
+> > after collecting ideas, we will have a vote.
+> > 
+> > - Dr. Binkley
+> > 
+> 
+> how many machines, and is there a given theme that we have to use?
+> 
+
+plan to 8 to 12 names.  There is no given theme.
+
+- dave
+
+

@@ -1,0 +1,38 @@
+
+CS 364                                                           Spring 97
+
+                        DUE ________________.
+
+
+
+                            Assignment Next
+
+Write a C program that  merges an arbitrary number of files of runs
+into one large sorted file.  You may assume that the only files in the 
+current working directory are the ones to be merged and the executable
+image of the merging program.
+
+You will not know how many files there are until the program is
+called; that's your first problem.  This *program merges* the files
+without resorting to a shell script.  ALL files are managed by the C
+program.  (See ~kbg/364/C/system.c for a possible method.)  Use a
+knock-out tree (ie. a heap) to find the minimum of a collection of
+values.  Don't leave the current directory cluttered w/ unwanted
+intermediate files.
+
+Issues
+
+  Find FOPEN_MAX -- but not all can be used by the program. Why?
+
+  Array of FILE pointers. Why? (or a struct where one component is a
+    file pointer...)
+
+Test your program by using the rand / splitter programs to make input files.
+Use your first merging program to check the output.
+
+
+This document is in ~kbg/364/adm/c5.s97  rev 2/97
+
+
+
+

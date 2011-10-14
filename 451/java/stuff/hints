@@ -1,0 +1,42 @@
+type
+   setenv JAVA_HOME /usr/local/java
+
+create myapplet
+
+  <applet code=MyApplet.class width=100 height=100>
+  </applet>
+
+
+create MyApplet.java
+
+  import java.applet.Applet;
+  import java.awt.*;
+  
+  public class MyApplet extends Applet
+  {
+      public void init()
+      {
+	  Panel childPanel = new Panel();
+	  add(childPanel);
+      }
+  
+      public void paint(Graphics g)
+      {
+	  g.drawString("Hello World", 0, 20);
+      }
+  }
+
+
+run java compiler
+
+   javac MyApplet.java
+
+
+run applet viewer
+   appletviewer myapplet
+
+
+change the string to your name and your half way there :)
+
+- dave
+

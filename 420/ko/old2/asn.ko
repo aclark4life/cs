@@ -1,0 +1,78 @@
+From kbg@peace Tue Mar 25 15:59:19 1997
+Return-Path: <gfurr@csmaster.loyola.edu>
+Received: from purity.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id PAA00580; Tue, 25 Mar 1997 15:59:18 -0500
+Received: by purity.loyola.edu (SMI-8.6/SMI-SVR4)
+	id QAA15703; Tue, 25 Mar 1997 16:00:53 -0500
+Received: from peace.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id OAA16265; Wed, 19 Feb 1997 14:33:49 -0500
+Received: by peace.loyola.edu (SMI-8.6/SMI-SVR4)
+	id OAA16991; Wed, 19 Feb 1997 14:33:54 -0500
+Date: Wed, 19 Feb 1997 14:33:54 -0500
+Message-Id: <199702191933.OAA16991@peace.loyola.edu>
+From: keith brian gallagher <kbg@peace>
+To: darnett@csmaster.loyola.edu, gfurr@csmaster.loyola.edu,
+        dpapouli@csmaster.loyola.edu, srivera@csmaster.loyola.edu,
+        jruggier@csmaster.loyola.edu, mstone@csmaster.loyola.edu,
+        mbarkett@csmaster.loyola.edu, vbekkerm@csmaster.loyola.edu,
+        jgregoir@csmaster.loyola.edu, dharmon@csmaster.loyola.edu,
+        thorky@csmaster.loyola.edu, ehubbard@csmaster.loyola.edu,
+        mmachore@csmaster.loyola.edu, rbecker@csmaster.loyola.edu,
+        dsundell@csmaster.loyola.edu, kbg@csmaster.loyola.edu
+Subject: next 
+Sender: gfurr@csmaster.loyola.edu
+Content-Length: 1183
+Status: OR
+
+
+
+CS 364                                                           Spring 97
+
+                        DUE ________________.
+
+
+                            Assignment Next
+
+Write a C program that merges an arbitrary number of files of runs
+
+/* what is in the files? */
+
+into a large sorted file.  You may assume that the only files in the 
+
+/* sorted numerically */
+
+current working directory are the ones to be merged and the executable
+image of the merging program.
+
+You will not know how many files there are until the program is
+called; that's your first problem.  
+			/* fine */ 
+					This *program merges* the files
+without resorting to a shell script.  ALL files are managed by the C
+program.  (See ~kbg/364/C/system.c for a possible method.)  Use a
+knock-out tree (ie. a heap) to find the minimum of a collection of
+
+/* what is a ko tree? */
+
+values.  Don't leave the current directory cluttered w/ unwanted
+intermediate files.
+/* ok */
+
+Issues
+
+  Find FOPEN_MAX -- but not all can be used by the program. Why?
+
+  Array of FILE pointers. Why? (or a struct where one component is a
+    file pointer...)
+
+Test your program by using the rand / splitter programs to make input files.
+Use your first merging program to check the output.
+
+
+This document is in ~kbg/364/adm/c5.s97  rev 2/97
+
+
+
+
+
+

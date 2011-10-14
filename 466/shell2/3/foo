@@ -1,0 +1,47 @@
+here it is:
+just the fact that more doesn't end and the prompt
+prints like this * * * * * * * * 
+instead of 
+*
+*
+*
+is annoying. also my shell is in ~/os/2/shell3
+should i move it to my root? i forgot to do so...
+
+
+
+Script started on Tue Mar 04 09:57:39 1997
+[1;7mcsmaster:~/os/2/shell3>[mash
+* ls | more
+Makefile
+ash
+bak
+bg.c
+bg.o
+bust_a_fork.c
+bust_a_fork.o
+check_for_exit.c
+check_for_exit.o
+core
+do_pipe.c
+do_pipe.o
+dump_tokens.c
+dump_tokens.o
+find_crazy_tokens.c
+find_crazy_tokens.o
+foo
+main.c
+main.o
+prompt.c
+prompt.o
+read_long.c
+[1;7m--More--[m* read_long.o
+[1;7m--More--[msom[K
+[1;7m--More--[msomething.c
+[1;7m--More--[mtokenize.c
+[1;7m--More--[mtokenize.o
+[1;7m--More--[mtypescript
+[1;7m--More--[muninformative
+* * * * * * * * * exit
+[1;7mcsmaster:~/os/2/shell3>[mlate
+script done on Tue Mar 04 09:57:51 1997

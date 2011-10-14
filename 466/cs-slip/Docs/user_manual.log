@@ -1,0 +1,91 @@
+This is TeX, Version 3.14159 (C version 6.1) (format=latex 96.11.4)  1 MAY 1997 03:57
+**user_manual.latex
+(user_manual.latex
+LaTeX2e <1996/06/01>
+Hyphenation patterns for english, german, loaded.
+(/usr/local/teTeX/texmf/tex/latex/base/article.cls
+Document Class: article 1996/05/26 v1.3r Standard LaTeX document class
+(/usr/local/teTeX/texmf/tex/latex/base/size12.clo
+File: size12.clo 1996/05/26 v1.3r Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/teTeX/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1996/05/29 v1.0 Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/teTeX/texmf/tex/latex/graphics/trig.sty
+Package: trig 1994/10/16 v1.08 sin cos tan (DPC)
+)
+(/usr/local/teTeX/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 82.
+
+(/usr/local/teTeX/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1996/05/29 v3.00 Driver-dependant file (DPC,SPQR)
+))
+No file user_manual.aux.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 21.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 21.
+[1
+
+]
+
+LaTeX Warning: Citation `Poole95' on page 2 undefined on input line 33.
+
+
+LaTeX Warning: Reference `fig:viewer' on page 2 undefined on input line 35.
+
+
+LaTeX Warning: File `viewer.ps' not found on input line 64.
+
+
+! LaTeX Error: File `viewer.ps' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.64 \includegraphics{viewer.ps}
+                                
+? 
+! Emergency stop.
+ ...                                              
+                                                  
+l.64 \includegraphics{viewer.ps}
+                                
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 434 strings out of 10910
+ 4554 string characters out of 72285
+ 49929 words of memory out of 262141
+ 3360 multiletter control sequences out of 9500
+ 6539 words of font info for 24 fonts, out of 150000 for 255
+ 14 hyphenation exceptions out of 607
+ 22i,6n,22p,169b,253s stack positions out of 300i,40n,60p,3000b,4000s
+Output written on user_manual.dvi (1 page, 464 bytes).

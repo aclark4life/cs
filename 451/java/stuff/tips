@@ -1,0 +1,9 @@
+ahh...umm....what i did was  ussse a public void paint function
+and do a   g.fill
+ 
+ 
+err..g.fillOval(
+err..g.fillOval(x,y,width,height), and it draws an oval at that location...then you just do like x=x+1, and repaint();  that 
+ 
+it's umm..yeah...go to   http://justice.loyola.edu/resources
+ 

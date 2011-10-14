@@ -1,0 +1,78 @@
+#
+# $HOME/.profile (works with sh, ksh and bash)
+#
+PATH=$HOME/bin:/usr/local/bin:/bin:/usr/bin:/usr/X11/bin:/usr/contrib/bin:/usr/games
+export PATH
+
+EDITOR=pico; export EDITOR
+
+### a good alternative is: PAGER=less
+PAGER=more; export PAGER
+BLOCKSIZE=1k; export BLOCKSIZE
+
+### uncomment to select an alternate timezone (/etc/localtime is default)
+# TZ=/usr/share/zoneinfo/US/Central; export TZ
+
+### NEWS Configuration
+RNINIT="$HOME/.rninit"; export RNINIT
+ORGANIZATION='Charm Net, Inc.'; export ORGANIZATION
+NNTPSERVER=news.charm.net; export NNTPSERVER
+
+### X Window System Configuration
+#XAPPLRESDIR="$HOME/app-defaults/Class/"; export XAPPLRESDIR
+### Old-style XNLSPATH
+# XNLSPATH=/usr/X11/lib/X11/nls; export XNLSPATH
+
+### WWW Browser Configuration
+# WWW_wais_GATEWAY="http://www.ncsa.uiuc.edu:8001"; export WWW_wais_GATEWAY
+WWW_HOME="http://www.charm.net/"; export WWW_HOME
+
+### umask sets a mask for the default file permissions,
+### ``umask 002'' is less restrictive
+umask 022
+
+TERM=vt100
+export TERM
+
+MAIL="/var/mail/$USER"
+MAILCHECK=30
+MAILPATH="/var/mail/$USER"
+export MAIL MAILCHECK MAILPATH
+
+HISTFILE="$HOME/.history"
+HISTFILESIZE=5000
+HISTSIZE=5000
+FCEDIT="$EDITOR"
+export HISTFILE HISTFILESIZE HISTSIZE FCEDIT
+
+# Interactive only commands
+case $- in *i*)
+    eval `tset -s -m 'network:?xterm'`
+    stty crt -tostop erase '^H' kill '^U' intr '^C' status '^T'
+    ### biff controls new mail notification
+    ### changed to biff n--8/29/96 mb
+    biff n
+    ### mesg controls messages from other users
+    mesg y
+esac
+
+case "$SHELL" in
+    */bash) set -o vi; set -o notify; set -o ignoreeof
+	    command_oriented_history=1
+    	    PS1='\h:\w $PSCH ' ENV="$HOME/.shellrc"
+	    export ENV
+	    [ -f "$ENV" ] && . "$ENV"
+            ;;
+    */ksh)  set -o vi; set -o monitor; set -o ignoreeof
+	    PS1="$(/bin/hostname)$ "
+	    ENV="$HOME/.shellrc"
+	    export ENV
+            ;;
+    *)      set -I
+	    PS1="$(/bin/hostname)$ "
+	    ENV="$HOME/.shellrc"
+	    export ENV
+            ;;
+esac
+
+if [ -f $HOME/.profile.locale ] ; then . $HOME/.profile.locale ; fi

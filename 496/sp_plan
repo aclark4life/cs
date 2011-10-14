@@ -1,0 +1,31 @@
+Subject: oops
+sorry man, i forgot to mail you with a plan...
+
+i am still working with mulvey and it is going pretty good. i am doing a 
+variety of things the most prominent of which are as follows.
+
+        writing a web tool which allow easy administration of the bootp table. 
+
+                -the bootp protocol allows a machine to receive an i.p. address from
+                 a server running on another machine
+
+                -this will involve coding in perl, and html. the html will
+                 call a perl script which edit the bootp table (a text file
+                 which is in /etc/  
+
+        i have installed two web servers on mulvey's sparc 5 and i also plan to
+                install gcc, perl, and elm.
+
+        DHCP
+                i have observed the operation of a DHCP server running on an NT box
+                and i will be giving a demo of this in class on tues.
+
+
+
+        i am going to summarize all of this and display it on a series of web pages
+        for the demo!  
+
+        see you tues.
+
+        aclark
+EOT

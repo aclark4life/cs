@@ -1,0 +1,100 @@
+
+% user_manual.latex - Alex, Bin, Bruce, Kirsten
+%
+%    %W%
+%    Last Changed: %G%
+%
+\documentclass[12pt]{article}
+\usepackage{graphics}
+ 
+%\sidemargin -0.5in
+%\evensidemargin -0.5in
+%\textwidth 7.5in
+%\textheight 8.5in
+  
+\begin{document}
+\title{{\bf BPE} \\ User Manual}
+\author{Alex Clark,\\
+  Bruce Duncan,\\
+  Kirsten Metzler,\\
+  Bin Wu}
+\maketitle
+\thispagestyle{empty}
+
+%\setcounter{page}{0}
+
+\newpage
+\thispagestyle{empty}
+\section{Introduction}
+The Basis Set Viewer is an enhancement to the unravel program. It allows
+the user to view basis sets. A basis set is a set of linearly independent 
+test paths. Each path in the basis set can not be formed as a combination of 
+other paths in the basis set. Also, any path through the control flow graph 
+can be formed as a combination of paths in the basis set.\cite{Poole95}
+\section{Description}
+The Basis Set Viewer (See Figure~\ref{fig:viewer}) includes the following:
+\begin{enumerate} 
+\item {\bf BUTTON BAR} - includes the following buttons:
+
+	\begin{description}
+        \item[\tt{Exit}] - exits the basis set viewer.
+        \item[\tt{Select}] - allows for selection of a basis set and basis path.
+        \item[\tt{Help}] - pops up a help file for the basis set viewer.
+	\end{description}
+ 
+\item {\bf STATUS BAR} - includes the following information:
+ 
+	\begin{description}
+        \item[\tt{File}] - the name of the file you are viewing.
+        \item[\tt{Proc}] - the name of the function whose basis set is selected.
+        \item[\tt{Path}] - the selected basis path in the selected basis set.
+	\end{description}
+ 
+\item {\bf SCROLL BAR} - used to scroll through the text of the file you have
+			 selected.
+ 
+\item {\bf TICK BAR} - used to locate highlighted text. May be used by 
+	   itself or in combination with the scroll bar. If the highlighting 
+	   is not visible either click on the tick bar or align the scroll bar 
+	   with the ticks on the ticks bar. This will produce the highlighted text.
+ 
+\end{enumerate} 
+
+\begin{figure}[h]
+\includegraphics{viewer.ps}
+\caption{Screenshot of the {\bf BPE}}\label{fig:viewer}
+\end{figure}
+
+\section{Directions}
+You may select a basis set by following these steps:
+\begin{enumerate} 
+\item Run unravel on your favorite directory of processed C files.
+
+\item Click on the 'Run Basis Set Viewer' button. This will open The Basis Set
+	   Viewer Selection Panel.
+
+\item Select a C file.
+ 
+\item Click on the 'Select' button.
+ 
+\item Select a function.
+ 
+\item Choose a basis path.
+\end{enumerate}
+The basis path you have chosen will be highlighted. If the
+highlighting is not visible either click on the tick bar or 
+align the scroll bar with the ticks on the ticks bar. This will 
+produce the highlighted text. Enjoy the Basis Set Viewer!
+
+\newpage
+\bibliography{bib}
+\bibliographystyle{alpha}
+
+
+
+
+
+
+\end{document}
+			   
+

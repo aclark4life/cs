@@ -1,0 +1,51 @@
+
+
+                           CS 451
+                 Programming Assignment #4
+                 Functional Programming: ML
+                   A Simple Interpreter
+                   Due 10/9/96, in class
+
+The goal of this assignment is to get acquainted with the ML
+programming  language.  Write a simple ML interpreter for an
+imperative language having scalar variables, and assignment,
+if,  and  while  statements.  The following ML datatypes and
+example should get you started.
+
+
+    datatype operation = plus | times | minus | lessthan ;
+    datatype variable = string_to_variable of string;
+    datatype exp = int_to_exp of int |
+                   variable_to_exp of variable |
+                   exp_to_exp of operation * exp * exp ;
+    datatype statement = assignment_statement of variable * exp |
+                         if_statement of exp * statement list * statement list |
+                         while_statement of exp * statement list;
+
+    (* Two sample Programs *)
+    val sum = string_to_variable "sum";
+    val i = string_to_variable "i";
+    val a1 = assignment_statement (sum,(int_to_exp 0));
+    val a2 = assignment_statement (i,(int_to_exp 1));
+    val a3 = assignment_statement (sum,(exp_to_exp (plus,(variable_to_exp sum),
+                                       (variable_to_exp i))));
+    val a4 = assignment_statement (i,(exp_to_exp (plus,(variable_to_exp i),
+                                                       (int_to_exp 1))));
+    val e1 = exp_to_exp (lessthan,(variable_to_exp i),(int_to_exp 10));
+    (* Program 1 computes i := 1 *)
+    val Program1 = statement_list_to_program [a2];
+    (* Program 1 computes the sum of 1,2,3,4,5,6,7,8,9 *)
+    val Program2 = statement_list_to_program
+                       [a1, a2, while_statement (e1, [a3, a4])];
+
+What to hand in
+
+(1)  A listing of your program.
+
+(2)  A printout of some example runs  that  adequately  test
+     your program.
+
+CS451, Fall '96             -1-           Assignment #4
+
+
+

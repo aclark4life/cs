@@ -1,0 +1,67 @@
+<html>
+
+<title>LavaMan</title>
+<body bgcolor="#000000" text="red" link="449977" vlink="449977" >
+
+<center> 
+
+<table>
+<td><h1>MANAGING IP SERVICES at LOYOLA COLLEGE</h1></td> 
+</table>
+
+<table>
+<td><h2>(Mulvey's Weenie)</h2></td>
+</table>     
+</center>
+<hr>  
+<table> <td></td> <td></td>
+<td><li><h1>Install HTTPD Web Server</h1></td>
+</table>
+
+<table> <td></td> <td></td>
+<td><li><h1>Install Netscape Enterprise Web Server</h1></td>
+</table>
+
+<table> <td></td> <td></td>
+<td><li><h1>Research WindowsNT DHCP Server</h1></td>
+</table>
+
+<table><td></td> <td></td>
+<td><li><h1>Research Cisco DHCP Server</h1></td>
+</table>
+
+<table> <td></td> <td></td>
+<td><li><h1></h1></td>
+</table>
+
+</body>
+</table>
+
+<CENTER>
+<TABLE BORDER=0 CELLSPACING=3 CELLPADDING=3>
+<P>
+<TR>
+<TD COLSPAN=2 ALIGN=CENTER BGCOLOR="552299"><FONT COLOR="CCAA66"><B>CRYPTOGRAPHY TOOLS</B></FONT></TD>
+</TR>
+<P>
+<TR>
+<TH VALIGN=TOP ALIGN=LEFT WIDTH=120><a href="ftp://rsa.com/pub/rfc1321.txt/">MD5</a></TH>
+<TD ALIGN=LEFT VALIGN=TOP WIDTH=350><FONT SIZE=2 FACE=ARIAL>
+The MD5 message-digest (one-way hash) utility. MD5 condenses an input of arbitrary size to a fairly unique 128-bit cryptographic "fingerprint," which plays a key role in creating digital signatures for PEM.</FONT></TD> </TR>
+<P>
+</TABLE>
+</CENTER>
+  
+
+
+
+
+<pre>
+
+
+</pre>
+<table align=right>
+<td><a href="bootp.html"><img src = "quake.gif"></a></td>
+</table>
+</html>
+

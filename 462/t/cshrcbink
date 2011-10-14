@@ -1,0 +1,109 @@
+# SHOULD YOU BE EDITING .tcshrc???  
+
+set path = (. ~/bin /usr/local/bin )
+set path = ($path /usr/local/opt/FSFgroff/bin )
+set path = ($path /usr/ucb /usr/bin /usr/local/X11R6.1/bin )
+set path = ($path /usr/openwin/bin /sbin )
+set path = ($path /usr/ccs/bin )
+set noclobber
+
+setenv LD_LIBRARY_PATH /usr/openwin/lib:/usr/local/lib:/usr/lib:/usr/local/X11R6.1/lib
+ 
+umask 022
+
+if (! $?TERM) then                      # for 'at' commands
+  set TERM="xterm"
+endif
+
+if ( $?prompt && { test -t 0 }) then
+    echo "welcome, prompt = $prompt, term = $term "
+    set history=32
+    stty erase 
+
+    if ($term == xterm) stty kill ^U erase 
+    if ($term == vt102) stty kill ^U erase ^H
+    if ($term == dialup) then
+        set term = vt102
+        stty erase ^? rows 24 columns 80
+    endif
+ 
+    set fignore=(.o tmp)
+    set filec
+    set history = 100
+    set ignoreeof
+    set term=$TERM
+    set time = 10
+    set prompt=`hostname | sed -e 's/.*-//' -e 's/\(..\).*/\1:/'`
+
+    # from dec set mail = /var/spool/mail/$USER
+
+
+    alias gp        gprint
+    alias rp        reprint
+    alias help      apropos
+    alias tin       /usr/scratch/bin/tin -r
+    alias weather   /usr/scratch/bin/weather bwi
+    alias mail      elm
+    alias oldmail   /usr/ucb/mail
+    alias .         source
+    alias md        mkdir
+    alias pd        pushd
+    alias pwd       'echo $cwd'
+    alias rd        rmdir
+    alias lpr       lpr -h
+    alias cp        cp -i
+    alias enscript  enscript -B
+    alias la        ls -a
+    alias su	    su -
+    alias ld        ls -l -d
+    alias ll        ls -l
+    alias ls        ls -F
+    alias mv        mv -i
+    alias rm        rm -i
+    alias gcc       gcc -DNeedFunctionPrototypes=0
+    alias compress  compress -v
+    alias xterm     xterm -cu
+    alias f         finger
+    alias ispell    ispell -n
+ 
+
+    alias clean     '/bin/rm xd xx >& /dev/null; /bin/rm *.bak >& /dev/null'
+    alias CF        'setenv CURRENTFILE'
+    alias CF?       printenv CURRENTFILE
+    alias grades    'make .grades -s ; .grades'
+    alias hist      'history -r | head -30'
+    alias home      'set term = vt100 ; stty erase ^? rows 24 columns 80'
+    alias lmail     'mail -f ~/Mail/lmail'
+    alias pages     'grep "^p" xx'
+    alias q         "check ; correct ; length"
+    alias qh        more ~/etc/quick.help
+    alias quickhelp more ~/etc/quick.help
+    alias vax       rlogin loyola
+    alias vt52      'set term = vt52'
+    alias vt100     'set term = vt100'
+    alias en2r      'enscript -2r -l \!^'
+    alias hist      'history -r | head -30'
+    alias term      'set noglob; eval `tset -s \!\!:1`; set term=$TERM'
+    alias title     'echo -n "]2;\!^]1;\!^"'
+    alias nist      'xterm  -geometry 80x25-00-00 \#+90+00 -display ramius.ncsl.nist.gov:0.0 -rv -n lbf -T lbf '
+
+
+    setenv CLASSPATH  '/usr/local/java/classes/java40.jar'
+    setenv PRINTER    hp4
+    setenv LPDEST     hp4
+    setenv NNTPSERVER love.loyola.edu
+    setenv ISPELL_PRIV_DICT $HOME/.ispell_words
+    setenv PGPPATH    ~/.pgp/
+    setenv VISUAL     vi
+    setenv MAILPOSTER "QUOTECHARS=%I elm -i %h %T"
+    setenv TEXINPUTS  .:$HOME/etc/tex:/usr/local/lib/tex/inputs
+    setenv YOUSAID    "From the keyboard of %f: "
+    setenv MANPATH    /usr/local/man:/usr/openwin/man:/usr/man:/usr/local/X11R6.1/man
+    setenv BACKUP "papers"
+    setenv DECMAINTHOSTS "khserver anger pride charity cs envy greed lust sloth cs3100 cs2100 kg2100 "
+    setenv MAINTHOSTS "csmaster purity mercy lbf peace sanity wisdom  virtue  accord" 
+    # from linux setenv TEXINPUTS .:/usr/TeX/lib/texmf/tex/latex2e:/usr/TeX/lib/texmf/bibtex/bst
+
+endif
+
+

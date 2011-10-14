@@ -1,0 +1,25 @@
+From bduncan@csmaster.loyola.edu  Tue Apr 21 20:26:45 1998
+Received: from csmaster (csmaster.loyola.edu [144.126.178.25])
+	by fellspt.charm.net (8.8.8/8.8.5) with SMTP id UAA13163
+	for <aclark@charm.net>; Tue, 21 Apr 1998 20:26:44 -0400 (EDT)
+Received: by csmaster (SMI-8.6/SMI-SVR4)
+	id UAA21079; Tue, 21 Apr 1998 20:26:43 -0400
+From: bduncan@csmaster.loyola.edu (Bruce Duncan)
+Message-Id: <199804220026.UAA21079@csmaster>
+Subject: here you go
+To: aclark@csmaster.loyola.edu (goodgreatuhuhyeah)
+Date: Tue, 21 Apr 1998 20:26:43 -0400 (EDT)
+X-Mailer: ELM [version 2.4 PL25]
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Status: RO
+Content-Length: 165
+Lines: 5
+
+cat clark_passwd_sed | sed 's/:\*:[0-9]*:[0-9]*:[^:]*:[^:]*:nologin/ : \/dev\/null/g' | more
+
+this won't change the ones that don't have nologin as the shell
+
+bruce
+

@@ -1,0 +1,68 @@
+/* i.c - Find the inverse of an nxn matrix.
+   Alex Clark - August 1998 */
+
+
+#include <stdio.h>
+#include <string.h>
+
+void read_in();
+void mem_chores();
+int n;
+int **I;
+
+void main()
+{
+	read_in();
+}
+void read_in()
+{
+	int i,j ; 
+	char *line = (char *)malloc(1024*sizeof(char));
+	char *tok; 
+
+	scanf("%d\n",&n);
+	printf ("%d\n",n);
+
+/*	fgets ( line , 1024 , stdin ) ;
+	printf ("%s",line);
+	fgets ( line , 1024 , stdin ) ;
+	printf ("%s",line);
+	fgets ( line , 1024 , stdin ) ;
+	printf ("%s",line);
+	fgets ( line , 1024 , stdin ) ;
+	printf ("%s",line);
+*/
+
+
+	mem_chores();
+	for(i = 1;i <= n; i++)
+	{
+		fgets (line , 1024 , stdin ) ;
+		tok=strtok(line, " ");
+		for (j=1; tok !=NULL; j++)
+		{
+			I[i][j]=atoi(tok);
+			printf ("%d ",atoi(tok));
+			tok=strtok (NULL, " ");
+		}
+		printf ("\n");
+	}
+}
+void mem_chores()
+{
+	int i;
+	I = (int **)malloc((n+1)*sizeof(int *)); 
+	for (i = 1;i<=(n+1);i++)
+	{
+		I[i]= (int *) malloc ((n+1)*sizeof(int));
+	}
+
+
+/*	A=(int **)malloc((m+1)*sizeof(int *));
+        for (i=1;i<=(m+1);i++){
+                A[i] = (int *)malloc((p+1)*sizeof(int));
+        }
+*/
+
+
+}

@@ -1,0 +1,5 @@
+a test of qsort, times, 
+compare the time it takes q sort to run on 
+some unsorted data, 
+then compare the time it takes for qsort to 
+run on the sorted data

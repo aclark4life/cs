@@ -1,0 +1,17 @@
+foo:~#dump 0uf /dev/nrst0 /usr
+  DUMP: Date of this level 0 dump: Sat May 16 10:43:37 1998
+  DUMP: Date of last level 0 dump: the epoch
+  DUMP: Dumping /dev/rwd0h (/usr) to /dev/nrst0
+  DUMP: mapping (Pass I) [regular files]
+  DUMP: mapping (Pass II) [directories]
+  DUMP: estimated 2170244 tape blocks on -41.34 tape(s).
+  DUMP: dumping (Pass III) [directories]
+  DUMP: dumping (Pass IV) [regular files]
+  DUMP: Closing /dev/nrst0
+  DUMP: Change Volumes: Mount volume #2
+  DUMP: Is the new volume mounted and ready to go?: ("yes" or "no") yes
+  DUMP: Volume 2 begins with blocks from inode 8050
+  DUMP: 1.77% done, finished in 43:23
+  DUMP: Closing /dev/nrst0
+  DUMP: Change Volumes: Mount volume #3
+  DUMP: Is the new volume mounted and ready to go?: ("yes" or "no") 

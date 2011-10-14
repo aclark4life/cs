@@ -1,0 +1,42 @@
+
+
+                    CS 466, Spring 1997
+                 Programming Assignment #3
+                   Distributed Programming
+                   Due 4/25/97, in class
+
+
+Introduction
+
+  Part  1: 
+     Implement a "token ring" by passing a "token" via sockets.
+
+     Make the token a 8 bit value with an 8 bit value field.
+     Create about four processes as token-ring members  then
+     decide  on  a  static  order between your processes and
+     pass the token around.
+
+  Part 2: Implement the Bully Algorithm (page  483)  and  then
+     hold an election.
+
+
+What to hand in
+
+ (1)   A listing of your well-formatted programs.
+
+Extra Credit
+
+ (1)   Implement a distributed white board.
+       A distributed white board is a collection of  comput-
+       ers  running  white board software that are connected
+       by a network.  The distributed white board has a sin-
+       gle pen.  You must have the pen to write to the white
+       board.  When someone attempts to write to  the  white
+       board  an  election  is  held.   The  lowest numbered
+       writer wins and may write (has the pen).  This writer
+       also sets his/her number to one plus the largest num-
+       ber seen so far (which should be passed  around  with
+       election  tokens);  thus,  they  will  loose the next
+       election.
+
+

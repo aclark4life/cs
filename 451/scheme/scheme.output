@@ -1,0 +1,130 @@
+Scheme Microcode Version 10.86
+MIT Scheme, unix [bsd] version
+Type `^C' (control-C) followed by `H' to obtain information about interrupts.
+Scheme saved on Wednesday January 29, 1992 at 3:31:02 PM
+  Release 7.0.0 (beta)
+  Microcode 10.86
+  Runtime 14.46
+  SF 4.8
+
+1 ]=> (LOAD-NOISILY 'examples)
+;Value: nil
+;Value: add
+;Value: sub
+;Value: last
+;Value: length
+;Value: append
+;Value: reverse
+;Value: reverse2-helper
+;Value: reverse2
+;Value: map
+
+1 ]=> (define l '(a b c d d a b b))
+;Value: l
+
+1 ]=> l
+;Value: (a b c d d a b b)
+
+1 ]=> (last l)
+;Value: b
+
+1 ]=> (last '(a b g))
+;Value: g
+
+**** try (last '(a (b d f) (r d (e f) e)))   
+**** Can you first predict the answer?  do the same for length (see below).
+
+1 ]=> (append '(a b) '(c d))
+;Value: (a b c d)
+
+1 ]=> (define l2 (append '(1 2) '(a b c)))
+;Value: l2
+
+1 ]=> l2
+;Value: (1 2 a b c)
+
+1 ]=> (reverse l2)
+;Value: (reverse l2)
+
+1 ]=> (reverse l2)
+;Value: (c b a 2 1)
+
+1 ]=> (reverse (append l l2))
+;Value: (c b a 2 1 b b a d d c b a)
+
+1 ]=> (reverse2 (append l l2))
+;Value: (c b a 2 1 b b a d d c b a)
+
+1 ]=>  (define increment (lambda (x) (+ x 1)))
+;Value: increment
+
+1 ]=> (map increment '(1 2 3))
+;Value: (2 3 4)
+
+1 ]=> (load 'examples2)
+;Value: fact
+
+1 ]=> (length1 l)
+;Value: 8
+
+1 ]=> (length2 l 0)
+;Value: 8
+
+1 ]=> (length2 l 2)		 ; **** why does "(len l 2)" equal 10 ?
+;Value: 10
+
+1 ]=> (factorial1 4)
+;Value: 24
+
+1 ]=> (factorial2 4)
+;Value: 24
+
+1 ]=> (factorial2 7)
+;Value: 5040
+
+**** for what value of 'n' is there a difference in execution time between
+**** factorial1 and factorial2?
+
+1 ]=> (define increment (fix-first-argument + 1))
+;Value: increment
+
+1 ]=> (increment 4)
+;Value: 5
+
+1 ]=> (fact 4)
+;Value: (* 4 (* 3 (* 2 1)))
+
+1 ]=> (fact 7)
+;Value: (* 7 (* 6 (* 5 (* 4 (* 3 (* 2 1))))))
+
+1 ]=> (define ans (fact 7))
+;Value: ans
+
+1 ]=> ans
+;Value: (* 7 (* 6 (* 5 (* 4 (* 3 (* 2 1))))))
+
+1 ]=> (eval ans nil)		; nil is the environment 
+;Value: 5040
+
+1 ]=> (load '7-1)
+;Value: inc-count
+
+1 ]=> l
+;Value: (a b c d d a b b)
+
+1 ]=> (remove-dups l)
+;Value: (b a d c b a)
+
+1 ]=> (remove-dups '(a a b b b))
+;Value: (b a)
+
+1 ]=> (remove-dups2 l)
+;Value: (a b c d a b)
+
+1 ]=> (remove-dups2 '(a a b b b))
+;Value: (a b)
+
+1 ]=> (inc-count '(a 4))
+;Value: (a 5)
+
+1 ]=> (exit)

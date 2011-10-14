@@ -1,0 +1,13 @@
+				*Netscape Enterprise Web Server*
+
+* I downloaded this webserver from Netscape's site: http://netscape.com
+
+* This allows those with minimal UNIX knowledge to administrate
+  a webserver.
+
+* All administrative tasks are done from within Netscape.
+
+* I didn't particularly care for this server as I would rather maintain
+  my server by editing text files in vi.
+
+

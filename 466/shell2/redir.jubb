@@ -1,0 +1,10 @@
+ if(1!=open(tok[length-1], O_WRONLY|O_CREAT,PERMS))
+          {
+               fprintf(stderr, "file error\n");
+               exit(0);
+          }
+where tok[length-1] is the token after the < or > hence it is
+the file to write to or read from
+
+
+

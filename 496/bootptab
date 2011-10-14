@@ -1,0 +1,1739 @@
+# 
+# /etc/bootptab: database for bootp server (/etc/bootpd)
+# Last update Mon 06/06/96  John J. Mulvey
+# Blank lines and lines beginning with '#' are ignored.
+# 
+#
+#
+# Legend:
+#
+#	first field -- hostname
+#			(may be full domain name and probably should be)
+#
+#	bf -- bootfile
+#	bs -- bootfile size
+#	cs -- cookie servers
+#	ds -- domain name servers
+#	gw -- gateway address list
+#	ha -- host hardware address
+#	hd -- bootfile home directory
+#	hn -- send hostname
+#	ht -- hardware type
+#	im -- impress servers
+#	ip -- host IP address
+#	lg -- log servers
+#	lp -- LPR servers
+#	ns -- IEN-116 name servers
+#	rl -- resource location protocol servers
+#	sm -- subnet mask
+#	tc -- template host (points to similar host entry)
+#	to -- time offset (seconds)
+#	ts -- time servers
+#	vm -- vendor magic cookie selector
+
+#
+# Be careful about including backslashes where they're needed.  Weird (bad)
+# things can happen when a backslash is omitted where one is intended.
+#
+
+# First, we define a global entry which specifies the stuff every host uses.
+
+global.dummy:\
+	:sm=255.255.255.0:\
+	:hd=/tftpboot:\
+	:gw=144.126.1.2:\
+	:ds=144.126.1.1 144.126.1.252:\
+	:to=18000:\
+        :bf=loyola.cfg\
+	:ht=ethernet\
+	:hd=/tftpboot
+global1.dummy:\
+	:sm=255.255.255.0:\
+	:hd=/tftpboot:\
+	:gw=144.126.1.2:\
+	:ds=144.126.1.1 144.126.1.252:\
+	:to=18000:\
+        :bf=loyola.cfg\
+	:ht=ethernet\
+	:hd=/tftpboot
+#
+#	
+# 
+#
+#	
+# Next, we can define different master entries for each subnet. . .
+testnet.dummy:\
+         :tc=global.dummy:gw=144.126.190.1
+
+knottnet.dummy:\
+	:tc=global.dummy:gw=144.126.1.2
+
+donnellynet.dummy:\
+	:tc=global.dummy:gw=144.126.178.2
+
+marylandnet.dummy:\
+	:tc=global.dummy:gw=144.126.179.4
+
+wynnewoodnet.dummy:\
+	:tc=global1.dummy:gw=144.126.177.3
+
+collegectrnet.dummy:\
+	:tc=global.dummy:gw=144.126.176.2
+
+humannet.dummy:\
+	:tc=global.dummy:gw=144.126.5.2
+
+jenkinsnet.dummy:\
+        :tc=collegectrnet.dummy
+
+beattynet.dummy:\
+	:tc=marylandnet.dummy
+
+columbianet.dummy:\
+	:tc=global.dummy:gw=144.126.10.10
+
+hvnet.dummy:\
+	:tc=global.dummy:gw=144.126.9.10
+
+primenet.dummy:\
+        :tc=global.dummy:gw=144.126.2.3
+
+loylabnet.dummy:\
+        :tc=global.dummy:gw=144.126.20.5
+
+jenkins2net.dummy:\
+        :tc=global1.dummy:gw=144.126.180.2
+
+guilfordnet.dummy:\
+	:tc=global.dummy:gw=144.126.185.1
+
+
+khclientsnet.dummy:\
+	:tc=global.dummy:gw=144.126.190.1
+
+testnet.dummy:\
+	:tc=global.dummy:gw=144.126.254.1
+	
+#
+# Advanced agents
+#
+MD-Terminal-Server-1:      ht=ethernet:   ha=000081ff08f7:   ip=144.126.179.15:   hd=/tftpboot:           bf=ts3395.img:         tc=marylandnet.dummy
+MD-Terminal-Server-2:      ht=ethernet:   ha=000081ff0b6d:   ip=144.126.179.16:   hd=/tftpboot:           bf=ts3395.img:         tc=marylandnet.dummy
+Rolm-Terminal-Server-8:    ht=ethernet:   ha=000081ff08f8:   ip=144.126.1.29:     hd=/tftpboot:           bf=ts3395.img:         tc=global.dummy
+
+xa1-nmm:                   ht=ethernet:   ha=0000810297b0:   ip=144.126.180.7:    hd=/tftpboot:           bf=xa1.cfg 
+#  this entry for columbia is wrong jjm
+#Columbia-conc1-nmm:       ht=ethernet:   ha=0000810297b0:   ip=144.126.10.1:     hd=/tftpboot:           bf=columbia.cfg      
+cisco-igs-router:          ht=ethernet:   ha=00000c039568:   ip=144.126.176.77:   hd=/tftpboot/router:    bf=lndlibrary-confg
+Admin-sysrm-3030-nmm:      ht=ethernet:   ha=000081070c79:   ip=144.126.2.5:      hd=/tftpboot:           bf=admin.cfg
+Ctswrm3-3000-nmm:          ht=ethernet:   ha=000081098f18:   ip=144.126.2.6:      hd=/tftpboot:           bf=ctswrm3.cfg
+Beatty-2810-nmm:           ht=ethernet:   ha=0000810265cc:   ip=144.126.1.35:     hd=/tftpboot:           bf=test3.cfg
+cohn-conc1-nmm:            ht=ethernet:   ha=0000810684e7:   ip=144.126.1.192:    hd=/tftpboot:           bf=cohn.cfg
+Gardens-D-conc1-nmm:       ht=ethernet:   ha=000081027791:   ip=144.126.177.7:    hd=/tftpboot:           bf=gardend1.cfg
+DS-East-121-conc1-nmm:     ht=ethernet:   ha=000081026704:   ip=144.126.178.3:    hd=/tftpboot:           bf=dse1211.cfg
+DS-East-420-conc1-nmm:     ht=ethernet:   ha=0000810266f7:   ip=144.126.178.4:    hd=/tftpboot:           bf=dse4201.cfg
+Beatty-024-conc1-nmm:      ht=ethernet:   ha=0000810266f9:   ip=144.126.179.10:   hd=/tftpboot:           bf=beatty0241.cfg
+Beatty-233-conc1-nmm:      ht=ethernet:   ha=0000810266fa:   ip=144.126.179.11:   hd=/tftpboot:           bf=beatty2331.cfg
+Hunt-Valley-conc1-nmm:     ht=ethernet:   ha=0000810263a9:   ip=144.126.9.1       hd=/tftpboot:           bf=hv1.cfg
+Knott-250-concB-nmm:       ht=ethernet:   ha=00008104227c:   ip=144.126.20.4:     hd=/tftpboot:           bf=kh250b.cfg
+Knott-450-conc1-nmm:       ht=ethernet:   ha=000081026702:   ip=144.126.1.101:    hd=/tftpboot:           bf=kh4501.cfg
+Knott-450-concA-nmm:       ht=ethernet:   ha=00008107754e:   ip=144.126.1.181:    hd=/tftpboot:           bf=kh450.cfg
+Knott-450-concB-nmm:       ht=ethernet:   ha=00008106df10:   ip=144.126.20.3:     hd=/tftpboot:           bf=kh450b.cfg 
+WT-West-Lab-conc1-nmm:     ht=ethernet:   ha=0000812441e8:   ip=144.126.177.4:    hd=/tftpboot:           bf=wtwlab1.cfg
+SC-Vending-Area-conc1-nmm: ht=ethernet:   ha=000081026716:   ip=144.126.177.1:    hd=/tftpboot:           bf=scva1.cfg
+#Physical-Plant-conc1-nmm:  ht=ethernet:   ha=000081026796:   ip=144.126.176.10:   hd=/tftpboot:           bf=ppbdf1.cfg
+MD-Hall-106-conc1-nmm:     ht=ethernet:   ha=0000810266f6:   ip=144.126.179.1:    hd=/tftpboot:           bf=md1061.cfg
+MD-Hall-312-conc1-nmm:     ht=ethernet:   ha=000081026703:   ip=144.126.179.2:    hd=/tftpboot:           bf=md3121.cfg
+MD-Hall-410-conc1-nmm:     ht=ethernet:   ha=000081026700:   ip=144.126.179.3:    hd=/tftpboot:           bf=md4101.cfg
+Jenkins-302-conc1-nmm:     ht=ethernet:   ha=0000810266f5:   ip=144.126.180.7:    hd=/tftpboot:           bf=jenkins3021.cfg
+Jenkins-151-conc1-nmm:     ht=ethernet:   ha=0000810266fc:   ip=144.126.180.6:    hd=/tftpboot:           bf=jenkins151.cfg
+CT-Switch-Room-conc1-nmm:  ht=ethernet:   ha=000081026705:   ip=144.126.176.1:    hd=/tftpboot:           bf=ctswrm1.cfg
+CT-Switch-Room-conc2-nmm:  ht=ethernet:   ha=00008102adf0:   ip=144.126.1.63:     hd=/tftpboot:           bf=ctswrm2.cfg
+SC-209-conc1-nmm:          ht=ethernet:   ha=0000810263a2:   ip=144.126.176.13:   hd=/tftpboot:           bf=sc2091.cfg
+CT-Middle-142-2310-nmm:    ht=ethernet:   ha=0000810263ae:   ip=144.126.176.5:    hd=/tftpboot:           bf=ctm1421.cfg
+CT-Middle-411-2310-nmm:    ht=ethernet:   ha=0000810263a7:   ip=144.126.176.3:    hd=/tftpboot:           bf=ctm411a1.cfg
+Knott-250-conc1-nmm:       ht=ethernet:   ha=000081061152:   ip=144.126.1.178:    hd=/tftpboot:           bf=kh2501.cfg
+DS-North-250-conc1-nmm:    ht=ethernet:   ha=000081061150:   ip=144.126.178.1:    hd=/tftpboot:           bf=dsn2501.cfg
+Guilford-conc1-nmm:        ht=ethernet:   ha=000081024604:   ip=144.126.180.10:   hd=/tftpboot:           bf=guilford1.cfg
+CT-router-e0:              ht=ethernet:   ha=0000810112bc:   ip=144.126.176.2:    hd=/tftpboot:           bf=rt3383.img
+CT-router-e1:              ht=ethernet:   ha=0000810112bd:   ip=144.126.1.5:      hd=/tftpboot:           bf=rt3383.img
+DS-router-e0:              ht=ethernet:   ha=0000810121e0:   ip=144.126.178.2:    hd=/tftpboot:           bf=rt3383.img
+DS-router-e1:              ht=ethernet:   ha=0000810121e1:   ip=144.126.1.180:    hd=/tftpboot:           bf=rt3383.img
+Admin-router-e0:           ht=ethernet:   ha=0000810121e4:   ip=144.126.2.3:      hd=/tftpboot:           bf=rt3383.img
+Admin-router-e1:           ht=ethernet:   ha=0000810121e5:   ip=144.126.1.13:     hd=/tftpboot:           bf=rt3383.img
+MD-router-e0:              ht=ethernet:   ha=000081011290:   ip=144.126.179.4:    hd=/tftpboot:           bf=rt3383.img
+MD-router-e1:              ht=ethernet:   ha=000081011291:   ip=144.126.1.183:    hd=/tftpboot:           bf=rt3383.img
+#WT-router-e0:              ht=ethernet:   ha=000081012658:   ip=144.126.177.2:    hd=/tftpboot:           #bf=rt3383.img
+WT-router-e1:              ht=ethernet:   ha=000081012659:   ip=144.126.1.176:    hd=/tftpboot:           bf=rt3383.img
+#Lab-router-e0:             ht=ethernet:   ha=000081113d2a:   ip=144.126.20.2      hd=/tftpboot:           bf=rt3383.img
+#Lab-router-e1:             ht=ethernet:   ha=000081113d2b:   ip=144.126.1.64      hd=/tftpboot:           bf=rt3383.img
+#Internet-router-e0:        ht=ethernet:   ha=000081011c34:   ip=144.126.1.2:      hd=/tftpboot:           bf=rt3383.img
+MD-312-bridge:             ht=ethernet:   ha=000081ffadb0:   ip=144.126.179.12:   hd=/tftpboot:           bf=332xs.img
+#DS-East-121-bridge:        ht=ethernet:   ha=000081ff9332:   ip=144.126.178.6:    hd=/tftpboot:           bf=332xs.img
+KH-250-bridge:             ht=ethernet:   ha=000081ffaeb2:   ip=144.126.1.182:    hd=/tftpboot:           bf=332xs.img
+Physical-Plant-bridge:     ht=ethernet:   ha=000081ffae6c:   ip=144.126.176.11:   hd=/tftpboot:           bf=332xs.img
+#HU-IDF-#1-conc1-nmm:       ht=ethernet:   ha=000081024616:   ip=144.126.5.1:      hd=/tftpboot: 
+#HU-IDF-#2-conc1-nmm:       ht=ethernet:   ha=000081024604:   ip=144.126.5.3:      hd=/tftpboot:       
+#HU-IDF-#3-conc1-nmm:       ht=ethernet:   ha=000081024616:   ip=144.126.5.4:      hd=/tftpboot: 
+#HU-IDF-#4-conc1-nmm:       ht=ethernet:   ha=000081024604:   ip=144.126.5.5:      hd=/tftpboot:
+#HU-IDF-#5-conc1-nmm:       ht=ethernet:   ha=000081024616:   ip=144.126.5.6:      hd=/tftpboot: 
+#HU-IDF-#6-conc1-nmm:       ht=ethernet:   ha=000081024604:   ip=144.126.5.7:      hd=/tftpboot:
+#HU-IDF-#7-conc1-nmm:       ht=ethernet:   ha=000081024616:   ip=144.126.5.8:      hd=/tftpboot: 
+HU-router-e0:              ht=ethernet:   ha=0000810126b0:   ip=144.126.5.2:      hd=/tftpboot:           bf=rt3383.img
+HU-router-e1:              ht=ethernet:   ha=0000810126b1:   ip=144.126.1.254:    hd=/tftpboot:           bf=rt3383.img
+#Columbia-conc1-nmm:        ht=ethernet:   ha=000081xxxxxx:   ip=144.126.10.1     hd=/tftpboot:            bf=columbia.cfg
+Columbia-conc2-nmm:        ht=ethernet:   ha=0000810263f5:   ip=144.126.10.3:     hd=/tftpboot:           bf=columbia2.cfg
+WEBA01-conc1-nmm:          ht=ethernet:   ha=0000810266ff:   ip=144.126.177.8:    hd=/tftpboot:           bf=weba01.cfg
+Health-conc1-nmm:          ht=ethernet:   ha=000081082b65:   ip=144.126.1.69:     hd=/tftpboot:           bf=health.cfg
+#
+#	The following information is an example for BOOTP Entry:
+#
+# 	name = user.loyola.edu
+#	ht = hardware type (Ethernet)
+#	ha = hardware address (Ethernet MAC Address)
+#	ip = internet address
+#	tc = subnet.dummy (for which subnet you are in)
+#
+# Example entry:
+#
+## joker.loyola.edu:	tc=whoknows.dummy:  ha=012345abcdef:	ip=012.345.678.901
+#
+#	*****	The following information is for BOOTP	*****
+#  
+#
+#
+#
+# ---------------------------TestNet .254.x 
+testmac.loyola.edu:      tc=testnet.dummy:    ha=000502e02b51:     ip=144.126.254.31
+bhenders.loyola.edu:     tc=testnet.dummy:    ha=02608cd96027:     ip=144.126.254.32
+
+# ----------------------- Knott Hall Labs .20.xxx  -------------------------------------------
+
+tsrevmac.loyola.edu:      tc=loylabnet.dummy:    ha=00a04007d48a:    ip=144.126.20.87 
+#              KH264 Lab
+#
+kh264-sta00.loyola.edu:    tc=loylabnet.dummy:   ha=00a0243742f6:    ip=144.126.20.51
+kh264-sta11.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e11d:    ip=144.126.20.157
+kh264-sta12.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e0e3:    ip=144.126.20.158
+kh264-sta13.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499dbfc:    ip=144.126.20.159
+kh264-sta14.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e193:    ip=144.126.20.160
+kh264-sta15.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e07b:    ip=144.126.20.161
+kh264-sta21.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499dcd4:    ip=144.126.20.162
+kh264-sta22.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499d5a0:    ip=144.126.20.163
+kh264-sta23.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499dc83:    ip=144.126.20.164
+kh264-sta24.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499d597:    ip=144.126.20.165
+kh264-sta25.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e170:    ip=144.126.20.166
+kh264-sta31.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e12a:    ip=144.126.20.167
+kh264-sta32.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e1a4:    ip=144.126.20.168
+kh264-sta33.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499dcb0:    ip=144.126.20.169
+kh264-sta41.loyola.edu:    tc=loylabnet.dummy:   ha=00608ce97fd3:    ip=144.126.20.172
+kh264-sta42.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499e19e:    ip=144.126.20.176
+kh264-sta00.loyola.edu:    tc=loylabnet.dummy:   ha=0020af9c8814:    ip=144.126.20.174
+kh264-sta42.loyola.edu:    tc=loylabnet.dummy:   ha=00a02499dcac:    ip=144.126.20.196
+#
+#               KH265 LAB    
+#
+kh265-sta00.loyola.edu:    tc=loylabnet.dummy:    ha=0020afc4d5e5:    ip=144.126.20.100
+kh265-sta11.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b8db7:    ip=144.126.20.101
+kh265-sta12.loyola.edu:    tc=loylabnet.dummy:    ha=00a024817002:    ip=144.126.20.102
+kh265-sta13.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816fe4:    ip=144.126.20.103
+kh265-sta14.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f26:    ip=144.126.20.104
+kh265-sta15.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f7d:    ip=144.126.20.105
+kh265-sta16.loyola.edu:    tc=loylabnet.dummy:    ha=00a024817066:    ip=144.126.20.106
+kh265-sta21.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90d1:    ip=144.126.20.107
+kh265-sta22.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f3b:    ip=144.126.20.108
+kh265-sta23.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b909e:    ip=144.126.20.109
+kh265-sta24.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90dc:    ip=144.126.20.110
+kh265-sta25.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90b6:    ip=144.126.20.111
+kh265-sta26.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f19:    ip=144.126.20.112
+kh265-sta31.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f8e:    ip=144.126.20.113
+kh265-sta32.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90aa:    ip=144.126.20.114
+kh265-sta33.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f90:    ip=144.126.20.115
+kh265-sta34.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f1d:    ip=144.126.20.116
+kh265-sta35.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f2c:    ip=144.126.20.117
+kh265-sta36.loyola.edu:    tc=loylabnet.dummy:    ha=00a02481707d:    ip=144.126.20.118
+kh265-sta41.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90a1:    ip=144.126.20.119
+kh265-sta42.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f50:    ip=144.126.20.120
+kh265-sta43.loyola.edu:    tc=loylabnet.dummy:    ha=00a02481708d:    ip=144.126.20.121
+kh265-sta44.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f23:    ip=144.126.20.122
+kh265-sta45.loyola.edu:    tc=loylabnet.dummy:    ha=00a024817085:    ip=144.126.20.123
+kh265-sta46.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f45:    ip=144.126.20.124
+kh265-sta51.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90c1:    ip=144.126.20.125
+kh265-sta52.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90bd:    ip=144.126.20.126
+kh265-sta53.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b9035:    ip=144.126.20.127
+kh265-sta54.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f24:    ip=144.126.20.128
+kh265-sta55.loyola.edu:    tc=loylabnet.dummy:    ha=00a024816f8c:    ip=144.126.20.129
+kh265-sta56.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b8e11:    ip=144.126.20.130
+kh265-sta61.loyola.edu:    tc=loylabnet.dummy:    ha=00a02481703c:    ip=144.126.20.131
+kh265-sta62.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b909b:    ip=144.126.20.132
+kh265-sta63.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90b9:    ip=144.126.20.133
+kh265-sta64.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b90bc:    ip=144.126.20.134
+kh265-sta65.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b8f46:    ip=144.126.20.135
+kh265-sta66.loyola.edu:    tc=loylabnet.dummy:    ha=00a0247b8bb0:    ip=144.126.20.136
+#
+#              KH474 Lab
+#
+kh474-sta411.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5bd75:    ip=144.126.20.137
+kh474-sta412.loyola.edu:   tc=loylabnet.dummy:    ha=00a0249896be:    ip=144.126.20.138
+kh474-sta413.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b6bb:    ip=144.126.20.139
+kh474-sta414.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b698:    ip=144.126.20.140
+kh474-sta421.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b6ab:    ip=144.126.20.141
+kh474-sta422.loyola.edu:   tc=loylabnet.dummy:    ha=00a02442826f:    ip=144.126.20.142
+kh474-sta423.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5be15:    ip=144.126.20.143
+kh474-sta424.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b6ae:    ip=144.126.20.144
+kh474-sta431.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b69b:    ip=144.126.20.145
+kh474-sta432.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b8d9:    ip=144.126.20.146
+kh474-sta433.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5bd9f:    ip=144.126.20.147
+kh474-sta434.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b8b3:    ip=144.126.20.148
+kh474-sta441.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b8d1:    ip=144.126.20.149
+kh474-sta442.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5a4ed:    ip=144.126.20.150
+kh474-sta443.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b8d3:    ip=144.126.20.151
+kh474-sta444.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5a570:    ip=144.126.20.152
+kh474-sta451.loyola.edu:   tc=loylabnet.dummy:    ha=080007ef73fd:    ip=144.126.20.153
+kh474-sta452.loyola.edu:   tc=loylabnet.dummy:    ha=0800072ff23e:    ip=144.126.20.154
+kh474-sta453.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b5a55c:    ip=144.126.20.155
+kh474-sta454.loyola.edu:   tc=loylabnet.dummy:    ha=00a024b6b91b:    ip=144.126.20.156
+kh474-hp4simx.loyola.edu:  tc=loylabnet.dummy:    ha=0800091e49bc:    ip=144.126.20.195
+kh474-sta461.loyola.edu:   tc=loylabnet.dummy:    ha=080007ef578d:    ip=144.126.20.84
+kh474-sta462.loyola.edu:   tc=loylabnet.dummy:    ha=0800071f3b68:    ip=144.126.20.85
+kh474-sta463.loyola.edu:   tc=loylabnet.dummy:    ha=080007ef87ce:    ip=144.126.20.86
+brice.loyola.edu:          tc=loylabnet.dummy:    ha=0800071f3b68:    ip=144.126.20.60
+trcmac.loyola.edu:         tc=loylabnet.dummy:    ha=080007f7f7b9:    ip=144.126.20.50
+#
+#   ----------------------- KH473 Lab
+
+
+kh473-sta11.loyola.edu:   tc=loylabnet.dummy:    ha=0020afc613c6:    ip=144.126.20.173
+kh473-sta12.loyola.edu:   tc=loylabnet.dummy:    ha=0020afc519b6:    ip=144.126.20.174
+kh473-sta13.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35fa0:    ip=144.126.20.175
+kh473-sta14.loyola.edu:   tc=loylabnet.dummy:    ha=0020af31b868:    ip=144.126.20.176
+kh473-sta21.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35f18:    ip=144.126.20.177
+kh473-sta22.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35fab:    ip=144.126.20.178
+kh473-sta23.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35f1d:    ip=144.126.20.179
+kh473-sta24.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35fb7:    ip=144.126.20.180
+kh473-sta31.loyola.edu:   tc=loylabnet.dummy:    ha=00a0247b8e0c:    ip=144.126.20.181
+kh473-sta32.loyola.edu:   tc=loylabnet.dummy:    ha=0020afe35f27:    ip=144.126.20.182
+#                                                                                      
+#                                                                   
+#
+#                Hammerman Lab
+#
+hhsta35.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c882b:    ip=144.126.20.61
+hhsta34.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c883a:    ip=144.126.20.62
+hhsta33.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c8812:    ip=144.126.20.63
+hhsta32.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c7305:    ip=144.126.20.64
+hhsta31.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c87e6:    ip=144.126.20.65
+hhsta21.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c788d:    ip=144.126.20.66
+hhsta22.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c87f1:    ip=144.126.20.67
+hhsta23.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c8800:    ip=144.126.20.68
+hhsta24.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c8828:    ip=144.126.20.69
+hhsta25.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c881b:    ip=144.126.20.70
+hhsta11.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c881e:    ip=144.126.20.71
+hhsta12.loyola.edu:        tc=loylabnet.dummy:   ha=0020af9c882c:    ip=144.126.20.72
+Hammprinter.loyola.edu:    tc=loylabnet.dummy:   ha=0800091e45d0:    ip=144.126.20.73
+ham-xterm-1.loyola.edu:    tc=loylabnet.dummy:   ha=0000a714151e:    ip=144.126.20.74
+ham-xterm-2.loyola.edu:    tc=loylabnet.dummy:   ha=0000a7141589:    ip=144.126.20.75
+macsta41.loyola.edu:       tc=loylabnet.dummy:   ha=080007d41b2e:    ip=144.126.20.76
+macsta42.loyola.edu:       tc=loylabnet.dummy:   ha=080007d4ffba:    ip=144.126.20.77
+macsta43.loyola.edu:       tc=loylabnet.dummy:   ha=080007d4678b:    ip=144.126.20.78
+macsta51.loyola.edu:       tc=loylabnet.dummy:   ha=080007348056:    ip=144.126.20.79
+macsta52.loyola.edu:       tc=loylabnet.dummy:   ha=080007d4bb04:    ip=144.126.20.80
+macsta53.loyola.edu:       tc=loylabnet.dummy:   ha=080007d47bd5:    ip=144.126.20.81
+macsta54.loyola.edu:       tc=loylabnet.dummy:   ha=080007d4073b:    ip=144.126.20.82
+#
+#
+#                *******Classrooms************
+#
+kh156.loyola.edu:          tc=loylabnet.dummy:   ha=02608c8b3a46:    ip=144.126.20.83
+#
+#
+#                *******INFORMATION SERVICES  ********* 
+#                          .1 zone
+#
+jjm.loyola.edu:            tc=knottnet.dummy:    ha=00A024428274:    ip=144.126.1.189
+sgf.loyola.edu:            tc=knottnet.dummy:    ha=00a024b6b72d:    ip=144.126.1.27
+sgf1.loyola.edu:           tc=knottnet.dummy:    ha=00608c56f39a:    ip=144.126.1.28
+sheldon.loyola.edu:        tc=knottnet.dummy:    ha=02608c8b39c2:    ip=144.126.1.76
+#
+#  ******************  Health ************************
+gmclean.loyola.edu:      tc=knottnet.dummy:    ha=02608c6ce8e3:    ip=144.126.1.115
+jlombardi.loyola.edu:    tc=knottnet.dummy:    ha=02608c6ce8e4:    ip=144.126.1.116
+jrepko.loyola.edu:       tc=knottnet.dummy:    ha=02608c6bfcb0:    ip=144.126.1.117
+aoates.loyola.edu:       tc=knottnet.dummy:    ha=02608c8a6aaa:    ip=144.126.1.118
+rbklein.loyola.edu:      tc=knottnet.dummy:    ha=02608c6d1f61:    ip=144.126.1.119
+mwiedefeld.loyola.edu:   tc=knottnet.dummy:    ha=0020afd309ac:    ip=144.126.1.120
+#
+# ******************** Student Life ***************************************
+#
+mdiacont.loyola.edu:    tc=knottnet.dummy:    ha=000094774a95:    ip=144.126.1.70
+kpeterson.loyola.edu:   tc=knottnet.dummy:      ha=0000945e44bf:    ip=144.126.1.71
+#
+#
+#
+#
+#  -----------------------Cohn Hall -------------------------------------------------
+#
+#                Campus Ministries/Community Service
+#
+kneilson.loyola.edu:       tc=knottnet.dummy:    ha=02608cda2b0a:    ip=144.126.1.39
+dgallagh.loyola.edu:       tc=knottnet.dummy:    ha=00a0247b9034:    ip=144.126.1.46
+dnellies.loyola.edu:       tc=knottnet.dummy:    ha=000094051e07:    ip=144.126.1.47
+jwebster.loyola.edu:       tc=knottnet.dummy:    ha=00a0247b8edf:    ip=144.126.1.33
+gmiller.loyola.edu:        tc=knottnet.dummy:    ha=080007dcdff8:    ip=144.126.1.38
+mgugerty.loyola.edu:       tc=knottnet.dummy:    ha=000062c082f5:    ip=144.126.1.41
+esweezy.loyola.edu:        tc=knottnet.dummy:    ha=00a0247b8f00:    ip=144.126.1.48
+tkane.loyola.edu:          tc=knottnet.dummy:    ha=0020af1dfcbb:    ip=144.126.1.49
+rjudge.loyola.edu:         tc=knottnet.dummy:    ha=02608cda2ab3:    ip=144.126.1.65
+studentmac.loyola.edu:     tc=knottnet.dummy:    ha=000094689d66:    ip=144.126.1.59
+jlang.loyola.edu:          tc=knottnet.dummy:    ha=0020afea664b:    ip=144.126.1.67
+pearl.loyola.edu:          tc=knottnet.dummy:    ha=00a02499dca4:    ip=144.126.1.52
+goodnough.loyola.edu:      tc=knottnet.dummy:    ha=00a0247b8f0a:    ip=144.126.1.32
+mkreidler.loyola.edu:      tc=knottnet.dummy:    ha=00a024e6f0e7:    ip=144.126.1.197 
+#  
+# ---------------------------KH_Clients 144.126.190.x ---------------------------------------------
+
+#               KH157 Classroom
+kh157pc.loyola.edu:        tc=khclientsnet.dummy:    ha=0020afa1269c:    ip=144.126.190.226
+kh157mac.loyola.edu:       tc=khclientsnet.dummy:    ha=080007ff7e54:    ip=144.126.190.57
+#
+#           ****   KNOTT HALL CLASSROOMS   *********
+kh02.loyola.edu:           tc=khclientsnet.dummy:    ha=0020af1dfcc2:    ip=144.126.190.58
+kn05.loyola.edu:           tc=khclientsnet.dummy:    ha=0020af1dfcbd:    ip=144.126.190.59
+teststa2.kh254.loyola.edu: tc=khclientsnet.dummy:    ha=02608c8a5337:    ip=144.126.190.60
+kh453.loyola.edu:          tc=khclientsnet.dummy:    ha=0020af7306a2:    ip=144.126.190.61
+#
+#
+trc1.loyola.edu:           tc=khclientsnet.dummy:    ha=00608ce98026:    ip=144.126.190.63
+#
+#
+#
+#                *******INFORMATION SERVICES   KH_Clients 190.x   ********* 
+##
+#
+mcm.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af7306a1:    ip=144.126.190.50
+dbutler.loyola.edu:        tc=khclientsnet.dummy:    ha=0020af7306a5:    ip=144.126.190.51
+dmr.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af684914:    ip=144.126.190.52
+rlh.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af9bc8d3:    ip=144.126.190.55
+twhite.loyola.edu:         tc=khclientsnet.dummy:    ha=0020af730d10:    ip=144.126.190.53
+#pfoley.loyola.edu:         tc=khclientsnet.dummy:    ha=0020af292f5b:    ip=144.126.190.54
+mcfadden.loyola.edu:       tc=khclientsnet.dummy:    ha=0020af41d154:    ip=144.126.190.64
+#jjm.loyola.edu:           tc=khclientsnet.dummy:    ha=00A024428274:    ip=144.126.190.65
+mac.loyola.edu:            tc=khclientsnet.dummy:    ha=08000754EA9E:    ip=144.126.190.66
+bkelley.loyola.edu:        tc=khclientsnet.dummy:    ha=0020afa29333:    ip=144.126.190.67
+ttprnt.loyola.edu:         tc=khclientsnet.dummy:    ha=0000c9023f55:    ip=144.126.190.68
+testani.loyola.edu:        tc=khclientsnet.dummy:    ha=02608cd9883f:    ip=144.126.190.69
+psmith.loyola.edu:         tc=khclientsnet.dummy:    ha=02070103d355:    ip=144.126.190.70
+bschech.loyola.edu:        tc=khclientsnet.dummy:    ha=00608ce98067:    ip=144.126.190.71
+#bhenderson.loyola.edu:     tc=khclientsnet.dummy:    ha=02608cd96027:    ip=144.126.190.72
+stukh153.loyola.edu:       tc=khclientsnet.dummy:    ha=02608c8b4924:    ip=144.126.190.94
+tac.loyola.edu:            tc=khclientsnet.dummy:    ha=02608c8b3a72:    ip=144.126.190.75
+pmp.loyola.edu:            tc=khclientsnet.dummy:    ha=00608c56f39e:    ip=144.126.190.76
+herman.loyola.edu:         tc=khclientsnet.dummy:    ha=02608cd96a52:    ip=144.126.190.77
+#admin.loyola.edu:         tc=khclientsnet.dummy:    ha=02608c6d1f12:    ip=144.126.190.78
+tbaines.loyola.edu:        tc=khclientsnet.dummy:    ha=00608c56f3e8:    ip=144.126.190.79
+shackmac.loyola.edu:       tc=khclientsnet.dummy:    ha=0000942228ab:    ip=144.126.190.80
+sparkle.loyola.edu:        tc=khclientsnet.dummy:    ha=0000942226b9:    ip=144.126.190.209
+#NTserv.loyola.edu:         tc=khclientsnet.dummy:    ha=00608ce98068:    ip=144.126.190.81
+#mailgate.loyola.edu:       tc=khclientsnet.dummy:    ha=02608cd96027:    ip=144.126.190.82
+printerrm.loyola.edu:      tc=khclientsnet.dummy:    ha=0207010404a8:    ip=144.126.190.83
+inv1.loyola.edu:           tc=khclientsnet.dummy:    ha=02608c8a9cb8:    ip=144.126.190.84
+inv2.loyola.edu:           tc=khclientsnet.dummy:    ha=0207010d6d4b:    ip=144.126.190.85
+plk.loyola.edu:            tc=khclientsnet.dummy:    ha=02608cd96996:    ip=144.126.190.86
+tgaham.loyola.edu:         tc=khclientsnet.dummy:    ha=0020afc4d40c:    ip=144.126.190.87
+sking.loyola.edu:          tc=khclientsnet.dummy:    ha=02608c8b3997:    ip=144.126.190.88
+# sbd.loyola.edu:            tc=khclientsnet.dummy:    ha=02608c8b39c2:    ip=144.126.190.89
+kaufmann.loyola.edu:       tc=khclientsnet.dummy:    ha=02608c8b39e4:    ip=144.126.190.90
+tjp.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af33224b:    ip=144.126.190.91
+jlb.loyola.edu:            tc=khclientsnet.dummy:    ha=02070103f121:    ip=144.126.190.92
+#jbaker.loyola.edu:         tc=khclientsnet.dummy:    ha=0207010d0830:    ip=144.126.190.93
+#jlbmac.loyola.edu:         tc=khclientsnet.dummy:    ha=080007142c37:    ip=144.126.190.225
+dpertee.loyola.edu:        tc=khclientsnet.dummy:  ha=0020afd309d1:    ip=144.126.190.225
+#
+#
+#
+dmrclark251.loyola.edu:    tc=khclientsnet.dummy:    ha=00a0240ad3e8:    ip=144.126.190.96
+rsteiner.loyola.edu:       tc=khclientsnet.dummy:    ha=080007ff9c20:    ip=144.126.190.98
+#
+#
+#
+#                      Registration PC's in Wiring Closet
+#
+PS2-50.loyola.edu:         tc=khclientsnet.dummy:    ha=02608cdb7866:    ip=144.126.190.99
+Zenith286.loyola.edu:      tc=khclientsnet.dummy:    ha=02070113bb35:    ip=144.126.190.100
+# 
+#                            Math lab macs 
+#
+#
+kh473-sta41.loyola.edu:   tc=khclientsnet.dummy:    ha=00009430d735:    ip=144.126.190.121
+kh473-sta42.loyola.edu:   tc=khclientsnet.dummy:    ha=080007e605e1:    ip=144.126.190.122
+kh473-sta43.loyola.edu:   tc=khclientsnet.dummy:    ha=080007e62553:    ip=144.126.190.123
+kh473-sta44.loyola.edu:   tc=khclientsnet.dummy:    ha=000094211cd1:    ip=144.126.190.124
+#
+#
+#
+#
+#
+#
+#
+#             *****   MATH DEPARTMENT   *********
+#
+jch.loyola.edu:            tc=khclientsnet.dummy:    ha=00a02499dcb7:    ip=144.126.190.101
+shchristensen.loyola.edu:  tc=khclientsnet.dummy:    ha=02608cdae02b:    ip=144.126.190.102
+chm.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af9db36a:    ip=144.126.190.103
+mackiw.loyola.edu:         tc=khclientsnet.dummy:    ha=0020af332186:    ip=144.126.190.104
+breddy.loyola.edu:         tc=khclientsnet.dummy:    ha=02608cdae02e:    ip=144.126.190.105
+rauer.loyola.edu:          tc=khclientsnet.dummy:    ha=02608c8f0921:    ip=144.126.190.106
+oldrauer.loyola.edu:       tc=khclientsnet.dummy:    ha=0207010cfb4d:    ip=144.126.190.107
+jroche.loyola.edu:         tc=khclientsnet.dummy:    ha=00a0247b8f1e:    ip=144.126.190.108
+mccoart.loyola.edu:        tc=khclientsnet.dummy:    ha=0020af9c883e:    ip=144.126.190.109
+psholtz.loyola.edu:        tc=khclientsnet.dummy:    ha=0020afc4d5c0:    ip=144.126.190.110
+mathcart.loyola.edu:       tc=khclientsnet.dummy:    ha=0020af9db316:    ip=144.126.190.111
+lcooper.loyola.edu:        tc=khclientsnet.dummy:    ha=000094211cd1:    ip=144.126.190.112
+ayoung.loyola.edu:         tc=khclientsnet.dummy:    ha=0800079f57fc:    ip=144.126.190.113
+choudhury.loyola.edu:      tc=khclientsnet.dummy:    ha=0020af332127:    ip=144.126.190.120
+#
+mathhp4.loyola.edu:        tc=khclientsnet.dummy:    ha=080009b548d0:    ip=144.126.190.114
+#                                                            
+#              *******  PHYSICS DEPARTMENT   *********** 
+#
+mmathews.loyola.edu:       tc=khclientsnet.dummy:    ha=00a024320526:    ip=144.126.190.115
+mlowe.loyola.edu:          tc=khclientsnet.dummy:    ha=02608cdd42f4:    ip=144.126.190.116
+rsj.loyola.edu:            tc=khclientsnet.dummy:    ha=0020af9c87cb:    ip=144.126.190.117
+perry.loyola.edu:          tc=khclientsnet.dummy:    ha=00a0242fbc05:    ip=144.126.190.118
+haig.loyola.edu:           tc=khclientsnet.dummy:    ha=0020af1e0722:    ip=144.126.190.119
+gnd.loyola.edu:            tc=khclientsnet.dummy:    ha=00a0247b8ddd:    ip=144.126.190.220
+hrm.loyola.edu:            tc=khclientsnet.dummy:    ha=02608c8a5190:    ip=144.126.190.221
+physicslab.loyola.edu:     tc=khclientsnet.dummy:    ha=02608c8b4064:    ip=144.126.190.223
+ganem.loyol.edu:           tc=khclientsnet.dummy:    ha=080007367600:    ip=144.126.190.224
+#
+#
+#-----------------END OF KH_Clients 144.126.190.x 
+#
+#
+#  ---------------------- Maryland Hall Zone ----------------------------------------	
+#
+#            Floating Demo IBM for Presentations in MH209  
+#
+#ibmtrc.loyola.edu:         tc=beattynet.dummy:    ha=            :    ip=144.126.179.99
+#
+#
+#
+backroom.loyola.edu:       tc=beattynet.dummy:    ha=020701108bb1:    ip=144.126.179.47
+# 
+kodenski.loyola.edu:       tc=beattynet.dummy:    ha=0020afd309bd:    ip=144.126.179.32
+#
+ggordon.loyola.edu:        tc=beattynet.dummy:    ha=02608cd96a64:    ip=144.126.179.230
+mpeising.loyola.edu:       tc=beattynet.dummy:    ha=0020afd309e0:    ip=144.126.179.229
+mwielgos.loyola.edu:       tc=beattynet.dummy:    ha=02608c8f0917:    ip=144.126.179.228
+jobaker.loyola.edu:        tc=beattynet.dummy:    ha=0020af1874d6:    ip=144.126.179.77
+dbivens.loyola.edu:        tc=beattynet.dummy:    ha=0080190c1769:    ip=144.126.179.68
+cscott.loyola.edu:         tc=beattynet.dummy:    ha=0020afc4d57d:    ip=144.126.179.124
+nwilliams.loyola.edu:      tc=beattynet.dummy:    ha=00a024a7fd11:    ip=144.126.179.75
+mmeador.loyola.edu:        tc=beattynet.dummy:    ha=02608caac3f7:    ip=144.126.179.125
+lbell.loyola.edu:          tc=beattynet.dummy:    ha=0020afc4d54c:    ip=144.126.179.126
+econadjuncts.loyola.edu:   tc=beattynet.dummy:    ha=02608caad46c:    ip=144.126.179.128
+christensen.loyola.edu:    tc=beattynet.dummy:    ha=02608c8a31be:    ip=144.126.179.135
+bnaumann.loyola.edu:       tc=beattynet.dummy:    ha=0020afc4d5b9:    ip=144.126.179.147
+fderrick.loyola.edu:       tc=beattynet.dummy:    ha=00a024a96088:    ip=144.126.179.148
+swalters.loyola.edu:       tc=beattynet.dummy:    ha=00a0243f3bff:    ip=144.126.179.150
+berford.loyola.edu:        tc=beattynet.dummy:    ha=0207010d323f:    ip=144.126.179.155
+hhilton.loyola.edu:        tc=beattynet.dummy:    ha=02608cd947b3:    ip=144.126.179.205
+fcunning.loyola.edu:       tc=beattynet.dummy:    ha=02608c8a5334:    ip=144.126.179.100
+aburke.loyola.edu:         tc=beattynet.dummy:    ha=0020af24bf9b:    ip=144.126.179.73
+cpiazza.loyola.edu:        tc=beattynet.dummy:    ha=0020afa21da5:    ip=144.126.179.74
+tscheye.loyola.edu:        tc=beattynet.dummy:    ha=0020af297b73:    ip=144.126.179.59
+rwalker.loyola.edu:        tc=beattynet.dummy:    ha=0020af3193c5:    ip=144.126.179.58
+jhartman.loyola.edu:       tc=beattynet.dummy:    ha=0020af1e64a5:    ip=144.126.179.55
+lwalden.loyola.edu:        tc=beattynet.dummy:    ha=080007fae14f:    ip=144.126.179.57
+jdegroot.loyola.edu:       tc=beattynet.dummy:    ha=080007cf5b58:    ip=144.126.179.40
+jlarson.loyola.edu:        tc=beattynet.dummy:    ha=00a0247b8ff4:    ip=144.126.179.225
+lorenzi.loyola.edu:        tc=beattynet.dummy:    ha=0000c54570b9:    ip=144.126.179.39
+#
+#
+#
+#
+#
+#                  Md hall MacIntosh Lab
+mdsta01.loyola.edu:        tc=beattynet.dummy:    ha=000094108660:    ip=144.126.179.101
+mdsta02.loyola.edu:        tc=beattynet.dummy:    ha=00009410858e:    ip=144.126.179.102
+mdsta03.loyola.edu:        tc=beattynet.dummy:    ha=0000941061df:    ip=144.126.179.103
+mdsta04.loyola.edu:        tc=beattynet.dummy:    ha=000094107f2c:    ip=144.126.179.104
+mdsta05.loyola.edu:        tc=beattynet.dummy:    ha=000094105ac7:    ip=144.126.179.105
+mdsta06.loyola.edu:        tc=beattynet.dummy:    ha=000094069133:    ip=144.126.179.106
+mdsta07.loyola.edu:        tc=beattynet.dummy:    ha=0000940691a7:    ip=144.126.179.107
+mdsta08.loyola.edu:        tc=beattynet.dummy:    ha=00009406939a:    ip=144.126.179.108
+mdsta09.loyola.edu:        tc=beattynet.dummy:    ha=000094108663:    ip=144.126.179.109
+mdsta10.loyola.edu:        tc=beattynet.dummy:    ha=000094105013:    ip=144.126.179.110
+mdsta11.loyola.edu:        tc=beattynet.dummy:    ha=000094069140:    ip=144.126.179.111
+mdsta12.loyola.edu:        tc=beattynet.dummy:    ha=000094069484:    ip=144.126.179.112
+mdsta13.loyola.edu:        tc=beattynet.dummy:    ha=000094069955:    ip=144.126.179.113
+mdsta14.loyola.edu:        tc=beattynet.dummy:    ha=000094069261:    ip=144.126.179.114
+mdsta15.loyola.edu:        tc=beattynet.dummy:    ha=000094108334:    ip=144.126.179.115
+mdsta16.loyola.edu:        tc=beattynet.dummy:    ha=080007348267:    ip=144.126.179.116
+mdsta17.loyola.edu:        tc=beattynet.dummy:    ha=000094069d16:    ip=144.126.179.117
+mdsta18.loyola.edu:        tc=beattynet.dummy:    ha=000094108133:    ip=144.126.179.118
+mdsta19.loyola.edu:        tc=beattynet.dummy:    ha=000094107f1b:    ip=144.126.179.119
+mdsta20.loyola.edu:        tc=beattynet.dummy:    ha=08000734c07e:    ip=144.126.179.120
+mdsta21.loyola.edu:        tc=beattynet.dummy:    ha=000094108474:    ip=144.126.179.121
+mdsta22.loyola.edu:        tc=beattynet.dummy:    ha=000094108004:    ip=144.126.179.122
+#
+#
+#                Education Mac Lab
+#
+#
+#besta01.loyola.edu:        tc=beattynet.dummy:    ha=080014905467
+#nbesta15.loyola.edu:        tc=beattynet.dummy:    ha=080014905467:    ip=144.126.179.174
+# 
+#                 XMBA 
+#
+mfreese.loyola.edu:        tc=beattynet.dummy:    ha=00a024653d51:    ip=144.126.179.176
+bmelfa.loyola.edu:         tc=beattynet.dummy:    ha=02608cd98876:    ip=144.126.179.177
+jburbrid.loyola.edu:       tc=beattynet.dummy:    ha=0020afc2e4b1:    ip=144.126.179.178
+jmoran.loyola.edu:         tc=beattynet.dummy:    ha=00a024a5f0fa:    ip=144.126.179.224
+#ranton.loyola.edu:         tc=beattynet.dummy:    ha=02608cd987a8:    ip=144.126.179.132
+mbuchman.loyola.edu:       tc=beattynet.dummy:    ha=02608c8a7a4c:    ip=144.126.179.191
+#
+#                 Graduate Admissions
+#
+mruppe.loyola.edu:         tc=beattynet.dummy:    ha=00a0243f3c00:    ip=144.126.179.213
+cgebhard.loyola.edu:       tc=beattynet.dummy:    ha=00a024639108:    ip=144.126.179.214
+johara.loyola.edu:      tc=beattynet.dummy:    ha=02608c8a7704:    ip=144.126.179.215
+#
+#                     VP Fianace
+#
+#
+jpalmucc.loyola.edu:       tc=beattynet.dummy:    ha=0020af317090:    ip=144.126.179.42
+secvpfin.loyola.edu:       tc=beattynet.dummy:    ha=0020afa21dbf:    ip=144.126.179.140
+#
+#
+#
+#              Counseling Center
+#
+klynch.loyola.edu:         tc=beattynet.dummy:    ha=00a024e709a2:    ip=144.126.179.180
+tpringle.loyola.edu:       tc=beattynet.dummy:    ha=02608cd96090:    ip=144.126.179.181
+bjaschik.loyola.edu:       tc=beattynet.dummy:    ha=0020af716131:    ip=144.126.179.182
+hkeech.loyola.edu:         tc=beattynet.dummy:    ha=0207010d33b2:    ip=144.126.179.183
+lbrooks.loyola.edu:        tc=beattynet.dummy:    ha=0207010d69bb:    ip=144.126.179.184
+dcook.loyola.edu:          tc=beattynet.dummy:    ha=02608cd9883d:    ip=144.126.179.185
+pgriffin.loyola.edu:       tc=beattynet.dummy:    ha=00a024e7090a:    ip=144.126.179.186
+jkobayash.loyola.edu:      tc=beattynet.dummy:    ha=00608c56f3b4:    ip=144.126.179.189
+general.loyola.edu:        tc=beattynet.dummy:    ha=080007afd411:    ip=144.126.179.211
+#
+#
+#             Political Science
+#
+pkrivak.loyola.edu:        tc=beattynet.dummy:    ha=0020afc4d3a2:    ip=144.126.179.71
+jholc.loyola.edu:          tc=beattynet.dummy:    ha=0020afc4d35b:    ip=144.126.179.70
+dschaub.loyola.edu:        tc=beattynet.dummy:    ha=0020afc4d3fa:    ip=144.126.179.69
+bkitchin.loyola.edu:       tc=beattynet.dummy:    ha=0020afa42a4e:    ip=144.126.179.127
+khula.loyola.edu:          tc=beattynet.dummy:    ha=0020af25ddc3:    ip=144.126.179.187
+mfranz.loyola.edu:         tc=beattynet.dummy:    ha=0020af9bc8cb:    ip=144.126.179.188
+# 
+#
+#            Sociology
+#
+mburton.loyola.edu:        tc=beattynet.dummy:    ha=02608c8b39e9:    ip=144.126.179.67
+akeane.loyola.edu:         tc=beattynet.dummy:    ha=00608c56f39b:    ip=144.126.179.66
+bvann.loyola.edu:          tc=beattynet.dummy:    ha=0020afc4d3e6:    ip=144.126.179.65
+jryu.loyola.edu:           tc=beattynet.dummy:    ha=02608c8a98f5:    ip=144.126.179.81
+lsmith.loyola.edu:         tc=beattynet.dummy:    ha=0020afc61329:    ip=144.126.179.79
+mpeyrot.loyola.edu:        tc=beattynet.dummy:    ha=0020af9c81da:    ip=144.126.179.129
+#
+#           Classics/Modern Languages
+#
+tmcright.loyola.edu:       tc=beattynet.dummy:    ha=080007ff080c:    ip=144.126.179.62
+somara.loyola.edu:         tc=beattynet.dummy:    ha=000502b00736:    ip=144.126.179.52
+mhaggstrom.loyola.edu:     tc=beattynet.dummy:    ha=00050270143c:    ip=144.126.179.34
+jwalsh.loyola.edu:         tc=beattynet.dummy:    ha=0800077fc813:    ip=144.126.179.63
+mdavison.loyola.edu:       tc=beattynet.dummy:    ha=080007ffd542:    ip=144.126.179.64
+mtaylor.loyola.edu:        tc=beattynet.dummy:    ha=080007ff8f64:    ip=144.126.179.60
+lmorgan.loyola.edu:        tc=beattynet.dummy:    ha=00a0247b8e75:    ip=144.126.179.56
+ubeitter.loyola.edu:       tc=beattynet.dummy:    ha=02608c8aa32a:    ip=144.126.179.54
+golmstead.loyola.edu:      tc=beattynet.dummy:    ha=00608ce9802c:    ip=144.126.179.53
+rdonalds.loyola.edu:       tc=beattynet.dummy:    ha=00a0247b8dc7:    ip=144.126.179.51
+acolomba.loyola.edu:       tc=beattynet.dummy:    ha=0020afe35f14:    ip=144.126.179.50
+dchaffee.loyola.edu:       tc=beattynet.dummy:    ha=0020af9c8798:    ip=144.126.179.48
+csavell.loyola.edu:        tc=beattynet.dummy:    ha=0207010d6d37:    ip=144.126.179.47
+mmurphy.loyola.edu:        tc=beattynet.dummy:    ha=000502b08f37:    ip=144.126.179.45
+hgeldric.loyola.edu:       tc=beattynet.dummy:    ha=0020afd309a1:    ip=144.126.179.44
+wmcdonough.loyola.edu:     tc=beattynet.dummy:    ha=02608ca1cd02:    ip=144.126.179.190
+emcpherson.loyola.edu:     tc=beattynet.dummy:    ha=0020af9db351:    ip=144.126.179.37
+babrams.loyola.edu:        tc=beattynet.dummy:    ha=020701100f17:    ip=144.126.179.36
+commonpc.loyola.edu:       tc=beattynet.dummy:    ha=02070113c977:    ip=144.126.179.142
+yasuko.loyola.edu:         tc=beattynet.dummy:    ha=0000943184a4:    ip=144.126.179.196 
+nrock.loyola.edu:          tc=beattynet.dummy:    ha=00a02499dd23:    ip=144.126.179.97
+amccormick.loyola.edu:     tc=beattynet.dummy:    ha=00a0242fbbeb:    ip=144.126.179.94
+abarresi.loyola.edu:       tc=beattynet.dummy:    ha=02070113be43:    ip=144.126.179.215
+#
+
+#
+#              Maryland Hall Classroom
+#
+mh02.loyola.edu:           tc=beattynet.dummy:    ha=00a0247b8e49:    ip=144.126.179.82
+mh200.loyola.edu:          tc=beattynet.dummy:    ha=00a0247b8f16:    ip=144.126.179.22
+mh201.loyola.edu:          tc=beattynet.dummy:    ha=0020af730c58:    ip=144.126.179.46
+mh01mac.loyola.edu:        tc=beattynet.dummy:    ha=0800077f2899:    ip=144.126.179.123
+mh0300.loyola.edu:         tc=beattynet.dummy:    ha=00a0247b8ee1:    ip=144.126.179.31
+#
+#               Md Hall Informational Technologies
+#
+dbivens.loyola.edu:        tc=beattynet.dummy:    ha=0800070fb74c:    ip=144.126.179.68
+#
+#
+#              Records
+# 
+LPlatz.loyola.edu:         tc=beattynet.dummy:    ha=0000942264a3:    ip=144.126.179.83
+PLovell.loyola.edu:        tc=beattynet.dummy:    ha=000094226567:    ip=144.126.179.84
+bkremer.loyola.edu:        tc=beattynet.dummy:    ha=000094202bd1:    ip=144.126.179.223
+RSteinermac.loyola.edu:    tc=beattynet.dummy:    ha=080007ff9c20:    ip=144.126.179.222
+spare.loyola.edu:          tc=beattynet.dummy:    ha=00009421ad3f:    ip=144.126.179.86
+rsteinerpc.loyola.edu:     tc=beattynet.dummy:    ha=0020af730d27:    ip=144.126.179.134
+rdesei.loyola.edu:         tc=beattynet.dummy:    ha=0020afc61895:    ip=144.126.179.149
+#
+#              Business Office
+#
+pmiller.loyola.edu:        tc=beattynet.dummy:    ha=00a024816fe9:    ip=144.126.179.39
+charkins.loyola.edu:       tc=beattynet.dummy:    ha=00a024b6b6fc:    ip=144.126.179.93
+bschmidt.loyola.edu:       tc=beattynet.dummy:    ha=00a024817080:    ip=144.126.179.131
+#abusch.loyola.edu:         tc=beattynet.dummy:    ha=0020afa21d9a:    ip=144.126.179.94
+bwashington.loyola.edu:    tc=beattynet.dummy:    ha=00a024817036:    ip=144.126.179.95
+pernst.loyola.edu:         tc=beattynet.dummy:    ha=00a0247b8e4f:    ip=144.126.179.96
+gcimino.loyola.edu:        tc=beattynet.dummy:    ha=00a024816c50:    ip=144.126.179.136
+cgore.loyola.edu:          tc=beattynet.dummy:    ha=0020af8da205:    ip=144.126.179.139
+jlioi.loyola.edu:          tc=beattynet.dummy:    ha=0020af6004d0:    ip=144.126.179.179
+dperreault.loyola.edu:     tc=beattynet.dummy:    ha=00a024b6b6f4:    ip=144.126.179.154
+busnsta1.loyola.edu:       tc=beattynet.dummy:    ha=02608c6bfd7a:    ip=144.126.179.217
+busnsta2.loyola.edu:       tc=beattynet.dummy:    ha=02608c6bfc9b:    ip=144.126.179.30
+busnsta3.loyola.edu:       tc=beattynet.dummy:    ha=02608c6c284d:    ip=144.126.179.218
+busnsta4.loyola.edu:       tc=beattynet.dummy:    ha=00a024816f83:    ip=144.126.179.29
+busnsta5.loyola.edu:       tc=beattynet.dummy:    ha=00a024816ce8:    ip=144.126.179.236
+busnsta6.loyola.edu:       tc=beattynet.dummy:    ha=00a024816cad:    ip=144.126.179.28
+busnsta7.loyola.edu:       tc=beattynet.dummy:    ha=02608c6d1f09:    ip=144.126.179.216
+sbates.loyola.edu:         tc=beattynet.dummy:    ha=0020af730d28:    ip=144.126.179.231
+#attdata.loyola.edu:       tc=beattynet.dummy:    ha=xxxxxxxxxxxx:    ip=144.126.179.35
+#
+#              Education
+wamoreill.loyola.edu:      tc=beattynet.dummy:    ha=0800074ff850:    ip=144.126.179.179
+lorraine.loyola.edu:       tc=beattynet.dummy:    ha=0800074f82e2:    ip=144.126.179.192
+erock.loyola.edu:          tc=beattynet.dummy:    ha=02608cda2ad2:    ip=144.126.179.141
+bbowie.loyola.edu:         tc=beattynet.dummy:    ha=0020af258c29:    ip=144.126.179.38
+lrichmond.loyola.edu:      tc=beattynet.dummy:    ha=000502608140:    ip=144.126.179.130
+srhodes.loyola.edu:        tc=beattynet.dummy:    ha=00a04005568e:    ip=144.126.179.143
+swall.loyola.edu:          tc=beattynet.dummy:    ha=00a040057cc6:    ip=144.126.179.144
+dhofler.loyola.edu:        tc=beattynet.dummy:    ha=00a040055694:    ip=144.126.179.145
+kcornell.loyola.edu:       tc=beattynet.dummy:    ha=000094206736:    ip=144.126.179.146
+bsarlos.loyola.edu:        tc=beattynet.dummy:    ha=000502405174:    ip=144.126.179.152
+jprocaccini.loyola.edu:    tc=beattynet.dummy:    ha=00050240655a:    ip=144.126.179.151
+jsmoot.loyola.edu:         tc=beattynet.dummy:    ha=000502a4aa99:    ip=144.126.179.233
+ddengler.loyola.edu:       tc=beattynet.dummy:    ha=000502a4bd98:    ip=144.126.179.234
+rburinsky.loyola.edu:      tc=beattynet.dummy:    ha=00050264a513:    ip=144.126.179.153
+dreitz.loyola.edu:         tc=beattynet.dummy:    ha=02608c6ce8d5:    ip=144.126.179.132 
+moneil.loyola.edu:         tc=beattynet.dummy:    ha=00a04008a71c:    ip=144.126.179.237
+landrathy.loyola.edu:      tc=beattynet.dummy:    ha=08000714eeed:    ip=144.126.179.254 
+kvinson.loyola.edu:        tc=beattynet.dummy:    ha=00a02498968e:    ip=144.126.179.221
+sdubble.loyola.edu:        tc=beattynet.dummy:    ha=00503264a513:    ip=144.126.179.253 
+#
+#               Multicultural Affairs
+#
+PPaul.loyola.edu:          tc=beattynet.dummy:    ha=00a02404a703:    ip=144.126.179.158
+MThomas.loyola.edu:        tc=beattynet.dummy:    ha=00a02406428c:    ip=144.126.179.159
+#
+#              Business Services
+#
+mpollack.loyola.edu:       tc=beattynet.dummy:    ha=0020afa21dc0:    ip=144.126.179.89
+mbrennan.loyola.edu:       tc=beattynet.dummy:    ha=0020afa21d85:    ip=144.126.179.90
+#
+#              Administrative Services
+#
+mblackburn.loyola.edu:     tc=beattynet.dummy:    ha=0020afa21d82:    ip=144.126.179.87
+cmccardell.loyola.edu:     tc=beattynet.dummy:    ha=0020afa21d80:    ip=144.126.179.88
+#
+#
+#
+#              Resource Management
+#
+ddaughaday.loyola.edu:     tc=beattynet.dummy:    ha=0020afa21d81:    ip=144.126.179.91
+tmiele.loyola.edu:         tc=beattynet.dummy:    ha=0020afa21dca:    ip=144.126.179.92
+#
+#              Post Office
+#
+mbattaglia.loyola.edu:     tc=beattynet.dummy:    ha=0020afa21d87:    ip=144.126.179.137
+jcoleman.loyola.edu:       tc=beattynet.dummy:    ha=0020afa21d83:    ip=144.126.179.138
+#  
+#              DEAN OF STUDENTS
+#
+#
+pmckibbin.loyola.edu:      tc=beattynet.dummy:    ha=0800071cb065:    ip=144.126.179.61
+mbasil.loyola.edu:         tc=beattynet.dummy:    ha=0800077cfacb:    ip=144.126.179.41
+tleary.loyola.edu:         tc=jenkinsnet.dummy:   ha=0000944574a6:    ip=144.126.179.235
+sdonov.loyola.edu:         tc=beattynet.dummy:    ha=0800076c0651:    ip=144.126.179.43
+#
+#
+#                   Psychology Department
+#
+#
+#
+fgilroy.loyola.edu:        tc=beattynet.dummy:   ha=0020af9db014:    ip=144.126.179.194
+msherman.loyola.edu:       tc=beattynet.dummy:   ha=0020afc4d30c:    ip=144.126.179.195
+pgrupp.loyola.edu:         tc=beattynet.dummy:   ha=0020afc4d59a:    ip=144.126.179.196
+gclapperton.loyola.edu:    tc=beattynet.dummy:   ha=02608caac37c:    ip=144.126.179.197
+athomas.loyola.edu:        tc=beattynet.dummy:   ha=00a0243f3c47:    ip=144.126.179.199
+ghelweg.loyola.edu:        tc=beattynet.dummy:   ha=02608c8a9915:    ip=144.126.179.200
+ssobelman.loyola.edu:      tc=beattynet.dummy:   ha=00a024989681:    ip=144.126.179.201
+dcrough.loyola.edu:        tc=beattynet.dummy:   ha=02608c8a98f7:    ip=144.126.179.202
+lfenzel.loyola.edu:        tc=beattynet.dummy:   ha=02608cdae03a:    ip=144.126.179.203
+jkinney.loyola.edu:        tc=beattynet.dummy:   ha=0800078e95f1:    ip=144.126.179.204
+clopresto.loyola.edu:      tc=beattynet.dummy:   ha=0020af3321d6:    ip=144.126.179.209
+aplotkin.loyola.edu:       tc=beattynet.dummy:   ha=00a0242fbdab:    ip=144.126.179.206
+rstemberger.loyola.edu:    tc=beattynet.dummy:   ha=0020afc61332:    ip=144.126.179.207
+dmanner.loyola.edu:        tc=beattynet.dummy:   ha=0020afc4d3df:    ip=144.126.179.208
+dhaskins.loyola.edu:       tc=beattynet.dummy:   ha=02608c8a9919:    ip=144.126.179.198
+jlowry.loyola.edu:         tc=beattynet.dummy:   ha=02608c8a9918:    ip=144.126.179.80
+jalessi.loyola.edu:        tc=beattynet.dummy:   ha=00a024b5bd6f:    ip=144.126.179.219
+gbartkovich.loyola.edu:    tc=beattynet.dummy:   ha=00608ceb6b2b:    ip=144.126.179.210
+wolfe.loyola.edu:          tc=beattynet.dummy:   ha=02608cdd41e2:    ip=144.126.179.212
+#amoriell.loyola.edu:       tc=beattynet.dummy:   ha=0020af6004d0:    ip=144.126.179.175
+#
+#               Psychology Lab 
+#
+#
+psychlab1.loyola.edu:       tc=beattynet.dummy:   ha=02608cd969c0:     ip=144.126.179.238 
+psychlab2.loyola.edu:       tc=beattynet.dummy:   ha=02608cda2b10:     ip=144.126.179.239
+psychlab3.loyola.edu:       tc=beattynet.dummy:   ha=02608c8a9c66:     ip=144.126.179.240 
+psychlab4.loyola.edu:       tc=beattynet.dummy:   ha=02608c8a88f5:     ip=144.126.179.241
+psychlab5.loyola.edu:       tc=beattynet.dummy:   ha=02608c8aa340:     ip=144.126.179.242 
+psychlab6.loyola.edu:       tc=beattynet.dummy:   ha=02608c8aa31b:     ip=144.126.179.243
+psychlab7.loyola.edu:       tc=beattynet.dummy:   ha=02608c8f09a5:     ip=144.126.179.244 
+psychlab8.loyola.edu:       tc=beattynet.dummy:   ha=02608cd94739:     ip=144.126.179.245
+psychlab9.loyola.edu:       tc=beattynet.dummy:   ha=02608c8b27f2:     ip=144.126.179.246 
+psychlab10.loyola.edu:      tc=beattynet.dummy:   ha=02608c8f09da:     ip=144.126.179.247
+psychlab11.loyola.edu:      tc=beattynet.dummy:   ha=00a0242fbd98:     ip=144.126.179.248 
+psychlab12.loyola.edu:      tc=beattynet.dummy:   ha=0020afc4d5c8:     ip=144.126.179.249
+psychlab13.loyola.edu:      tc=beattynet.dummy:   ha=02608c8b268f:     ip=144.126.179.250 
+psychlab14.loyola.edu:      tc=beattynet.dummy:   ha=02608c8a771b:     ip=144.126.179.251
+psychlab15.loyola.edu:      tc=beattynet.dummy:   ha=02608cd94737:     ip=144.126.179.252
+#
+#
+#
+#     Beatty 115 Lab ***************************************
+#
+belabmac11.loyola.edu:   tc=beattynet.dummy:    ha=00a04008bf51:    ip=144.126.179.160
+belabmac12.loyola.edu:   tc=beattynet.dummy:    ha=00a04008c0af:    ip=144.126.179.161
+belabmac13.loyola.edu:   tc=beattynet.dummy:    ha=00a04008bf4c:    ip=144.126.179.162
+belabmac14.loyola.edu:   tc=beattynet.dummy:    ha=00a0400d8c30:    ip=144.126.179.163
+belabmac15.loyola.edu:   tc=beattynet.dummy:    ha=00a04008be97:    ip=144.126.179.164
+belabmac16.loyola.edu:   tc=beattynet.dummy:    ha=00a04008bf4f:    ip=144.126.179.165
+belabmac17.loyola.edu:   tc=beattynet.dummy:    ha=00a0400e03da:    ip=144.126.179.166
+belabmac18.loyola.edu:   tc=beattynet.dummy:    ha=00a04008bf43:    ip=144.126.179.167
+belabmac19.loyola.edu:   tc=beattynet.dummy:    ha=00a04008be9e:    ip=144.126.179.168
+belabmac21.loyola.edu:   tc=beattynet.dummy:    ha=00a0400d8fae:    ip=144.126.179.169
+belabmac22.loyola.edu:   tc=beattynet.dummy:    ha=00a04008be93:    ip=144.126.179.170
+belabmac23.loyola.edu:   tc=beattynet.dummy:    ha=00a04008c224:    ip=144.126.179.171
+belabmac24.loyola.edu:   tc=beattynet.dummy:    ha=00a0400d8fac:    ip=144.126.179.172
+belabmac25.loyola.edu:   tc=beattynet.dummy:    ha=00a04008be9f:    ip=144.126.179.173
+belabmac26.loyola.edu:   tc=beattynet.dummy:    ha=00a04008bf5a:    ip=144.126.179.174
+Instbelabmac.loyola.edu:   tc=beattynet.dummy:  ha=00a0400b7da1:    ip=144.126.179.17
+belabmac29.loyola.edu:   tc=beattynet.dummy:    ha=00a0400d8fe4:    ip=144.126.179.18
+belabmac30.loyola.edu:   tc=beattynet.dummy:    ha=00a04008c231:    ip=144.126.179.19
+belabmac31.loyola.edu:   tc=beattynet.dummy:    ha=00a04008be8a:    ip=144.126.179.20
+bellbmc44.loyola.edu:    tc=beattynet.dummy:    ha=000502500978:    ip=144.126.179.21
+
+
+
+
+
+
+
+# -------------------- Donnelly Science Center Zone ------------------------------------
+
+jlbmac.loyola.edu:         tc=donnellynet.dummy:  ha=080007142c37:    ip=144.126.178.16 
+jbaker.loyola.edu:         tc=donnellynet.dummy:  ha=00a0247b8e37:    ip=144.126.178.34 
+#islaptop.loyola.edu:       tc=donnellynet.dummy:  ha=0080c71e881e:    ip=144.126.178.250
+#pertee.loyola.edu:         tc=donnellynet.dummy:  ha=080007ac1e37:    ip=144.126.178.8
+helpdesk1.loyola.edu:      tc=donnellynet.dummy:  ha=02608cd95cee:    ip=144.126.178.16
+hlpdskmac1.loyola.edu:     tc=donnellynet.dummy:  ha=000502105477:    ip=144.126.178.170
+hlpdskmac2.loyola.edu:     tc=donnellynet.dummy:  ha=00050210607a:    ip=144.126.178.171
+helpdeskp1.loyola.edu:     tc=donnellynet.dummy:  ha=00a0247b8f19:     ip=144.126.178.172
+helpdeskp2.loyola.edu:     tc=donnellynet.dummy:  ha=00a0247b8e74:    ip=144.126.178.173
+hcb.loyola.edu:            tc=donnellynet.dummy:  ha=020701040289:    ip=144.126.178.203
+kconner.loyola.edu:        tc=donnellynet.dummy:  ha=02608c8b2673:    ip=144.126.178.105
+mdaley.loyola.edu:         tc=donnellynet.dummy:  ha=00608ce97fc6:    ip=144.126.178.242
+mmiller.loyola.edu:        tc=donnellynet.dummy:  ha=0020af1dfcb7:    ip=144.126.178.104
+asherman.loyola.edu:       tc=donnellynet.dummy:  ha=02608caa37db:    ip=144.126.178.106
+tmcneese.loyola.edu:       tc=donnellynet.dummy:  ha=0020afc61357:    ip=144.126.178.96
+dprine.loyola.edu:         tc=donnellynet.dummy:  ha=02608c8a4165:    ip=144.126.178.97
+mdf.loyola.edu:            tc=donnellynet.dummy:  ha=00a0240ac49e:    ip=144.126.178.101
+#lorenzi.loyola.edu:        tc=donnellynet.dummy:  ha=00050210fd04:    ip=144.126.178.21
+nzaczek.loyola.edu:        tc=donnellynet.dummy:  ha=02608c6bfd78:    ip=144.126.178.107 
+#gemmell.loyola.edu:        tc=donnellynet.dummy:  ha=0000c00c6640:    ip=144.126.178.33
+adjunct.loyola.edu:        tc=donnellynet.dummy:  ha=0020af332125:    ip=144.126.178.43
+kderrick.loyola.edu:       tc=donnellynet.dummy:  ha=02608cd96a20:    ip=144.126.178.72
+wag.loyola.edu:            tc=donnellynet.dummy:  ha=080007d440c0:    ip=144.126.178.7
+hp4.loyola.edu:            tc=donnellynet.dummy:  ha=080009521151:    ip=144.126.178.240
+emeyer.loyola.edu:         tc=donnellynet.dummy:  ha=00a024816ecf:    ip=144.126.178.207
+dak.loyola.edu:            tc=donnellynet.dummy:  ha=02608cae2f36:    ip=144.126.178.71
+jwalsek.loyola.edu:        tc=donnellynet.dummy:  ha=0020af0df249:    ip=144.126.178.108
+cjay.loyola.edu:           tc=donnellynet.dummy:  ha=0020af730686:    ip=144.126.178.109
+skeilson.loyola.edu:       tc=donnellynet.dummy:  ha=0020af640dbf:    ip=144.126.178.73
+ds331lab.loyola.edu:       tc=donnellynet.dummy:  ha=080007765731:    ip=144.126.178.74
+ds328lab.loyola.edu:       tc=donnellynet.dummy:  ha=08000776b7fd:    ip=144.126.178.75
+ds328lab.loyola.edu:       tc=donnellynet.dummy:  ha=080007f6c8b6:    ip=144.126.178.76
+ds328lab.loyola.edu:       tc=donnellynet.dummy:  ha=080007f67874:    ip=144.126.178.45
+ds310lab.loyola.edu:       tc=donnellynet.dummy:  ha=080007f6c425:    ip=144.126.178.77
+ds310lab.loyola.edu:       tc=donnellynet.dummy:  ha=080007f67ca4:    ip=144.126.178.78
+ds310lab.loyola.edu:       tc=donnellynet.dummy:  ha=08000776e379:    ip=144.126.178.79
+Infoexpress.loyola.edu:    tc=donnellynet.dummy:  ha=000094222b4b:    ip=144.126.178.17
+helpdesk.loyola.edu:       tc=donnellynet.dummy:  ha=000094223682:    ip=144.126.178.29
+helpdesk2.loyola.edu:      tc=donnellynet.dummy:  ha=00a040082aee:    ip=144.126.178.87
+helpdesk3.loyola.edu:      tc=donnellynet.dummy:  ha=00a04008065e:    ip=144.126.178.88
+cking.loyola.edu:          tc=donnellynet.dummy:  ha=0800074f3425:    ip=144.126.178.82
+DS209-1.loyola.edu:        tc=donnellynet.dummy:  ha=0207010405a2:    ip=144.126.178.85
+DS209-2.loyola.edu:        tc=donnellynet.dummy:  ha=02608cda2ac6:    ip=144.126.178.84
+DS209-3.loyola.edu:        tc=donnellynet.dummy:  ha=0020afddebd1:    ip=144.126.178.44
+DS209-4.loyola.edu:        tc=donnellynet.dummy:  ha=0020af31a361:    ip=144.126.178.127
+dshofield.loyola.edu:      tc=donnellynet.dummy:  ha=0800077f1993:    ip=144.126.178.80
+dkeefer.loyola.edu:        tc=donnellynet.dummy:  ha=080007fff9dc:    ip=144.126.178.81
+eshea.loyola.edu:          tc=donnellynet.dummy:  ha=0800074c3cc4:    ip=144.126.178.83
+ddimitroff.loyola.edu:     tc=donnellynet.dummy:  ha=00a0242c708d:    ip=144.126.178.124
+rds.loyola.edu:            tc=donnellynet.dummy:  ha=00a0243743d0:    ip=144.126.178.200
+drivers.loyola.edu:        tc=donnellynet.dummy:  ha=08000756378d:    ip=144.126.178.61
+cgraham.loyola.edu:        tc=donnellynet.dummy:  ha=02608c8aabfd:    ip=144.126.178.201
+hbutcher.loyola.edu:       tc=donnellynet.dummy:  ha=02608caad6f4:    ip=144.126.178.204
+peace.loyola.edu:          tc=donnellynet.dummy:  ha=0800207aee60:    ip=144.126.178.86
+nluperini.loyola.edu:      tc=donnellynet.dummy:  ha=000094317b90:    ip=144.126.178.98
+ederrickson.loyola.edu:    tc=donnellynet.dummy:  ha=000094303e3d:    ip=144.126.178.212
+welban.loyola.edu:         tc=donnellynet.dummy:  ha=00608ceb2acb:    ip=144.126.178.126 
+kolsen.loyola.edu:         tc=donnellynet.dummy:  ha=00a0249896c1:    ip=144.126.178.128
+rsigler.loyola.edu:        tc=donnellynet.dummy:  ha=00a024b5bde7:    ip=144.126.178.110
+bjennison.loyola.edu:      tc=donnellynet.dummy:  ha=000502984e57:    ip=144.126.178.123
+#
+# ---------------- Wynnewood Towers Zone -----------------------------------------------
+#
+#                  Wynnewood Lab 
+#
+#
+#mac.loyola.edu:            tc=wynnewoodnet.dummy: ha=08000754EA9E:    ip=144.126.177.200
+wtsta11.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb330:    ip=144.126.177.101
+wtsta12.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb306:    ip=144.126.177.102
+wtsta13.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb311:    ip=144.126.177.103
+wtsta21.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2ff:    ip=144.126.177.104
+wtsta22.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb301:    ip=144.126.177.105
+wtsta23.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb314:    ip=144.126.177.106
+wtsta24.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2e2:    ip=144.126.177.107
+wtsta25.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb279:    ip=144.126.177.108
+wtsta31.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2c3:    ip=144.126.177.109
+wtsta32.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2c4:    ip=144.126.177.110
+wtsta33.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2bc:    ip=144.126.177.111
+wtsta34.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2f8:    ip=144.126.177.112
+wtsta35.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb299:    ip=144.126.177.113
+wtsta41.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2d4:    ip=144.126.177.114
+wtsta42.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2a6:    ip=144.126.177.115
+wtsta43.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1a78af:    ip=144.126.177.116
+wtsta44.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb305:    ip=144.126.177.117
+wtsta45.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2c8:    ip=144.126.177.118
+wtsta51.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb300:    ip=144.126.177.201
+wtsta63.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb319:    ip=144.126.177.202
+wtsta67.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb186:    ip=144.126.177.203
+wtsta62.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2c2:    ip=144.126.177.204
+wtsta53.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2f5:    ip=144.126.177.205
+wtsta52.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb31c:    ip=144.126.177.206
+wtsta66.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2fe:    ip=144.126.177.207
+wtsta55.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb296:    ip=144.126.177.208
+wtsta61.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2cb:    ip=144.126.177.209
+wtsta54.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb2fb:    ip=144.126.177.210
+wtsta64.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb308:    ip=144.126.177.211
+wtsta65.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1cb310:    ip=144.126.177.212
+xterm1.loyola.edu:         tc=wynnewoodnet.dummy: ha=0000a7122e5d:    ip=144.126.177.92
+xterm2.loyola.edu:         tc=wynnewoodnet.dummy: ha=0000a7008fc7:    ip=144.126.177.93
+#
+#
+#
+#               Gardens "D" lab
+#
+gasta11.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6d26d:    ip=144.126.177.130  
+gasta12.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6b279:    ip=144.126.177.131  
+gasta13.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc60:    ip=144.126.177.132  
+gasta14.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc36:    ip=144.126.177.133  
+gasta15.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6529b:    ip=144.126.177.134  
+gasta16.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6b238:    ip=144.126.177.135  
+gasta17.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f602f6:    ip=144.126.177.136  
+gasta18.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f64221:    ip=144.126.177.137  
+gasta21.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f632bf:    ip=144.126.177.138  
+gasta22.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f65287:    ip=144.126.177.139  
+gasta23.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6e2bd:    ip=144.126.177.140  
+gasta24.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dcd6:    ip=144.126.177.141  
+gasta25.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6b230:    ip=144.126.177.142  
+gasta26.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6d283:    ip=144.126.177.143  
+gasta27.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6527f:    ip=144.126.177.144  
+gasta28.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc2e:    ip=144.126.177.145  
+gasta31.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f652b3:    ip=144.126.177.146  
+gasta32.loyola.edu:        tc=wynnewoodnet.dummy: ha=0800074e25fc:    ip=144.126.177.147  
+gasta33.loyola.edu:        tc=wynnewoodnet.dummy: ha=0800070ea048:    ip=144.126.177.148  
+gasta34.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f65cdf:    ip=144.126.177.149  
+gasta35.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f65213:    ip=144.126.177.150  
+gasta36.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc5e:    ip=144.126.177.151  
+gasta37.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dcc8:    ip=144.126.177.152  
+gasta41.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f632df:    ip=144.126.177.153  
+gasta42.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f64212:    ip=144.126.177.154  
+gasta43.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f66296:    ip=144.126.177.155  
+gasta44.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f69fe4:    ip=144.126.177.156  
+gasta45.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc3e:    ip=144.126.177.157  
+gasta46.loyola.edu:        tc=wynnewoodnet.dummy: ha=080007f6dc1e:    ip=144.126.177.158
+gasta47.loyola.edu:        tc=wynnewoodnet.dummy: ha=08000776275a:    ip=144.126.177.159  
+#
+#
+#                 station in wynnewood towers switch room
+#
+wynne.loyola.edu:          tc=wynnewoodnet.dummy: ha=02608c8b4169:    ip=144.126.177.89
+#
+#
+#              Special Events Department-Wynnewood
+#
+jwood.loyola.edu:          tc=wynnewoodnet.dummy: ha=0020afa21d5a:    ip=144.126.177.99
+gplatania.loyola.edu:      tc=wynnewoodnet.dummy: ha=02608c8a4e2b:    ip=144.126.177.98
+valkins.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af6f514f:    ip=144.126.177.97
+openpc.loyola.edu:         tc=wynnewoodnet.dummy: ha=0020af6f5153:    ip=144.126.177.96
+jbradleywyn.loyola.edu:    tc=wynnewoodnet.dummy: ha=0020afa21d7b:    ip=144.126.177.95
+valkins2.loyola.edu:       tc=wynnewoodnet.dummy: ha=0020af3e0906:    ip=144.126.177.214
+#
+#
+#
+#              Administrative Users-Wynnewood
+#
+dboyd.loyola.edu:          tc=wynnewoodnet.dummy: ha=02608cd98873:    ip=144.126.177.94
+#
+#
+#              Wynnewood Student Life
+#
+whois.loyola.edu:         tc=wynnewoodnet.dummy: ha=0800071fcb37:    ip=144.126.177.91
+xcole.loyola.edu:          tc=wynnewoodnet.dummy: ha=080007cf5bd0:    ip=144.126.177.90
+#
+#
+#              Public Safety - Wynnewood
+#
+Ghill.loyola.edu:          tc=wynnewoodnet.dummy: ha=0020afd60d0c:    ip=144.126.177.170
+Bkyne.loyola.edu:          tc=wynnewoodnet.dummy: ha=0020afe5e8ee:    ip=144.126.177.171
+Supervisor.loyola.edu:     tc=wynnewoodnet.dummy: ha=0020afe5e9e5:    ip=144.126.177.172
+Rdevon.loyola.edu:         tc=wynnewoodnet.dummy: ha=0020af730d0c:    ip=144.126.177.173
+Nporemski.loyola.edu:      tc=wynnewoodnet.dummy: ha=0020afd41aad:    ip=144.126.177.174
+Rsmith.loyola.edu:         tc=wynnewoodnet.dummy: ha=00a024bd2adb:    ip=144.126.177.175
+sjoyce.loyola.edu:         tc=wynnewoodnet.dummy: ha=00a02424db23:    ip=144.126.177.176
+aharvey.loyola.edu:        tc=wynnewoodnet.dummy: ha=0020af1e2020:    ip=144.126.177.50
+#
+#      		Speech and Hearing
+ksiren.loyola.edu:        tc=wynnewoodnet.dummy: ha=0207010d311d:    ip=144.126.177.51
+shodges.loyola.edu:       tc=wynnewoodnet.dummy: ha=02070113c777:    ip=144.126.177.52
+kcopeman.loyola.edu:      tc=wynnewoodnet.dummy: ha=0207010d2e87:    ip=144.126.177.53
+bmiller.loyola.edu:       tc=wynnewoodnet.dummy: ha=02070113c635:    ip=144.126.177.54
+lschoen.loyola.edu:       tc=wynnewoodnet.dummy: ha=0207010d343b:    ip=144.126.177.55
+jsloan.loyola.edu:        tc=wynnewoodnet.dummy: ha=02608c8a51a7:    ip=144.126.177.56
+gsimon.loyola.edu:        tc=wynnewoodnet.dummy: ha=00a024bd3297:    ip=144.126.177.57
+lkumin.loyola.edu:        tc=wynnewoodnet.dummy: ha=02608cae3070:    ip=144.126.177.58
+generalp.loyola.edu:      tc=wynnewoodnet.dummy: ha=00a024142741:    ip=144.126.177.59
+#
+# *********************  GHounds Office 
+ghmac1.loyola.edu:        tc=wynnewoodnet.dummy: ha=00009460f5e9:    ip=144.126.177.161
+ghmac2.loyola.edu:        tc=wynnewoodnet.dummy: ha=00009460fb28:    ip=144.126.177.162
+ghmac3.loyola.edu:        tc=wynnewoodnet.dummy: ha=00009460fc1a:    ip=144.126.177.163
+ghmac4.loyola.edu:        tc=wynnewoodnet.dummy: ha=00a004004902:    ip=144.126.177.164
+#
+#
+#
+# ---------------------Jenkins2 zone  .180.x  ---------------------------------------------
+#
+#
+#
+ranton.loyola.edu:         tc=jenkins2net.dummy:   ha=00a024aa9672:    ip=144.126.180.94
+rkashlak.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b900e:    ip=144.126.180.80
+oldodenski.loyola.edu:       tc=jenkins2net.dummy:   ha=02608cd98755:    ip=144.126.180.34
+tbrown.loyola.edu:         tc=jenkins2net.dummy:   ha=0080c7728e03:    ip=144.126.180.35
+nellis.loyola.edu:         tc=jenkins2net.dummy:   ha=0020afd3099f:    ip=144.126.180.36
+#johara.loyola.edu:         tc=jenkinsnet.dummy:    ha=00a0243f3c00:    ip=144.126.180.37
+jgray.loyola.edu:          tc=jenkins2net.dummy:   ha=00a0243f3c2a:    ip=144.126.180.17
+agiamp.loyola.edu:         tc=jenkins2net.dummy:   ha=00a02442822e:    ip=144.126.180.88
+hdesai.loyola.edu:         tc=jenkins2net.dummy:   ha=00a0247b8f4f:    ip=144.126.180.103
+mgarcia.loyola.edu:        tc=jenkins2net.dummy:   ha=00a02442821c:    ip=144.126.180.113
+rjones.loyola.edu:         tc=jenkins2net.dummy:   ha=00a0243f3c01:    ip=144.126.180.199
+clyles.loyola.edu:         tc=jenkins2net.dummy:   ha=0020af760433:    ip=144.126.180.105
+nliang.loyola.edu:         tc=jenkins2net.dummy:   ha=00a024a7f8f8:    ip=144.126.180.106
+tmento.loyola.edu:         tc=jenkins2net.dummy:   ha=00a0247b8bad:    ip=144.126.180.108
+sagafinejad.loyola.edu:    tc=jenkins2net.dummy:   ha=0020afd30997:    ip=144.126.180.109
+cdevader.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b900a:    ip=144.126.180.111
+rmergenthaler.loyola.edu:  tc=jenkins2net.dummy:   ha=00a0247b90a4:    ip=144.126.180.141
+#mdehaemer.jtec.loyola.edu: tc=jenkins2net.dummy:   ha=00608c8b46fd:    ip=144.126.180.140
+#mdehaemer1.loyola.edu:     tc=jenkins2net.dummy:   ha=0020afd30996:    ip=144.126.180.100
+rfranke.loyola.edu:        tc=jenkins2net.dummy:   ha=02608c8a9cae:    ip=144.126.180.93
+wharris.loyola.edu:        tc=jenkins2net.dummy:   ha=0020afc4d504:    ip=144.126.180.162
+psharkey.loyola.edu:       tc=jenkins2net.dummy:   ha=00608ce98041:    ip=144.126.180.142
+leroysimmons.loyola.edu:   tc=jenkins2net.dummy:   ha=00a0241639ea:    ip=144.126.180.143
+gathaide.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b908e:    ip=144.126.180.38
+#lduvall.loyola.edu:        tc=jenkins2net.dummy:   ha=:    ip=144.126.180.147
+dsmith.loyola.edu:         tc=jenkins2net.dummy:   ha=00a0244281f1:    ip=144.126.180.153
+martinelli.loyola.edu:     tc=jenkins2net.dummy:   ha=00a024a7f8ef:    ip=144.126.180.112
+cooke.loyola.edu:          tc=jenkins2net.dummy:   ha=00a0243f3c35:    ip=144.126.180.175
+wreinhardt.loyola.edu:     tc=jenkins2net.dummy:   ha=0800077f9489:    ip=144.126.180.81
+laur.loyola.edu:           tc=jenkins2net.dummy:   ha=0020af31e5ed:    ip=144.126.180.74
+ebenrud.loyola.edu:        tc=jenkins2net.dummy:   ha=02608c8b1f07:    ip=144.126.180.18
+ksherman.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b8e82:    ip=144.126.180.124
+vhogan.loyola.edu:         tc=jenkins2net.dummy:   ha=02608cd95c74:    ip=144.126.180.91
+sgooding.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0243f3c41:    ip=144.126.180.95
+fulbright.loyola.edu:      tc=jenkins2net.dummy:   ha=02608ca9dfcd:    ip=144.126.180.119
+tbrown.loyola.edu:         tc=jenkins2net.dummy:   ha=00a024649d0b:    ip=144.126.180.168
+ehoadl.loyola.edu:         tc=jenkins2net.dummy:   ha=00a024a7f8ec:    ip=144.126.180.138
+xahpjet.loyola.edu:        tc=jenkins2net.dummy:   ha=0800097ffa27:    ip=144.126.180.154
+doerfler.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0241a89e7:    ip=144.126.180.99
+plorenzi.loyola.edu:       tc=jenkins2net.dummy:   ha=00050210fd04:    ip=144.126.180.98
+dvandoren.loyola.edu:      tc=jenkins2net.dummy:   ha=02608c8f09e9:    ip=144.126.180.156
+nliang.loyola.edu:         tc=jenkins2net.dummy:   ha=00a024a7f8fe:    ip=144.126.180.176
+#
+#		    ACCOUNTING DEPARTMENT - XAVIER HALL - Jenkins2net  .180.x 
+#
+jsaroosh.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b8fb4:    ip=144.126.180.151
+guercio.loyola.edu:        tc=jenkins2net.dummy:   ha=0020afd309b6:    ip=144.126.180.75
+brice.loyola.edu:          tc=jenkins2net.dummy:   ha=00a0247b897a:    ip=144.126.180.114
+acctlab.loyola.edu:        tc=jenkins2net.dummy:   ha=02608cab882e:    ip=144.126.180.102
+bblouch.loyola.edu:        tc=jenkins2net.dummy:   ha=00a0247b9025:    ip=144.126.180.145
+mconron.loyola.edu:        tc=jenkins2net.dummy:   ha=0020afc4d562:    ip=144.126.180.146
+#geo.loyola.edu:            tc=jenkins2net.dummy:   ha=02608c8b492b:    ip=144.126.180.155
+geotemp.loyola.edu:        tc=jenkins2net.dummy:   ha=00a0247b8ee8:    ip=144.126.180.101
+kkeeling.loyola.edu:       tc=jenkins2net.dummy:   ha=00a0247b9022:    ip=144.126.180.148
+asedaghat.loyola.edu:      tc=jenkins2net.dummy:   ha=00a02499e17d:    ip=144.126.180.150
+amichenzi.loyola.edu:      tc=jenkins2net.dummy:   ha=00a0247b8f2f:    ip=144.126.180.149
+tulrich.loyola.edu:        tc=jenkins2net.dummy:   ha=0207010c9472:    ip=144.126.180.152
+ljanus.loyola.edu:         tc=jenkins2net.dummy:   ha=0020afc618a6:    ip=144.126.180.121
+#
+#
+#                   FINANCE DEPARTMENT -Jenkins Hall  - Jenkins2net  .180.x
+#
+fletcher.loyola.edu:       tc=jenkins2net.dummy:   ha=0020afc4d50d:    ip=144.126.180.97
+fairchild.loyola.edu:      tc=jenkins2net.dummy:   ha=0020afc4d559:    ip=144.126.180.16
+durkin.loyola.edu:         tc=jenkins2net.dummy:   ha=0020af343076:    ip=144.126.180.86
+cotner.loyola.edu:         tc=jenkins2net.dummy:   ha=0020afd30979:    ip=144.126.180.73
+eddy.loyola.edu:           tc=jenkins2net.dummy:   ha=02608cda2b20:    ip=144.126.180.39
+wholman.loyola.edu:        tc=jenkins2net.dummy:   ha=00a0243f3c38:    ip=144.126.180.40
+#
+#
+#                      MIS LAB Jenkins Hall
+#
+mislab1.loyola.edu:       tc=jenkins2net.dummy:   ha=00a024bd322b:     ip=144.126.180.163
+mislab2.loyola.edu:       tc=jenkins2net.dummy:   ha=00a024b6b712:     ip=144.126.180.164
+mislab3.loyola.edu:       tc=jenkins2net.dummy:   ha=00a024b6b718:     ip=144.126.180.165
+mislab4.loyola.edu:       tc=jenkins2net.dummy:   ha=0020afd30996:     ip=144.126.180.166
+#
+#
+#
+#
+#
+#
+# ----------------- DeChiaro College Center Zone   - jenkinsnet .176.x   --------------------
+#
+#               --------one card system ----------------------------- 
+#
+onecard1.loyola.edu:      tc=jenkinsnet.dummy:   ha=00a024bd2abf:   ip=144.126.176.220
+onecard2.loyola.edu:      tc=jenkinsnet.dummy:   ha=00a024bd301f:   ip=144.126.176.221
+#
+#
+#
+#
+#
+vweller.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af730d18:    ip=144.126.176.115
+sec-latt.loyola.edu:       tc=jenkinsnet.dummy:   ha=0020af730d1e:    ip=144.126.176.169
+jthompso.loyola.edu:       tc=jenkinsnet.dummy:   ha=0020af725a46:    ip=144.126.176.44
+#tquinn.loyola.edu:         tc=jenkinsnet.dummy:   ha=00a0240ac56a:    ip=144.126.176.123
+mdehaemer.jtec.loyola.edu: tc=jenkins2net.dummy:  ha=00608c8b46fd:    ip=144.126.176.140
+bookstore.loyola.edu:      tc=jenkinsnet.dummy:   ha=00a0244819e1:    ip=144.126.176.86
+#
+
+#
+#                 STUDENT Developement
+#
+dbush.loyola.edu:          tc=jenkinsnet.dummy:   ha=02608cda2aff:    ip=144.126.176.110
+jhopkins.loyola.edu:       tc=jenkinsnet.dummy:   ha=0020af72f9de:    ip=144.126.176.118
+#
+#
+#                  Fine Arts
+eross.loyola.edu:          tc=jenkinsnet.dummy:   ha=080007e6d3a7:    ip=144.126.176.92
+jsobier.loyola.edu:          tc=jenkinsnet.dummy:   ha=02608c8a5784:    ip=144.126.176.121
+jheadley.loyola.edu:          tc=jenkinsnet.dummy:   ha=02608c8b492b:    ip=144.126.176.122
+tfalvello.loyola.edu:       tc=jenkinsnet.dummy:    ha=00a040082ac9:    ip=144.126.176.88   
+avilla.loyola.edu:          tc=jenkinsnet.dummy:    ha=0800071cc801:    ip=144.126.176.94
+# 
+#                  Special Events - Student Center
+# 
+jbradley.loyola.edu:       tc=jenkinsnet.dummy:   ha=0020afa21d70:    ip=144.126.176.156
+hrucker.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af6f518a:    ip=144.126.176.157
+#
+#
+#
+#                  Athletics
+#
+pnotting.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a0240d6ab0:    ip=144.126.176.55
+jsmith.loyola.edu:         tc=jenkinsnet.dummy:   ha=00a02499e178:    ip=144.126.176.56
+eshriver.loyola.edu:        tc=jenkinsnet.dummy:   ha=02070113c780:    ip=144.126.176.57
+canderson.loyola.edu:      tc=jenkinsnet.dummy:   ha=02070113c62e:    ip=144.126.176.58
+dgretz.loyola.edu:         tc=jenkinsnet.dummy:   ha=0020af1dfcbf:    ip=144.126.176.59
+tburns.loyola.edu:         tc=jenkinsnet.dummy:   ha=0020af1e071b:    ip=144.126.176.60
+tmcclellan.loyola.edu:     tc=jenkinsnet.dummy:   ha=02070113cf29:    ip=144.126.176.61
+dgarrity.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a02499dc8c:    ip=144.126.176.62
+tmurphy.loyola.edu:        tc=jenkinsnet.dummy:   ha=02070114031d:    ip=144.126.176.63
+bconnor.loyola.edu:	   tc=jenkinsnet.dummy:   ha=020701140131:    ip=144.126.176.64
+mboylan.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a0240d6aaf:    ip=144.126.176.116
+frontdesk.loyola.edu:      tc=jenkinsnet.dummy:   ha=00a0240d0ec1:    ip=144.126.176.117
+slowe.loyola.edu:          tc=jenkinsnet.dummy:   ha=02608cd96a60:    ip=144.126.176.98
+jartuso.loyola.edu:        tc=jenkinsnet.dummy:   ha=0207011400d0:    ip=144.126.176.99
+sjones.loyola.edu:         tc=jenkinsnet.dummy:   ha=00a024eaa3b1:    ip=144.126.176.96
+mthompson.loyola.edu:      tc=jenkinsnet.dummy:   ha=02070113f347:    ip=144.126.176.158
+estewart.loyola.edu:       tc=jenkinsnet.dummy:   ha=02608cdda5de:    ip=144.126.176.161
+pcoyle.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608cda2c4a:    ip=144.126.176.139
+daikens.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a02499e1b8:    ip=144.126.176.97
+lnovotny.loyola.edu:       tc=jenkinsnet.dummy:   ha=02070114031d:    ip=144.126.176.73
+jmallia.loyola.edu:        tc=jenkinsnet.dummy:   ha=020701140131:    ip=144.126.176.40 
+#
+#
+#                  Recreation
+#
+ADescenzo.loyola.edu:      tc=jenkinsnet.dummy:   ha=0020af22fe3c:    ip=144.126.176.135
+Rsatterlee.loyola.edu:     tc=jenkinsnet.dummy:   ha=0020afc5d317:    ip=144.126.176.136
+MManis.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608cad7413:    ip=144.126.176.137
+bwilkens.loyola.edu:       tc=jenkinsnet.dummy:   ha=02608cd9a510:    ip=144.126.176.159
+#
+#                 Student Activities
+mbroder.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a0241639cd:    ip=144.126.176.132
+drizzi.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608cda2b68:    ip=144.126.176.133
+kthomas.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a024163472:    ip=144.126.176.134
+sga.loyola.edu:            tc=jenkinsnet.dummy:   ha=00a0241a8a0f:    ip=144.126.176.101
+mmurray.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a0247b8f4e:    ip=144.126.176.87
+#
+#                 JTEC
+#
+gholdridge.loyola.edu:     tc=jenkinsnet.dummy:   ha=00608c36af86:    ip=144.126.176.51
+cfoley.loyola.edu:         tc=jenkinsnet.dummy:   ha=0020afdc3afc:    ip=144.126.176.52
+bwilliams.loyola.edu:      tc=jenkinsnet.dummy:   ha=0000b4222fd2:    ip=144.126.176.53
+gholdridge.loyola.edu:     tc=jenkinsnet.dummy:   ha=00aa00420673:    ip=144.126.176.54
+dehaemer.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a040054e32:    ip=144.126.176.47
+student.loyola.edu:        tc=jenkinsnet.dummy:   ha=02608c3f07c1:    ip=144.126.176.46
+pentium.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af1e654c:    ip=144.126.176.43
+rds.jtec.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a024530467:    ip=144.126.176.42
+mac1jtec.loyola.edu:       tc=jenkinsnet.dummy:   ha=0800070ff2a9:    ip=144.126.176.213
+mac1jtec.loyola.edu:       tc=jenkinsnet.dummy:   ha=000094226569:    ip=144.126.176.216
+rhorning.loyola.edu:       tc=jenkinsnet.dummy:   ha=000502a0724c:    ip=144.126.176.105
+itri2.loyola.edu:          tc=jenkinsnet.dummy:   ha=080007468c7a:    ip=144.126.176.45
+#
+#                 Radnor House
+sta01.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a5336:     ip=144.126.176.217
+sta02.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a9d3d:     ip=144.126.176.218
+sta03.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a79ed:     ip=144.126.176.219
+sta04.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a7afb:     ip=144.126.176.222
+sta05.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a9c4d:     ip=144.126.176.223
+sta06.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a79db:     ip=144.126.176.224
+sta07.loyola.edu:           tc=jenkinsnet.dummy:  ha=02608c8a9cba:     ip=144.126.176.225
+#
+#                 Physical Plant 
+ppguest.loyola.edu:        tc=jenkinsnet.dummy:   ha=02608cdd3e7c:    ip=144.126.176.155
+lpely.loyola.edu:          tc=jenkinsnet.dummy:   ha=00805f5a7274:    ip=144.126.176.65
+jkleinham.loyola.edu:      tc=jenkinsnet.dummy:   ha=00a024e44ea4:    ip=144.126.176.214
+dorothy.loyola.edu:	   tc=jenkinsnet.dummy:	  ha=0020afa42a47:    ip=144.126.176.176
+kath.loyola.edu:	   tc=jenkinsnet.dummy:   ha=0020afa42a50:    ip=144.126.176.177
+mkupres.loyola.edu:        tc=jenkinsnet.dummy:   ha=02070113c807:    ip=144.126.176.215
+larry.loyola.edu:          tc=jenkinsnet.dummy:   ha=02608cae306f:    ip=144.126.176.178
+henry.loyola.edu:          tc=jenkinsnet.dummy:   ha=02070113d0c1:    ip=144.126.176.85
+leon.loyola.edu:           tc=jenkinsnet.dummy:   ha=02608cd96a27:    ip=144.126.176.79
+Valerie.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a024e44eb6:    ip=144.126.176.80
+ben.loyola.edu:            tc=jenkinsnet.dummy:   ha=0020afa42a48:    ip=144.126.176.81
+bobby.loyola.edu:          tc=jenkinsnet.dummy:   ha=00a0244bbe33:    ip=144.126.176.82
+ward.loyola.edu:           tc=jenkinsnet.dummy:   ha=02608cdd0c1c:    ip=144.126.176.83
+carl.loyola.edu:           tc=jenkinsnet.dummy:   ha=00608ce9803d:    ip=144.126.176.84
+#jyorkshire.loyola.edu:     tc=jenkinsnet.dummy:   ha=:    ip=144.126.176.91
+ksheeks.loyola.edu:        tc=jenkinsnet.dummy:   ha=00a0244bbe69:    ip=144.126.176.103
+cward.loyola.edu:          tc=jenkinsnet.dummy:   ha=00a0244bbc94:    ip=144.126.176.102
+pubsafeshare.loyola.edu:       tc=jenkinsnet.dummy:  ha=00a024bd3372:    ip=144.126.176.140
+emcneil.loyola.edu:         tc=jenkinsnet.dummy:  ha=00a024bd3341:    ip=144.126.176.141 
+cbledsoe.loyola.edu:        tc=jenkinsnet.dummy:  ha=00a0247b8e41:    ip=144.126.176.76
+#
+#
+#                Hammerman Lab
+#
+#hhsta35.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c882b:    ip=144.126.176.201
+#hhsta34.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c883a:    ip=144.126.176.202
+#hhsta33.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c8812:    ip=144.126.176.203
+#hhsta32.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c7305:    ip=144.126.176.204
+#hhsta31.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c87e6:    ip=144.126.176.205
+#hhsta21.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c788d:    ip=144.126.176.206
+#hhsta22.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c87f1:    ip=144.126.176.207
+#hhsta23.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c8800:    ip=144.126.176.208
+#hhsta24.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c8828:    ip=144.126.176.209
+#hhsta25.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c881b:    ip=144.126.176.210
+#hhsta11.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c881e:    ip=144.126.176.211
+#hhsta12.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020af9c882c:    ip=144.126.176.212
+#Hammprinter.loyola.edu:    tc=jenkinsnet.dummy:   ha=0800091e45d0:    ip=144.126.176.87
+jboylanlp.loyola.edu:    tc=jenkinsnet.dummy:   ha=00a024aa39f5:    ip=144.126.176.89
+#ham-xterm-2.loyola.edu:    tc=jenkinsnet.dummy:   ha=0000a7141589:    ip=144.126.176.90
+#macsta41.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d41b2e:    ip=144.126.176.125
+#macsta42.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d4ffba:    ip=144.126.176.126
+#macsta43.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d4678b:    ip=144.126.176.127
+#macsta51.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007348056:    ip=144.126.176.128
+#macsta52.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d4bb04:    ip=144.126.176.129
+#macsta53.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d47bd5:    ip=144.126.176.130
+#macsta54.loyola.edu:       tc=jenkinsnet.dummy:   ha=080007d4073b:    ip=144.126.176.131
+#
+##             Career Developement
+#
+csills.loyola.edu:         tc=jenkinsnet.dummy:   ha=0020afc4d510:    ip=144.126.176.66
+ckues.loyola.edu:          tc=jenkinsnet.dummy:   ha=0020afc4d671:    ip=144.126.176.67
+bsmeltz.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020afc6189d:    ip=144.126.176.68
+mmerrill.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a0241dbd03:    ip=144.126.176.69
+mdemanss.loyola.edu:       tc=jenkinsnet.dummy:   ha=00a0241a8aea:    ip=144.126.176.70
+mschuller.loyola.edu:      tc=jenkinsnet.dummy:   ha=0020afd47cce:    ip=144.126.176.72
+#
+#
+#            Instructor Station in College Center
+#
+#
+ct100.loyola.edu:          tc=jenkinsnet.dummy:   ha=0020af1e0717:    ip=144.126.176.48
+#
+#
+#                       JESUIT RESIDENCE/Ignatius House
+#
+mdf.loyola.edu:           tc=jenkinsnet.dummy:    ha=00a0241a8a0d:    ip=144.126.176.120
+jsalmon.loyola.edu:       tc=jenkinsnet.dummy:    ha=00a024a7fd18:    ip=144.126.176.106
+wmcgroarty.loyola.edu:    tc=jenkinsnet.dummy:    ha=00608ce98030:    ip=144.126.176.107
+pearl.loyola.edu:         tc=jenkinsnet.dummy:    ha=02608cd96b45:    ip=144.126.176.108  
+kgillespie.loyola.edu:    tc=jenkinsnet.dummy:    ha=00a02411d5bf:    ip=144.126.176.109
+econvey.loyola.edu:       tc=jenkinsnet.dummy:    ha=02608cd96031:    ip=144.126.176.111
+psun.loyola.edu:          tc=jenkinsnet.dummy:    ha=0020e00e1241:    ip=144.126.176.112
+#
+#
+#
+#             Library
+#
+stewart.loyola.edu:        tc=jenkinsnet.dummy:   ha=02608cda2b1d:    ip=144.126.176.240
+ray.loyola.edu:            tc=jenkinsnet.dummy:   ha=02608cda2b66:    ip=144.126.176.241
+pdf.loyola.edu:            tc=jenkinsnet.dummy:   ha=02608cd96a46:    ip=144.126.176.242
+jpp.loyola.edu:            tc=jenkinsnet.dummy:   ha=0020afe5e9db:    ip=144.126.176.243
+jco.loyola.edu:            tc=jenkinsnet.dummy:   ha=02608cda2b72:    ip=144.126.176.244
+jab.loyola.edu:            tc=jenkinsnet.dummy:   ha=0020afe5e8f3:    ip=144.126.176.245
+goessman.loyola.edu:       tc=jenkinsnet.dummy:   ha=02608cae2f78:    ip=144.126.176.246
+brawlins.loyola.edu:       tc=jenkinsnet.dummy:   ha=02608cda2c13:    ip=144.126.176.248
+gbreyer.loyola.edu:        tc=jenkinsnet.dummy:   ha=0020afe5e5b4:    ip=144.126.176.239
+ghg.loyola.edu:            tc=jenkinsnet.dummy:   ha=02608cda2b7a:    ip=144.126.176.247
+birch.loyola.edu:          tc=jenkinsnet.dummy:   ha=0020af1e2027:    ip=144.126.176.249
+beverungen.loyola.edu:     tc=jenkinsnet.dummy:   ha=0020afe5e9e2:    ip=144.126.176.250
+av-system.loyola.edu:      tc=jenkinsnet.dummy:   ha=02608cae2f3e:    ip=144.126.176.251
+cooperstein.loyola.edu:    tc=jenkinsnet.dummy:   ha=0020af730cc9:    ip=144.126.176.230
+mlinardi.loyola.edu:       tc=jenkinsnet.dummy:   ha=02608c8aad2e:    ip=144.126.176.231
+
+#########     Library Lab Machines 
+
+LibMac.loyola.edu:         tc=jenkinsnet.dummy:   ha=080007af2c00:    ip=144.126.176.179
+LibMac.loyola.edu:         tc=jenkinsnet.dummy:   ha=080007ef5743:    ip=144.126.176.180
+LibPC1.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a797a:    ip=144.126.176.181
+LibPC2.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a765b:    ip=144.126.176.182
+LibPC3.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a79d7:    ip=144.126.176.183
+LibPC4.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a797b:    ip=144.126.176.184
+LibPC5.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a9ce5:    ip=144.126.176.185
+LibPC6.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608c8a89a7:    ip=144.126.176.186
+Libpc9.loyola.edu:         tc=jenkinsnet.dummy:   ha=02608ca5ce9a:    ip=144.126.176.123
+libpc10.loyola.edu:        tc=jenkinsnet.dummy:   ha=00608c56f1ff:    ip=144.126.176.124
+#
+#
+#
+#   ------------- Humanities Center Zone --------------------------------------------
+#
+rivilois.loyola.edu:       tc=humannet.dummy:    ha=00a0240d9392:    ip=144.126.5.41
+#
+#                     *****    DEANS OFFICE   *********
+#
+droswell.loyola.edu:       tc=humannet.dummy:    ha=0020afc5d07c:    ip=144.126.5.133
+msheehan.loyola.edu:       tc=humannet.dummy:    ha=0020afc5d06c:    ip=144.126.5.129
+lvasil.loyola.edu:         tc=humannet.dummy:    ha=0020afc5d04e:    ip=144.126.5.130
+perrelli.loyola.edu:       tc=humannet.dummy:    ha=00a0242fbbe1:    ip=144.126.5.141
+#
+#                       ******  ADVISING     *********
+#
+jjordan.loyola.edu:        tc=humannet.dummy:    ha=0020afe5e407:    ip=144.126.5.123
+jbrunett.loyola.edu:       tc=humannet.dummy:    ha=02608c8b2509:    ip=144.126.5.124
+evorbach.loyola.edu:       tc=humannet.dummy:    ha=0020afc4d659:    ip=144.126.5.139
+jhealy.loyola.edu:         tc=humannet.dummy:    ha=02608caa3cb7:    ip=144.126.5.125
+jkling.loyola.edu:         tc=humannet.dummy:    ha=0020af9db32e:    ip=144.126.5.140
+kfallon.loyola.edu:        tc=humannet.dummy:    ha=00a02432fddb:    ip=144.126.5.142
+goetzel.loyola.edu:        tc=humannet.dummy:    ha=0020af9db258:    ip=144.126.5.143
+jproctor.loyola.edu:       tc=humannet.dummy:    ha=0020af9db309:    ip=144.126.5.144
+marshall.loyola.edu:       tc=humannet.dummy:    ha=0020afc4d3e3:    ip=144.126.5.145
+kmilam.loyola.edu:         tc=humannet.dummy:    ha=0020afc4d5c3:    ip=144.126.5.134
+fnash.loyola.edu:          tc=humannet.dummy:    ha=02608cdd972c:    ip=144.126.5.135
+lMcginnity.loyola.edu:     tc=humannet.dummy:    ha=00a0241a8cea:    ip=144.126.5.136
+rjohnson.loyola.edu:       tc=humannet.dummy:    ha=02608c8a991c:    ip=144.126.5.137
+lmadgar.loyola.edu:        tc=humannet.dummy:    ha=02608c8a53f8:    ip=144.126.5.138
+fmcmanimin.loyola.edu:     tc=humannet.dummy:    ha=02608c8a8049:    ip=144.126.5.127
+sjones.loyola.edu:         tc=humannet.dummy:    ha=02608c8aa3a4:    ip=144.126.5.222
+#
+#                      ****   ADVISING LAB  *******
+advise1.loyola.edu:        tc=humannet.dummy:    ha=0020af730cfa:    ip=144.126.5.64
+advise2.loyola.edu:        tc=humannet.dummy:    ha=0020af730d14:    ip=144.126.5.63
+advise3.loyola.edu:        tc=humannet.dummy:    ha=0020af730c27:    ip=144.126.5.62
+#
+#                        ****  GRADUATE ADMISSIONS   *******
+#
+bednarsky.loyola.edu:      tc=humannet.dummy:    ha=02608cad7d34:    ip=144.126.5.151
+cbell.loyola.edu:          tc=humannet.dummy:    ha=02608cd960a5:    ip=144.126.5.152
+#jebberts.loyola.edu:      tc=humannet.dummy:    ha=                 ip=144.126.5.122
+#
+#                        ****  GRADUATE SERVICES   ******
+#
+fmcguire.loyola.edu:       tc=humannet.dummy:    ha=00a024988aae:    ip=144.126.5.207
+jricas.loyola.edu:         tc=humannet.dummy:    ha=00a024988ab2:    ip=144.126.5.206
+#
+#                       *****  DEVELOPMENT   ***********
+#
+mgoff.loyola.edu:          tc=humannet.dummy:    ha=0020af1e0fe4:    ip=144.126.5.17
+emorthole.loyola.edu:      tc=humannet.dummy:    ha=0020afc49e75:    ip=144.126.5.23
+mhorrigan.loyola.edu:      tc=humannet.dummy:    ha=0020af1de428:    ip=144.126.5.18
+khoeck.loyola.edu:         tc=humannet.dummy:    ha=00a024b6b70b:    ip=144.126.5.16
+eattias.loyola.edu:        tc=humannet.dummy:    ha=02608cd99f0b:    ip=144.126.5.20
+snakshma.loyola.edu:	   tc=humannet.dummy:    ha=0020afc5d08e:    ip=144.126.5.21
+crael.loyola.edu:          tc=humannet.dummy:    ha=00a024989746:    ip=144.126.5.22
+tlangenb.loyola.edu:       tc=humannet.dummy:    ha=00a02498975c:    ip=144.126.5.24
+swalton.loyola.edu:        tc=humannet.dummy:    ha=02608cd98de0:    ip=144.126.5.25
+dcasper.loyola.edu:        tc=humannet.dummy:    ha=0020afc5d09a:    ip=144.126.5.26
+sschubert.loyola.edu:      tc=humannet.dummy:    ha=0020afc49f54:    ip=144.126.5.27
+jrau.loyola.edu:           tc=humannet.dummy:    ha=02070110681a:    ip=144.126.5.28
+temp.loyola.edu:           tc=humannet.dummy:    ha=0020afc6176e:    ip=144.126.5.29
+msemela.loyola.edu:        tc=humannet.dummy:    ha=02608cd96b40:    ip=144.126.5.30
+kthompson.loyola.edu:      tc=humannet.dummy:    ha=0020af1dc982:    ip=144.126.5.147
+mgardner.loyola.edu:       tc=humannet.dummy:    ha=00a0243203af:    ip=144.126.5.35
+nwindsor.loyola.edu:       tc=humannet.dummy:    ha=00a02498976d:    ip=144.126.5.36
+jsmith.loyola.edu:         tc=humannet.dummy:    ha=0020afc49eea:    ip=144.126.5.38
+dmanner.loyola.edu:        tc=humannet.dummy:    ha=02608c8b4929:    ip=144.126.5.153
+khayes.loyola.edu:         tc=humannet.dummy:    ha=0020afc5cff7:    ip=144.126.5.131
+kferraro.loyola.edu:       tc=humannet.dummy:    ha=0020af1e1085:    ip=144.126.5.42
+callen.loyola.edu:         tc=humannet.dummy:    ha=00009440d956:    ip=144.126.5.39
+bbowden.loyola.edu:        tc=humannet.dummy:    ha=02608cd96b15:    ip=144.126.5.44
+rscalia.loyola.edu:        tc=humannet.dummy:    ha=000094313739:    ip=144.126.5.45
+sfowl.loyola.edu:          tc=humannet.dummy:    ha=0000943032ed:    ip=144.126.5.115
+mfulton.loyola.edu:        tc=humannet.dummy:    ha=0020afc5d0fa:    ip=144.126.5.169
+mmccarty.loyola.edu:       tc=humannet.dummy:    ha=02608cd98e4c:    ip=144.126.5.132
+slee.loyola.edu:           tc=humannet.dummy:    ha=0020afc5d06d:    ip=144.126.5.183
+syoung.loyola.edu:         tc=humannet.dummy:    ha=00608ce97fec:    ip=144.126.5.91
+#
+#                          **** Admissions ****
+#
+wbossmeyer.loyola.edu:     tc=humannet.dummy:    ha=00a024a7f8d0:    ip=144.126.5.148
+bhalter.loyola.edu:        tc=humannet.dummy:    ha=0020af1cb297:    ip=144.126.5.51
+psipes.loyola.edu:         tc=humannet.dummy:    ha=02608cae1465:    ip=144.126.5.37
+sheidel.loyola.edu:        tc=humannet.dummy:    ha=0020af1cb2c1:    ip=144.126.5.53
+mkelly.loyola.edu:         tc=humannet.dummy:    ha=0020af1cb2ac:    ip=144.126.5.54
+pgallagher.loyola.edu:     tc=humannet.dummy:    ha=0020af1cb2a9:    ip=144.126.5.55
+piou.loyola.edu:           tc=humannet.dummy:    ha=0020af1cb28d:    ip=144.126.5.56
+ejanssen.loyola.edu:       tc=humannet.dummy:    ha=0020af1cb2a3:    ip=144.126.5.57
+belz.loyola.edu:           tc=humannet.dummy:    ha=0020af1cb2c6:    ip=144.126.5.58
+enovak.loyola.edu:         tc=humannet.dummy:    ha=0020afe35f05:    ip=144.126.5.59
+akozlowski.loyola.edu:     tc=humannet.dummy:    ha=02608c6ce8e1:    ip=144.126.5.212
+cconrad.loyola.edu:        tc=humannet.dummy:    ha=02608c6d04d3:    ip=144.126.5.213
+mmiller.loyola.edu:        tc=humannet.dummy:    ha=02608c8a4e33:    ip=144.126.5.214
+mmims.loyola.edu:          tc=humannet.dummy:    ha=02608c8a422d:    ip=144.126.5.215
+psipes.loyola.edu:         tc=humannet.dummy:    ha=02608c6d34fc:    ip=144.126.5.216
+itrainer.loyola.edu:       tc=humannet.dummy:    ha=02608c6d0955:    ip=144.126.5.217
+#
+#
+#                          ****   FINANCIAL AID  ****
+#
+mlindeme.loyola.edu:       tc=humannet.dummy:    ha=0020afa29330:    ip=144.126.5.47
+dhemling.loyola.edu:       tc=humannet.dummy:    ha=0020afa2931c:    ip=144.126.5.50
+blewando.loyola.edu:       tc=humannet.dummy:    ha=02608cd96895:    ip=144.126.5.31
+kgallagh.loyola.edu:       tc=humannet.dummy:    ha=0020afa2932c:    ip=144.126.5.48
+mbellest.loyola.edu:       tc=humannet.dummy:    ha=0020afe35f7b:    ip=144.126.5.33
+rwhittock.loyola.edu:      tc=humannet.dummy:    ha=0020afa29323:    ip=144.126.5.49
+#phelmstetter.loyola.edu:  tc=humannet.dummy:    ha=                 ip=144.126.5.121
+#
+phemsteter.loyola.edu:     tc=humannet.dummy:    ha=02608c6d34f2:    ip=144.126.5.221
+#
+#         Humanities MacIntosh Lab
+#
+Hummac01.loyola.edu:       tc=humannet.dummy:    ha=080007ee1aaf:    ip=144.126.5.66
+hummac02.loyola.edu:       tc=humannet.dummy:    ha=080007defe73:    ip=144.126.5.67
+hummac03.loyola.edu:       tc=humannet.dummy:    ha=080007ee2d3a:    ip=144.126.5.68
+hummac04.loyola.edu:       tc=humannet.dummy:    ha=080007eeba10:    ip=144.126.5.69
+hummac05.loyola.edu:       tc=humannet.dummy:    ha=080007eebabe:    ip=144.126.5.70
+hummac06.loyola.edu:       tc=humannet.dummy:    ha=080007deaea8:    ip=144.126.5.71
+hummac07.loyola.edu:       tc=humannet.dummy:    ha=080007eebad2:    ip=144.126.5.72
+hummac08.loyola.edu:       tc=humannet.dummy:    ha=080007ee86b2:    ip=144.126.5.73
+hummac09.loyola.edu:       tc=humannet.dummy:    ha=080007aeefbd:    ip=144.126.5.74
+hummac10.loyola.edu:       tc=humannet.dummy:    ha=0800079e757b:    ip=144.126.5.75
+hummac11.loyola.edu:       tc=humannet.dummy:    ha=080007eeba12:    ip=144.126.5.76
+hummac12.loyola.edu:       tc=humannet.dummy:    ha=080007de3665:    ip=144.126.5.77
+hummac13.loyola.edu:       tc=humannet.dummy:    ha=080007ee1aef:    ip=144.126.5.78
+hummac14.loyola.edu:       tc=humannet.dummy:    ha=080007eeba51:    ip=144.126.5.79
+hummac15.loyola.edu:       tc=humannet.dummy:    ha=080007ae6fa3:    ip=144.126.5.80
+hummac16.loyola.edu:       tc=humannet.dummy:    ha=0800079e7593:    ip=144.126.5.81
+hummac17.loyola.edu:       tc=humannet.dummy:    ha=080007eeba71:    ip=144.126.5.82
+hummac18.loyola.edu:       tc=humannet.dummy:    ha=080007eebaa9:    ip=144.126.5.83
+hummac19.loyola.edu:       tc=humannet.dummy:    ha=0800079e1529:    ip=144.126.5.168
+hummac20.loyola.edu:       tc=humannet.dummy:    ha=080007eecd00:    ip=144.126.5.85
+hummac21.loyola.edu:       tc=humannet.dummy:    ha=080007ee1ac7:    ip=144.126.5.86             
+#
+# 
+#            *****   Philosphy Department  *******
+#
+jsnow.loyola.edu:          tc=humannet.dummy:    ha=02070109c1c4:    ip=144.126.5.99
+pbagley.loyola.edu:        tc=humannet.dummy:    ha=02608c8a5193:    ip=144.126.5.100
+sartzen.loyola.edu:        tc=humannet.dummy:    ha=02608cd987a8:    ip=144.126.5.101
+pcook.loyola.edu:          tc=humannet.dummy:    ha=02608cae2f77:    ip=144.126.5.102
+atassi.loyola.edu:         tc=humannet.dummy:    ha=00a024816f81:    ip=144.126.5.103
+tstaplet.loyola.edu:       tc=humannet.dummy:    ha=0020af1dfcc0:    ip=144.126.5.105
+dleder.loyola.edu:         tc=humannet.dummy:    ha=00608ce9806d:    ip=144.126.5.106
+dsnow.loyola.edu:          tc=humannet.dummy:    ha=02070113b7d9:    ip=144.126.5.108
+isherer.loyola.edu:        tc=humannet.dummy:    ha=02608c8a53f7:    ip=144.126.5.109
+lflaherty.loyola.edu:      tc=humannet.dummy:    ha=00a02481705d:    ip=144.126.5.110
+gziniewi.loyola.edu:       tc=humannet.dummy:    ha=02608cd96b45:    ip=144.126.5.111
+sweber.loyola.edu:         tc=humannet.dummy:    ha=0207010d343e:    ip=144.126.5.194
+rboothby.loyola.edu:       tc=humannet.dummy:    ha=0000944d536d:    ip=144.126.5.146
+chanley.loyola.edu:        tc=humannet.dummy:    ha=00608ce98066:    ip=144.126.5.116
+gmcaler.loyola.edu:        tc=humannet.dummy:    ha=0020af1e071d:    ip=144.126.5.199
+rwilson.loyola.edu:        tc=humannet.dummy:    ha=02070113c0da:    ip=144.126.5.128
+#
+#             *******     English Department    *******
+#
+ddougher.loyola.edu:       tc=humannet.dummy:    ha=00a0247b8ff7:    ip=144.126.5.154
+graffert.loyola.edu:       tc=humannet.dummy:    ha=0020afc4d69f:    ip=144.126.5.155
+cabromit.loyola.edu:       tc=humannet.dummy:    ha=02608cd9600f:    ip=144.126.5.156
+bcrocket.loyola.edu:       tc=humannet.dummy:    ha=020701107d9a:    ip=144.126.5.157
+chands.loyola.edu:         tc=humannet.dummy:    ha=02608c8b3a49:    ip=144.126.5.158
+alipscom.loyola.edu:       tc=humannet.dummy:    ha=02608cd96a29:    ip=144.126.5.159
+odonnell.loyola.edu:       tc=humannet.dummy:    ha=02608caad249:    ip=144.126.5.150
+plukacs.loyola.edu:        tc=humannet.dummy:    ha=00a0247b8f51:    ip=144.126.5.160
+pmccaffer.loyola.edu:      tc=humannet.dummy:    ha=02608cd96869:    ip=144.126.5.161
+rmiola.loyola.edu:         tc=humannet.dummy:    ha=02608c8a990f:    ip=144.126.5.163
+bodonnel.loyola.edu:       tc=humannet.dummy:    ha=0020af730c6d:    ip=144.126.5.164
+mosteen.loyola.edu:        tc=humannet.dummy:    ha=0020afe35f25:    ip=144.126.5.165
+hthomas.loyola.edu:        tc=humannet.dummy:    ha=0020af1dfcbe:    ip=144.126.5.167
+Englishptr.loyola.edu:     tc=humannet.dummy:    ha=0800091c780a:    ip=144.126.5.40
+forni.loyola.edu:	   tc=humannet.dummy:    ha=0000943034bc:    ip=144.126.5.118
+gmcglamery.loyola.edu:     tc=humannet.dummy:    ha=0800077f5c2f:    ip=144.126.5.162
+msingh.loyola.edu:         tc=humannet.dummy:    ha=0000944128b8:    ip=144.126.5.166
+#
+#         History Department
+#
+#
+jwyman.loyola.edu:         tc=humannet.dummy:    ha=02608c8a5337:    ip=144.126.5.170
+tpegram.loyola.edu:        tc=humannet.dummy:    ha=02608cd96912:    ip=144.126.5.171
+mgallman.loyola.edu:       tc=humannet.dummy:    ha=00a0247b8f27:    ip=144.126.5.172
+kdevries.loyola.edu:       tc=humannet.dummy:    ha=0020af413030:    ip=144.126.5.174
+eschmidt.loyola.edu:       tc=humannet.dummy:    ha=00a0240ac0d3:    ip=144.126.5.175
+hadjunct.loyola.edu:       tc=humannet.dummy:    ha=02608cd968a5:    ip=144.126.5.181
+jbreian.loyola.edu:        tc=humannet.dummy:    ha=000502a45dbb:    ip=144.126.5.176
+ccheape.loyola.edu:        tc=humannet.dummy:    ha=000502f887ea:    ip=144.126.5.177
+bdonovan.loyola.edu:       tc=humannet.dummy:    ha=02608cd96a28:    ip=144.126.5.178
+jdabney.loyola.edu:        tc=humannet.dummy:    ha=00a0247b9065:    ip=144.126.5.179
+shughes.loyola.edu:        tc=humannet.dummy:    ha=000502a4cb07:    ip=144.126.5.92
+jpetropo.loyola.edu:       tc=humannet.dummy:    ha=00a0247b8fff:    ip=144.126.5.112
+jedwards.loyola.edu:       tc=humannet.dummy:    ha=02608c8f09f3:    ip=144.126.5.113
+historyptr.loyola.edu:     tc=humannet.dummy:    ha=080009b883a9:    ip=144.126.5.208         
+kbrennan.loyola.edu:       tc=humannet.dummy:    ha=02608cd98872:    ip=144.126.5.19
+akugler.loyola.edu:        tc=humannet.dummy:    ha=000094304a6a:    ip=144.126.5.32
+scole.loyola.edu:          tc=humannet.dummy:    ha=00608ce97842:    ip=144.126.5.149
+#
+#                      ******  THEOLOGY DEPT *****  
+#
+cmarsh.loyola.edu:         tc=humannet.dummy:    ha=02608caf5688:    ip=144.126.5.185
+jrossi.loyola.edu:         tc=humannet.dummy:    ha=0020af9db359:    ip=144.126.5.187
+cmattews.loyola.edu:       tc=humannet.dummy:    ha=02608cd96b01:    ip=144.126.5.188
+gjones.loyola.edu:         tc=humannet.dummy:    ha=02608caf44ed:    ip=144.126.5.190
+jbuckley.loyola.edu:       tc=humannet.dummy:    ha=02608caf44ee:    ip=144.126.5.191
+szczybor.loyola.edu:       tc=humannet.dummy:    ha=0020afe35f83:    ip=144.126.5.193
+fbauer.loyola.edu:         tc=humannet.dummy:    ha=0020af9db35a:    ip=144.126.5.209
+pryan.loyola.edu:          tc=humannet.dummy:    ha=02608c8aa33c:    ip=144.126.5.210
+achristm.loyola.edu:       tc=humannet.dummy:    ha=0020afe35f75:    ip=144.126.5.186
+fherman.loyola.edu:        tc=humannet.dummy:    ha=02070110cc59:    ip=144.126.5.192
+slittle.loyola.edu:        tc=humannet.dummy:    ha=02608cd96b33:    ip=144.126.5.211
+asuthe.loyola.edu:         tc=humannet.dummy:    ha=00009430359c:    ip=144.126.5.218
+mkreid.loyola.edu:         tc=humannet.dummy:    ha=02608cd98827:    ip=144.126.5.220
+#
+#                     ****   Writing/Media Department   ***
+#
+rtanner.loyola.edu:        tc=humannet.dummy:    ha=02608cd96a2a:    ip=144.126.5.197
+bmurray.loyola.edu:        tc=humannet.dummy:    ha=02608c6d1f09:    ip=144.126.5.198
+dmcguine.loyola.edu:       tc=humannet.dummy:    ha=00a024428216:    ip=144.126.5.200
+imcguine.loyola.edu:       tc=humannet.dummy:    ha=0020af258c08:    ip=144.126.5.202
+bmallone.loyola.edu:       tc=humannet.dummy:    ha=00a0247b8e45:    ip=144.126.5.203
+lbartolo.loyola.edu:       tc=humannet.dummy:    ha=00a02499e190:    ip=144.126.5.204
+kfitts.loyola.edu:         tc=humannet.dummy:    ha=0020af9c87d2:    ip=144.126.5.205
+naplers.loyola.edu:        tc=humannet.dummy:    ha=00050218325f:    ip=144.126.5.43
+jdobler.loyola.edu:        tc=humannet.dummy:    ha=080007fab4e3:    ip=144.126.5.95
+dsamet.loyola.edu:         tc=humannet.dummy:    ha=0800077fc8bb:    ip=144.126.5.93
+aciofalo.loyola.edu:       tc=humannet.dummy:    ha=00a040178612:    ip=144.126.5.94
+lpurpura.loyola.edu:       tc=humannet.dummy:    ha=000094303de8:    ip=144.126.5.90
+aleary.loyola.edu:         tc=humannet.dummy:    ha=02070114058b:    ip=144.126.5.65
+bkirby.loyola.edu:         tc=humannet.dummy:    ha=0000943044f1:    ip=144.126.5.61
+eking.loyola.edu:          tc=humannet.dummy:    ha=080007cea480:    ip=144.126.5.84
+kfish.loyola.edu:          tc=humannet.dummy:    ha=0000943044c0:    ip=144.126.5.114
+higgins.loyola.edu:        tc=humannet.dummy:    ha=020701107827:    ip=144.126.5.119
+vaxqueue.loyola.edu:       tc=humannet.dummy:    ha=080009b8d3db:    ip=144.126.5.195
+honor.loyola.edu:          tc=humannet.dummy:    ha=02608c8a4222:    ip=144.126.5.219
+mmusgrove.loyola.edu:      tc=humannet.dummy:    ha=00009422370d:    ip=144.126.5.223 
+pmiller.loyola.edu:        tc=humannet.dummy:    ha=080007965c78:    ip=144.126.5.224
+dlazere.loyola.edu:        tc=humannet.dummy:    ha=00a024b6b753:    ip=144.126.5.184
+#
+#                  *****  PUBLICATIONS   ******* 
+#
+betty.loyola.edu:          tc=humannet.dummy:     ha=0000942226b8:    ip=144.126.5.226
+getzingr.loyola.edu:       tc=humannet.dummy:     ha=00009441c509:    ip=144.126.5.225
+rbrach.loyola.edu:         tc=humannet.dummy:     ha=00050214b78c:    ip=144.126.5.52
+jstrass.loyola.edu:        tc=humannet.dummy:     ha=000502148fe1:    ip=144.126.5.88
+djones.loyola.edu:         tc=humannet.dummy:     ha=00050214a7c8:    ip=144.126.5.89
+schminke.loyola.edu:       tc=humannet.dummy:     ha=000502146773:    ip=144.126.5.46
+publications.loyola.edu:   tc=humannet.dummy:     ha=080007d668ec:    ip=144.126.5.120
+datmac.loyola.edu:         tc=humannet.dummy:     ha=080007d40300:    ip=144.126.5.126
+#
+#                  *****  Public Relations ****
+#
+kdillon.loyola.edu:        tc=humannet.dummy:     ha=080007ce6021:    ip=144.126.5.117
+#
+#
+#   ----------- Columbia Center Zone -------------------------------------------
+#
+#
+col-sta11.loyola.edu:      tc=columbianet.dummy: ha=00a024989140:    ip=144.126.10.51
+col-sta12.loyola.edu:      tc=columbianet.dummy: ha=00a02498914d:    ip=144.126.10.52
+col-sta13.loyola.edu:      tc=columbianet.dummy: ha=00a024988ddb:    ip=144.126.10.93
+col-sta14.loyola.edu:      tc=columbianet.dummy: ha=00a02498912f:    ip=144.126.10.92
+col-sta15.loyola.edu:      tc=columbianet.dummy: ha=00a0247b8ef8:    ip=144.126.10.91
+col-sta21.loyola.edu:      tc=columbianet.dummy: ha=00a02498875f:    ip=144.126.10.53
+col-sta22.loyola.edu:      tc=columbianet.dummy: ha=00a024988b2c:    ip=144.126.10.54
+col-sta23.loyola.edu:      tc=columbianet.dummy: ha=00a024988bbc:    ip=144.126.10.55
+col-sta24.loyola.edu:      tc=columbianet.dummy: ha=00a0249886f2:    ip=144.126.10.56
+col-sta25.loyola.edu:      tc=columbianet.dummy: ha=00a024988f77:    ip=144.126.10.57
+col-sta31.loyola.edu:      tc=columbianet.dummy: ha=00a0249888c9:    ip=144.126.10.94
+col-sta32.loyola.edu:      tc=columbianet.dummy: ha=00a024988f3f:    ip=144.126.10.58
+col-sta33.loyola.edu:      tc=columbianet.dummy: ha=00a024988bd0:    ip=144.126.10.59
+col-sta34.loyola.edu:      tc=columbianet.dummy: ha=00a024988e62:    ip=144.126.10.60
+col-sta35.loyola.edu:      tc=columbianet.dummy: ha=00a024989110:    ip=144.126.10.95
+col-sta41.loyola.edu:      tc=columbianet.dummy: ha=00a0249890f2:    ip=144.126.10.96
+col-sta42.loyola.edu:      tc=columbianet.dummy: ha=00a024988b3f:    ip=144.126.10.97
+col-sta43.loyola.edu:      tc=columbianet.dummy: ha=00a024988745:    ip=144.126.10.98
+col-sta44.loyola.edu:      tc=columbianet.dummy: ha=00a024989039:    ip=144.126.10.101
+col-sta45.loyola.edu:      tc=columbianet.dummy: ha=00a024989774:    ip=144.126.10.102
+col-sta24-1.loyola.edu:    tc=columbianet.dummy: ha=00a0249896e0:    ip=144.126.10.61
+col-sta24-2.loyola.edu:    tc=columbianet.dummy: ha=00a024988cef:    ip=144.126.10.62
+cc128.loyola.edu:          tc=columbianet.dummy: ha=00a024bd2b23:    ip=144.126.10.105
+#
+amcdonald.loyola.edu:      tc=columbianet.dummy: ha=0020af1dfcb5:    ip=144.126.10.63
+scheston.loyola.edu:       tc=columbianet.dummy: ha=0020af1eee59:    ip=144.126.10.64
+beanes.loyola.edu:         tc=columbianet.dummy: ha=0020af1cb295:    ip=144.126.10.65
+jstaurou.loyola.edu:       tc=columbianet.dummy: ha=0020af1cb2b2:    ip=144.126.10.66
+ajtepe.loyola.edu:         tc=columbianet.dummy: ha=0020af1dfcb8:    ip=144.126.10.67
+colfaculty.loyola.edu:     tc=columbianet.dummy: ha=02070113ca8e:    ip=144.126.10.68
+jgreer.loyola.edu:         tc=columbianet.dummy: ha=02608cda3202:    ip=144.126.10.69
+jciarrocchi.loyola.edu:    tc=columbianet.dummy: ha=02070113c357:    ip=144.126.10.70
+rpiedmont.loyola.edu:      tc=columbianet.dummy: ha=0020af1e1fe0:    ip=144.126.10.71
+stincher.loyola.edu:       tc=columbianet.dummy: ha=0020af1dfc93:    ip=144.126.10.72
+wsneck.loyola.edu:         tc=columbianet.dummy: ha=0020af1cb2b1:    ip=144.126.10.73
+bestadt.loyola.edu:        tc=columbianet.dummy: ha=0020af1dfcb6:    ip=144.126.10.74
+rwicks.loyola.edu:         tc=columbianet.dummy: ha=0020af1dfcb1:    ip=144.126.10.75
+criordan.loyola.edu:       tc=columbianet.dummy: ha=0020af1dfcaf:    ip=144.126.10.76
+rose.loyola.edu:           tc=columbianet.dummy: ha=02608c8a5335:    ip=144.126.10.77
+dcreel.loyola.edu:         tc=columbianet.dummy: ha=00a024428237:    ip=144.126.10.99
+kgillespie.loyola.edu:     tc=columbianet.dummy: ha=0020af1eef03:    ip=144.126.10.103
+engsta21.loyola.edu:       tc=columbianet.dummy: ha=0000c0fe2385:    ip=144.126.10.80
+engsta22.loyola.edu:       tc=columbianet.dummy: ha=0000c0711185:    ip=144.126.10.81
+engsta23.loyola.edu:       tc=columbianet.dummy: ha=0000c0f2fb49:    ip=144.126.10.82
+engsta24.loyola.edu:       tc=columbianet.dummy: ha=0000c0fc2385:    ip=144.126.10.83
+engsta25.loyola.edu:       tc=columbianet.dummy: ha=0000c054f749:    ip=144.126.10.84
+engsta11.loyola.edu:       tc=columbianet.dummy: ha=0000c0902585:    ip=144.126.10.85
+engsta12.loyola.edu:       tc=columbianet.dummy: ha=0000c01b0b85:    ip=144.126.10.86
+engsta13.loyola.edu:       tc=columbianet.dummy: ha=0000c0290785:    ip=144.126.10.87
+engsta14.loyola.edu:       tc=columbianet.dummy: ha=0000c0fafb49:    ip=144.126.10.88
+engsta15.loyola.edu:       tc=columbianet.dummy: ha=0000c0731a85:    ip=144.126.10.89
+avcart1.loyola.edu:        tc=columbianet.dummy: ha=00a0243743d9:    ip=144.126.10.50
+gradasstloyola.edu:        tc=columbianet.dummy: ha=02070113cddc:    ip=144.126.10.104
+
+#                                                            
+#   ----------- Hunt Valley Center Zone --------------------------------------------
+#
+#
+hvsta11.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db361:    ip=144.126.9.11
+hvsta12.loyola.edu:        tc=hvnet.dummy:       ha=0020afa12745:    ip=144.126.9.12
+hvsta13.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db346:    ip=144.126.9.13
+hvsta14.loyola.edu:        tc=hvnet.dummy:       ha=0020afa3d53e:    ip=144.126.9.14
+hvsta15.loyola.edu:        tc=hvnet.dummy:       ha=0020afa126a7:    ip=144.126.9.15
+hvsta21.loyola.edu:        tc=hvnet.dummy:       ha=0020afa12265:    ip=144.126.9.21
+hvsta22.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db2ff:    ip=144.126.9.22
+hvsta23.loyola.edu:        tc=hvnet.dummy:       ha=0020afa3f447:    ip=144.126.9.23
+hvsta24.loyola.edu:        tc=hvnet.dummy:       ha=0020afa12733:    ip=144.126.9.24
+hvsta25.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db36e:    ip=144.126.9.25
+hvsta31.loyola.edu:        tc=hvnet.dummy:       ha=0020afa3f1d3:    ip=144.126.9.31
+hvsta32.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db360:    ip=144.126.9.32
+hvsta33.loyola.edu:        tc=hvnet.dummy:       ha=0020afa12136:    ip=144.126.9.33
+hvsta34.loyola.edu:        tc=hvnet.dummy:       ha=0020afa126a1:    ip=144.126.9.34
+hvsta35.loyola.edu:        tc=hvnet.dummy:       ha=0020af9db34e:    ip=144.126.9.35
+hvcsalisbu.loyola.edu:     tc=hvnet.dummy:       ha=0020af1dfca6:    ip=144.126.9.61
+bmiller.loyola.edu:        tc=hvnet.dummy:       ha=02070113c971:    ip=144.126.9.62
+#
+#
+#                       *****Engineering Lab*****
+#
+engsta11.loyola.edu:       tc=hvnet.dummy:       ha=00608c56f393:    ip=144.126.9.70
+engsta12.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b1576:    ip=144.126.9.71
+engsta13.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b1085:    ip=144.126.9.72
+engsta14.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b1078:    ip=144.126.9.73
+engsta15.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b15da:    ip=144.126.9.74
+engsta21.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b1566:    ip=144.126.9.75
+engsta22.loyola.edu:       tc=hvnet.dummy:       ha=0020af18a0c9:    ip=144.126.9.76
+engsta23.loyola.edu:       tc=hvnet.dummy:       ha=0020af3afd95:    ip=144.126.9.77
+engsta24.loyola.edu:       tc=hvnet.dummy:       ha=0020af189db3:    ip=144.126.9.78
+engsta25.loyola.edu:       tc=hvnet.dummy:       ha=0020af3b1015:    ip=144.126.9.79   
+#
+#
+#                       ****Guilford Towers****
+#
+# Guilford Towers 144.126.185.x
+# The first 25 ip addresses are reserved for I.S use 
+# User addresses will start at 144.126.185.26
+#
+tquinn.loyola.edu:         tc=guilfordnet.dummy:     ha=00a0240ac56a:     ip=144.126.185.26
+dschmitz.loyola.edu:       tc=guilfordnet.dummy:     ha=0020afda89f1:     ip=144.126.185.27
+#
+#
+#       Business Office/Payroll in Guilford Towers
+#
+jrzepiennik.loyola.edu:    tc=guilfordnet.dummy:     ha=00a024816cd0:     ip=144.126.185.28
+jlioi.loyola.edu:	   tc=guilfordnet.dummy:     ha=00a02481708a:     ip=144.126.185.29
+mwallace.loyola.edu:       tc=guilfordnet.dummy:     ha=00a024816cb2:     ip=144.126.185.30
+vbonkowski.loyola.edu:     tc=guilfordnet.dummy:     ha=00a02481705c:     ip=144.126.185.31
+abusch.loyola.edu:         tc=guilfordnet.dummy:     ha=0020afa21d9a:     ip=144.126.185.42
+fmyers.loyola.edu:         tc=guilfordnet.dummy:     ha=0020afa21c52:     ip=144.126.185.43
+#
+#       Human Resources Office 
+#
+lclark.loyola.edu:         tc=guilfordnet.dummy:    ha=02608cd9605d:     ip=144.126.185.32
+mgrace.loyola.edu:         tc=guilfordnet.dummy:    ha=02608cda0cea:     ip=144.126.185.33
+kkeelty.loyola.edu:        tc=guilfordnet.dummy:    ha=00a0240d9333:     ip=144.126.185.34
+nrizzi.loyola.edu:         tc=guilfordnet.dummy:    ha=00a0240d939a:     ip=144.126.185.35
+bfarwell.loyola.edu:       tc=guilfordnet.dummy:    ha=00a0240d938d:     ip=144.126.185.36
+fschmidt.loyola.edu:       tc=guilfordnet.dummy:    ha=00a0240d9327:     ip=144.126.185.37
+palfone.loyola.edu:        tc=guilfordnet.dummy:    ha=00a0240d9365:     ip=144.126.185.38
+kdonofrio.loyola.edu:      tc=guilfordnet.dummy:    ha=0020af730cf8:     ip=144.126.185.39
+dja.loyola.edu:            tc=guilfordnet.dummy:    ha=02608cd98839:     ip=144.126.185.40
+lsbens.loyola.edu:         tc=guilfordnet.dummy:    ha=0000d800fa97:     ip=144.126.185.41
+#
+pernt.loyola.edu:          tc=guilfordnet.dummy:    ha=00a024aa39ab:     ip=144.126.185.44 
+#
+#
+#
+#
+#
+#
+#    ************************** Student Life
+kkaras.loyola.edu:            tc=guilfordnet.dummy:    ha=000094774ba9:     ip=144.126.185.44
+jteachen.loyola.edu:         tc=guilfordnet.dummy:    ha=0000944584c4:     ip=144.126.185.45
+#
+#
+#	*****	END OF ALL CURRENT INFORMATION	*****
+
+
+# WebAdditions
+
+# Addition!
+# Addition!
+# Addition!
+# Addition!
+# Addition!

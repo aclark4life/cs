@@ -1,0 +1,129 @@
+%!PS-Adobe-
+%%Creator: aclark
+%%CreationDate: Thu Aug 27 23:23:25 1998
+%%DocumentFonts: (atend)
+%%Pages: (atend)
+%%EndComments
+/showuline {
+	/CurPointSize exch def
+	dup stringwidth pop
+	gsave
+	currentfont /FontInfo get dup
+	/UnderlinePosition get CurPointSize mul 1000 div 0 exch rmoveto exch 0 rlineto
+	/UnderlineThickness get CurPointSize mul 1000 div setlinewidth stroke
+	grestore
+	show
+} def
+/mv {moveto} def
+%%EndProlog
+%%Page: ? 1
+/pg save def
+1.00000 0.99083 scale
+/Courier findfont 12 scalefont setfont
+0 0 translate
+18 769 mv (/* m.c - Find the inverse of an m x n matrix.)show
+18 757 mv (   Alex Clark - August 1998 */)show
+18 721 mv (#include <stdio.h>)show
+18 709 mv (#include <string.h>)show
+18 685 mv (int **A,**ID,**ANS,n;)show
+18 673 mv (int **get_mem\(int **A\);)show
+18 661 mv (int **get_mem2\(int **A\);)show
+18 649 mv (void get_matrx\(\);)show
+18 637 mv (void setup_ident\(\);)show
+18 625 mv (void gauss_jord\(\);)show
+18 601 mv (void main\(int argc\) {)show
+18 589 mv (        if \(argc!=1\) { exit\(-1\); })show
+18 577 mv (        else {)show
+18 565 mv (                get_matrx\(\);)show
+18 553 mv (                setup_ident\(\);)show
+18 541 mv (                gauss_jord\(\);)show
+18 529 mv (        })show
+18 517 mv (})show
+18 493 mv (void gauss_jord\(\))show
+18 481 mv ({)show
+18 469 mv (        int i,j,k; )show
+18 457 mv (        ANS=get_mem2\(ANS\);)show
+18 445 mv (        for\(i=1;i<=n;i++\))show
+18 433 mv (        {)show
+18 421 mv (                for \(j=1; j<=\(n*2\);j++\))show
+18 409 mv (                {)show
+18 397 mv (                        if \(j <= n\))show
+18 385 mv (                        {)show
+18 373 mv (                                ANS[i][j] = A[i][j];)show
+18 361 mv (                                printf \("%d ",ANS[i][j]\);)show
+18 349 mv (                        })show
+18 337 mv (                        else )show
+18 325 mv (                        {)show
+18 313 mv (                                if \(\(i+4\)==j\))show
+18 301 mv (                                {       )show
+18 289 mv (                                        ANS[i][j]=1;)show
+18 277 mv (                                } )show
+18 265 mv (                                else ANS[i][j]=0;)show
+18 241 mv (                                printf \("%d ",ANS[i][j]\);)show
+18 229 mv (                                //printf \("[%d %d]",i,j\);)show
+18 217 mv (                        })show
+18 205 mv (                })show
+18 193 mv (                printf\("\\n"\);)show
+18 181 mv (        })show
+18 157 mv (})show
+18 145 mv (void setup_ident\(\))show
+18 133 mv ({)show
+18 121 mv (        int i,j;)show
+18 109 mv (        ID=get_mem\(ID\);)show
+18 97 mv (        for\(i=1;i<=n;i++\))show
+18 85 mv (        {)show
+18 73 mv (                for \(j=1; j<= n; j++\))show
+18 61 mv (                {)show
+18 49 mv (                        ID[i][j]=0;)show
+18 37 mv (                        if \(i == j \) ID[i][j] = 1 ; )show
+18 25 mv (                        printf \("%d ",ID[i][j]\);)show
+showpage pg restore
+%%Page: ? 2
+/pg save def
+1.00000 0.99083 scale
+/Courier findfont 12 scalefont setfont
+0 0 translate
+18 769 mv (                } printf \("\\n"\);)show
+18 757 mv (        })show
+18 745 mv (})show
+18 733 mv (void get_matrx\(\))show
+18 721 mv ({)show
+18 709 mv (        int i,j ; )show
+18 697 mv (        char *line = \(char *\)malloc\(1024*sizeof\(char\)\);)show
+18 685 mv (        char *tok; )show
+18 661 mv (        scanf\("%d\\n",&n\);printf\("%d\\n",n\);)show
+18 649 mv (        A=get_mem\(A\);)show
+18 637 mv (        for\(i=1;i<=n;i++\))show
+18 625 mv (        {)show
+18 613 mv (                fgets \(line , 1024 , stdin \) ;)show
+18 601 mv (                tok=strtok\(line, " "\);)show
+18 589 mv (                for \(j=1; tok !=NULL; j++\))show
+18 577 mv (                {)show
+18 565 mv (                        A[i][j]=atoi\(tok\);)show
+18 553 mv (                        printf \("%d ",atoi\(tok\)\);)show
+18 541 mv (                        tok=strtok \(NULL, " "\);)show
+18 529 mv (                } printf \("\\n"\);)show
+18 517 mv (        })show
+18 505 mv (})show
+18 493 mv (int **get_mem\(int **arg\))show
+18 481 mv ({)show
+18 469 mv (        int i;)show
+18 457 mv (        arg = \(int **\)malloc\(\(n+1\)*sizeof\(int *\)\); )show
+18 445 mv (        for \(i = 1;i<=\(n+1\);i++\))show
+18 433 mv (        { arg[i]= \(int *\) malloc \(\(n+1\)*sizeof\(int\)\); })show
+18 421 mv (        return\(arg\);)show
+18 409 mv (})show
+18 397 mv (int **get_mem2\(int **arg\))show
+18 385 mv ({)show
+18 373 mv (        int i;)show
+18 361 mv (        arg=\(int **\)malloc\(\(n+1\)*sizeof\(int *\)\); )show
+18 349 mv (        for \(i = 1;i<=\(n+1\);i++\))show
+18 337 mv (        { )show
+18 325 mv (                arg[i]= \(int *\) malloc \(\(\(n+1\)*2\)*sizeof\(int\)\); )show
+18 313 mv (        })show
+18 301 mv (        return\(arg\);)show
+18 289 mv (})show
+showpage pg restore
+%%Trailer
+%%DocumentFonts: Courier
+%%Pages: 2

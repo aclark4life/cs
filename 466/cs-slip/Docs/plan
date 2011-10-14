@@ -1,0 +1,13 @@
+Alex Clark					February 10, 1997
+
+PROJECT PLAN:
+
+I would like to pursue the implementation of the 'slip' protocol.
+My plans include the following:
+	1. Talk to students who have worked on this project.
+	2. Analyze existing 'slip' software.
+	3. Ask John Mulvey (in information services) to provide some 
+		IP addresses that I can assign to slip clients.
+	4. Decide which machine(s) that 'slip' will be implemented on.
+
+	

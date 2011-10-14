@@ -1,0 +1,48 @@
+what is the input ? 
+how does it get input ? 
+redirected to std in
+exact format of the data
+first line contains an integer containing the number of points,
+points are a pair of floats
+then come the points
+write a program that reads in the number o points alloc space 
+data
+management
+what it is 
+int n
+distances between points
+p 	n points 	dist
+2 points per dist * n^2 
+array elements 1-n
+2 arrays for x and y
+we're discussing.
+tss i love that stuff
+precalc e the distaance s between the points 
+how to do that 
+how to store that
+3 element array 
+n 	n 	dist
+n	x	dist	
+n	f	dist
+after you precalculate the distances, forget the points 
+so now i have the distances and i am happy 
+after we precalc all the distances 
+n=5
+ask the system for 
+an array of x and y 
+5 thingies
+for (i = 1; i < n; i++)
+{
+	x[i]=x;
+	y[i]=y;
+}
+for (i = 1; i < n; i++)
+{
+	for (j = 1; j < n; j++)
+	{
+		printf("%f",array[i][j];
+	}
+}
+for (i = 1 ; i < n; i ++)
+i know that i have an array x[1-n] y[1-n]
+dist formula

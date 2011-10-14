@@ -1,0 +1,74 @@
+From binkley@cs.loyola.edu Fri Nov  1 14:06:11 1996
+Return-Path: <binkley@cs.loyola.edu>
+Received: from cs.loyola.edu by csmaster.loyola.edu (SMI-8.6/SMI-SVR4)
+	id OAA28927; Fri, 1 Nov 1996 14:06:11 -0500
+Received: by cs.loyola.edu (5.57/Ultrix3.0-C)
+	id AA29856; Fri, 1 Nov 96 14:05:26 -0500
+From: binkley@cs.loyola.edu (Dave Binkley)
+Message-Id: <9611011905.AA29856@cs.loyola.edu>
+Subject: no subject (file transmission)
+To: binkley@cs.loyola.edu (Dave Binkley),
+        aclark@cs.loyola.edu (J. Alexander Clark),
+        ddobisch@cs.loyola.edu (Dawn Dobisch),
+        bduncan@cs.loyola.edu (Cousin Brucie),
+        rhaber@cs.loyola.edu (Ryan Haber),
+        ghall@cs.loyola.edu (Curious George),
+        rhemling@cs.loyola.edu (Roland Hemling),
+        bjubb@cs.loyola.edu (Brennan Jubb),
+        kmcguire@cs.loyola.edu (Kelly McGuire),
+        jmeehan@cs.loyola.edu (Janine Meehan),
+        kmetzler@cs.loyola.edu (Kirsten Metzler),
+        colive@cs.loyola.edu (Christopher Olive),
+        nrusso@cs.loyola.edu (Nick Russo),
+        awielgos@cs.loyola.edu (April Wielgosz), bwu@cs.loyola.edu (Bin Wu)
+Date: Fri, 1 Nov 1996 14:05:26 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1398
+Status: OR
+
+% Where does the zebra live?
+% Puzzle solution written by Claude Sammut.
+main :-
+	houses(Houses),
+	member(house(red, english, _, _, _), Houses),
+	member(house(_, spanish, dog, _, _), Houses),
+	member(house(green, _, _, coffee, _), Houses),
+	member(house(_, ukrainian, _, tea, _), Houses),
+	right_of(house(green,_,_,_,_), house(ivory,_,_,_,_), Houses),
+	member(house(_, _, snails, _, winstons), Houses),
+	member(house(yellow, _, _, _, kools), Houses),
+	Houses = [_, _, house(_, _, _, milk, _), _,_],
+	Houses = [house(_, norwegian, _, _, _)|_],
+	next_to(house(_,_,_,_,chesterfields), house(_,_,fox,_,_), Houses),
+	next_to(house(_,_,_,_,kools), house(_,_,horse,_,_), Houses),
+	member(house(_, _, _, orange_juice, lucky_strikes), Houses),
+	member(house(_, japanese, _, _, parliaments), Houses),
+	next_to(house(_,norwegian,_,_,_), house(blue,_,_,_,_), Houses),
+	member(house(_, _, zebra, _, _), Houses),
+	member(house(_, _, _, water, _), Houses),
+	print_houses(Houses).
+
+houses([
+	house(_, _, _, _, _),
+	house(_, _, _, _, _),
+	house(_, _, _, _, _),
+	house(_, _, _, _, _),
+	house(_, _, _, _, _)
+]).
+
+right_of(A, B, [B, A | _]).
+right_of(A, B, [_ | Y]) :- right_of(A, B, Y).
+
+next_to(A, B, [A, B | _]).
+next_to(A, B, [B, A | _]).
+next_to(A, B, [_ | Y]) :- next_to(A, B, Y).
+
+member(X, [X|_]).
+member(X, [_|Y]) :- member(X, Y).
+
+print_houses([A|B]) :- !,
+	write(A), nl,
+	print_houses(B).
+print_houses([]).
+

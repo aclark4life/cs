@@ -1,0 +1,276 @@
+% slip.latex - Alex % 
+%    %W% 
+%    Last Changed: %G%
+%
+\documentclass[12pt]{article}
+\usepackage{graphics}
+ 
+%\sidemargin -0.5in
+%\evensidemargin -0.5in
+%\textwidth 7.5in
+%\textheight 8.5in
+  
+\begin{document}
+\title{{\bf SLIP} \\ Implementation}
+\vspace{2in}
+\author{\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\Alex Clark }
+\maketitle
+\thispagestyle{empty}
+%\setcounter{page}{0}
+\newpage
+\thispagestyle{empty}
+
+%%%%%%%%%%%%%%% Introduction %%%%%%%%%%%%%%% 
+\section{Introduction}
+
+Welcome to the saga of SLIP Implemention at Loyola College in Maryland.
+This is the story of my attempt to implement a working SLIP server in the computer
+science department. This server will theoretically be for use by members
+of the department, including students and faculty, to become "hotwired to the net".
+
+
+First, a very general definition of SLIP and it's function. SLIP stands for
+serial line internet protocol. In order to understand this it is important to know
+that internet protocol or IP, is the way in which machines identify themselves on the 
+internet. For example Loyola's Vax, a computer which handles email for many members of
+the campus community (among many other important tasks), is known to the internet as loyola.edu.
+But it is also known as 144.126.1.1. This number can be thought of as a synonym for the
+name loyola.edu. In fact, when computers talk to each other, they must resolve every 
+name, such as loyola.edu, with a number, like 144.126.1.1. Computers on the internet
+are physically unable to talk to one another without IP.
+ 
+
+With the internet comes the ability to run applications like ftp, telnet, and Netscape.
+Wouldn't it be exciting if a computer on the internet could lend it's IP address 
+(or others IP addresses) to another machine not on the internet, so that that machine 
+could also run such applications? Well, this is possible via the SLIP protocol.
+
+%%%%%%%%%%%%%%% What I Did %%%%%%%%%%%%%%% 
+\section{What I Did}
+\begin{enumerate}
+\item {\bf Decide Which Computers To Use: Binkley's Computer vs. My Computer.} 
+
+These were the two machines that were available to me. I figured
+that the project had to eventually work with Binkley's computer (since it is owned
+by the department) but that I could also use my computer.
+My computer had several advantages (like a bigger hard drive and a CDROM) and I liked
+the idea of equipping it with an ethernet card. Binkley's computer
+is a 486 with a 100M hard drive and no CDROM. My computer is a 486 with a 2.5G hard drive
+and a CDROM. At the beginning of the project, my computer had the latest slackware 
+distribution of Linux along with Windows95. Binkley's computer was strictly a DOS machine.
+Neither computer had a functioning ethernet card. I only 
+really needed one of the computers to work but I wanted to try to 
+get both working, in case one absolutely refused to work. Also, if i did get both working, 
+I could use one computer to call the other to test what I had done.
+
+\item {\bf Ethernet Cards for everyone!} 
+
+Now that I knew what I had to do the first step was to get working ethernet cards in 
+either or both of the PC's. I utilized my employment with the Loyola College Information
+Services Department to facilitate this. I was able to attain two ethernet cards (permanently,
+with their permission) to use for this project. The cards I used were 3COM 3C503's. These
+are nice, slightly older cards that were relatively easy to configure. 
+
+	\begin {description} 
+	\item {\bf Bink's PC:} 
+
+	I equipped Binkley's PC with a 3C503 and loaded some DOS drivers
+	on it. I was able to establish that the card was working (in DOS) by connecting to 
+	Loyola's Novell network.
+
+	\item {\bf My PC:} 
+
+	I decided to see if I could get a 3C503 to work under Windows95 on my 
+	computer. Eventually I succeeded (Windows95 had all the drivers and found the card
+	successfully) and was able to run telnet, ftp, and Netscape to test it.
+	\end {description}
+
+\item {\bf Linux for everyone!} 
+
+Since this was the operating system that was actually 
+going to run the SLIP server, I figured that the next step was to get Linux up and 
+running on one or both of the PC's. My PC already had slackware, but it was not
+configured to support the card. Binkley's PC didn't have Linux.
+
+	\begin {description} 
+	\item {\bf Bink's PC:} 
+	Getting Linux on Binkley's PC was a fiasco. It didn't have a CDROM
+	plus there was only 100M available to support the operating system. I decided to go
+	with Red Hat 4.1 since I had heard alot of good things about it, and it was a new 
+	distribution. After many failed attempts with different methods, including installation 
+	via ftp,
+	I was able to use the CDROM out of my machine to successfully install Linux (I removed it
+	from my PC and put it in Binkley's). Red Hat made it easy to provide kernel support for
+	the ethernet card but it was still challenging to get the network to be recognized. A 
+	nice feature of Red Hat Linux is the 'control-panel' which runs under X, and allows for 
+	networking to 
+	be easily configured. Unfortunately, I did not install X due to space limitations, so 
+	I was unable to run the control-panel. After some assistance from other students (Mike Stone and
+	Matthew Brannigan), I was able to figure out which files needed to be editted. I file 
+	called /etc/sysconfig/network-scripts/ifcfg-eth0 was crucial in getting the network
+	to be recognized.
+
+	\item {\bf My PC:} This was another fiasco (of course). I tried to install Red Hat 4.1 
+	on the existing partitions I had created for slackware, but Red Hat's installation
+	program crashed and left me high and dry. For some reason it was unable to format those
+	partitions. I decided to make a clean break by using a utility that came with 
+	my hard drive to create new partitions. (I had to use this utility due to the bios's
+	inablility to recognize more than 540M of disk space.)
+	I knew that I would lose all data on the disk and
+	this was not a problem for me. I made 5 DOS partitions and then used Red Hat's fdisk
+	to turn them all into Linux partitions. When I was done I had 4 Linux Native partitions and
+	one Linux Swap partition. I installed the entire Red Hat distribution with no problem.
+	Then I used the control-panel to configure the networking.
+
+	\end{description}
+
+\item {\bf Working Modems for everyone!} 
+
+Now that both machines were on the network, it
+was time to get the modems working. Modem configuration on both machines was uneventful.
+
+	\begin{description}
+
+	\item {\bf Bink's PC:} This computer was equipped with a state of the art, 2400 baud
+	external modem. Once I discovered that the modem was /dev/cua1 I was able to test it 
+	with a program called Minicom.
+
+
+	\item {\bf My PC:} My computer has a 9600 baud internal fax modem, also located on /dev/cua1.
+	I used Minicom again to test it.
+
+	\end{description}
+
+\item {\bf Location} 
+
+Now that the machines were both 'fully functional', they were ready 
+to be placed in strategic locations inside Knott Hall and Donnelly Science. Since my computer
+was the first one on the net I decided to make it cs-slip. I put it in the computer
+science department, in Donnelly Science Room 209 where I was able to attach it to the 
+ethernet and and analog phone line, with the phone number 617-5117. Binkley's PC was placed
+in the 'Schech Shack', where I work. This room is located on the first floor of 
+Knott Hall. Fortunately it also has ethernet and an analog phone line. I figured I could
+use it to dial cs-slip and establish a SLIP connecton. This way I could prove that I had 
+actually done something.
+
+\item {\bf Success}  
+
+With a lot of help (from Bruce Duncan and Matt Brannigan) and little a luck, I was able to 
+get something working. This project,
+for the most part, came together exactly as I foresaw it. Most of the work done involved
+creating the right conditions for implementing and testing a SLIP connection. After all, 
+once I had done all of the preliminary work, as mentioned above, I was able to log into both
+machines from the lab. This meant being able to do everything for the remainder of the 
+project from one location (with a few exceptions involving quirky 2400 baud modems that won't
+reset themselves).
+
+	\begin {description}
+
+	\item {\bf Which flavor of protocol}
+
+	Although this document is entitled SLIP implementation, I eventually ended up using the
+	PPP or point to point protocol. This came about for several reasons. I went to 
+\begin{verbatim}
+	http://sunsite.unc.edu/linux/HOWTO/HOWTO-INDEX.html 
+\end{verbatim}
+	and browsed through the HOW-TO's.
+	Eventually, PPP presented itself as the most feasible protocol. Luckily the software that
+	I used, ppp-2.2.0d, was already present on both systems. The point to point protocol functions
+	similarly to SLIP.
+
+	\item {\bf Mgetty}
+
+	The first important piece of software I needed was called mgetty. This is the software
+	that answers the phone when someone calls. It is configured by placing an entry in the 
+	/etc/inittab. I learned that I needed this software from a PPP-HOWTO located at:
+\begin{verbatim}
+	http://sunsite.unc.edu/linux/HOWTO/PPP-HOWTO.html.
+\end{verbatim}
+
+	\item {\bf Binkley's PC calls cs-slip}
+
+	Eventually, I was able to properly configure the ppp daemon and establish a 
+	client-server connetion between Binkley's PC, which was in the Schech Shack
+	and cs-slip (my PC) which was in the computer science department.
+
+	The ppp daemon required an entry in /etc/ppp/options which looked like this.
+\begin{verbatim}
+	 # /etc/ppp/options (NO PAP/CHAP)
+         # 
+	 # Prevent pppd from forking into the background
+	 -detach
+	 #
+	 # use the modem control lines
+	 modem
+	 # use uucp style locks to ensure exclusive access to the serial device
+	 lock
+	 # use hardware flow control
+	 crtscts
+	 # create a default route for this connection in the routing table
+	 defaultroute
+	 # do NOT set up any "escaped" control sequences
+	 asyncmap 0
+	 # use a maximum transmission packet size of 552 bytes
+	 mtu 552
+	 # use a maximum receive packet size of 552 bytes
+	 mru 552
+	 #
+\end{verbatim}
+	Also, I made an alias to start the server and the client which
+	looked like this:
+\begin{enumerate}
+\begin{verbatim}
+	alias ppp 'exec /usr/sbin/pppd -d -detach /dev/ttyS1 2400'
+\end{verbatim}
+\end{enumerate}
+	\end {description}
+
+\end {enumerate}
+
+%%%%%%%%%%%%%%% Instructions %%%%%%%%%%%%%%% 
+\section{Instructions}
+
+In order to establish a PPP connection in the Computer Science Department at Loyola
+College, follow these steps:
+\begin{enumerate}
+	
+\item For now, you must have Linux with kernel 2.0 or higher, Minicom, ppp-2.2.0d, and
+a modem.
+\item Configure Minicom to use your modem. Then, dial 617-5117.
+\item Log in to cs-slip (you must have an account).
+\item Run the command to execute ppp.
+\begin{enumerate}
+\begin{verbatim}
+	exec /usr/sbin/pppd -d -detach /dev/ttyS1 2400.
+\end{verbatim}
+\end{enumerate}
+
+\item Exit Minicom with CTRL A, Q.
+\item Start the client with the same command: exec /usr/sbin/pppd -d -detach /dev/ttyS1 2400.
+
+\end {enumerate}
+
+PPP should now be running. In order to check, type 'ifconfig'. This should give you proof
+of the connection by showing the device. It will look something like this:
+\begin{enumerate}
+\begin{verbatim}
+	ppp0     Link encap:Point-Point Protocol
+		 inet addr:10.144.153.104  P-t-P:10.144.153.51 Mask:255.255.255.0
+		 UP POINTOPOINT RUNNING  MTU:552  Metric:1
+		 RX packets:0 errors:0 dropped:0 overruns:0
+		 TX packets:0 errors:0 dropped:0 overruns:0
+\end{verbatim}
+\end{enumerate}
+If this does not work, see me or go to 
+\begin{enumerate}
+\begin{verbatim}
+	http://sunsite.unc.edu/linux/HOWTO/PPP-HOWTO.html.
+\end{verbatim}
+\end{enumerate}
+for help.
+Enjoy cs-slip!!!
+
+
+
+
+\end{document}

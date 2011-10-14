@@ -1,0 +1,1591 @@
+From binkley Tue Nov 28 06:57:03 1995
+Subject: div.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 06:56:59 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1876      
+Status: RO
+X-Status: 
+
+; div.asm
+;
+; David Binkley
+; CS 366
+; Assignment 6 (Part 1)
+; 11/23/93
+;
+		include	macros.h
+
+DIV_BY_ZERO_INT	equ	0
+DIV_BY_ZERO_LOC	equ	4*DIV_BY_ZERO_INT
+CR		equ	13
+LF		equ	10
+TTY		equ	10H
+TTY_WRITE	equ	0eH
+DOS		equ	21H
+READ_CHARACTER	equ	01H
+TERMINATE	equ	4cH
+QUIT		equ	'Q'
+N		equ	0ABCH
+MAXINT		equ	7FFFH
+
+
+code	segment	public byte 'code'
+	extrn	printAXhex:near
+	extrn	print_blank:near, crlf:near
+	extrn	get_number:near
+	assume  cs:code
+
+main	proc	near
+	assume	ds:data
+        xor     ax,ax
+        mov     es,ax 				; seg of interrupt vector table
+
+	mov	ax,seg data
+	mov 	ds,ax
+
+        mov     di,DIV_BY_ZERO_LOC		; intercept /0 interrupt
+	mov	ax,cs
+	lea	bx,new_interrupt_handler
+	cli
+	xchg    es:0[di],bx			; offset then segment
+        xchg    es:2[di],ax
+	sti
+	mov     hold_div_by_0_ip,bx
+	mov     hold_div_by_0_cs,ax
+
+
+lp:						; loop until QUIT character
+        mov     ah,READ_CHARACTER
+	int	DOS
+	cmp     al,QUIT
+	je	exit_program
+
+	call	get_number			; get and echo N
+	call	print_blank
+
+	xor	dx,dx				; divide 0:N by bx
+	mov	bx,ax				
+	mov	ax,N
+	idiv	bx
+	call	printAXhex
+	call	crlf
+	jmp	lp
+
+exit_program:
+ 	mov	ax,hold_div_by_0_cs		; restore timer interrupt
+	mov	bx,hold_div_by_0_ip
+	cli						
+	mov     es:0[di], bx
+	mov     es:2[di], ax
+	sti
+
+	exit	0
+main	endp
+
+
+
+;
+; new_interrupt_handler is invoked whenever there is a divide by zero
+; input: nothing
+; output: ax, and dx hold MAXINT
+; destroys: nothing (including flags)
+;
+
+new_interrupt_handler proc	near
+	push	si
+	push	es
+	mov	ax,seg data
+	mov	es,ax
+	lea	si,message
+
+next_char:			; can't use print macro here! Why?
+	lodsb
+	cmp	al,'$'
+	je 	done
+	mov     ah,TTY_WRITE
+	int     TTY
+	jmp	next_char
+
+done:
+	mov	ax,MAXINT
+	mov	dx,MAXINT
+	pop	es
+	pop	si
+	iret
+new_interrupt_handler endp
+
+code	ends
+
+
+data	segment
+message			db	'divide by zero',CR,LF,'$'
+hold_div_by_0_ip	dw	?
+hold_div_by_0_cs	dw	?
+data	ends
+	end	main
+
+From binkley Tue Nov 28 06:58:04 1995
+Subject: dollar.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 06:58:02 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1654      
+Status: RO
+X-Status: 
+
+; dollar.asm
+;
+;
+; David Binkley
+; CS 366
+; Assignment 6 (Part 2)
+; 11/23/93
+;
+		include	macros.h
+TIMER_INT	equ	1cH
+TIMER_INT_LOC	equ	4*TIMER_INT
+TAU		equ	36
+TRUE		equ	 1
+FALSE		equ	 0
+TTY		equ	10H
+TTY_WRITE	equ	0eH
+DOS		equ	21H
+READ_CHARACTER	equ	01H
+TERMINATE	equ	4cH
+QUIT		equ	'Q'
+
+
+code	segment	public byte 'code'
+	assume  cs:code
+main	proc	near
+	mov	ax,cs
+	mov	ds,ax
+	assume	ds:code
+
+        xor     ax,ax
+        mov     es,ax 				; seg of interrupt vector table
+
+	mov     currently_active,TRUE		; disable new timer interrupt
+        mov     di,TIMER_INT_LOC		; intercept timer interrupt
+	mov	ax,cs
+	lea	bx,new_interrupt_handler
+	cli
+	xchg    es:0[di],bx			; offset then segment
+        xchg    es:2[di],ax
+	sti
+	mov     hold_timer_ip,bx
+	mov     hold_timer_cs,ax
+
+	mov     count,TAU
+	mov     currently_active,FALSE
+lp:						; read and echo until QUIT character
+        mov     ah,READ_CHARACTER
+	int	DOS
+	cmp     al,QUIT
+	jne	lp
+
+ 	mov	ax,hold_timer_cs		; restore timer interrupt
+	mov	bx,hold_timer_ip
+	cli						
+	mov     es:0[di], bx
+	mov     es:2[di], ax
+	sti
+
+	exit	0
+main	endp
+
+
+;
+; data smack in the middle of the code segment
+; (so it can be referred to as cs:currently_active, cs:..., etc).
+;
+currently_active	db	?
+count			dw	?
+hold_timer_ip		dw	?
+hold_timer_cs		dw	?
+
+new_interrupt_handler proc	near
+	cmp	cs:currently_active,TRUE	; don't run two copies
+        je	done				; as the "same" time
+	dec	cs:count
+	jnz	done
+
+	mov     cs:currently_active,TRUE
+	push    ax
+	mov     ah,TTY_WRITE
+	mov	al,'$'
+	int     TTY
+	mov     cs:count,TAU
+	pop	ax
+	mov     cs:currently_active,FALSE
+
+done:
+	iret
+new_interrupt_handler endp
+
+
+code	ends
+	end main
+
+From binkley Tue Nov 28 07:25:41 1995
+Subject: timebomb.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 07:25:39 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 1948      
+Status: RO
+X-Status: 
+
+; Time Bomb
+; a TSR!  (be nice)
+
+	include dos.h
+	include macros.h
+	include screen.h
+
+TIMER_INT       equ     1cH
+TIMER_INT_LOC   equ     4*TIMER_INT
+TAU             equ     16*60
+
+	extrn print_string:near
+	extrn locate:near
+
+code	segment	public byte 'code'
+	assume cs:code, ds:nothing
+;
+; data smack in the of the code segment
+; (so it can be referred to as cs:currently_active, cs:..., etc).
+;
+currently_active	db	?
+count			dw	?
+message			db	'  BOOM!  ', 0
+m2	db 'm2!', 0
+
+
+main	proc	near
+	
+        xor     ax,ax
+        mov     es,ax 				; seg of interrupt vector table
+
+	mov     currently_active,TRUE		; disable new timer interrupt
+        mov     di,TIMER_INT_LOC		; intercept timer interrupt
+	mov	ax,cs
+	lea	bx,new_interrupt_handler
+	cli
+	mov     es:0[di],bx			; offset then segment
+        mov     es:2[di],ax
+	sti
+
+	mov     count,TAU
+	mov     currently_active,FALSE
+
+        mov     ah, 31H
+	mov     al, STATUS_OK
+	mov     dx, 264H   ; 64 paragraphs = 1K   
+	int	DOS_SERVICE
+
+	exit 	STATUS_OK
+main	endp
+
+
+;purpose:  replacement interrupt handler
+;input:    active flag and count in CODE segment 
+;output:   nothing (calls update_vogons every TAU interrupts)
+;destroys: nothing [[ interrupt handlers cannot destroy anything!]]
+new_interrupt_handler proc	near
+	assume	ds:nothing
+
+	cmp	cs:currently_active,TRUE	; don't run two copies
+        je	done				; at the "same" time
+	dec	cs:count
+	jnz	done
+
+	mov     cs:currently_active,TRUE
+	call	print_message
+	mov     cs:count,TAU
+	mov     cs:currently_active,FALSE
+
+done:
+	iret
+new_interrupt_handler endp
+
+
+;purpose: update the vogons
+;input:     vogon array in segment 'data'
+;output:    nothing (vogons are updated across screen)
+;destroys:  nothing
+print_message	proc	near
+	push	si
+	push	ds
+
+	push	cs			; move cs to ds using the stack
+	pop	ds
+ 
+	push	dx
+        mov	dx,0b22H
+	call	locate
+	pop	dx
+
+	lea	si, message
+	call	print_string
+
+	pop	ds
+	pop	si
+	ret
+print_message	endp
+
+code	ends
+	end main
+
+From binkley Tue Nov 28 07:29:31 1995
+Subject: assigement_6_solution
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 07:29:28 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 2749      
+Status: RO
+X-Status: 
+
+; macros to implement a simple vector machine	
+; add macros assume vector_length is >= 1
+; all destroy AX
+
+	include dos.h
+	include macros.h
+
+
+addv	macro	v1, v2, len
+	local   lp
+	push	cx
+	push    si
+	push    di
+
+	lea	di,v1
+	lea	si,v2
+	mov	cx,len
+	cld					; [so load increments]
+lp:
+	lodsw					; v2[i]
+	add	[di],ax				; +v1[i]
+	inc	di				; next word
+	inc	di
+	loop	lp
+
+	pop	di
+	pop	si
+	pop	cx
+	endm
+
+
+subv	macro	v1, v2, len
+	local   lp
+	push	cx
+	push    si
+	push    di
+
+	lea	di,v1
+	lea	si,v2
+	mov	cx,len
+	cld
+lp:
+	lodsw
+	sub	[di],ax
+	inc	di
+	inc	di
+	loop	lp
+
+	pop	di
+	pop	si
+	pop	cx
+	endm
+
+
+multv	macro	v1, v2, len
+	local   lp
+	push	cx
+	push    dx
+	push    si
+	push    di
+
+	lea	di,v1
+	lea	si,v2
+	mov	cx,len
+	cld
+lp:
+	lodsw
+	mul	word ptr [di]
+	stosw	
+	loop	lp
+
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
+	endm
+
+
+zerov	macro	v1, len
+	push	cx
+	push    di
+
+	lea	di,v1
+	mov	cx,len
+	xor	ax,ax
+	cld
+	rep stosw	
+
+	pop	di
+	pop	cx
+	endm
+
+data            segment
+final_msg       db      CR, LF, 'bye', CR, LF, '$'
+a		dw	1,2,3,4,5,6,7,8,9,10
+b		dw	10,9,8,7,6,5,4,3,2,1
+c		dw	1,2,1,2,1,2,1,2,1,2
+d		dw	VECTOR_LENGTH dup(?)
+crlf		db	CR, LF, '$'
+a_is		db	'a =       $'
+b_is		db	'b =       $'
+c_is		db	'c =       $'
+d_is		db	'd =       $'
+d_equals_0_is	db	'd = 0 =   $'
+a_plus_b_is	db	'a = a+b = $'
+b_minus_c_is	db	'b = b-c = $'
+a_times_c_is	db	'a = a*c = $'
+a_times_d_is	db	'a = a*d = $'
+blank		db	' $'
+data            ends
+
+
+stack   segment stack
+	db 256 dup(?)
+stack   ends
+
+VECTOR_LENGTH	equ	10
+
+	extrn printAXdec:near
+code    segment public byte 'code'
+	assume cs:code, ds:data, ss:stack
+main    proc	near
+	mov	ax, seg data
+	mov	ds,ax
+	mov	es,ax
+
+	mov	cx,VECTOR_LENGTH
+
+	print	a_is				; print a
+	lea	si,a
+	call    print_vector
+
+	print	b_is				; print b
+	lea	si,b
+	call    print_vector
+
+	print	c_is				; print c
+	lea	si,c
+	call    print_vector
+
+	print	d_is				; print d
+	lea	si,d
+	call    print_vector
+
+
+	zerov	d, VECTOR_LENGTH		; zero then print d
+	print	d_equals_0_is
+	lea	si,d
+	call    print_vector
+
+	addv	a,b,VECTOR_LENGTH
+	print	a_plus_b_is			; print a + b
+	lea	si,a
+	call    print_vector
+
+	multv	a,c,VECTOR_LENGTH		; (a+b)*c
+	print	a_times_c_is
+	lea	si,a
+	call	print_vector
+
+	subv	b,c, VECTOR_LENGTH		; b-c
+	print	b_minus_c_is
+	lea	si,b
+	call	print_vector
+
+	multv	a,d,VECTOR_LENGTH		; a * d (d=all zeros)
+	print	a_times_d_is
+	lea	si,a
+	call	print_vector
+
+	exit 	STATUS_OK
+main	endp
+
+
+;purpose: to print a vector of unsigned words 
+;input:     [ds:si] points to the start of the vector, cx holds its length
+;output:    nothing (vector is output)
+;destroys:  nothing
+print_vector	proc	near
+	push 	ax
+	push	cx
+	push	si
+
+	cld
+print_loop:
+	lodsw
+	call	printAXdec
+	print	blank
+	loop	print_loop
+
+	print   crlf
+
+	pop	si
+	pop	cx
+	pop	ax
+	ret
+print_vector	endp
+code	ends
+	end
+
+From binkley Tue Nov 28 08:29:39 1995
+Subject: Hand_out-cities.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:29:36 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 3103      
+Status: RO
+X-Status: 
+
+; city.asm
+; cities look like this ('.' is a blank)
+;
+; ....+ 
+; ..*.* 
+; *****
+;
+; dead cities look like this
+; 
+; .....      
+; .....    
+; (:-:)
+
+MAX_CITIES		equ 	 5
+CITY_SPACING		equ	15		; used 12 with 6 cities
+FIRST_CITY_LOCATION	equ   1503H		; 24, 3
+MAX_HITS		equ	 3
+CITY_WIDTH		equ	 5
+SCORE_DRAW_OFFSET	equ   0301H		; below city
+
+	extrn	printAXhex:near
+	include	dos.h
+	include	screen.h
+	include image.h
+
+	public	cities_draw
+	public	cities_hit_check
+	public	cities_initialize
+
+
+; city "struct"
+HIT_COUNT	equ	0		; a word
+LOCATION	equ	2		; a word
+CITY_SIZE	equ	4
+
+data	segment public
+cities	db	MAX_CITIES dup( CITY_SIZE  dup(?))
+city_image	db	0,0,' ',  1,0,' ',  2,0,' ',  3,0,'+', 4,0,' '
+		db	0,1,' ',  1,1,'*',  2,1,' ',  3,1,'*', 4,1,' '
+		db	0,2,'*',  1,2,'*',  2,2,'*',  3,2,'*', 4,2,'*'
+CITY_IMAGE_LENGTH	equ	($ - city_image)/3
+dead_city_image	db	0,0,' ',  1,0,' ',  2,0,' ',  3,0,' ', 4,0,' '
+		db	0,1,' ',  1,1,' ',  2,1,' ',  3,1,' ', 4,1,' '
+		db	0,2,'(',  1,2,':',  2,2,'-',  3,2,':', 4,2,')'
+data	ends
+
+
+code	segment public byte 'code'
+	assume	cs:code, ds:data
+;
+; purpose:  initialize the cities array and print the cities
+; input:    nothing
+; output:   nothing (updates array and screen)
+; destroys: nothing
+;
+cities_initialize	proc	near
+	push	ax
+	push	cx
+	push	dx
+	push	si
+
+	lea	si, cities
+	mov	cx, MAX_CITIES
+	mov	dx, FIRST_CITY_LOCATION
+	xor	ax, ax
+
+init_loop:
+	mov	HIT_COUNT[si], ax
+	mov	LOCATION[si], dx
+	add	dl, CITY_SPACING
+	add	si, CITY_SIZE
+	loop	init_loop
+
+	pop	si
+	pop	dx
+	pop	cx
+	pop	ax
+	ret
+cities_initialize	endp
+
+
+;
+; purpose:  draw the cities
+; input:    nothing
+; output:   nothing (screen is updated)
+; destroys: nothing
+;
+cities_draw	proc	near
+	push	cx
+	push	si
+
+	lea	si, cities
+	mov	cx, MAX_CITIES
+
+draw_loop:
+	call	draw_city
+	add	si, CITY_SIZE
+	loop	draw_loop
+
+	pop	si
+	pop	cx
+	ret
+cities_draw	endp
+
+
+;
+; purpose:  draw a city 
+; input:    si points to the city
+; output:   nothing (screen is updated)
+; destroys: nothing
+;
+draw_city	proc	near
+	push	ax
+	push	cx
+	push	dx
+	push	si
+
+	mov	dx, LOCATION[si]
+	mov	ax, HIT_COUNT[si]
+	cmp	ax, MAX_HITS
+	jle	alive
+	lea	si, dead_city_image
+	jmp	draw_it
+
+alive:
+	lea	si, city_image
+
+draw_it:
+	mov	cx, CITY_IMAGE_LENGTH
+	call	image_draw
+	add	dx, SCORE_DRAW_OFFSET
+	call	screen_locate
+	call	printAXhex
+
+	pop	si
+	pop	dx
+	pop	cx
+	pop	ax
+	ret
+draw_city	endp
+
+
+;
+; purpose:  check to see if a rock has hit any of the cities
+; input:    dx = upper left corner of a rock
+; output:   nothing (cities array and screen are updated)
+; destroys: nothing
+;
+cities_hit_check	proc	near
+	push	cx
+	push	si
+
+	lea	si, cities
+	mov	cx, MAX_CITIES
+
+check_loop:
+	call	city_check_hit
+
+	add	si, CITY_SIZE
+	loop	check_loop
+
+	pop	si
+	pop	cx
+	ret
+cities_hit_check	endp
+
+
+;
+; purpose:  check to see if a rock has hit a city
+; input:    dx = upper left corner of a rock, si points to a city, 
+;           cl = rock image width
+; output:   nothing (city array and screen are updated)
+; destroys: nothing
+;
+city_check_hit	proc	near
+	push	bx
+	push	dx
+
+	...
+
+hit:
+	...
+	call	cities_draw
+	
+no_hit:	
+	pop	dx
+	pop	bx
+	ret
+city_check_hit	endp
+
+code	ends
+	end
+
+From binkley Tue Nov 28 08:29:44 1995
+Subject: Hand_out-rocks.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:29:39 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 5814      
+Status: RO
+X-Status: 
+
+; rocks.asm
+;
+; purpose: play the rocks "game"
+; input:   nothing
+; output:  nothing (screen is updated)
+;
+; 
+;  A rock looks like this
+;
+;     ##
+;    ####
+;     ##
+;
+	include dos.h
+	include	macros.h
+	include screen.h
+	include	random.h
+	include	shield.h
+	include	cities.h
+	include image.h
+
+
+MAX_ROCKS		equ	 5		; on screen at a time
+NEW_ROCK_CHANCE 	equ	10
+TAU			equ	 8 		; fast = 4;  slow = 12
+ROCK_MAX_Y		equ	20		; how far down can a rock fall
+ROCK_MAX_X		equ	SCREEN_WIDTH-5	; how far over can a rock "fall"
+
+PLAYER_1_LEFT	equ	'4'
+PLAYER_1_RIGHT	equ	'6'
+QUIT		equ	'q'
+
+TIMER_INT	equ	1cH
+TIMER_INT_LOCATION equ	4*TIMER_INT
+SEGMENT_PART	equ	2
+OFFSET_PART	equ	0
+
+; A rock record (struct) has 4 fields
+upper_left_corner equ	0		; corner location as a word
+upper_left_x	equ	0		; a byte
+upper_left_y	equ	1		; a byte
+active		equ	2		; a byte
+momentum	equ	3		; a byte
+ROCK_SIZE	equ	4		; number of bytes in a rock struct
+
+ROCK_HEIGHT	equ	3
+ROCK_WIDTH 	equ	4
+
+
+data	segment	public
+rocks		db MAX_ROCKS dup (ROCK_SIZE dup (?))
+rock_image	db 0,0,' ',  1,0,'#',  2,0,'#',  3,0,' '
+       		db 0,1,'#',  1,1,'#',  2,1,'#',  3,1,'#'
+       		db 0,2,' ',  1,2,'#',  2,2,'#',  3,2,' '
+ROCK_IMAGE_LENGTH equ  ($ - rock_image)/3
+blank_rock	db 0,0,' ',  1,0,' ',  2,0,' ',  3,0,' '
+		db 0,1,' ',  1,1,' ',  2,1,' ',  3,1,' '
+       		db 0,2,' ',  1,2,' ',  2,2,' ',  3,2,' '
+hold_timer_ip	dw ?
+hold_timer_cs	dw ?
+data	ends
+
+
+stack	segment stack
+	db	256 dup	(?)
+stack	ends
+
+
+code	segment	public byte 'code'
+	assume  cs:code, ss:stack
+
+; data in the code segment so it can be referenced as 
+; cs:currently_active and cs:count
+
+currently_active	db	?
+count			dw	?
+
+main	proc	near 
+	mov	ax, seg data
+	mov	ds, ax
+	assume	ds:data
+
+	call	cities_initialize
+	call	cities_draw
+
+
+	mov	cx, MAX_ROCKS		; initialize rocks
+	lea	di, rocks
+
+init_loop:
+	mov	byte ptr ACTIVE[di], FALSE
+	add	di, ROCK_SIZE
+	loop	init_loop
+
+
+	xor	ax, ax			; hook into timer interrupt
+	mov	es, ax			; segment of interrupt vector table
+
+	mov	currently_active, TRUE
+	mov	ax, cs			; segment of new interrupt handler
+	mov	bx, offset new_interrupt_handler
+
+	cli				; interrupts off
+	xchg	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
+	xchg	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
+	sti				; interrupts back on
+	
+	mov	hold_timer_ip, bx
+	mov	hold_timer_cs, ax
+
+
+	mov	count, TAU		; set up count down timer
+	mov	currently_active, FALSE
+
+
+main_loop:
+	mov	ah, DOS_READ_CHARACTER
+	int	DOS_SERVICE
+
+	cmp	al, QUIT
+	je	finish
+
+	cmp	al, PLAYER_1_LEFT
+	jne	else2
+	call	shield_p1_left
+	jmp	main_loop
+
+else2:
+	cmp	al, PLAYER_1_RIGHT
+	jne	main_loop
+
+	call	shield_p1_right
+	jmp	main_loop
+
+finish:
+	mov	ax, hold_timer_cs
+	mov	bx, hold_timer_ip
+
+	cli	
+	mov	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
+	mov	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
+	sti
+
+	exit	STATUS_OK
+main	endp
+
+
+;
+; purpose:  handle timer interrupts
+; input:    nothing
+; output:   nothing (rocks and cities are updated)
+; destroys: nothing (hardware interrupt handlers can NOT destroy anything!)
+;
+new_interrupt_handler	proc	near
+	assume	ds:nothing
+	cmp	cs:currently_active, TRUE
+	je	done
+	dec	cs:count
+	jnz	done
+
+	mov	cs:currently_active, TRUE
+	call	update_rocks
+	mov	cs:count, TAU
+	mov	cs:currently_active, FALSE
+
+done:
+	iret
+new_interrupt_handler	endp	
+
+
+;
+; purpose:  update all active rocks
+; input:    nothing
+; output:   nothing (rocks and screen are updated)
+; destroys: nothing
+;
+update_rocks	proc	near
+	push	ax
+	push	ds			; save DOS' data segment
+
+	mov	ax, seg data
+	mov	ds, ax			; move to our data segment
+	assume	ds:data
+
+	call	move_rocks
+	call	new_rock_check
+
+	pop	ds
+	pop	ax
+	ret
+update_rocks	endp
+
+
+;
+; purpose:  check to see if a new rock should be created
+; input:    nothing
+; output:   nothing (rocks array is updated)
+; destroys: nothing
+;
+new_rock_check	proc	near
+	push	ax
+	push	cx
+	push	di
+
+	mov	ax, NEW_ROCK_CHANCE
+	call	random
+	cmp	ax, NEW_ROCK_CHANCE
+	jne	no_new_rock
+
+	mov	cx, MAX_ROCKS		; for cx = MAX_ROCKS to 1
+	lea	di, rocks
+
+	...
+	; find a non-active rock then set it to active with
+	; a random x location on the top of the screen 
+	
+no_new_rock:
+	pop	di
+	pop	cx
+	pop	ax
+	ret
+new_rock_check	endp
+
+
+;
+; purpose:  move the rocks 
+; input:    nothing
+; output:   nothing (rocks array and screen are updated)
+; destroys: nothing
+;
+move_rocks	proc	near
+	push	ax
+	push	cx
+	push	dx
+	push	si
+	push	di
+
+	mov	cx, MAX_ROCKS		; for cx = MAX_ROCKS to 1
+	lea	di, rocks
+
+move_rock_loop:
+	cmp	byte ptr active[di], TRUE
+	jne	next
+
+	push	cx
+	lea	si, blank_rock
+	mov	dx, upper_left_corner[di]
+	mov	cx, ROCK_IMAGE_LENGTH
+	call	image_draw
+	pop	cx
+
+	call 	move_a_rock
+	cmp	byte ptr upper_left_x[di], ROCK_MAX_X
+	jge	remove_rock
+
+	cmp	byte ptr upper_left_y[di], ROCK_MAX_Y
+	jl	keep_rock
+
+	mov	dx, upper_left_corner[di]
+	push	cx			; save around call
+	mov	cl, ROCK_WIDTH
+	call	cities_hit_check
+	pop	cx
+	jmp	remove_rock
+
+keep_rock:
+	push	cx
+	lea	si, rock_image		; else draw the rock
+	mov	dx, upper_left_corner[di]
+	mov	cx, ROCK_IMAGE_LENGTH
+	call	image_draw
+	pop	cx
+	jmp	next
+
+remove_rock:
+	mov	byte ptr active[di], FALSE
+
+next:
+	add	di, ROCK_SIZE
+	loop	move_rock_loop
+
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
+	pop	ax
+	ret
+move_rocks	endp
+
+;
+; purpose:  move a rock!
+; input:    di points to the rock
+; output:   nothing (rock and screen are updated)
+; destroys: nothing
+;
+move_a_rock	proc	near
+	push	cx
+	push	dx
+
+	mov 	dx, upper_left_corner[di]
+	add	dh, ROCK_HEIGHT-1		; dx = lower left corner
+	mov	cl, ROCK_WIDTH
+	call	shield_p1_hit
+	mov	dh, upper_left_y[di]		; dx = upper left corner
+	jne	keep_going
+
+	mov	byte ptr momentum[di], -3	; else bounce
+
+keep_going:
+	cmp	byte ptr momentum[di], 0
+	jg	going_down
+
+	dec	dh				; move up
+	inc	byte ptr momentum[di]
+	jnz	store
+	mov	byte ptr momentum[di], 1
+	jmp	store
+
+going_down:
+	inc	dh
+
+store:
+	inc	dl
+	mov	upper_left_corner[di], dx
+	
+	pop	dx
+	pop	cx
+	ret
+move_a_rock	endp
+code	ends
+	end	main
+
+From binkley Tue Nov 28 08:29:48 1995
+Subject: Hand_out-shield.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:29:43 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 2123      
+Status: RO
+X-Status: 
+
+; shield.asm
+
+SHIELD_WIDTH 		  equ	5
+INITIAL_SHIELD_1_LOCATION equ	1401H		; 20, 1
+
+	public	shield_p1_left
+	public	shield_p1_right
+	public	shield_p1_hit
+
+	include	screen.h
+
+data			segment	public
+p1_shield_location	dw	INITIAL_SHIELD_1_LOCATION
+shield_string		db	SHIELD_WIDTH dup ('_')
+blank_shield_string	db	SHIELD_WIDTH dup (' ')
+data			ends
+
+
+code	segment	public byte 'code'
+	assume cs:code, ds:data
+
+;
+; purpose:  check if a rock hit a shield
+; input:    dx = lower left corner of rock, cl = rock width
+; output:   zr flag set if hit, clear otherwise.  
+; destroys: nothing
+;
+shield_p1_hit	proc	near
+	push	ax
+	push	dx
+	push	si
+
+	...
+
+
+hit:
+	...
+
+	test	al, 0				; hit!  set ZF = 1
+	
+no_hit:						; for jumps, ZF = 0 
+	pop	si
+	pop	dx
+	pop	ax
+	ret
+shield_p1_hit	endp
+
+
+;
+; purpose:  move player one's shield to the left
+; input:    nothing
+; output:   nothing (player 1's shield location is updated and is screen) 
+; destroys: nothing
+;
+shield_p1_left	proc	near
+	push	dx
+	push	si
+
+	mov	dx, p1_shield_location
+	cmp	dl, 0
+	jle	cant_move_left
+
+	lea	si, blank_shield_string
+	call	draw_shield
+
+	sub	dl, 1				; the actual move!
+	mov	p1_shield_location, dx
+	lea	si, shield_string
+	call	draw_shield
+
+cant_move_left:
+	pop	si
+	pop	dx
+	ret
+shield_p1_left	endp
+
+
+;
+; purpose:  move player one's shield to the right
+; input:    nothing
+; output:   nothing (player 1's shield location is updated and is screen) 
+; destroys: nothing
+;
+shield_p1_right	proc	near
+	push	dx
+	push	si
+
+	mov	dx, p1_shield_location
+	cmp	dl, SCREEN_WIDTH-SHIELD_WIDTH-1
+	jge	cant_move_right
+
+	lea	si, blank_shield_string
+	call	draw_shield
+
+	inc	dl
+	mov	p1_shield_location, dx
+
+	lea	si, shield_string
+	call	draw_shield
+
+cant_move_right:
+	pop	si
+	pop	dx
+	ret
+shield_p1_right	endp
+
+
+;
+; purpose:  draw a shield :)
+; input:    dx holds location, si points to the string to print
+; output:   nothing (screen is updated)
+; destroys: nothing
+;
+draw_shield	proc	near
+	push	ax
+	push	cx
+	push	dx
+
+	cld
+	mov	cx, SHIELD_WIDTH
+draw_loop:
+	call	screen_locate
+	lodsb
+	call	screen_write_char
+	inc	dl
+	loop	draw_loop
+
+	pop	dx
+	pop	cx
+	pop	ax
+	ret
+draw_shield	endp
+
+code	ends
+	end
+
+From binkley Tue Nov 28 08:29:52 1995
+Subject: cities.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:29:48 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 94        
+Status: RO
+X-Status: 
+
+; cities.h
+	extrn	cities_initialize:near
+	extrn	cities_draw:near
+	extrn	cities_hit_check:near
+
+From binkley Tue Nov 28 08:29:59 1995
+Subject: dos.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:29:54 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 266       
+Status: RO
+X-Status: 
+
+; dos.h
+
+DOS_SERVICE	equ	21H
+DOS_READ_CHARACTER equ	01H
+DOS_PRINT_STRING equ	09H
+DOS_READ	equ	0aH
+DOS_TERMINATE	equ	4cH
+DOS_GET_INTERRUPT equ	35H
+DOS_SET_INTERRUPT equ	25H
+TIMER_INTERRUPT	equ	1cH
+
+CR		equ	0dH
+LF		equ	0aH
+
+STATUS_OK	equ	00H
+
+TRUE		equ	1
+FALSE		equ	0
+
+From binkley Tue Nov 28 08:30:04 1995
+Subject: image.asm
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:00 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 813       
+Status: RO
+X-Status: 
+
+; image.asm
+
+	public	image_draw
+	include	dos.h
+	include	screen.h
+
+code	segment	byte public 'code'
+	assume cs:code
+
+;
+; purpose: draw an image 
+; input: dx has the upper left corner's location, si points to the image
+;        cx has image's length
+; output: nothing (as a side effect the screen is updated)
+; destroys: nothing! (called during interrupt)
+;
+; note: during interrupt can't call dos; therefore prints with int 10
+;
+image_draw	proc	near
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	si
+
+	mov	bx, dx			; save corner
+	cld
+
+image_loop:
+	mov	dx, bx
+	add	dx, [si]
+	add	si, 2
+	call	screen_locate
+	lodsb
+	call	screen_write_char
+	loop	image_loop
+
+	pop	si
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+	ret
+image_draw	endp
+code	ends
+	end
+
+
+
+
+
+
+
+;
+; link with:
+;          link rocks+shield+cities+image+screen+random+printhex;
+;
+
+From binkley Tue Nov 28 08:30:08 1995
+Subject: image.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:04 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 34        
+Status: RO
+X-Status: 
+
+; image.h
+
+	extrn image_draw:near
+
+From binkley Tue Nov 28 08:30:15 1995
+Subject: l.bat
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:10 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 55        
+Status: RO
+X-Status: 
+
+link rocks+shield+cities+image+screen+random+printhex;
+
+From binkley Tue Nov 28 08:30:20 1995
+Subject: macros.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:16 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 211       
+Status: RO
+X-Status: 
+
+; macros.h
+
+exit	macro	status
+	mov	al, status
+	mov	ah, DOS_TERMINATE
+	int	DOS_SERVICE
+	endm
+
+print	macro	string
+	push	ax
+	push	dx
+	mov	ah, DOS_PRINT_STRING
+	lea	dx, string
+	int	DOS_SERVICE
+	pop	dx
+	pop	ax
+	endm
+
+From binkley Tue Nov 28 08:30:25 1995
+Subject: random.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:21 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 31        
+Status: RO
+X-Status: 
+
+; random.h
+
+	extrn	random:near
+
+From binkley Tue Nov 28 08:30:30 1995
+Subject: screen.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:25 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 474       
+Status: RO
+X-Status: 
+
+; screen.h
+
+;SCREEN_CURSOR_ON	equ	???
+;SCREEN_CURSOR_OFF	equ	???
+SCREEN_WIDTH		equ	80
+
+SCREEN_TEXT_MODE	equ	03H
+SCREEN_GRAPHICS_MODE	equ	06H
+SCREEN_GRAPHICS_WIDTH	equ	640
+SCREEN_GRAPHICS_HEIGHT	equ	200
+
+	extrn	screen_set_mode:near
+	extrn	screen_get_cursor_location:near
+	extrn	screen_locate:near
+	extrn	screen_read_char:near
+	extrn	screen_write_char:near
+	extrn	screen_clear_window:near
+;	extrn	screen_clear:near
+	extrn	screen_write_dot:near
+;	extrn	screen_cursor_mode:near
+
+From binkley Tue Nov 28 08:30:35 1995
+Subject: shield.h
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:30:32 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 93        
+Status: RO
+X-Status: 
+
+; shield.h
+
+	extrn	shield_p1_left:near
+	extrn	shield_p1_right:near
+	extrn	shield_p1_hit:near
+
+From binkley Tue Nov 28 08:38:00 1995
+Subject: code for assignment 7
+To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
+        bjubb (Brennan Jubb), colive (Christopher Olive), ghall (George Hall),
+        kmcguire (Kelly McGuire), pmcgee (Patti McGee), rhaber (Ryan Haber),
+        gfurr (Gwendolyn Furr), hliu@love, tbennett@love, awielgosz@loyola.edu,
+        ddobisch@loyola.edu, dzaudtke@loyola.edu, kmetzler@loyola.edu,
+        lhopkins@loyola.edu, nrusso@loyola.edu, mdubin@loyola.edu,
+        rhemling@loyola.edu
+Date: Tue, 28 Nov 1995 08:37:58 -0500 (EST)
+X-Mailer: ELM [version 2.4 PL22]
+Content-Type: text
+Content-Length: 73        
+Status: RO
+X-Status: 
+
+
+
+I mailed the code.
+I put it on ghost.
+I put it on my web page.
+
+- dave
+

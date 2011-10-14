@@ -1,0 +1,11 @@
+
+DOS_SERVICE	equ	21H
+DOS_READ_ONE_CHAR equ	01H
+DOS_PRINT	equ	09H
+DOS_READ	equ	0aH
+DOS_TERMINATE	equ	4cH
+
+CR		equ	0dH
+LF		equ	0aH
+
+STATUS_OK	equ	00H

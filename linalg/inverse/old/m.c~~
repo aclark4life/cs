@@ -1,0 +1,104 @@
+/* i.c - Find the inverse of an nxn matrix.
+   Alex Clark - August 1998 */
+
+
+#include <stdio.h>
+#include <string.h>
+
+int n;
+int **I;
+int **Id;
+int **Ans;
+int **mem_chores(int **arg);
+int **mem_chores2(int **arg);
+void read_matrx();
+void setup_ident();
+void gauss_jord();
+
+void main()
+{
+	read_matrx();
+//	setup_ident();
+	gauss_jord();
+}
+void gauss_jord()
+{
+	int i,j,k; 
+	Ans=mem_chores2(Ans);
+	for(i=1;i<=n;i++)
+	{
+		for (j=1; j<=(n*2);j++)
+		{
+			if (j <= n)
+			{
+				Ans[i][j] = I[i][j];
+				printf ("%d ",Ans[i][j]);
+			}
+			else 
+			{
+				if ((i+4)==j)
+				{ 	
+					Ans[i][j]=1;
+				} 
+				else Ans[i][j]=0;
+
+				printf ("%d ",Ans[i][j]);
+				//printf ("[%d %d]",i,j);
+			}
+		}
+		printf("\n");
+	}
+
+}
+void setup_ident()
+{
+	int i,j;
+	Id=mem_chores(Id);
+	for(i=1;i<=n;i++)
+	{
+		for (j=1; j<= n; j++)
+		{
+			Id[i][j]=0;
+			if (i == j ) Id[i][j] = 1 ; 
+			printf ("%d ",Id[i][j]);
+		} printf ("\n");
+	}
+}
+void read_matrx()
+{
+	int i,j ; 
+	char *line = (char *)malloc(1024*sizeof(char));
+	char *tok; 
+
+	scanf("%d\n",&n);printf("%d\n",n);
+	I=mem_chores(I);
+	for(i=1;i<=n;i++)
+	{
+		fgets (line , 1024 , stdin ) ;
+		tok=strtok(line, " ");
+		for (j=1; tok !=NULL; j++)
+		{
+			I[i][j]=atoi(tok);
+			printf ("%d ",atoi(tok));
+			tok=strtok (NULL, " ");
+		} printf ("\n");
+	}
+}
+int **mem_chores(int **arg)
+{
+	int i;
+	arg = (int **)malloc((n+1)*sizeof(int *)); 
+	for (i = 1;i<=(n+1);i++)
+	{ arg[i]= (int *) malloc ((n+1)*sizeof(int)); }
+	return(arg);
+}
+int **mem_chores2(int **arg)
+{
+	int i;
+	arg=(int **)malloc((n+1)*sizeof(int *)); 
+	for (i = 1;i<=(n+1);i++)
+	{ 
+		arg[i]= (int *) malloc (((n+1)*2)*sizeof(int)); 
+	}
+	return(arg);
+}

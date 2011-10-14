@@ -1,0 +1,7 @@
+COND condition
+
+CON push onto stack
+
+CDR everything but first element  
+
+CAR first element 
