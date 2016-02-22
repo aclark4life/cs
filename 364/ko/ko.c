@@ -88,21 +88,6 @@ main(int argc, char *argv[]) {
       }
     }
 
-    /*    print_array(temp_array, max_row, max_col);
-       printf("\n");
-        for(i=1;i<max_col;i++){
-          printf("node[%d].winner = %d   ",i, node[i].winner);
-          printf("node[%d].loser = %d\n",i, node[i].loser);
-          } printf("\n");
-        for(i=1;i<max_col;i++){
-          printf("node[%d].winner_index = %d   ",i, node[i].winner_index);
-          printf("node[%d].loser_index = %d\n", i ,node[i].loser_index);
-        } printf("\n");
-        printf("output> %d\n",node[1].winner);
-        print_array(temp_array, max_row, max_col);
-
-       */
-
     row_index++;
     index = node[1].winner_index;
     pass_index = node[1].winner_index;
@@ -114,31 +99,16 @@ main(int argc, char *argv[]) {
       for (i = 1; i < height; i++) {
         power = pow(2, i);
 
-        /*	printf("pass> %d\n", pass);
-                printf("cue> %d\n", temp_array[row][pass_index/power]);
-
-        */
         if (pass < temp_array[row][pass_index / power]) {
 
-          /*	  printf("%d < %d\n",pass, temp_array[row][pass_index/power]);
-
-                   */
         } else {
-          /* printf("%d < %d\n",temp_array[row][pass_index/power],pass);
-           printf("replace %d with %d ",temp_array[row][pass_index/power],pass);
-            */
           temp = pass;
           pass = temp_array[row][pass_index / power];
           pass_index = node[pass_index / power].loser_index;
 
-          /*  printf("and pass -> %d\n", pass);
-            printf("pass_index> %d\n", pass_index);
-             */
           temp_array[row][pass_index / power] = temp;
           loser_index = node[pass_index / power].winner_index;
 
-          /*	  printf("loser_index> %d\n", loser_index);
-                   */
           node[pass_index / power].loser = temp_array[row][pass_index / power];
           node[pass_index / power].winner = pass;
 
@@ -150,18 +120,6 @@ main(int argc, char *argv[]) {
       node[1].winner_index = pass_index;
       output = pass;
       printf("output> %d\n", output);
-      /*
-      print_array ( temp_array, max_row, max_col);
-      for(i=1;i<max_col;i++){
-        printf("node[%d].winner = %d   ",i, node[i].winner);
-        printf("node[%d].loser = %d\n",i, node[i].loser);
-      } printf("\n");
-      for(i=1;i<max_col;i++){
-        printf("node[%d].winner_index = %d   ",i, node[i].winner_index);
-        printf("node[%d].loser_index = %d\n", i ,node[i].loser_index);
-      } printf("\n");
-
-      */
     }
   }
 }
