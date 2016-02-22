@@ -36,10 +36,12 @@ main(int argc, char *argv[]) {
       fscanf(infile2, "%d", &j);
     }
 
-    if (
-      feof(infile1)) { fprintf(outfile, "%d\n", j); }
-    if (
-      feof(infile2)) { fprintf(outfile, "%d\n", i); }
+    if (feof(infile1)) {
+      fprintf(outfile, "%d\n", j);
+    }
+    if (feof(infile2)) {
+      fprintf(outfile, "%d\n", i);
+    }
   }
   for (; (fscanf(infile1, "%d", &i)) != EOF;)
     fprintf(outfile, "%d\n", i);
