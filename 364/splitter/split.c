@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define OUTFILE_DIR "/home/aclark/classes/364/splitter"
+#define OUTFILE_DIR "."
 
 /*#define    L_tmpnam        25     */ /* (sizeof(P_tmpdir) + 15) */
 
