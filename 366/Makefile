@@ -1,2 +1,2 @@
 commit:
-	git commit -a -m "Update"
+	git commit -a -m "Update"; git push
