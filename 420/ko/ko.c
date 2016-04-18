@@ -1,5 +1,2 @@
-#include<stdio.h>
-main()
-{
-	do_something();
-}
+#include <stdio.h>
+main() { do_something(); }
