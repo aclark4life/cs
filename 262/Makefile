@@ -1,6 +1,7 @@
+objects = average.o
 all: average counter list roach
-average:
-	gcc average.c -o average
+average: $(objects)
+	gcc -o average $(objects)
 counter:
 	gcc counter.c -o counter
 list:
