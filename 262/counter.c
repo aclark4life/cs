@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include <ctype.h>
 #include <math.h>
+#include <stdio.h>
 main(int argc, char *argv[])
 
 {

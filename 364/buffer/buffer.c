@@ -1,11 +1,11 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/uio.h>
 
 #define PERMS 0666
 #define BUF_SIZE 700

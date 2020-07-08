@@ -1,7 +1,7 @@
 /*aclark*/
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 main() {
   int state = 0;

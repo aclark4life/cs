@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 void print_array(int **array, int row, int col);
 void print_count_array(int col);

@@ -1,9 +1,7 @@
-#include<stdio.h>
+#include <stdio.h>
 
-main()
-{
+main() {
 
-	sleep(100);
-	printf("done.\n");
-
+  sleep(100);
+  printf("done.\n");
 }

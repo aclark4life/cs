@@ -1,7 +1,7 @@
+#include </usr/sys/h/timeb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include </usr/sys/h/timeb.h>
 
 int improvedbubble(int a[], int n) {
   int i, pass = 1, sorted = 0;

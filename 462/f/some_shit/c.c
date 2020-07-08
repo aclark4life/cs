@@ -2,33 +2,31 @@
 //
 //  Frequently used routines.
 
-#include  <iostream.h>
-#include  <iomanip.h>
-#include  <fstream.h>
+#include <fstream.h>
+#include <iomanip.h>
+#include <iostream.h>
 
-#include  <stdio.h>
-#include  <stdlib.h>
-#include  <math.h>
-#include  <string.h>
-#include  <ctype.h>
-#include  <limits.h>
-#include  <float.h>
-#include  <time.h>
-#include  <assert.h>
+#include <assert.h>
+#include <ctype.h>
+#include <float.h>
+#include <limits.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-#ifndef  __COOLNESS_H_INCLUDED
-#define  __COOLNESS_H_INCLUDED
+#ifndef __COOLNESS_H_INCLUDED
+#define __COOLNESS_H_INCLUDED
 
-
-#define  TRUE  1
-#define  FALSE  0
-#ifndef  EXIT_FAILURE
-#define  EXIT_FAILURE  -1
+#define TRUE 1
+#define FALSE 0
+#ifndef EXIT_FAILURE
+#define EXIT_FAILURE -1
 #endif
-#ifndef  EXIT_SUCCESS
-#define  EXIT_SUCCESS  0
+#ifndef EXIT_SUCCESS
+#define EXIT_SUCCESS 0
 #endif
-
 
 #if 0
 
@@ -123,5 +121,3 @@ void Pause(void)
 
 #endif
 #endif
-
-

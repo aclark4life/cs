@@ -1,5 +1,2 @@
 
-main()
-{
-    sleep(100);
-}
+main() { sleep(100); }

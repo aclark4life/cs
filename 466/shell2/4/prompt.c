@@ -1,7 +1,6 @@
-#include<stdio.h>
+#include <stdio.h>
 #define PROMPT "* "
-prompt()
-{
-	printf(PROMPT);
-	return(read_long());
+prompt() {
+  printf(PROMPT);
+  return (read_long());
 }

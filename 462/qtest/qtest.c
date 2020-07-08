@@ -4,35 +4,25 @@
 //
 // - alex clark
 
-
-static int intcompare(int *i, int *j)
-{
-	if (*i > *j ) 
-			return (1);
-	if (*i < *j ) 
-			return (-1);
-	return (0);
+static int intcompare(int *i, int *j) {
+  if (*i > *j)
+    return (1);
+  if (*i < *j)
+    return (-1);
+  return (0);
 }
-void main(int argc, char *argv[])
-{
+void main(int argc, char *argv[]) {
 
+  int *a;
 
+  long n = atol(argv[1]);
 
-	int *a; 
+  printf("%ld\n", n);
 
-	long n = atol (argv[1]) ;
+  a = malloc
 
-	printf ( "%ld\n",n);
-
-	
-
-	a = malloc
-
-	
-
-
-/*	qsort((char *) a,  10, sizeof(int), intcompare ) ;
-	for ( i = 0 ; i < 10 ; i ++ ) printf ( "%d", a[i] ) ;
-	printf ("\n");
-*/
+  /*	qsort((char *) a,  10, sizeof(int), intcompare ) ;
+          for ( i = 0 ; i < 10 ; i ++ ) printf ( "%d", a[i] ) ;
+          printf ("\n");
+  */
 }

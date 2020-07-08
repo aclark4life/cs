@@ -1,6 +1,3 @@
 
 
-main()
-{
-    sleep(5);
-}
+main() { sleep(5); }

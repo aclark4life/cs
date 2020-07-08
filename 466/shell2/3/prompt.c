@@ -1,7 +1,4 @@
-#include<stdio.h> 
+#include <stdio.h>
 #define PROMPT "* "
 
-prompt() 
-{ 
-	printf(PROMPT); 
-}
+prompt() { printf(PROMPT); }

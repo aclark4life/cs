@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include </usr/sys/h/timeb.h>
+#include <stdio.h>
 
 #define number 1000
 int ImprovedBubble(int a[], int n) {
