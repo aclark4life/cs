@@ -1,6 +1,10 @@
 #include <math.h>
 #include <stdio.h>
 
+void exit(int status);
+int atoi(const char *str);
+void *malloc(size_t size);
+
 main(int argc, char *argv[]) {
   FILE *infile;
   int i, n = 0, *a;
