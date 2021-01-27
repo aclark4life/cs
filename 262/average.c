@@ -6,9 +6,17 @@ int atoi(const char *str);
 void *malloc(size_t size);
 
 int main(int argc, char *argv[]) {
+
   FILE *file;
-  int i, n = 0, *a;
+
+  int i;
+
+  n = 0
+
+      * a;
+
   float sum, mean, stdev, temp1, temp2;
+
   if (argc == 3) {
     file = fopen(argv[2], "r");
     if (file == NULL) {
