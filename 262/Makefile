@@ -57,4 +57,5 @@ roach:
 trapezoid:
 	gcc trapezoid.c -o trapezoid
 clean:
-	rm average counter list roach
+	-rm average counter list roach
+	-rm *.o
