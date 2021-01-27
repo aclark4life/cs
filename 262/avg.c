@@ -32,13 +32,12 @@ int main(int argc, char *argv[]) {
       file = stdin;
       n = atoi(argv[1]);
       a = (int *)malloc(n * sizeof(int));
-      printf("enter %d integers:\n", n);
+      printf("\n\nEnter %d integers for me to average:\n\n", n);
       for (i = 0; i < n; i++) {
         fscanf(file, "%d", &a[i]);
       }
     } else {
-      printf("usage: %s n\n", argv[0]);
-
+      printf("\n\nUsage: %s num_int_to_avg\n\nE.g.\n./avg 3\nEnter 3 integers for me to average:\n1 3 3\nmean: 2.333333\nstandard deviation: 1.154701\n", argv[0]);
       exit(-1);
     }
   }
@@ -51,6 +50,6 @@ int main(int argc, char *argv[]) {
     temp2 = temp1 + temp2;
   }
   stdev = sqrt(temp2 / (n - 1));
-  printf("mean: %f\n", mean);
+  printf("Mean: %f\n", mean);
   printf("standard deviation: %f\n", stdev);
 }
