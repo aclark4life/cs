@@ -46,7 +46,7 @@ serve: django-serve
 
 objects = average.o
 all: average counter list roach
-average: $(objects)
+avg: $(objects)
 	gcc -o average $(objects)
 counter:
 	gcc counter.c -o counter

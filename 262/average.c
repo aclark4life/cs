@@ -9,7 +9,9 @@ int main(int argc, char *argv[]) {
 
   FILE *file;
 
-  int i, n = 0, *a;
+  int i;
+  int n = 0;
+  int *a;
 
   float sum, mean, stdev, temp1, temp2;
 
