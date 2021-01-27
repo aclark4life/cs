@@ -6,29 +6,29 @@ int atoi(const char *str);
 void *malloc(size_t size);
 
 int main(int argc, char *argv[]) {
-  FILE *infile;
+  FILE *file;
   int i, n = 0, *a;
   float sum, mean, stdev, temp1, temp2;
   if (argc == 3) {
-    infile = fopen(argv[2], "r");
-    if (infile == NULL) {
+    file = fopen(argv[2], "r");
+    if (file == NULL) {
       printf("Unable to open the input file.\n");
       exit(-1);
     } else {
       n = atoi(argv[1]);
       a = (int *)malloc(n * sizeof(int));
       for (i = 0; i < n; i++) {
-        fscanf(infile, "%d", &a[i]);
+        fscanf(file, "%d", &a[i]);
       }
     }
   } else {
     if (argc == 2) {
-      infile = stdin;
+      file = stdin;
       n = atoi(argv[1]);
       a = (int *)malloc(n * sizeof(int));
       printf("enter %d integers:\n", n);
       for (i = 0; i < n; i++) {
-        fscanf(infile, "%d", &a[i]);
+        fscanf(file, "%d", &a[i]);
       }
     } else {
       printf("usage: %s n\n", argv[0]);
