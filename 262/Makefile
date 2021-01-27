@@ -60,4 +60,4 @@ clean:
 	-rm average counter list roach
 	-rm *.o
 clang:
-	clang-format *.c
+	clang-format -i *.c
