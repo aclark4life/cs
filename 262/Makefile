@@ -43,12 +43,12 @@ include base.mk
 .DEFAULT_GOAL := commit-push
 PROJECT := CS
 
-objects = average.o
+objects = avg.o
 
-all: average counter list roach
+all: avg counter list roach
 
 avg: $(objects)
-	gcc -o average $(objects)
+	gcc -o avg $(objects)
 
 counter:
 	gcc counter.c -o counter
@@ -63,7 +63,7 @@ trapezoid:
 	gcc trapezoid.c -o trapezoid
 
 clean:
-	-rm average counter list roach
+	-rm avg counter list roach
 	-rm *.o
 
 clang:
