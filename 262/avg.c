@@ -37,7 +37,10 @@ int main(int argc, char *argv[]) {
         fscanf(file, "%d", &a[i]);
       }
     } else {
-      printf("\n\nUsage: %s num_int_to_avg\n\nE.g.\n./avg 3\nEnter 3 integers for me to average:\n1 3 3\nmean: 2.333333\nstandard deviation: 1.154701\n", argv[0]);
+      printf("\n\nUsage: %s num_int_to_avg\n\nE.g.\n./avg 3\nEnter 3 integers "
+             "for me to average:\n1 3 3\nmean: 2.333333\nstandard deviation: "
+             "1.154701\n",
+             argv[0]);
       exit(-1);
     }
   }
