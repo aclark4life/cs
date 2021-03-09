@@ -40,9 +40,10 @@ include base.mk
 #
 # Here you can override variables, targets, etc.
 #
-.DEFAULT_GOAL := commit-push
-PROJECT := CS
 
+.DEFAULT_GOAL := all
+PROJECT := CS
+serve: django-serve
 objects = avg.o
 
 all: avg counter list roach
