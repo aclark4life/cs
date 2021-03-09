@@ -46,7 +46,7 @@ PROJECT := CS
 serve: django-serve
 objects = avg.o
 
-all: avg counter list roach
+all: avg list roach
 
 avg: $(objects)
 	gcc -o avg $(objects)
