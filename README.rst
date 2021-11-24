@@ -1,6 +1,8 @@
 CS
 ==
 
+.. image:: methinking2.gif
+
 My CS code from back in the day.
 
 262
