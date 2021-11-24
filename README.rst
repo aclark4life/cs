@@ -1,9 +1,11 @@
 CS
 ==
 
+My CS code from back in the day.
+
 .. image:: methinking2.gif
 
-My CS code from back in the day.
+Me circa 1998.
 
 262
 ---
