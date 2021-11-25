@@ -3,7 +3,7 @@ CS
 
 My CS code from back in the day.
 
-.. image:: methinking2.gif
+.. image:: solutions.gif
 
 Me circa 1998.
 
