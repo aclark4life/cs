@@ -9,7 +9,7 @@
 # License
 # ------------------------------------------------------------------------------ 
 #
-# Copyright 2016—2021 Jeffrey A. Clark, "Alex"
+# Copyright 2016—2022 Jeffrey A. Clark, "Alex"
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,28 +29,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+include base.mk
 
 #
-#
-# Includes
-# ------------------------------------------------------------------------------ 
-#
-include base.mk
-#
-# Overrides
+# Overrides and includes
 # ------------------------------------------------------------------------------ 
 #
 # E.g.
 #
-# Uncomment next line to customize the default goal
-.DEFAULT_GOAL := commit-push
 #
-# Uncomment next line to customize the project name
-#PROJECT_NAME := my_project
+# Uncomment the next line to customize the project name variable
+#PROJECT_NAME := project
 #
-# Uncomment next line to customize the commit message
-#COMMIT_MESSAGE := Update
+# Uncomment the next line to customize the commit message variable
+#GIT_COMMIT := update
 #
-# Uncomment next two lines to add a "phony" target
-#.PHONY: serve
-#serve: django-serve-webpack
+# Uncomment the next line to include additional makefiles
+#include project.mk
+#
+# Uncomment the next line to customize the default goal
+#.DEFAULT_GOAL := git-commit-push
