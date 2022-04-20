@@ -1,2 +1,2 @@
 all:
-	ls
+	cd 262; make
