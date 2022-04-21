@@ -23,7 +23,7 @@ Boolean algebra, combinatorics, graphs, inductive and deductive proofs, function
 364
 ---
 
-`File and Data Structures <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/`_
+`File and Data Structures <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`_
 
 366
 ---
