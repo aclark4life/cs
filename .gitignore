@@ -6,6 +6,8 @@ pyvenv.cfg
 __pycache__
 *.o
 262/avg
+262/list
+262/roach
 295/compound
 295/factorial
 295/fsa
