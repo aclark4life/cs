@@ -1,12 +1,13 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
   int state = 0;
-  int input;
+  int input = 0;
   printf("A Finite-State Automaton!\n");
   while (input != -1) {
-    scanf("%d", &input);
+    scanf_s("%d", &input);
     if (state == 0) {
       if (input == 0) {
         printf("state = 1\n");
