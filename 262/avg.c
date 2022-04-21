@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
       for (i = 0; i < n; i++) {
         fscanf_s(file, "%d", &a[i]);
       }
-      free(a);
     }
   } else {
     if (argc == 2) {
@@ -40,7 +39,6 @@ int main(int argc, char *argv[]) {
       for (i = 0; i < n; i++) {
         fscanf_s(file, "%d", &a[i]);
       }
-      free(a);
     } else {
       printf("\n\nUsage: %s num_int_to_avg\n\nE.g.\n./avg 3\nEnter 3 integers "
              "for me to average:\n1 3 3\nmean: 2.333333\nstandard deviation: "
@@ -57,6 +55,7 @@ int main(int argc, char *argv[]) {
     temp1 = pow(a[i] - mean, 2);
     temp2 = temp1 + temp2;
   }
+  free(a);
   stdev = sqrt(temp2 / (n - 1));
   printf("Mean: %f\n", mean);
   printf("standard deviation: %f\n", stdev);
