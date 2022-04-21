@@ -1,2 +1,2 @@
 all:
-	cd 262; make
+	cd 262; make all
