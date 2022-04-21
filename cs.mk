@@ -13,6 +13,11 @@ format:
 	cd 295; make format
 	cd 364/buffer; make format
 	cd 364/ko; make format
+tidy:
+	cd 262; make tidy
+	cd 295; make tidy
+	cd 364/buffer; make tidy
+	cd 364/ko; make tidy
 
 avg:
 	262/avg 3
