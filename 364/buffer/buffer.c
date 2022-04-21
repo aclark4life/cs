@@ -366,10 +366,10 @@ void create_outfiles() {
 }
 /*******************************************************************/
 void close_files() {
-  close("s.out");
-  close("d.out");
-  close("f.out");
-  close("c.out");
+  close(*"s.out");
+  close(*"d.out");
+  close(*"f.out");
+  close(*"c.out");
 }
 /*******************************************************************/
 int find_char_bjubb(char find_me, char ***buffer, int position,
