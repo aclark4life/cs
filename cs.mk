@@ -21,4 +21,4 @@ list:
 buffer:
 	cd 364/buffer; ./buffer input.txt
 ko:
-	364/ko/ko
+	364/ko/ko 5 5
