@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*****************************************************************************/
 
@@ -233,7 +234,7 @@ struct element *insert_node(struct element *new_node, struct element *head) {
 
 /*****************************************************************************/
 
-print_matrix(struct element *head) {
+int print_matrix(struct element *head) {
 
   struct element *e;
   printf("PRINT_BY_ROW>\n\n");
@@ -257,7 +258,7 @@ print_matrix(struct element *head) {
 
 /*****************************************************************************/
 
-print_menu() {
+int print_menu() {
 
   system("clear"); /*clear the screen*/
   printf("\n JOHNNY LINK A LIST (UNDER CONSTRUCTION)\n\n");
@@ -277,7 +278,7 @@ print_menu() {
 
 /*****************************************************************************/
 
-menu() {
+int menu() {
   int gaurd1 = 0;
   int gaurd2 = 0;
   char print = 0;
@@ -615,7 +616,7 @@ menu() {
 
 /*********************************************************************/
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   if (argc != 1) {
     printf("USAGE: %s\n\n", argv[0]);
     exit(-1);

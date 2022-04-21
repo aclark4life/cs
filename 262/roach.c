@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 
 {
   int move, imove[7], jmove[7];
