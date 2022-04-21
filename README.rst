@@ -3,9 +3,10 @@ CS
 
 My CS code from back in the day.
 
-.. image:: solutions.gif
+Me circa 1998
+-------------
 
-Me circa 1998.
+.. image:: solutions.gif
 
 262
 ---
