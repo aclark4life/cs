@@ -18,8 +18,7 @@ trapezoid:
 	gcc trapezoid.c -o trapezoid
 
 clean:
-	-rm avg counter list roach
-	-rm *.o
+	rm *.o avg list roach
 
 clang:
 	clang-format -i *.c
