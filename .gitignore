@@ -4,3 +4,6 @@ lib64
 share/
 pyvenv.cfg
 __pycache__
+*.o
+262/list
+262/roach
