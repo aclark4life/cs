@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 float amount(int t) {
   float answer;
@@ -11,7 +12,7 @@ float amount(int t) {
   }
 }
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   int t = 0;
   int i = 0;
   if (argc != 2)

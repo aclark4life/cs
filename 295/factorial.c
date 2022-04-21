@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int Factorial(int n) {
   if (n == 1)
@@ -8,7 +9,7 @@ int Factorial(int n) {
   printf("%d", n);
 }
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   int n;
   n = atoi(argv[1]);
   Factorial(n);

@@ -1,6 +1,7 @@
-/*aclark*/
+#include <stdio.h>
+#include <stdlib.h>
 
-main() {
+int main() {
 
   int m[64];
   int k;
