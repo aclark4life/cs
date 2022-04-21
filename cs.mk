@@ -4,3 +4,5 @@ clean:
 	cd 262; make clean
 black:
 	cd 262; make black
+avg:
+	262/avg 3
