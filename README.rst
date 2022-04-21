@@ -47,7 +47,7 @@ fringilla vel, aliquet nec, vulputate
 461
 ---
 
-`Compiler Construction <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`
+`Compiler Construction <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`_
 
 462
 ---
