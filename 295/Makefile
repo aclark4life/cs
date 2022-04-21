@@ -19,3 +19,5 @@ time:
 	gcc time.c -o time
 format:
 	clang-format -i *.c
+tidy:
+	clang-tidy fsa.c
