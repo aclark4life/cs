@@ -14,3 +14,6 @@ avg:
 	262/avg 3
 list:
 	262/list
+
+buffer:
+	cd 364/buffer; ./buffer input.txt
