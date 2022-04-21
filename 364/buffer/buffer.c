@@ -48,13 +48,13 @@ int main(int argc, char *argv[]) {
   char f_buffer[BUF_SIZE];
   char c_buffer[BUF_SIZE];
 
-  int n, m, i, j, infile, s, d, f, c;
+  int n, m, i, j, s, d, f, c;
   int s_index, d_index, f_index, c_index;
   int s_length, d_length, f_length1, f_length2, c_length;
   int format_index;
   int format_count;
   int data_index;
-
+  int infile = 0;
   int WHICH = 0;
   int data_WHICH = 0;
   if (argc != 2) {
