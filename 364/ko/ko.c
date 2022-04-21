@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
   FILE *outfile;
 
   if (argc != 3) {
-    printf("USAGE IS: n m\n", argv[0]);
+    printf("USAGE IS: n m\n");
     exit(-1);
   } else {
     int max_row = atoi(argv[1]);
@@ -41,10 +41,10 @@ int main(int argc, char *argv[]) {
     for (i = 0; i < max_row + 1; i++) {
       for (j = 0; j < max_col * 2 - 1; j++) {
         temp_array[i][j] = 0;
-        for (j = max_col; j < max_col * 2; j++) {
-          temp_array[i][j] = k;
-          k++;
-        }
+        // for (j = max_col; j < max_col * 2; j++) {
+        //  temp_array[i][j] = k;
+        //  k++;
+        //}
       }
       for (j = 0; j < max_col * 2; j++) {
         temp_array[max_row + 1][j] = -1;
