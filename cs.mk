@@ -6,3 +6,5 @@ black:
 	cd 262; make black
 avg:
 	262/avg 3
+list:
+	262/list
