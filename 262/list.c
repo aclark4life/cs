@@ -234,7 +234,7 @@ struct element *insert_node(struct element *new_node, struct element *head) {
 
 /*****************************************************************************/
 
-int print_matrix(struct element *head) {
+void print_matrix(struct element *head) {
 
   struct element *e;
   printf("PRINT_BY_ROW>\n\n");
@@ -258,7 +258,7 @@ int print_matrix(struct element *head) {
 
 /*****************************************************************************/
 
-int print_menu() {
+void print_menu() {
 
   system("clear"); /*clear the screen*/
   printf("\n JOHNNY LINK A LIST (UNDER CONSTRUCTION)\n\n");
@@ -278,7 +278,7 @@ int print_menu() {
 
 /*****************************************************************************/
 
-int menu() {
+void menu() {
   int gaurd1 = 0;
   int gaurd2 = 0;
   char print = 0;

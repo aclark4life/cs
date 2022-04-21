@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
   imove[4] = 1;
   imove[5] = 0;
   imove[6] = -1;
-  imove[7] = -1;
+  // imove[7] = -1;
 
   jmove[0] = 1;
   jmove[1] = 1;
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   jmove[4] = -1;
   jmove[5] = -1;
   jmove[6] = -1;
-  jmove[7] = 0;
+  // jmove[7] = 0;
 
   if (argc != 5) {
     printf("usage: %s n m ibug jbug\n", argv[0]);
