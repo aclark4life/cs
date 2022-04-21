@@ -3,9 +3,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <unistd.h>
 
 #define PERMS 0666
 #define BUF_SIZE 700
@@ -22,7 +24,7 @@ void write_buff(char buff[BUF_SIZE], int fd);
 void get_write_fd(int *a, int *b, int *c, int *d);
 int get_read_fd(char *file);
 int find_char_bjubb(char find_me, char ***buffer, int position, int *which);
-int init_start_values(char ***buffer, int *data_index, int *format_index,
+void init_start_values(char ***buffer, int *data_index, int *format_index,
                       int *format_count, int *which, int *data_which);
 void do_string(int length, char ***buffer, int fd, char buff[BUF_SIZE],
                int *data_index, int *s_index, int *which, int *data_which);
@@ -38,7 +40,7 @@ void read_input_data_bjubb(int fd, char ***buffer);
 void flush_buff(char buffer[BUF_SIZE]);
 
 /*******************************************************************/
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   char *INFILE = argv[1];
   char **buffer;
   char s_buffer[BUF_SIZE];
@@ -62,7 +64,7 @@ main(int argc, char *argv[]) {
     exit(-1);
   }
 
-  if (infile = get_read_fd(INFILE) == -1) {
+  if (infile == get_read_fd(INFILE)) {
     write(2, argv[0], strlen(argv[0]));
     write(2, " error: infile is NULL.\n", 24);
     exit(-1);
@@ -134,7 +136,7 @@ main(int argc, char *argv[]) {
   close_files();
 }
 /*******************************************************************/
-int init_start_values(char ***buffer, int *data_index, int *format_index,
+void init_start_values(char ***buffer, int *data_index, int *format_index,
                       int *format_count, int *which, int *data_which) {
   int i, j;
   /* found EOF */
@@ -142,7 +144,7 @@ int init_start_values(char ***buffer, int *data_index, int *format_index,
     for (j = 0; j < (BUF_SIZE); j++) {
       if ((*buffer)[*data_which][j] == ')') {
         (*data_index)++;
-        return (1);
+        // return (1);
       } else {
         (*data_index)++;
         (*format_count)++;
