@@ -14,7 +14,7 @@ following scheme.
    The size of the data of the given type will also be encoded, with
    the exception of character data, which will always have size 1.
 
-   The data layout will encoded as a format string, similar but not
+   The data layout will be encoded as a format string, similar but not
    equivalent to C I/O format strings:
 
      (xiyjzk....)  where x, y, z and so on are the data type indicators
