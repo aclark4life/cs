@@ -1,7 +1,7 @@
 CS
 ==
 
-My CS code from back in the day.
+My CS code from back in the day
 
 Me circa 1998
 -------------
