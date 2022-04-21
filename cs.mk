@@ -8,10 +8,11 @@ clean:
 	cd 295; make clean
 	cd 364/buffer; make clean
 	cd 364/ko; make clean
-black:
-	cd 262; make black
-	cd 295; make black
-	cd 364; make black
+format:
+	cd 262; make format
+	cd 295; make format
+	cd 364/buffer; make format
+	cd 364/ko; make format
 
 avg:
 	262/avg 3

@@ -20,5 +20,5 @@ trapezoid:
 clean:
 	rm *.o avg list roach
 
-black:
+format:
 	clang-format -i *.c

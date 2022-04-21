@@ -17,5 +17,5 @@ swap:
 	gcc swap.c -o swap
 time:
 	gcc time.c -o time
-black:
+format:
 	clang-format -i *.c

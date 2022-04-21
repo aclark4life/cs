@@ -25,7 +25,7 @@ void get_write_fd(int *a, int *b, int *c, int *d);
 int get_read_fd(char *file);
 int find_char_bjubb(char find_me, char ***buffer, int position, int *which);
 void init_start_values(char ***buffer, int *data_index, int *format_index,
-                      int *format_count, int *which, int *data_which);
+                       int *format_count, int *which, int *data_which);
 void do_string(int length, char ***buffer, int fd, char buff[BUF_SIZE],
                int *data_index, int *s_index, int *which, int *data_which);
 void do_int(int length, char ***buffer, int fd, char buff[BUF_SIZE],
@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
 }
 /*******************************************************************/
 void init_start_values(char ***buffer, int *data_index, int *format_index,
-                      int *format_count, int *which, int *data_which) {
+                       int *format_count, int *which, int *data_which) {
   int i, j;
   /* found EOF */
   for (i = 0; i < BUF_SIZE; i++) {
