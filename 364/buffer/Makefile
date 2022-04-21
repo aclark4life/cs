@@ -2,4 +2,4 @@ all: buffer
 buffer:
 	gcc buffer.c -o buffer
 clean: 
-	rm -f buffer *.o *.out
+	rm -f buffer *.out
