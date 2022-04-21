@@ -5,5 +5,9 @@ share/
 pyvenv.cfg
 __pycache__
 *.o
-262/list
-262/roach
+262/avg
+295/compound
+295/factorial
+295/fsa
+295/hanoi
+295/swap
