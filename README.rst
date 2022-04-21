@@ -23,12 +23,12 @@ Boolean algebra, combinatorics, graphs, inductive and deductive proofs, function
 364
 ---
 
-File and Data Structures
+`File and Data Structures <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/`_
 
 366
 ---
 
-Systems Level Programming
+`Systems Level Programming <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`_
 
 420
 ---
@@ -42,20 +42,12 @@ fringilla vel, aliquet nec, vulputate
 451
 ---
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-fringilla vel, aliquet nec, vulputate
+`Programming Languages <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`_
 
 461
 ---
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-fringilla vel, aliquet nec, vulputate
+`Compiler Construction <https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/>`
 
 462
 ---
