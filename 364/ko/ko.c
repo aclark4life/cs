@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void print_array(int **array, int row, int col);
 void print_count_array(int col);
@@ -12,7 +13,7 @@ struct node {
   int loser_index;
 };
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   int i, j, ii = 0;
   int k, l = 1;
   int row, row_index = 0;
