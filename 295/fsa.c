@@ -7,7 +7,7 @@ int main() {
   int input = 0;
   printf("A Finite-State Automaton!\n");
   while (input != -1) {
-    scanf_s("%d", &input);
+    scanf("%d", &input);
     if (state == 0) {
       if (input == 0) {
         printf("state = 1\n");

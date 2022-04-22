@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
       n = atoi(argv[1]);
       a = (int *)malloc(n * sizeof(int));
       for (i = 0; i < n; i++) {
-        fscanf_s(file, "%d", &a[i]);
+        fscanf(file, "%d", &a[i]);
       }
     }
   } else {
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
       a = (int *)malloc(n * sizeof(int));
       printf("\n\nEnter %d integers for me to average:\n\n", n);
       for (i = 0; i < n; i++) {
-        fscanf_s(file, "%d", &a[i]);
+        fscanf(file, "%d", &a[i]);
       }
     } else {
       printf("\n\nUsage: %s num_int_to_avg\n\nE.g.\n./avg 3\nEnter 3 integers "
