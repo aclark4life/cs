@@ -1,7 +1,7 @@
 all: split
 clean:
 	rm -f split
-merge:
+splitter:
 	gcc split.c -o split
-lint:
+format:
 	clang-format -i *.c
