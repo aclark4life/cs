@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
       temp_array[i] = (int *)malloc((max_col * 2) * sizeof(int));
     for (i = 0; i < max_row + 1; i++) {
       for (j = 0; j < max_col * 2 - 1; j++) {
-        temp_array[i][j] = 0;
+        // temp_array[i][j] = 0;
         // for (j = max_col; j < max_col * 2; j++) {
         //  temp_array[i][j] = k;
         //  k++;
