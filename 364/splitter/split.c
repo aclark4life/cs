@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define OUTFILE_DIR "."
 
 /*#define    L_tmpnam        25     */ /* (sizeof(P_tmpdir) + 15) */
