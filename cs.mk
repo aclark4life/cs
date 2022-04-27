@@ -33,4 +33,4 @@ buffer:
 ko:
 	364/ko/ko 5 5
 merge:
-	364/merge/merge
+	cd 364/merge; ./merge t tt ttt
