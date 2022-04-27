@@ -232,7 +232,7 @@ void do_float(int length1, int length2, char ***in, int fd,
               char f_buffer[BUF_SIZE], int *data_index, int *f_buffer_index,
               int *which, int *data_which) {
   int i, j, stop1, stop2;
-  *f_buffer_index;
+  // *f_buffer_index;
 
   if ((*data_index) == BUF_SIZE) {
     (*data_index) = 0;
