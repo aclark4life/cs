@@ -4,7 +4,7 @@
 
 /*#define    L_tmpnam        25     */ /* (sizeof(P_tmpdir) + 15) */
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   FILE *infile;
   FILE *outfile;
   int i = 0;
