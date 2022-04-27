@@ -1,7 +1,7 @@
 all: rng
 clean:
 	rm -f rng
-merge:
-	gcc rng.c -o rng
-lint:
+rng:
+	gcc -ggdb rng.c -o rng
+format:
 	clang-format -i *.c
