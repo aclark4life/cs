@@ -38,3 +38,5 @@ ko:
 	364/ko/ko 5 5
 merge:
 	cd 364/merge; ./merge
+rng:
+	cd 364/rng; ./rng
