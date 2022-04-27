@@ -39,4 +39,4 @@ ko:
 merge:
 	cd 364/merge; ./merge
 rng:
-	cd 364/rng; ./rng
+	cd 364/rng; ./rng 3
