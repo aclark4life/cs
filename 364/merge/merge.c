@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
   int i, j, k, l;
 
   if (argc != 4) {
-    printf("usage: %s file1 file2 file3\n", argv[0]);
+    printf("usage: %s infile1 infile2 outfile\n", argv[0]);
     exit(0);
   }
   infile1 = fopen(argv[1], "r");
