@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         //}
       }
       for (j = 0; j < max_col * 2; j++) {
-        printf(temp_array[max_row + 1][j];
+        printf(temp_array[max_row + 1][j]);
         temp_array[max_row + 1][j] = -1;
       }
     }
