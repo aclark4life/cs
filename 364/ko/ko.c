@@ -54,21 +54,21 @@ int main(int argc, char *argv[]) {
     printf("\n");
     node = (struct node *)malloc(max_col * sizeof(struct node));
     for (i = max_col, j = max_col / 2; i < max_col * 2; i += 2, j++) {
-      if (temp_array[row][i] < temp_array[row][i + 1]) {
-        node[j].winner = temp_array[row][i];
-        node[j].loser = temp_array[row][i + 1];
-        node[j].winner_index = i;
-        node[j].loser_index = i + 1;
-        node[j].lindex = i / 2;
-        temp_array[row][node[j].lindex] = node[j].loser;
-      } else {
-        node[j].winner = temp_array[row][i + 1];
-        node[j].loser = temp_array[row][i];
-        node[j].winner_index = i + 1;
-        node[j].loser_index = i;
-        node[j].lindex = i / 2;
-        temp_array[row][node[j].lindex] = node[j].loser;
-      }
+      // if (temp_array[row][i] < temp_array[row][i + 1]) {
+      //   node[j].winner = temp_array[row][i];
+      //   node[j].loser = temp_array[row][i + 1];
+      //   node[j].winner_index = i;
+      //   node[j].loser_index = i + 1;
+      //   node[j].lindex = i / 2;
+      //   temp_array[row][node[j].lindex] = node[j].loser;
+      // } else {
+      //   node[j].winner = temp_array[row][i + 1];
+      //   node[j].loser = temp_array[row][i];
+      //   node[j].winner_index = i + 1;
+      //   node[j].loser_index = i;
+      //   node[j].lindex = i / 2;
+      //   temp_array[row][node[j].lindex] = node[j].loser;
+      // }
     }
 
     for (i = (max_col - 1), j = ((max_col / 2) - 1); i > 0; i -= 2, j--) {
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         node[j].winner_index = node[i].winner_index;
         node[j].loser_index = node[i - 1].winner_index;
         node[j].lindex = i / 2;
-        temp_array[row][node[j].lindex] = node[j].loser;
+        // temp_array[row][node[j].lindex] = node[j].loser;
       }
     }
 
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     pass_index = node[1].winner_index;
 
     for (ii = 0; ii < outer_loop_length; ii++) {
-      temp_array[row][pass_index] = temp_array[row_index][pass_index];
+      // temp_array[row][pass_index] = temp_array[row_index][pass_index];
       pass = temp_array[row_index][pass_index];
       height = 3;
       for (i = 1; i < height; i++) {
@@ -136,7 +136,7 @@ void print_array(int **array, int row, int col) {
   }
   for (i = row + 1; i < row + 2; i++) {
     for (j = 1; j < col * 2; j++) {
-      printf("%d ", array[i][j]);
+      // printf("%d ", array[i][j]);
     }
     printf("\n");
   }
