@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   FILE *infile1;
   FILE *infile2;
   FILE *outfile;
