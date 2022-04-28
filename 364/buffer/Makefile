@@ -1,6 +1,6 @@
 all: buffer
 buffer:
-	gcc -ggdb buffer.c -o buffer
+	gcc buffer.c -o buffer
 clean: 
 	rm -f buffer *.out
 format:
