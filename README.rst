@@ -6,7 +6,7 @@ My CS code from back in the day
 Me circa 1998
 -------------
 
-.. image:: solutions.gif
+.. image:: sol.gif
 
 262
 ---
