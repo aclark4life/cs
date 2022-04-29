@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     x = atoi(argv[1]);
     for (i = 0; i < x; i++) {
-      printf("%d\n", random());
+      printf("%ld\n", random());
     }
   }
 }
