@@ -41,7 +41,7 @@ Dr. Keith Gallagher, Computer Science Dept.
 
 Readings or other work:
 
-- Assigned readings on software construction methods (from the instructor's journal collection).
+  Assigned readings on software construction methods (from the instructor's journal collection).
 
 Description of the study:
  
