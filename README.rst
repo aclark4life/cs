@@ -33,11 +33,24 @@ Systems Level Programming
 420
 ---
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-fringilla vel, aliquet nec, vulputate
+Computer Science Research  3.0 credits.
+
+ Research in Software Construction Methods.
+
+ Dr. Keith Gallagher, Computer Science Dept.
+
+ Readings or other work:
+
+ Assigned readings on software construction methods (from the
+   instructor's journal collection).
+
+ Description of the study:
+ 
+ There many methods of software development: clean-room, iterative
+enhancement, rapid prototyping, and decomposition-based, to list a
+few.  The student will survey the methods and select 4 or 5 to "try
+out" in a sample implementation.  This will provide a framework for
+comparison and analysis from a personal perspective.
 
 451
 ---
