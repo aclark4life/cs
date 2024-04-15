@@ -23,4 +23,4 @@ clean:
 format:
 	clang-format -i *.c
 tidy:
-	clang-tidy avg.c
+	/opt/homebrew/Cellar/llvm/17.0.6_1/bin/clang-tidy avg.c
