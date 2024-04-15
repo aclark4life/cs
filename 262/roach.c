@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
           count[ibug][jbug]++;
         }
         iteration++; /*increment iteration*/
-      }              /*end while*/
+      } /*end while*/
       for (i = 0; i < n; i++) {
         for (j = 0; j < m; j++) {
           printf("count[%d][%d] = %d\n", i, j, count[i][j]);
@@ -82,6 +82,6 @@ int main(int argc, char *argv[])
       printf("LEGAL MOVES: %d\n", iteration); /*print total legal moves*/
 
     } /*end else*/
-  }   /*end else*/
+  } /*end else*/
   free(count);
 } /*end main*/

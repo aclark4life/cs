@@ -33,6 +33,9 @@ tidy:
 	cd 364/rng; make tidy
 	cd 364/split; make tidy
 
+lint:
+	$(MAKE) format tidy
+
 avg:
 	262/avg 3
 list:
