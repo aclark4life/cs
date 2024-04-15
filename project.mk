@@ -1,3 +1,5 @@
+PROJECT_NAME = CS
+
 all:
 	cd 262; make all
 	cd 295; make all
