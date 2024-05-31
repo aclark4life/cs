@@ -1,4 +1,4 @@
-PROJECT_NAME = CS
+PROJECT_NAME := CS
 
 all:
 	cd 262; make all
