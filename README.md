@@ -711,11 +711,6 @@ Operating Systems
 │   ├── start.html
 │   ├── start.html.jsnyder
 │   └── title.wp51
-├── Makefile
-├── README.md
-├── README.rst
-├── me.gif
-└── project.mk
 ```
 
 91 directories, 559 files
