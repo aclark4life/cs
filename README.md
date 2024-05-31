@@ -4,7 +4,7 @@ My CS code from back in the day
 
 ## Me circa 1998
 
-![me circa 98](sol.gif)
+![me circa 98](me.gif)
 
 ## 262
 
