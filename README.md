@@ -820,3 +820,137 @@ Operating Systems
 
 91 directories, 8 files
 ```
+
+## Makefile
+
+```
+.
+├── 262
+│   └── Makefile
+├── 295
+│   └── Makefile
+├── 301
+│   ├── determinant
+│   │   └── old
+│   ├── gauss
+│   │   ├── Old
+│   │   └── in
+│   ├── generic
+│   ├── inverse
+│   ├── multiply
+│   │   ├── inp
+│   │   └── old
+│   ├── ortho
+│   └── t
+├── 364
+│   ├── buffer
+│   │   └── Makefile
+│   ├── ko
+│   │   └── Makefile
+│   ├── merge
+│   │   └── Makefile
+│   ├── rng
+│   │   └── Makefile
+│   ├── split
+│   │   └── Makefile
+│   ├── tcsh
+│   └── tmp
+│       └── Makefile
+├── 366
+│   ├── Makefile
+│   ├── bin
+│   └── src
+├── 420
+│   ├── ko
+│   │   ├── Makefile
+│   │   ├── old
+│   │   │   ├── Makefile
+│   │   │   ├── old
+│   │   │   ├── rng
+│   │   │   └── split
+│   │   └── old2
+│   │       └── Makefile
+│   └── tri
+│       ├── Makefile
+│       └── old
+│           ├── 1
+│           ├── 2
+│           │   └── Makefile
+│           ├── 3
+│           │   └── Makefile
+│           ├── 4
+│           │   └── Makefile
+│           └── 5
+│               └── Makefile
+├── 451
+│   ├── ht
+│   │   └── Makefile
+│   ├── ht2
+│   │   └── Makefile
+│   ├── java
+│   │   └── stuff
+│   ├── ml
+│   ├── pl
+│   ├── review
+│   ├── scanner
+│   └── scheme
+├── 461
+│   ├── hw
+│   │   ├── alloca
+│   │   ├── java
+│   │   └── stat
+│   └── project
+│       ├── Makefile
+│       ├── first
+│       ├── prac
+│       │   └── Makefile
+│       ├── scan
+│       └── tok
+├── 462
+│   ├── crap
+│   │   ├── mat
+│   │   │   └── Makefile
+│   │   ├── max
+│   │   │   └── Makefile
+│   │   └── optsertre
+│   │       └── Makefile
+│   ├── etsp
+│   │   └── Makefile
+│   ├── f
+│   │   ├── Makefile
+│   │   └── some_shit
+│   ├── floyd
+│   │   └── Makefile
+│   ├── pasc
+│   │   └── Makefile
+│   ├── qtest
+│   │   └── Makefile
+│   └── t
+├── 466
+│   ├── cs-slip
+│   │   └── Docs
+│   ├── dir
+│   ├── shell2
+│   │   ├── 1
+│   │   │   └── Makefile
+│   │   ├── 2
+│   │   │   └── Makefile
+│   │   ├── 3
+│   │   │   ├── Makefile
+│   │   │   └── bak
+│   │   ├── 4
+│   │   │   ├── Makefile
+│   │   │   └── bink
+│   │   └── dave-s-shell
+│   │       └── Makefile
+│   ├── sort
+│   │   └── Makefile
+│   └── tok
+│       ├── old
+│       └── so
+├── 474
+├── 496
+└── Makefile
+
+91 directories, 36 files
+```
