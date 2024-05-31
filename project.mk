@@ -24,17 +24,9 @@ format:
 	-cd 364/merge; make format
 	cd 364/rng; make format
 	cd 364/split; make format
-tidy:
-	cd 262; make tidy
-	cd 295; make tidy
-	cd 364/buffer; make tidy
-	cd 364/ko; make tidy
-	-cd 364/merge; make tidy
-	cd 364/rng; make tidy
-	cd 364/split; make tidy
 
 lint:
-	$(MAKE) format tidy
+	$(MAKE) format
 
 avg:
 	262/avg 3
