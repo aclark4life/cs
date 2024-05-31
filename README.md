@@ -16,9 +16,9 @@ Prerequisite: CS 202. A continuation of CS 202 includ- ing elementary file handl
 CS 295 Discrete Structures (3.00 cr.)
 Boolean algebra, combinatorics, graphs, inductive and deductive proofs, functions and relations, recurrences, finite state machines. Same course as MA 295.
 
-## 301
+## 301 (MA 301)
 
-MA301 Computational Linear Algebra
+Computational Linear Algebra
 
 ## 364
 
