@@ -30,9 +30,10 @@ Systems Level Programming
 
 ## 420
 
-Computer Science Research 3.0 credits.
-Research in Software Construction Methods.
-Dr. Keith Gallagher, Computer Science Dept.
+### Computer Science Research 3.0 credits.
+
+- Research in Software Construction Methods.
+- Dr. Keith Gallagher, Computer Science Dept.
 
 ### Readings or other work
 
