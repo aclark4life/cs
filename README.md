@@ -711,5 +711,112 @@ Operating Systems
 │   ├── start.html
 │   ├── start.html.jsnyder
 │   └── title.wp51
+
 91 directories, 559 files
+```
+
+## Foo
+
+```
+.
+├── 262
+├── 295
+├── 301
+│   ├── determinant
+│   │   └── old
+│   ├── gauss
+│   │   ├── Old
+│   │   └── in
+│   ├── generic
+│   ├── inverse
+│   ├── multiply
+│   │   ├── inp
+│   │   └── old
+│   ├── ortho
+│   └── t
+├── 364
+│   ├── buffer
+│   ├── ko
+│   ├── merge
+│   ├── rng
+│   ├── split
+│   ├── tcsh
+│   └── tmp
+├── 366
+│   ├── bin
+│   └── src
+├── 420
+│   ├── ko
+│   │   ├── old
+│   │   │   ├── foo
+│   │   │   ├── old
+│   │   │   ├── rng
+│   │   │   └── split
+│   │   │       └── foo
+│   │   └── old2
+│   │       └── foo
+│   └── tri
+│       └── old
+│           ├── 1
+│           ├── 2
+│           ├── 3
+│           ├── 4
+│           └── 5
+├── 451
+│   ├── ht
+│   ├── ht2
+│   ├── java
+│   │   └── stuff
+│   ├── ml
+│   ├── pl
+│   ├── review
+│   ├── scanner
+│   └── scheme
+├── 461
+│   ├── hw
+│   │   ├── alloca
+│   │   ├── java
+│   │   └── stat
+│   │       └── foo
+│   └── project
+│       ├── first
+│       ├── prac
+│       │   └── foo
+│       ├── scan
+│       └── tok
+├── 462
+│   ├── crap
+│   │   ├── mat
+│   │   ├── max
+│   │   └── optsertre
+│   ├── etsp
+│   ├── f
+│   │   └── some_shit
+│   ├── floyd
+│   ├── pasc
+│   ├── qtest
+│   └── t
+├── 466
+│   ├── cs-slip
+│   │   └── Docs
+│   ├── dir
+│   ├── shell2
+│   │   ├── 1
+│   │   ├── 2
+│   │   ├── 3
+│   │   │   ├── bak
+│   │   │   └── foo
+│   │   ├── 4
+│   │   │   └── bink
+│   │   │       └── foo
+│   │   └── dave-s-shell
+│   ├── sort
+│   └── tok
+│       ├── old
+│       └── so
+├── 474
+└── 496
+    └── foo
+
+91 directories, 8 files
 ```
