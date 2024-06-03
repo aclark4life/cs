@@ -1,4 +1,5 @@
 PROJECT_NAME := CS
+.DEFAULT_GOAL := all
 
 all:
 	cd 262; make all
