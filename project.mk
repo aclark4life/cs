@@ -9,6 +9,7 @@ all:
 	cd 364/merge; make
 	cd 364/rng; make
 	cd 364/split; make
+	cd 999; make
 clean:
 	cd 262; make clean
 	cd 295; make clean
