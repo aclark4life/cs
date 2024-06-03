@@ -42,3 +42,5 @@ rng:
 	cd 364/rng; ./rng 3
 split:
 	cd 364/split; ./split
+tree:
+	tree -P *.c
