@@ -13,12 +13,8 @@ __pycache__
 295/fsa
 295/hanoi
 295/swap
-364/buffer/buffer
-364/buffer/c.out
-364/buffer/d.out
-364/buffer/f.out
-364/buffer/s.out
-364/ko/ko
-364/merge/merge
-364/rng/rng
-364/split/split
+364/buffer
+364/ko
+364/merge
+364/rng
+364/split
