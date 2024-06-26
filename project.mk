@@ -1,15 +1,15 @@
-PROJECT_NAME := CS
+PROJECT_NAME := cs
 .DEFAULT_GOAL := all
 
 all:
-	cd 262; make all
-	cd 295; make all
+	cd 262; make
+	cd 295; make
 	cd 364/buffer; make
-	cd 364/ko; make
-	cd 364/merge; make
-	cd 364/rng; make
-	cd 364/split; make
-	cd 999; make
+	# cd 364/ko; make
+	# cd 364/merge; make
+	# cd 364/rng; make
+	# cd 364/split; make
+	# cd 999; make
 clean:
 	cd 262; make clean
 	cd 295; make clean
@@ -46,3 +46,6 @@ split:
 	cd 364/split; ./split
 tree:
 	tree -P *.c
+
+edit:
+	vi project.mk

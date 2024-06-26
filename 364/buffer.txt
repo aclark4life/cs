@@ -50,7 +50,7 @@ Data:
         d3:    987
         d3     654
         f1.2   3.21
-
+
 The next record follows immediately in the buffer:
 
  (s5d3cf3.5s2cd3d3f1.2)keith123q12312345xyz987654321(d1d1cs2)12abc(d5)13579...
@@ -97,8 +97,6 @@ Assumptions / other issues:
 
 This document is in ~kbg/364/adm/buffer  
 
+Input:
 
-
-
-
-
+(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789(s9f5.5cccccccccd9)gallagher1234554321abcdefghi123456789
