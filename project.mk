@@ -4,7 +4,7 @@ PROJECT_NAME := cs
 all:
 	cd 262; make
 	cd 295; make
-	cd 364; make
+	# cd 364; make
 
 clean:
 	cd 262; make clean
