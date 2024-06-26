@@ -4,7 +4,7 @@ PROJECT_NAME := cs
 all:
 	cd 262; make
 	cd 295; make
-	cd 364/buffer; make
+	cd 364; make
 	# cd 364/ko; make
 	# cd 364/merge; make
 	# cd 364/rng; make
