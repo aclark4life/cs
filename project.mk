@@ -46,6 +46,5 @@ split:
 	cd 364/split; ./split
 tree:
 	tree -P *.c
-
 edit:
 	vi project.mk
