@@ -14,4 +14,14 @@ def dfs_iterative(graph, start):
                     stack.append(neighbor)
 
 # Example usage:
-dfs_iterative(graph, 'A')
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F', 'G'],
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': []
+}
+
+dfs_iterative(graph, 'B')
