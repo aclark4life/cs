@@ -9,6 +9,7 @@ struct Node {
 void printList(struct Node* n) {
     while (n != NULL) {
         printf("%d ", n->data);
+        printf("\n");
         n = n->next;
     }
 }
