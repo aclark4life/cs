@@ -60,7 +60,6 @@ Operating Systems
 ## 496
 
 ```
-tree -P *.c
 .
 ├── 262
 │   ├── avg.c
@@ -351,6 +350,7 @@ tree -P *.c
 └── src
     ├── arg.c
     └── data-structures
+        └── array.c
 
-86 directories, 204 files
+86 directories, 205 files
 ```
