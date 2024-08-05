@@ -1,10 +1,6 @@
-# CS
+# My CS code from back in the day
 
-My CS code from back in the day
-
-## Me circa 1998
-
-![me circa 98](me.gif)
+![me circa 98](me.gif "Me circa 1998")
 
 ## 262
 
