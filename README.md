@@ -59,10 +59,7 @@ Operating Systems
 
 ## 496
 
-## Tree
-
 ```
-tree -P *.c
 .
 ├── 262
 │   ├── avg.c
