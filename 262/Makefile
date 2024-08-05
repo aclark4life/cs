@@ -1,5 +1,8 @@
 objects = avg.o
 
+clean:
+	rm -f avg.o avg
+
 all: avg list roach
 
 avg: $(objects)
