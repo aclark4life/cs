@@ -1844,6 +1844,7 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
+
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -1859,11 +1860,13 @@ if settings.DEBUG:
 
 # https://www.django-rest-framework.org/#example
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
 
 class UserViewSet(viewsets.ModelViewSet):
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -2188,7 +2191,9 @@ class MarketingBlock(blocks.StructBlock):
 
 
 class HomePage(Page):
+
     template = 'home/home_page.html'  # Create a template for rendering the home page
+
     marketing_blocks = StreamField([
         ('marketing_block', MarketingBlock()),
     ], blank=True, null=True, use_json_field=True)
@@ -2599,10 +2604,10 @@ eb-create-default: aws-check-env eb-check-env
 eb-custom-env-default:
 	$(ADD_DIR) .ebextensions
 	@echo "$$CUSTOM_ENV_EC2_USER" > .ebextensions/bash.config
-	$(GIT_ADD) .ebextensions/bash.config
+	-$(GIT_ADD) .ebextensions/bash.config
 	$(ADD_DIR) .platform/hooks/postdeploy
 	@echo "$$CUSTOM_ENV_VAR_FILE" > .platform/hooks/postdeploy/setenv.sh
-	$(GIT_ADD) .platform/hooks/postdeploy/setenv.sh
+	-$(GIT_ADD) .platform/hooks/postdeploy/setenv.sh
 
 eb-deploy-default:
 	eb deploy
@@ -2642,7 +2647,7 @@ eb-print-env-default:
 
 npm-init-default:
 	npm init -y
-	$(GIT_ADD) package.json
+	-$(GIT_ADD) package.json
 	-$(GIT_ADD) package-lock.json
 
 npm-build-default:
@@ -2650,7 +2655,7 @@ npm-build-default:
 
 npm-install-default:
 	npm install
-	$(GIT_ADD) package-lock.json
+	-$(GIT_ADD) package-lock.json
 
 npm-clean-default:
 	$(DEL_DIR) dist/
@@ -2697,6 +2702,7 @@ django-init-default: db-init django-install
 		$(MAKE) django-search
 	@$(MAKE) django-urls
 	@$(MAKE) separator
+	@$(MAKE) freeze
 	@$(MAKE) django-common
 	@$(MAKE) separator
 	export SETTINGS=backend/settings/base.py; \
@@ -2716,7 +2722,6 @@ django-init-default: db-init django-install
 	@$(MAKE) separator
 	@$(MAKE) readme
 	@$(MAKE) gitignore
-	@$(MAKE) freeze
 	@$(MAKE) serve
 
 django-common-default:
@@ -2725,11 +2730,11 @@ django-common-default:
 	export SETTINGS=backend/settings/base.py DEV_SETTINGS=backend/settings/dev.py; \
 		$(MAKE) django-settings
 	$(MAKE) django-custom-admin
-	$(GIT_ADD) backend
-	$(GIT_ADD) requirements.txt
-	$(GIT_ADD) manage.py
-	$(GIT_ADD) Dockerfile
-	$(GIT_ADD) .dockerignore
+	-$(GIT_ADD) backend
+	-$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) manage.py
+	-$(GIT_ADD) Dockerfile
+	-$(GIT_ADD) .dockerignore
 
 django-install-default: separator
 	$(ENSURE_PIP)
@@ -2803,17 +2808,17 @@ django-frontend-default: python-webpack-init
 	@echo "$$THEME_BLUE" > frontend/src/styles/theme-blue.scss
 	@echo "$$THEME_TOGGLER" > frontend/src/utils/themeToggler.js
 	@echo "$$TINYMCE_JS" > frontend/src/utils/tinymce.js
-	$(GIT_ADD) home
-	$(GIT_ADD) frontend
-	$(GIT_ADD) .babelrc
-	$(GIT_ADD) .browserslistrc
-	$(GIT_ADD) .eslintrc
-	$(GIT_ADD) .nvmrc
-	$(GIT_ADD) .stylelintrc.json
-	$(GIT_ADD) docker-compose.yml
-	$(GIT_ADD) package-lock.json
-	$(GIT_ADD) package.json
-	$(GIT_ADD) postcss.config.js
+	-$(GIT_ADD) home
+	-$(GIT_ADD) frontend
+	-$(GIT_ADD) .babelrc
+	-$(GIT_ADD) .browserslistrc
+	-$(GIT_ADD) .eslintrc
+	-$(GIT_ADD) .nvmrc
+	-$(GIT_ADD) .stylelintrc.json
+	-$(GIT_ADD) docker-compose.yml
+	-$(GIT_ADD) package-lock.json
+	-$(GIT_ADD) package.json
+	-$(GIT_ADD) postcss.config.js
 
 django-home-default:
 	python manage.py startapp home
@@ -2822,7 +2827,7 @@ django-home-default:
 	@echo "$$DJANGO_HOME_PAGE_VIEWS" > home/views.py
 	@echo "$$DJANGO_HOME_PAGE_URLS" > home/urls.py
 	@echo "INSTALLED_APPS.append('home')" >> $(SETTINGS)
-	$(GIT_ADD) home
+	-$(GIT_ADD) home
 
 django-payments-default:
 	python manage.py startapp payments
@@ -2844,7 +2849,7 @@ django-payments-default:
 	@echo "STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')" >> $(SETTINGS)
 	python manage.py makemigrations payments
 	@echo "$$PAYMENTS_MIGRATION" > payments/migrations/0002_set_stripe_api_keys.py
-	$(GIT_ADD) payments/
+	-$(GIT_ADD) payments/
 
 django-search-default:
 	python manage.py startapp search
@@ -2855,7 +2860,7 @@ django-search-default:
 	@echo "$$DJANGO_SEARCH_URLS" > search/urls.py
 	@echo "$$DJANGO_SEARCH_UTILS" > search/utils.py
 	@echo "$$DJANGO_SEARCH_VIEWS" > search/views.py
-	$(GIT_ADD) search
+	-$(GIT_ADD) search
 
 django-secret-default:
 	@python -c "from secrets import token_urlsafe; print(token_urlsafe(50))"
@@ -2874,7 +2879,7 @@ django-siteuser-default:
 	@echo "INSTALLED_APPS.append('siteuser')" >> $(SETTINGS)
 	@echo "AUTH_USER_MODEL = 'siteuser.User'" >> $(SETTINGS)
 	python manage.py makemigrations siteuser
-	$(GIT_ADD) siteuser/
+	-$(GIT_ADD) siteuser/
 
 django-graph-default:
 	python manage.py graph_models -a -o $(PROJECT_NAME).png
@@ -2907,7 +2912,7 @@ django-model-form-demo-default:
 	@echo "$$MODEL_FORM_DEMO_TEMPLATE_LIST" > model_form_demo/templates/model_form_demo_list.html
 	@echo "INSTALLED_APPS.append('model_form_demo')" >> $(SETTINGS)
 	python manage.py makemigrations
-	$(GIT_ADD) model_form_demo
+	-$(GIT_ADD) model_form_demo
 
 django-logging-demo-default:
 	python manage.py startapp logging_demo
@@ -2915,7 +2920,7 @@ django-logging-demo-default:
 	@echo "$$LOGGING_DEMO_URLS" > logging_demo/urls.py
 	@echo "$$LOGGING_DEMO_SETTINGS" >> $(SETTINGS)
 	@echo "INSTALLED_APPS.append('logging_demo')" >> $(SETTINGS)
-	$(GIT_ADD) logging_demo
+	-$(GIT_ADD) logging_demo
 
 django-serve-default:
 	npm run watch &
@@ -2975,6 +2980,9 @@ django-crispy-default:
 
 django-shell-default:
 	python manage.py shell
+
+django-db-shell-default:
+	python manage.py dbshell
 
 django-static-default:
 	python manage.py collectstatic --noinput
@@ -3055,7 +3063,7 @@ endif
 favicon-default:
 	dd if=/dev/urandom bs=64 count=1 status=none | base64 | convert -size 16x16 -depth 8 -background none -fill white label:@- favicon.png
 	convert favicon.png favicon.ico
-	$(GIT_ADD) favicon.ico
+	-$(GIT_ADD) favicon.ico
 	$(DEL_FILE) favicon.png
 
 gh-default:
@@ -3063,7 +3071,7 @@ gh-default:
 
 git-ignore-default:
 	@echo "$$GIT_IGNORE" > .gitignore
-	$(GIT_ADD) .gitignore
+	-$(GIT_ADD) .gitignore
 
 git-branches-default:
 	-for i in $(GIT_BRANCHES) ; do \
@@ -3094,6 +3102,9 @@ git-prune-default:
 git-set-upstream-default:
 	git push --set-upstream origin main
 
+git-set-default-default:
+	gh repo set-default
+
 git-short-default:
 	@echo $(GIT_REV)
 
@@ -3120,7 +3131,7 @@ lint-default:
 	-ruff check -v --fix
 
 make-default:
-	$(GIT_ADD) Makefile
+	-$(GIT_ADD) Makefile
 	-git commit Makefile -m "Add/update project-makefile files"
 	-git push
 
@@ -3128,15 +3139,15 @@ pip-freeze-default:
 	$(ENSURE_PIP)
 	python -m pip freeze | sort > $(TMPDIR)/requirements.txt
 	mv -f $(TMPDIR)/requirements.txt .
-	$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) requirements.txt
 
 pip-init-default:
 	touch requirements.txt
-	$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) requirements.txt
 
 pip-init-test-default:
 	@echo "$$REQUIREMENTS_TEST" > requirements-test.txt
-	$(GIT_ADD) requirements-test.txt
+	-$(GIT_ADD) requirements-test.txt
 
 pip-install-default:
 	$(ENSURE_PIP)
@@ -3192,15 +3203,15 @@ plone-build-default:
 
 project-mk-default:
 	touch project.mk
-	$(GIT_ADD) project.mk
+	-$(GIT_ADD) project.mk
 
 python-license-default:
 	@echo "$(PYTHON_LICENSE_TXT)" > LICENSE.txt
-	$(GIT_ADD) LICENSE.txt
+	-$(GIT_ADD) LICENSE.txt
 
 python-project-default:
 	@echo "$(PYTHON_PROJECT_TOML)" > pyproject.toml
-	$(GIT_ADD) pyproject.toml
+	-$(GIT_ADD) pyproject.toml
 
 python-serve-default:
 	@echo "\n\tServing HTTP on http://0.0.0.0:8000\n"
@@ -3215,7 +3226,7 @@ python-webpack-init-default:
 python-ci-default:
 	$(ADD_DIR) .github/workflows
 	@echo "$(PYTHON_CI_YAML)" > .github/workflows/build_wheels.yml
-	$(GIT_ADD) .github/workflows/build_wheels.yml
+	-$(GIT_ADD) .github/workflows/build_wheels.yml
 
 rand-default:
 	@openssl rand -base64 12 | sed 's/\///g'
@@ -3223,11 +3234,11 @@ rand-default:
 readme-init-rst-default:
 	@echo "$(PROJECT_NAME)" > README.rst
 	@echo "================================================================================" >> README.rst
-	$(GIT_ADD) README.rst
+	-$(GIT_ADD) README.rst
 
 readme-init-md-default:
 	@echo "# $(PROJECT_NAME)" > README.md
-	$(GIT_ADD) README.md
+	-$(GIT_ADD) README.md
 
 readme-edit-rst-default:
 	vi README.rst
@@ -3268,8 +3279,8 @@ sphinx-init-default: sphinx-install
 	sphinx-quickstart -q -p $(PROJECT_NAME) -a $(USER) -v 0.0.1 $(RANDIR)
 	$(COPY_DIR) $(RANDIR)/* .
 	$(DEL_DIR) $(RANDIR)
-	$(GIT_ADD) index.rst
-	$(GIT_ADD) conf.py
+	-$(GIT_ADD) index.rst
+	-$(GIT_ADD) conf.py
 	$(DEL_FILE) make.bat
 	git checkout Makefile
 	$(MAKE) gitignore
@@ -3278,16 +3289,16 @@ sphinx-theme-init-default:
 	export THEME_NAME=$(PROJECT_NAME)_theme; \
 	$(ADD_DIR) $$THEME_NAME ; \
 	$(ADD_FILE) $$THEME_NAME/__init__.py ; \
-	$(GIT_ADD) $$THEME_NAME/__init__.py ; \
+	-$(GIT_ADD) $$THEME_NAME/__init__.py ; \
 	$(ADD_FILE) $$THEME_NAME/theme.conf ; \
-	$(GIT_ADD) $$THEME_NAME/theme.conf ; \
+	-$(GIT_ADD) $$THEME_NAME/theme.conf ; \
 	$(ADD_FILE) $$THEME_NAME/layout.html ; \
-	$(GIT_ADD) $$THEME_NAME/layout.html ; \
+	-$(GIT_ADD) $$THEME_NAME/layout.html ; \
 	$(ADD_DIR) $$THEME_NAME/static/css ; \
 	$(ADD_FILE) $$THEME_NAME/static/css/style.css ; \
 	$(ADD_DIR) $$THEME_NAME/static/js ; \
 	$(ADD_FILE) $$THEME_NAME/static/js/script.js ; \
-	$(GIT_ADD) $$THEME_NAME/static
+	-$(GIT_ADD) $$THEME_NAME/static
 
 review-default:
 ifeq ($(UNAME), Darwin)
@@ -3321,7 +3332,7 @@ usage-default:
 wagtail-search-default:
 	@echo "$$WAGTAIL_SEARCH_TEMPLATE" > search/templates/search/search.html
 	@echo "$$WAGTAIL_SEARCH_URLS" > search/urls.py
-	$(GIT_ADD) search
+	-$(GIT_ADD) search
 
 wagtail-settings-default:
 	@echo "INSTALLED_APPS.append('wagtailmenus')" >> $(SETTINGS)
@@ -3341,7 +3352,7 @@ wagtail-privacy-default:
 	@echo "$$PRIVACY_PAGE_TEMPLATE" > privacy/templates/privacy_page.html
 	@echo "INSTALLED_APPS.append('privacy')" >> $(SETTINGS)
 	python manage.py makemigrations privacy
-	$(GIT_ADD) privacy/
+	-$(GIT_ADD) privacy/
 
 wagtail-base-default:
 	@echo "$$WAGTAIL_BASE_TEMPLATE" > backend/templates/base.html
@@ -3374,7 +3385,7 @@ wagtail-backend-templates-default:
 	@echo "$$HTML_HEADER" >> backend/templates/header.html
 	@echo "$$HTML_FOOTER" >> backend/templates/footer.html
 	@echo "$$WAGTAIL_HTML_OFFCANVAS" > backend/templates/offcanvas.html
-	$(GIT_ADD) backend/templates/
+	-$(GIT_ADD) backend/templates/
 
 wagtail-start-default:
 	wagtail start backend .
@@ -3435,24 +3446,24 @@ wagtail-install-default:
 
 webpack-init-default: npm-init
 	@echo "$$WEBPACK_CONFIG_JS" > webpack.config.js
-	$(GIT_ADD) webpack.config.js
+	-$(GIT_ADD) webpack.config.js
 	npm install --save-dev webpack webpack-cli webpack-dev-server
 	$(ADD_DIR) src/
 	@echo "$$WEBPACK_INDEX_JS" > src/index.js
-	$(GIT_ADD) src/index.js
+	-$(GIT_ADD) src/index.js
 	@echo "$$WEBPACK_INDEX_HTML" > index.html
-	$(GIT_ADD) index.html
+	-$(GIT_ADD) index.html
 	$(MAKE) gitignore
 
 webpack-reveal-init-default: npm-init
 	@echo "$$WEBPACK_REVEAL_CONFIG_JS" > webpack.config.js
-	$(GIT_ADD) webpack.config.js
+	-$(GIT_ADD) webpack.config.js
 	npm install --save-dev webpack webpack-cli webpack-dev-server
 	$(ADD_DIR) src/
 	@echo "$$WEBPACK_REVEAL_INDEX_JS" > src/index.js
-	$(GIT_ADD) src/index.js
+	-$(GIT_ADD) src/index.js
 	@echo "$$WEBPACK_REVEAL_INDEX_HTML" > index.html
-	$(GIT_ADD) index.html
+	-$(GIT_ADD) index.html
 	$(MAKE) gitignore
 
 wagtail-contactpage-default:
@@ -3464,7 +3475,7 @@ wagtail-contactpage-default:
 	@echo "$$CONTACT_PAGE_LANDING" > contactpage/templates/contactpage/contact_page_landing.html
 	@echo "INSTALLED_APPS.append('contactpage')" >> $(SETTINGS)
 	python manage.py makemigrations contactpage
-	$(GIT_ADD) contactpage/
+	-$(GIT_ADD) contactpage/
 
 wagtail-sitepage-default:
 	python manage.py startapp sitepage
@@ -3473,7 +3484,7 @@ wagtail-sitepage-default:
 	@echo "$$SITEPAGE_TEMPLATE" > sitepage/templates/sitepage/site_page.html
 	@echo "INSTALLED_APPS.append('sitepage')" >> $(SETTINGS)
 	python manage.py makemigrations sitepage
-	$(GIT_ADD) sitepage/
+	-$(GIT_ADD) sitepage/
 
 # ------------------------------------------------------------------------------  
 # More rules
@@ -3491,6 +3502,8 @@ db-import-default: db-pg-import
 db-export-default: eb-pg-export
 db-init-default: db-pg-init
 db-init-test-default: db-pg-init-test
+db-shell-default: django-db-shell
+dbshell-default: django-db-shell
 deploy-default: eb-deploy
 django-clean-default: wagtail-clean
 djlint-default: lint-djlint
@@ -3522,6 +3535,7 @@ migrate-default: django-migrate
 migrations-default: django-migrations
 migrations-show-default: django-migrations-show
 mk-default: project-mk
+m-default: django-migrate
 o-default: open
 open-default: django-open
 p-default: git-push
