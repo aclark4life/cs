@@ -11,9 +11,6 @@ format:
 	cd 262; make format
 	cd 295; make format
 
-lint:
-	$(MAKE) format
-
 avg:
 	262/avg 3
 
@@ -34,9 +31,3 @@ rng:
 
 split:
 	cd 364/split; ./split
-
-tree:
-	tree -P *.c
-
-edit:
-	vi project.mk
