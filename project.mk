@@ -43,9 +43,3 @@ tree:
 
 edit:
 	vi project.mk
-
-bfs:
-	cd src; make bfs
-
-dfs:
-	cd src; make dfs
