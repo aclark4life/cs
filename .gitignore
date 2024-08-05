@@ -19,3 +19,8 @@ __pycache__
 364/rng
 364/split
 src/arg
+src/data-structures/array
+src/data-structures/list
+src/data-structures/queue
+src/data-structures/stack
+src/data-structures/tree
