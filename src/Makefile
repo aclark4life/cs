@@ -1,4 +1,2 @@
-bfs:
-	python bfs.py
-dfs:
-	python dfs.py
+arg:
+	gcc -o arg arg.c
