@@ -1,4 +1,8 @@
 all: array list queue stack tree
+
+clean:
+	rm -f array list queue stack tree
+
 array: array.c
 	gcc -o array array.c
 
