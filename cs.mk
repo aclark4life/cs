@@ -1,7 +1,4 @@
-.DEFAULT_GOAL := all
-PROJECT_NAME := cs
-
-all:
+cs:
 	cd 262; make
 	cd 295; make
 	cd src; make
