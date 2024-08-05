@@ -45,7 +45,7 @@ edit:
 	vi project.mk
 
 bfs:
-	cd 499; make bfs
+	cd src; make bfs
 
 dfs:
-	cd 499; make dfs
+	cd src; make dfs
