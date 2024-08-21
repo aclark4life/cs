@@ -1,9 +1,4 @@
-PROJECT_NAME := cs
-
-include cs.mk
-
-
-tree:
-	tree -P *.c
-
-t: tree
+# Custom Makefile
+# Add your custom makefile commands here
+#
+# PROJECT_NAME := my-new-project
