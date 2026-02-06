@@ -1,17 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-extern void prompt();
-extern char *read_long();
+extern void prompt(void);
+extern char *read_long(void);
 extern char **tokenize(char *, int *);
 extern int no_token(char **);
 extern int check_for_exit(char **);
 extern void do_token(char **, int *);
 
-main() {
+int main(void) {
   char **tokenv;
   char *s;
   int tokenc;
-  int i;
 
   prompt();
   for (s = read_long(); s != NULL; s = read_long()) {
@@ -23,4 +23,6 @@ main() {
     }
     prompt();
   }
+
+  return EXIT_SUCCESS;
 }

@@ -32,6 +32,7 @@ tSymbol symbol_initialize(char *text, int kind) {
   symbol = (tSymbol)check_malloc(SYMBOL_SIZE);
   symbol->name = string_copy(text);
   symbol->kind = kind;
+  return symbol;
 }
 
 void symbol_print(tSymbol s) {

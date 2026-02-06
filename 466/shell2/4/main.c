@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #define PROMPT "* "
 
-main() {
+int main(void) {
   char **tokenv;
   char *s;
   int tokenc;
-  int i;
 
   s = prompt();
   while (s != NULL) {
@@ -18,4 +18,6 @@ main() {
     free(s);
     s = prompt();
   }
+
+  return EXIT_SUCCESS;
 }

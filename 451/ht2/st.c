@@ -35,6 +35,7 @@ tSymbolTable st_initialize(int size, int (*symbol_compare_function)(),
   st->symbol_compare_function = symbol_compare_function;
   st->symbol_hash_function = symbol_hash_function;
   st->current_scope = -1;
+  return st;
 }
 
 void st_free(tSymbolTable st) {

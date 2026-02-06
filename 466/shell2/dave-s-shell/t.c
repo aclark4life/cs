@@ -2,12 +2,14 @@
 
 #include "jobs.h"
 
-#include "stdio.h"
-extern char *read_long();
-extern char **tokenize();
-static char *prompt();
+#include <stdio.h>
+#include <stdlib.h>
 
-main() {
+extern char *read_long(void);
+extern char **tokenize(char *);
+static char *prompt(void);
+
+int main(void) {
   char *input;
   char **tokenv;
   int i;
@@ -28,9 +30,11 @@ main() {
     free(input);
     input = prompt();
   }
+
+  return EXIT_SUCCESS;
 }
 
-static char *prompt() {
+static char *prompt(void) {
   printf("command:");
   return (read_long());
 }

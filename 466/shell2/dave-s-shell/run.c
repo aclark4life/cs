@@ -21,7 +21,7 @@ static void check_redirect_stdin(char **tokenv);
 static void check_redirect_stdout(char **tokenv);
 static void external_command(char **tokenv, tJob background_processes[]);
 
-static dump_tokens(char **t) {
+static void dump_tokens(char **t) {
   fprintf(stderr, "tokens: ");
   while (*t)
     fprintf(stderr, "  '%s' ", *t++);
@@ -29,11 +29,14 @@ static dump_tokens(char **t) {
 }
 
 void run(char **tokenv, tJob background_processes[]) {
+  if (tokenv == NULL || tokenv[0] == NULL)
+    return;
+
   if (strcmp(tokenv[0], "jobs") == 0) {
     print_jobs(background_processes);
     note_finished_jobs(background_processes, 0);
   } else if (strcmp(tokenv[0], "kill") == 0) {
-    if isdigit ((*tokenv[1]))
+    if (tokenv[1] != NULL && isdigit((*tokenv[1])))
       kill_job(atoi(tokenv[1]), background_processes);
     else
       printf("usage: kill <job number>\n");

@@ -2,16 +2,25 @@
 #include <stdlib.h>
 
 int Factorial(int n) {
-  if (n == 1)
+  if (n <= 0)
+    return 1;
+  else if (n == 1)
     return 1;
   else
     return n * Factorial(n - 1);
-  printf("%d", n);
 }
 
 int main(int argc, char *argv[]) {
-  int n;
+  int n, result;
+
+  if (argc < 2) {
+    fprintf(stderr, "Usage: %s <number>\n", argv[0]);
+    return EXIT_FAILURE;
+  }
+
   n = atoi(argv[1]);
-  Factorial(n);
-  printf("ANSWER> %d\n", n);
+  result = Factorial(n);
+  printf("ANSWER> %d\n", result);
+
+  return EXIT_SUCCESS;
 }
