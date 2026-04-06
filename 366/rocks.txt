@@ -10,9 +10,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 06:56:59 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1876      
+Content-Length: 1876
 Status: RO
-X-Status: 
+X-Status:
 
 ; div.asm
 ;
@@ -72,7 +72,7 @@ lp:						; loop until QUIT character
 	call	print_blank
 
 	xor	dx,dx				; divide 0:N by bx
-	mov	bx,ax				
+	mov	bx,ax
 	mov	ax,N
 	idiv	bx
 	call	printAXhex
@@ -82,7 +82,7 @@ lp:						; loop until QUIT character
 exit_program:
  	mov	ax,hold_div_by_0_cs		; restore timer interrupt
 	mov	bx,hold_div_by_0_ip
-	cli						
+	cli
 	mov     es:0[di], bx
 	mov     es:2[di], ax
 	sti
@@ -144,9 +144,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 06:58:02 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1654      
+Content-Length: 1654
 Status: RO
-X-Status: 
+X-Status:
 
 ; dollar.asm
 ;
@@ -201,7 +201,7 @@ lp:						; read and echo until QUIT character
 
  	mov	ax,hold_timer_cs		; restore timer interrupt
 	mov	bx,hold_timer_ip
-	cli						
+	cli
 	mov     es:0[di], bx
 	mov     es:2[di], ax
 	sti
@@ -254,9 +254,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 07:25:39 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1948      
+Content-Length: 1948
 Status: RO
-X-Status: 
+X-Status:
 
 ; Time Bomb
 ; a TSR!  (be nice)
@@ -285,7 +285,7 @@ m2	db 'm2!', 0
 
 
 main	proc	near
-	
+
         xor     ax,ax
         mov     es,ax 				; seg of interrupt vector table
 
@@ -303,7 +303,7 @@ main	proc	near
 
         mov     ah, 31H
 	mov     al, STATUS_OK
-	mov     dx, 264H   ; 64 paragraphs = 1K   
+	mov     dx, 264H   ; 64 paragraphs = 1K
 	int	DOS_SERVICE
 
 	exit 	STATUS_OK
@@ -311,7 +311,7 @@ main	endp
 
 
 ;purpose:  replacement interrupt handler
-;input:    active flag and count in CODE segment 
+;input:    active flag and count in CODE segment
 ;output:   nothing (calls update_vogons every TAU interrupts)
 ;destroys: nothing [[ interrupt handlers cannot destroy anything!]]
 new_interrupt_handler proc	near
@@ -342,7 +342,7 @@ print_message	proc	near
 
 	push	cs			; move cs to ds using the stack
 	pop	ds
- 
+
 	push	dx
         mov	dx,0b22H
 	call	locate
@@ -371,11 +371,11 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 07:29:28 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2749      
+Content-Length: 2749
 Status: RO
-X-Status: 
+X-Status:
 
-; macros to implement a simple vector machine	
+; macros to implement a simple vector machine
 ; add macros assume vector_length is >= 1
 ; all destroy AX
 
@@ -443,7 +443,7 @@ lp:
 lp:
 	lodsw
 	mul	word ptr [di]
-	stosw	
+	stosw
 	loop	lp
 
 	pop	di
@@ -461,7 +461,7 @@ zerov	macro	v1, len
 	mov	cx,len
 	xor	ax,ax
 	cld
-	rep stosw	
+	rep stosw
 
 	pop	di
 	pop	cx
@@ -549,7 +549,7 @@ main    proc	near
 main	endp
 
 
-;purpose: to print a vector of unsigned words 
+;purpose: to print a vector of unsigned words
 ;input:     [ds:si] points to the start of the vector, cx holds its length
 ;output:    nothing (vector is output)
 ;destroys:  nothing
@@ -587,21 +587,21 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:29:36 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 3103      
+Content-Length: 3103
 Status: RO
-X-Status: 
+X-Status:
 
 ; city.asm
 ; cities look like this ('.' is a blank)
 ;
-; ....+ 
-; ..*.* 
+; ....+
+; ..*.*
 ; *****
 ;
 ; dead cities look like this
-; 
-; .....      
-; .....    
+;
+; .....
+; .....
 ; (:-:)
 
 MAX_CITIES		equ 	 5
@@ -697,7 +697,7 @@ cities_draw	endp
 
 
 ;
-; purpose:  draw a city 
+; purpose:  draw a city
 ; input:    si points to the city
 ; output:   nothing (screen is updated)
 ; destroys: nothing
@@ -760,7 +760,7 @@ cities_hit_check	endp
 
 ;
 ; purpose:  check to see if a rock has hit a city
-; input:    dx = upper left corner of a rock, si points to a city, 
+; input:    dx = upper left corner of a rock, si points to a city,
 ;           cl = rock image width
 ; output:   nothing (city array and screen are updated)
 ; destroys: nothing
@@ -774,8 +774,8 @@ city_check_hit	proc	near
 hit:
 	...
 	call	cities_draw
-	
-no_hit:	
+
+no_hit:
 	pop	dx
 	pop	bx
 	ret
@@ -796,9 +796,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:29:39 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 5814      
+Content-Length: 5814
 Status: RO
-X-Status: 
+X-Status:
 
 ; rocks.asm
 ;
@@ -806,7 +806,7 @@ X-Status:
 ; input:   nothing
 ; output:  nothing (screen is updated)
 ;
-; 
+;
 ;  A rock looks like this
 ;
 ;     ##
@@ -871,13 +871,13 @@ stack	ends
 code	segment	public byte 'code'
 	assume  cs:code, ss:stack
 
-; data in the code segment so it can be referenced as 
+; data in the code segment so it can be referenced as
 ; cs:currently_active and cs:count
 
 currently_active	db	?
 count			dw	?
 
-main	proc	near 
+main	proc	near
 	mov	ax, seg data
 	mov	ds, ax
 	assume	ds:data
@@ -906,7 +906,7 @@ init_loop:
 	xchg	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
 	xchg	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
 	sti				; interrupts back on
-	
+
 	mov	hold_timer_ip, bx
 	mov	hold_timer_cs, ax
 
@@ -938,7 +938,7 @@ finish:
 	mov	ax, hold_timer_cs
 	mov	bx, hold_timer_ip
 
-	cli	
+	cli
 	mov	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
 	mov	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
 	sti
@@ -967,7 +967,7 @@ new_interrupt_handler	proc	near
 
 done:
 	iret
-new_interrupt_handler	endp	
+new_interrupt_handler	endp
 
 
 ;
@@ -1014,8 +1014,8 @@ new_rock_check	proc	near
 
 	...
 	; find a non-active rock then set it to active with
-	; a random x location on the top of the screen 
-	
+	; a random x location on the top of the screen
+
 no_new_rock:
 	pop	di
 	pop	cx
@@ -1025,7 +1025,7 @@ new_rock_check	endp
 
 
 ;
-; purpose:  move the rocks 
+; purpose:  move the rocks
 ; input:    nothing
 ; output:   nothing (rocks array and screen are updated)
 ; destroys: nothing
@@ -1124,7 +1124,7 @@ going_down:
 store:
 	inc	dl
 	mov	upper_left_corner[di], dx
-	
+
 	pop	dx
 	pop	cx
 	ret
@@ -1144,9 +1144,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:29:43 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2123      
+Content-Length: 2123
 Status: RO
-X-Status: 
+X-Status:
 
 ; shield.asm
 
@@ -1172,7 +1172,7 @@ code	segment	public byte 'code'
 ;
 ; purpose:  check if a rock hit a shield
 ; input:    dx = lower left corner of rock, cl = rock width
-; output:   zr flag set if hit, clear otherwise.  
+; output:   zr flag set if hit, clear otherwise.
 ; destroys: nothing
 ;
 shield_p1_hit	proc	near
@@ -1187,8 +1187,8 @@ hit:
 	...
 
 	test	al, 0				; hit!  set ZF = 1
-	
-no_hit:						; for jumps, ZF = 0 
+
+no_hit:						; for jumps, ZF = 0
 	pop	si
 	pop	dx
 	pop	ax
@@ -1199,7 +1199,7 @@ shield_p1_hit	endp
 ;
 ; purpose:  move player one's shield to the left
 ; input:    nothing
-; output:   nothing (player 1's shield location is updated and is screen) 
+; output:   nothing (player 1's shield location is updated and is screen)
 ; destroys: nothing
 ;
 shield_p1_left	proc	near
@@ -1228,7 +1228,7 @@ shield_p1_left	endp
 ;
 ; purpose:  move player one's shield to the right
 ; input:    nothing
-; output:   nothing (player 1's shield location is updated and is screen) 
+; output:   nothing (player 1's shield location is updated and is screen)
 ; destroys: nothing
 ;
 shield_p1_right	proc	near
@@ -1296,9 +1296,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:29:48 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 94        
+Content-Length: 94
 Status: RO
-X-Status: 
+X-Status:
 
 ; cities.h
 	extrn	cities_initialize:near
@@ -1317,9 +1317,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:29:54 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 266       
+Content-Length: 266
 Status: RO
-X-Status: 
+X-Status:
 
 ; dos.h
 
@@ -1352,9 +1352,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:00 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 813       
+Content-Length: 813
 Status: RO
-X-Status: 
+X-Status:
 
 ; image.asm
 
@@ -1366,7 +1366,7 @@ code	segment	byte public 'code'
 	assume cs:code
 
 ;
-; purpose: draw an image 
+; purpose: draw an image
 ; input: dx has the upper left corner's location, si points to the image
 ;        cx has image's length
 ; output: nothing (as a side effect the screen is updated)
@@ -1426,9 +1426,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:04 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 34        
+Content-Length: 34
 Status: RO
-X-Status: 
+X-Status:
 
 ; image.h
 
@@ -1446,9 +1446,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:10 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 55        
+Content-Length: 55
 Status: RO
-X-Status: 
+X-Status:
 
 link rocks+shield+cities+image+screen+random+printhex;
 
@@ -1464,9 +1464,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:16 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 211       
+Content-Length: 211
 Status: RO
-X-Status: 
+X-Status:
 
 ; macros.h
 
@@ -1498,9 +1498,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:21 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 31        
+Content-Length: 31
 Status: RO
-X-Status: 
+X-Status:
 
 ; random.h
 
@@ -1518,9 +1518,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:25 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 474       
+Content-Length: 474
 Status: RO
-X-Status: 
+X-Status:
 
 ; screen.h
 
@@ -1555,9 +1555,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:30:32 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 93        
+Content-Length: 93
 Status: RO
-X-Status: 
+X-Status:
 
 ; shield.h
 
@@ -1577,9 +1577,9 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Tue, 28 Nov 1995 08:37:58 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 73        
+Content-Length: 73
 Status: RO
-X-Status: 
+X-Status:
 
 
 
@@ -1588,4 +1588,3 @@ I put it on ghost.
 I put it on my web page.
 
 - dave
-

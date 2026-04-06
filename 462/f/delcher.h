@@ -4,90 +4,76 @@
 //  Common generic routines.
 //
 
+#ifndef __DELCHER_H_INCLUDED
+#define __DELCHER_H_INCLUDED
 
-#ifndef  __DELCHER_H_INCLUDED
-#define  __DELCHER_H_INCLUDED
+#include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <float.h>
+#include <iomanip.h>
+#include <iostream.h>
+#include <limits.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-
-#include  <stdio.h>
-#include  <stdlib.h>
-#include  <iostream.h>
-#include  <iomanip.h>
-#include  <math.h>
-#include  <string.h>
-#include  <ctype.h>
-#include  <limits.h>
-#include  <float.h>
-#include  <time.h>
-#include  <assert.h>
-#include  <errno.h>
-
-
-#define  TRUE  1
-#define  FALSE  0
-#ifndef  EXIT_FAILURE
-  #define  EXIT_FAILURE  -1
+#define TRUE 1
+#define FALSE 0
+#ifndef EXIT_FAILURE
+#define EXIT_FAILURE -1
 #endif
-#ifndef  EXIT_SUCCESS
-  #define  EXIT_SUCCESS  0
+#ifndef EXIT_SUCCESS
+#define EXIT_SUCCESS 0
 #endif
 
-
-FILE *  File_Open  (const char *, const char *);
-template <class DT>
-  DT  Max  (DT, DT);
-template <class DT>
-  DT  Min  (DT, DT);
-void *  Safe_malloc  (size_t);
-void *  Safe_realloc  (void *, size_t);
-char *  strdup  (char * &, const char *);
-template <class DT>
-void  Swap  (DT &, DT &);
-
+FILE *File_Open(const char *, const char *);
+template <class DT> DT Max(DT, DT);
+template <class DT> DT Min(DT, DT);
+void *Safe_malloc(size_t);
+void *Safe_realloc(void *, size_t);
+char *strdup(char *&, const char *);
+template <class DT> void Swap(DT &, DT &);
 
 template <class DT>
-DT  Max  (DT A, DT B)
+DT Max(DT A, DT B)
 
 /* Return the larger of  A  and  B . */
 
-  {
-   if  (A > B)
-       return  A;
-     else
-       return  B;
-  }
-
-
+{
+  if (A > B)
+    return A;
+  else
+    return B;
+}
 
 template <class DT>
-DT  Min  (DT A, DT B)
+DT Min(DT A, DT B)
 
 /* Return the smaller of  A  and  B . */
 
-  {
-   if  (A < B)
-       return  A;
-     else
-       return  B;
-  }
-
-
+{
+  if (A < B)
+    return A;
+  else
+    return B;
+}
 
 template <class DT>
-void  Swap  (DT & A, DT & B)
+void Swap(DT &A, DT &B)
 
 /* Swap the values in  A  and  B . */
 
-  {
-   DT  Save;
+{
+  DT Save;
 
-   Save = A;
-   A = B;
-   B = Save;
+  Save = A;
+  A = B;
+  B = Save;
 
-   return;
-  }
-
-
+  return;
+}
 
 #endif

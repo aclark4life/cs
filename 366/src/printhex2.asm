@@ -11,7 +11,7 @@ code	segment public byte 'code'
 	assume cs:code
 
 ; destroys AX
-; 
+;
 printAXhex	proc	near
 	push ax
 	mov  al,ah
@@ -21,7 +21,7 @@ printAXhex	proc	near
 	ret
 printAXhex	endp
 
-; 
+;
 ; destroys AX
 ;
 printALhex	proc	near
@@ -37,7 +37,7 @@ printALhex	proc	near
 	ret
 printALhex	endp
 
-; 
+;
 ; destroys AL
 ;
 printNibble	proc	near
@@ -45,7 +45,7 @@ printNibble	proc	near
         jl   small
         add  al,'A' - 10D
         jmp  endif
-small: 
+small:
         add  al,'0'
 endif:
         mov  ah,TTY_WRITE
@@ -53,13 +53,4 @@ endif:
 	ret
 printNibble	endp
 code	ends
-	end 
-
-
-
-
-
-
-
-
-
+	end

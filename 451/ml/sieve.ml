@@ -3,7 +3,7 @@
 
 (* computes primes using the sieve of Eratosthenes *)
 
-fun multiple a b = b mod a = 0 
+fun multiple a b = b mod a = 0
   ;
 
 fun sieve filter 100 = nil
@@ -11,7 +11,7 @@ fun sieve filter 100 = nil
 			   sieve filter (n+1)
 		       else
 			   let
-			       fun new_filter x = if multiple n x then 
+			       fun new_filter x = if multiple n x then
 						      true
 						  else
 						      filter x
@@ -47,13 +47,13 @@ fun takeq (0,x)           = []
   ;
 
 fun sieve_sequence filter (cons(100,A)) = nil
-  | sieve_sequence filter inStream      = 
+  | sieve_sequence filter inStream      =
 	if filter (head inStream) then
             sieve_sequence filter (tail inStream)
         else
             let
-                fun new_filter x = 
-		    if multiple (head inStream) x then 
+                fun new_filter x =
+		    if multiple (head inStream) x then
                         true
                     else
                         filter x
@@ -66,13 +66,13 @@ sieve_sequence false_function (from 2);   (* sieve sequence test *)
 
 (* truly lazy prime caculator ! *)
 
-fun sieve_stream filter inStream   = 
+fun sieve_stream filter inStream   =
 	if filter (head inStream) then
             sieve_stream filter (tail inStream)
         else
             let
-                fun new_filter x = 
-		    if multiple (head inStream) x then 
+                fun new_filter x =
+		    if multiple (head inStream) x then
                         true
                     else
                         filter x
@@ -120,4 +120,3 @@ val it = () : unit
 -
 
 *)
-

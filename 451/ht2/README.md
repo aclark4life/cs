@@ -15,7 +15,7 @@ Scoped symbol table with nested scope support.
 
 **API:**
 ```c
-tSymbolTable st_initialize(int size, 
+tSymbolTable st_initialize(int size,
                           int (*compare_fn)(void*, void*),
                           int (*hash_fn)(void*));
 int st_open_scope(tSymbolTable st);
@@ -104,4 +104,3 @@ See test files for usage examples.
 - Maximum 10 scopes (configurable via MAX_SCOPES)
 - Hash table size configurable per symbol table
 - Thread-unsafe (not designed for concurrent access)
-

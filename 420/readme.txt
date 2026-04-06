@@ -25,12 +25,9 @@ Status: OR
    instructor's journal collection).
 
  Description of the study:
- 
+
  There many methods of software development: clean-room, iterative
 enhancement, rapid prototyping, and decomposition-based, to list a
 few.  The student will survey the methods and select 4 or 5 to "try
 out" in a sample implementation.  This will provide a framework for
 comparison and analysis from a personal perspective.
-
- 
-

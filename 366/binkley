@@ -10,7 +10,7 @@ To: 3, part, 2, aclark (J. Alexander Clark), bduncan (Cousin Brucie),
 Date: Wed, 11 Oct 1995 14:04:59 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 3624      
+Content-Length: 3624
 Status: OR
 
 ; assignment 3 part 2
@@ -51,7 +51,7 @@ data	ends
 
 code	segment public byte 'code'
 	assume  cs:code, ds:data, ss:stack
-	
+
 main	proc	near
 	mov	ax,seg data
 	mov	ds,ax
@@ -64,7 +64,7 @@ loop:
 	add	sum,ax
 	jno	print_number			; jmp no overflow
 
-        js 	overflow			; pos + pos results in neg 
+        js 	overflow			; pos + pos results in neg
 						; sign bit on = neg number
 
 	lea	dx,oops_underflow_message
@@ -74,7 +74,7 @@ overflow:
 	lea	dx,oops_overflow_message
 print_message:
 	mov	ah, DOS_PRINT
-	int	DOS_SERVICE	
+	int	DOS_SERVICE
 
 print_number:
 	mov	ax,sum
@@ -122,7 +122,7 @@ read_number	endp
 ; output:   hex digit in al
 ; destroys: nothing
 ;
-convert_digit	proc near 	
+convert_digit	proc near
 	cmp	al,'9'
         jle	small2
         and	al,0dfH  			; [[ ask me ]]
@@ -155,10 +155,10 @@ read_string endp
 
 
 ;
-; purpose:  convert a string to a hex number 
+; purpose:  convert a string to a hex number
 ; input:    si points to the string (first byte is the strings length,
 ;           which number be <= 4)
-; output:   hex number in AX  
+; output:   hex number in AX
 ; destroys: nothing
 ;
 ; should check the a 5 digit number is not entered
@@ -169,7 +169,7 @@ string_to_number	proc near
 	push	dx
 	push	si
 
-        mov 	cl,[si]				; get string length 
+        mov 	cl,[si]				; get string length
 	xor 	ch,ch				; unsigned convert cl to cx
 	inc 	si				; point past length
 	xor 	bx,bx				; [[ fast zero AX ]]
@@ -194,14 +194,14 @@ next_digit:
         pop 	cx
 	lodsb
 	call	convert_digit
-	or  	bl, al				; or in new low nibble 
+	or  	bl, al				; or in new low nibble
         loop	next_digit
-        
+
 	mov	ax,bx
 	cmp	dx,-1				; change sign?
 	jne	no
 	neg	ax				; 2's comp!
-no:	
+no:
 	pop 	si
 	pop	dx
 	pop 	cx
@@ -224,10 +224,10 @@ To: 3, part, 1, aclark (J. Alexander Clark), bduncan (Cousin Brucie),
 Date: Wed, 11 Oct 1995 14:04:51 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2922      
+Content-Length: 2922
 Status: OR
 
-; assignment 3 part 1 
+; assignment 3 part 1
 ;
 ; this program adds hex number read from the keyboard until zero is entered.
 ; if a carry occurs it prints a message.
@@ -252,7 +252,7 @@ stack	ends
 
 data	segment	byte public
 sum			dw   0
-number_as_string	db   MAX_READ_LENGTH+1, 
+number_as_string	db   MAX_READ_LENGTH+1,
 actual_length		db   ?
 buffer			db   MAX_READ_LENGTH+1 dup(?)
 oops_carry_message	db   'Oops carry',CR,LF,'$'
@@ -264,7 +264,7 @@ data	ends
 
 code	segment public byte 'code'
 	assume 	cs:code, ds:data, ss:stack
-	
+
 main	proc	near
 	mov	ax,seg data
 	mov	ds,ax
@@ -279,7 +279,7 @@ loop:
 
 	lea	dx,oops_carry_message
 	mov	ah, DOS_PRINT
-	int	DOS_SERVICE	
+	int	DOS_SERVICE
 
 print_number:
 	mov	ax,sum
@@ -327,7 +327,7 @@ read_number	endp
 ; output:   hex digit in al
 ; destroys: nothing
 ;
-convert_digit	proc near 	
+convert_digit	proc near
 	cmp	al,'9'
         jle	small2
         and	al,0dfH  			; [[ ask me ]]
@@ -360,10 +360,10 @@ read_string endp
 
 
 ;
-; purpose:  convert a string to a hex number 
+; purpose:  convert a string to a hex number
 ; input:    si points to the string (first byte is the strings length,
 ;           which number be <= 4)
-; output:   hex number in AX  
+; output:   hex number in AX
 ; destroys: nothing
 ;
 string_to_number	proc near
@@ -371,7 +371,7 @@ string_to_number	proc near
 	push	cx
 	push	bx
 
-        mov	cl,[si]				; get string length 
+        mov	cl,[si]				; get string length
 	xor	ch,ch				; unsigned convert cl to cx
 	inc	si				; point past length
 	xor	bx,bx				; [[ fast zero BX ]]
@@ -383,9 +383,9 @@ next_digit:
         pop 	cx
 	lodsb
 	call	convert_digit
-	or  	bl, al				; or in new low nibble 
+	or  	bl, al				; or in new low nibble
         loop	next_digit
-        
+
 	mov	ax,bx
 	pop	bx
 	pop 	cx
@@ -408,7 +408,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Wed, 25 Oct 1995 13:46:11 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1287      
+Content-Length: 1287
 Status: RO
 
 Forwarded message:
@@ -418,7 +418,7 @@ To: cs36
 Date: Wed, 25 Oct 1995 13:15:13 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1083      
+Content-Length: 1083
 
 ; echo.asn
 
@@ -446,10 +446,10 @@ main	proc	near
 
 	mov 	bl,buffer+1
 	xor	bh,bh			; i.e.   mov bh, 0  FAST
-	mov	buffer+2[bx], '$'    
-   
+	mov	buffer+2[bx], '$'
+
         ; add a '$'
-	
+
 	call	crlf
 
         ;mov	ah, 09H
@@ -465,7 +465,7 @@ main	proc	near
 	int	21H
 
 
-	
+
 main	endp
 
 ; input: ds:dx points to a string to print
@@ -524,7 +524,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 10 Nov 1995 15:56:38 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 162       
+Content-Length: 162
 Status: OR
 
 
@@ -548,12 +548,12 @@ To: all-users
 Date: Wed, 15 Nov 1995 08:14:49 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 393       
+Content-Length: 393
 Status: OR
 
 				net guru quiz
 
-what do 
+what do
 
   WWW
   FTP
@@ -572,7 +572,7 @@ stand for?
 
 
 
-
+
 
 
   FTP	- file transfer protocol (not file transfer program)
@@ -600,7 +600,7 @@ To: aclark, (J., Alexander, Clark), bduncan, (Cousin, Brucie), bwu, (Bin,
 Date: Wed, 15 Nov 1995 07:51:01 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2006      
+Content-Length: 2006
 Status: OR
 
 ; fract.asm
@@ -633,7 +633,7 @@ data	ends
 
 code	segment public byte 'code'
 	assume cs:code, ss:stack
-	
+
 main	proc	near
 	mov	ax,seg data
 	mov	ds,ax
@@ -676,12 +676,12 @@ main_loop:
 	dec	ax				; adjust 1-3 to 0-2
 	shl	ax,1				; convert to array index (i.e.,  *4)
 	shl	ax,1
-	mov	si,ax			
+	mov	si,ax
 	add	si, offset vertices
 
 	lea	di, current_point		; di = p = (p + vertices[random(3)])/2
 	call	point_add
-	call	point_half			
+	call	point_half
 
 	call	point_draw
 	loop	main_loop
@@ -721,7 +721,7 @@ To: aclark, (J., Alexander, Clark), bduncan, (Cousin, Brucie), bwu, (Bin,
 Date: Wed, 15 Nov 1995 07:50:45 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1692      
+Content-Length: 1692
 Status: OR
 
 ; point.asm
@@ -791,7 +791,7 @@ point_add	proc	near
 	ret
 point_add	endp
 
-; purpose:  to divide a point by 2 
+; purpose:  to divide a point by 2
 ; input:    di points to the point
 ; output:   di's point is halved
 ; destroys: nothing
@@ -801,9 +801,9 @@ point_half	proc	near
 	ret
 point_half	endp
 
-; purpose:  to divide a point by 3 
+; purpose:  to divide a point by 3
 ; input:    di points to the point, p
-; output:   p = (p.x/3, p.y/3) 
+; output:   p = (p.x/3, p.y/3)
 ; destroys: nothing
 point_third	proc	near
 	push	bx
@@ -843,7 +843,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Mon, 20 Nov 1995 08:17:09 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 593       
+Content-Length: 593
 Status: OR
 
 
@@ -851,7 +851,7 @@ Status: OR
 ; macros.h
 ;
 ; my favorite macros
-; CS366 
+; CS366
 ; Fall 1995
 ;
 
@@ -906,7 +906,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 1 Dec 1995 12:22:53 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 999       
+Content-Length: 999
 Status: OR
 
         .radix 16
@@ -938,7 +938,7 @@ code    segment
 	repz	scasb			; skip blanks
 
  	mov	bx,di
-	add	bx,cx	
+	add	bx,cx
 	mov	byte ptr [bx], 0	; terminate s2 with '\0'
 	dec	di			; point to start of second string
 
@@ -974,7 +974,7 @@ To: mbarkett (The Cunning Linguist), jaycock (Jamie Aycock),
 Date: Mon, 26 Feb 1996 09:18:35 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 490       
+Content-Length: 490
 Status: OR
 
 
@@ -983,7 +983,7 @@ You are using tooooo much disk space.
 Either you decide what to download/delete or the system does.
 Please shoot for 10Meg.
 send me mail (binkley) if you think you need more the 10Meg.
- 
+
 
  thanks
  - dave
@@ -1014,7 +1014,7 @@ To: cs-students, cs-faculty
 Date: Tue, 27 Feb 1996 17:36:24 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 213       
+Content-Length: 213
 Status: OR
 
 
@@ -1037,26 +1037,24 @@ Cc: cs-students, cs-faculty
 In-Reply-To: <9602272241.AA15358@lust.loyola.edu> from "Christopher Olive" at Feb 27, 96 05:41:45 pm
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 389       
+Content-Length: 389
 Status: OR
 
-> 
-> > 
+>
+> >
 > > Soon new machine will arrive.  They need names.
 > > Try for short names that share a theme (i.e. love. hope, ...)
-> > 
+> >
 > > send your ideas to acm@cs.loyola.edu.
-> > 
+> >
 > > after collecting ideas, we will have a vote.
-> > 
+> >
 > > - Dr. Binkley
-> > 
-> 
+> >
+>
 > how many machines, and is there a given theme that we have to use?
-> 
+>
 
 plan to 8 to 12 names.  There is no given theme.
 
 - dave
-
-

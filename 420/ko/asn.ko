@@ -8,7 +8,7 @@ CS 364                                                           Spring 97
                             Assignment Next
 
 Write a C program that  merges an arbitrary number of files of runs
-into one large sorted file.  You may assume that the only files in the 
+into one large sorted file.  You may assume that the only files in the
 current working directory are the ones to be merged and the executable
 image of the merging program.
 
@@ -32,7 +32,3 @@ Use your first merging program to check the output.
 
 
 This document is in ~kbg/364/adm/c5.s97  rev 2/97
-
-
-
-

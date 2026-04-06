@@ -49,7 +49,7 @@
 )
 
 ;
-; For example, fix-first-argument is to define the function increment from 
+; For example, fix-first-argument is to define the function increment from
 ; the function +.
 ;
 (define increment (fix-first-argument + 1))

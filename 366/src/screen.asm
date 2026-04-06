@@ -25,7 +25,7 @@ PAGE_NUMBER		equ	00H
 code	segment public byte 'code'
 	assume cs:code
 ;
-; purpose:  set the screen mode 
+; purpose:  set the screen mode
 ; input:    al = mode (3 = 80x24 color, 6 = 640x200, others exist)
 ; output:   nothing (screen mode is change and screen is cleared)
 ; destroys: nothing
@@ -46,7 +46,7 @@ screen_set_mode	proc	near
 	ret
 screen_set_mode	endp
 
-	
+
 ;
 ; purpose:  get the cursors location
 ; input:    nothing
@@ -147,7 +147,7 @@ screen_write_char	proc	near
 	push	bp
 
 	mov	bh, PAGE_NUMBER
-	mov	cx,1	
+	mov	cx,1
 	mov	ah, WRITE_CHARACTER
 	int	VIDEO_SERVICE
 
@@ -203,7 +203,7 @@ screen_write_dot	proc	near
 	push	di
 	push	bp
 
-	mov	ah, WRITE_DOT 
+	mov	ah, WRITE_DOT
 	int	VIDEO_SERVICE
 
 	pop	bp

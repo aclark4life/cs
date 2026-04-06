@@ -1,13 +1,13 @@
 #!/usr/local/bin/perl
 #############################################################################
 
-This perl script was given to me by Bruce Duncan, who acquired it from an 
+This perl script was given to me by Bruce Duncan, who acquired it from an
 unknown source. I have made several modifications as indicated.
 
 This script is called by bootp.html, or rather a web browser that is viewing bootp.html.
 When viewed through Netscape, or a similar browser, bootp.html takes user input. Four
-variables are inputed from the browser to this shell script. They are:  name, tc, ha, ip. 
-These are fields in the bootp table. The variables are then appended to the bootp table in 
+variables are inputed from the browser to this shell script. They are:  name, tc, ha, ip.
+These are fields in the bootp table. The variables are then appended to the bootp table in
 accordance with existing style.
 
 
@@ -54,7 +54,7 @@ foreach $pair (@pairs)
 
 open(IN,"+</usr/users/aclark/bootp/bootptab");      		###  modified by aclark
 								###  12/96
-								###  This file is the 	
+								###  This file is the
 								###  bootp table,
 								###  where the entries
 								###  are appended.
@@ -69,7 +69,7 @@ print IN "$FORM{'name'}:\t\ttc=$FORM{'tc'}:\tha=$FORM{'ha'}:\tip=$FORM{'ip'}\n";
 close IN;
 
 print <<EOM;
-	 	
+
 <html> 								###  modified by aclark
 <table height=60% width=100%>					###  12/96
 <td align=center> <h1>$FORM{'name'}</h1> </td>   		###  This section of HTML
@@ -83,4 +83,3 @@ print <<EOM;
 
 EOM
 exit;
-

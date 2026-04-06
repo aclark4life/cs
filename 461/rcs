@@ -1,24 +1,24 @@
-> 
+>
 > I have started adding RCS dirs everywhere.....this means we are using RCS as a
 > version control.  Gwennie and Alex, I have photo copies of the RCS page from
 > the emacs manual for using emacs....man rcs to find out how to use it with vi,
 > if you wish...
-> 
+>
 
-consider adding 
-   make checkin 
+consider adding
+   make checkin
 and
    make checkout
 
 
 - dave
 > matt
-> -- 
+> --
 > --------------------------Matthew Aloysious Brannigan-------------------------
 > |				mab@acm.org				     |
 > |                     http://www.cs.loyola.edu/~mbrannig                     |
 > ---- "The average hacker could....." Me --------------------------------------
-> 
+>
 
 
 From mab@justice.loyola.edu Wed Feb  5 13:30:24 1997
@@ -45,9 +45,8 @@ the emacs manual for using emacs....man rcs to find out how to use it with vi,
 if you wish...
 
 matt
--- 
+--
 --------------------------Matthew Aloysious Brannigan-------------------------
 |				mab@acm.org				     |
 |                     http://www.cs.loyola.edu/~mbrannig                     |
 ---- "The average hacker could....." Me --------------------------------------
-

@@ -16,12 +16,12 @@ code 	segment	public	byte	'code'
 	assume cs:code
 
 main	proc	near
-	
+
 	mov dx, offset message
 
 	assume  ds:data
-	mov ah, WRITE_CHAR 
-	int DOS_SERVICE 
+	mov ah, WRITE_CHAR
+	int DOS_SERVICE
 
 
 	mov 	ax,4c00H

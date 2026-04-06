@@ -1,7 +1,7 @@
 # /etc/ppp/options -*- sh -*- general options for pppd
 # created 13-Jul-1995 jmk
-# autodate: 01-Aug-1995 
-# autotime: 19:45 
+# autodate: 01-Aug-1995
+# autotime: 19:45
 
 # Use the executable or shell command specified to set up the serial
 # line.  This script would typically use the "chat" program to dial the
@@ -265,4 +265,3 @@
 # With this option, pppd will accept the peer's idea of its (remote) IP
 # address, even if the remote IP address was specified in an option.
 #ipcp-accept-remote
-

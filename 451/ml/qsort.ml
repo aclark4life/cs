@@ -10,7 +10,7 @@ To: binkley (Dave Binkley), aclark (J. Alexander Clark),
 Date: Wed, 9 Oct 1996 14:36:11 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 468       
+Content-Length: 468
 Status: O
 
 
@@ -22,8 +22,8 @@ fun append nil ys = ys
 
 fun qs nil = nil
   | qs [x] = [x]
-  | qs (pivot::l) = 
-	  let  
+  | qs (pivot::l) =
+	  let
 	      fun ph pivot nil smalls bigs =
 		     (append (qs smalls) (pivot :: (qs bigs)))
 	        | ph (pivot:int) l   smalls bigs =
@@ -32,8 +32,7 @@ fun qs nil = nil
 		     else
 			 ph pivot (tl l) (hd l :: smalls) bigs
 	      fun p pivot l = ph pivot l nil nil;
-	 in 
-	     p pivot l 
+	 in
+	     p pivot l
 	end
   ;
-

@@ -1,6 +1,8 @@
 /* util.h */
 
-#define printd      if (DEBUG) printf
+#define printd                                                                 \
+  if (DEBUG)                                                                   \
+  printf
 
 #ifndef _MISC
 #define _MISC
@@ -17,7 +19,6 @@
 void die(char *);
 char *check_malloc(int);
 void *check_realloc(void *, int);
-char *string_copy(char*);
+char *string_copy(char *);
 
 #endif
-

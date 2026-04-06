@@ -54,7 +54,7 @@ main	proc	near
 	int	DOS_SERVICE
 main	endp
 
-
+
 printAXhex	proc	near
 	push	ax
 	mov	al,ah
@@ -82,7 +82,7 @@ printALhex	proc	near
 	pop	ax
 
  	mov	di,ax
-        and	di,000FH   
+        and	di,000FH
         add     di, offset hex_digits
 	mov     dl,[di]
 	mov	ah, DOS_CHAR_WRITE

@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 15:03:26 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 5269      
+Content-Length: 5269
 Status: O
 
 ; DRV.ASM. My first device driver.
@@ -21,7 +21,7 @@ Status: O
 ; read_imm and flush_in have not been tested but the get char
 ; routime used by these functions.
 ; IOTCL is not supported.
-         
+
          .radix 16
 comm_number equ 0                      ; com1
 time_out equ   80H
@@ -38,8 +38,8 @@ dest_seg equ   16D
 count    equ   18D                     ; length to transfer
 status   equ   3
 noerror  equ   0100H                   ; for status
-         
-         
+
+
 code     segment
          assume cs:code
 ; device driver for bink thruogh com1
@@ -49,9 +49,9 @@ code     segment
          dw    offset                  strategy
          dw    offset                  interupt
          db    'BINK    '              ; len must be eight
-         
+
 main     proc  far
-         
+
 functab  dw    offset init
          dw    offset nop
          dw    offset nop
@@ -65,17 +65,17 @@ functab  dw    offset init
          dw    offset out_status
          dw    offset out_flush
          dw    offset nop              ; ioctl out
-         
+
          dw    offset nop              ; insurance
 rh_seg   dw    ?
 rh_off   dw    ?
-         
-strategy: 
+
+strategy:
          mov   cs:rh_seg,es            ; request segment
          mov   cs:rh_off,bx            ; request offset
          ret
-         
-interupt: 
+
+interupt:
          push  ax
          push  bx
          push  cx
@@ -100,20 +100,20 @@ interupt:
          pop   ax
          ret
 main     endp
-         
-read:    
+
+read:
          mov   di,es:[bx+dest_off]     ; buffer addr
          mov   cx,es:word ptr [bx+count]
          push  es
          mov   es,es:word ptr [bx+dest_seg]
-get_loop: 
+get_loop:
          call  get_char
          stosb                         ; save and inc di
          loop  get_loop
          pop   es
          or    es:word ptr [bx+status],noerror
          ret
-         
+
 read_imm: ;    get byte and stat leave byte in buff
          call  get_rs_stat             ; stat to ah char in al
          test  ah,char_ready
@@ -121,39 +121,39 @@ read_imm: ;    get byte and stat leave byte in buff
          je    set_ready
          or    es:word ptr [bx+status],busy ; no char
          ret
-set_ready: 
+set_ready:
          and   es:word ptr [bx+status],not_busy ; clear bit
          ret
-         
-in_status: 
-out_status: 
+
+in_status:
+out_status:
          or    es:word ptr [bx+status],done
          ret
-         
-         
+
+
 flush_in: ;    read till time out
          call  get_byte
          test  ah,time_out
          jnz   flush_in
          or    es:word ptr [bx+status],done
          ret
-         
-out_flush: 
-nop:     
+
+out_flush:
+nop:
          ret
-         
+
 write_v:                               ; same as a write
-write:   
+write:
          mov   si,es:[bx+dest_off]     ; buffer addr
          mov   ds,es:[bx+dest_seg]
          mov   cx,es:[bx+count]
-write_loop: 
+write_loop:
          lodsb                         ; get each byte
          call  write_char
          loop  write_loop
          or    es:word ptr [bx+status],noerror
          ret
-         
+
 ;
 ; locate procedures
 ;
@@ -163,8 +163,8 @@ get_char proc  near
          jnz   get_char                ; live with other errors
          ret
 get_char endp
-         
-         
+
+
 get_byte proc  near
 ; get a single byte unless and error or time out occures
          push  dx
@@ -174,14 +174,14 @@ get_byte proc  near
          pop   dx
          ret
 get_byte endp
-         
-         
+
+
 write_char proc near
          push  cx
          push  dx
          mov   dx,comm_number
          mov   cx,re_try_count
-send:    
+send:
          mov   ah,01                   ;write byte
          int   14
          test  ah,time_out
@@ -190,7 +190,7 @@ send:
          pop   cx
          ret
 write_char endp
-         
+
 get_rs_stat proc near
          push  dx
          mov   dx,comm_number
@@ -199,16 +199,14 @@ get_rs_stat proc near
 ; ah has stat fanagle char into al
          ret
 get_rs_stat endp
-         
-         
-         
-init:    
+
+
+
+init:
          mov   es:word ptr [bx+end_off],offset init ; end addr
          mov   es:[bx+end_seg],cs
          or    es:word ptr [bx+status],noerror
          ret
-         
+
 code     ends
          end
-         
-

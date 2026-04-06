@@ -1,14 +1,14 @@
 ; city.asm
 ; cities look like this ('.' is a blank)
 ;
-; ....+ 
-; ..*.* 
+; ....+
+; ..*.*
 ; *****
 ;
 ; dead cities look like this
-; 
-; .....      
-; .....    
+;
+; .....
+; .....
 ; (:-:)
 
 MAX_CITIES		equ 	 5
@@ -104,7 +104,7 @@ cities_draw	endp
 
 
 ;
-; purpose:  draw a city 
+; purpose:  draw a city
 ; input:    si points to the city
 ; output:   nothing (screen is updated)
 ; destroys: nothing
@@ -167,7 +167,7 @@ cities_hit_check	endp
 
 ;
 ; purpose:  check to see if a rock has hit a city
-; input:    dx = upper left corner of a rock, si points to a city, 
+; input:    dx = upper left corner of a rock, si points to a city,
 ;           cl = rock image width
 ; output:   nothing (city array and screen are updated)
 ; destroys: nothing
@@ -181,8 +181,8 @@ city_check_hit	proc	near
 hit:
 	...
 	call	cities_draw
-	
-no_hit:	
+
+no_hit:
 	pop	dx
 	pop	bx
 	ret

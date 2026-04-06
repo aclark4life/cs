@@ -108,7 +108,8 @@ run(tSocket others[], int my_number, int next) {
       printf("token %d %d  (%d)\n", token.as_char[0], token.as_char[1],
              token.as_short);
 
-    switch (token.as_char[0]) { /*...*/ }
+    switch (token.as_char[0]) { /*...*/
+    }
   }
 }
 

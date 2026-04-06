@@ -31,7 +31,7 @@ Scheme saved on Wednesday January 29, 1992 at 3:31:02 PM
 1 ]=> (last '(a b g))
 ;Value: g
 
-**** try (last '(a (b d f) (r d (e f) e)))   
+**** try (last '(a (b d f) (r d (e f) e)))
 **** Can you first predict the answer?  do the same for length (see below).
 
 1 ]=> (append '(a b) '(c d))
@@ -103,7 +103,7 @@ Scheme saved on Wednesday January 29, 1992 at 3:31:02 PM
 1 ]=> ans
 ;Value: (* 7 (* 6 (* 5 (* 4 (* 3 (* 2 1))))))
 
-1 ]=> (eval ans nil)		; nil is the environment 
+1 ]=> (eval ans nil)		; nil is the environment
 ;Value: 5040
 
 1 ]=> (load '7-1)

@@ -7,7 +7,7 @@
 
 !ReservedWordScanner methodsFor: 'scanning'!
 
- recognize: str 
+ recognize: str
      	str = 'if' ifTrue: [ ^#if ].
 	str = 'else' ifTrue: [ ^#else ].
      	str = 'fi' ifTrue: [ ^#fi ].
@@ -17,6 +17,3 @@
 	^super recognize: str
 !
 !
-
-
-

@@ -15,7 +15,8 @@ abort(s) char *s;
  * input:   the number of bytes to allocate
  * output:  a pointer to the memory (program aborts if no memory is available)
  */
-char *check_malloc(size) int size;
+char *check_malloc(size)
+int size;
 {
   char *cp, *malloc();
 
@@ -30,7 +31,8 @@ char *check_malloc(size) int size;
  * input:   a string, s
  * output:  a copy of s in newly allocated memory
  */
-char *string_copy(s) char *s;
+char *string_copy(s)
+char *s;
 {
   char *s_copy;
 

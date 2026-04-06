@@ -1,5 +1,5 @@
 (define (add a b) (+ a b))
-(define (sub a b) (- a b)) 
+(define (sub a b) (- a b))
 (define (mul a b) (* a b))
 (define (div a b) (/ a b))
 
@@ -11,7 +11,5 @@
 		((eq? (car list) '/) (postfix (cdr list) (cons (div (car stack) (car(cdr stack))) (cdr(cdr(stack))))))
 		(else (postfix (cdr list) (cons (car list) stack)))
 	)
-		
+
 )
-
-

@@ -14,4 +14,4 @@ foo:~#dump 0uf /dev/nrst0 /usr
   DUMP: 1.77% done, finished in 43:23
   DUMP: Closing /dev/nrst0
   DUMP: Change Volumes: Mount volume #3
-  DUMP: Is the new volume mounted and ready to go?: ("yes" or "no") 
+  DUMP: Is the new volume mounted and ready to go?: ("yes" or "no")

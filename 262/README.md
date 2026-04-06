@@ -49,4 +49,3 @@ gcc <filename>.c -lm -o <program_name>
 - All programs include proper error handling
 - Memory is properly managed (no leaks)
 - Follow ANSI C standards
-

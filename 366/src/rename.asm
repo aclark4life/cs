@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 14:57:31 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 999       
+Content-Length: 999
 Status: O
 
         .radix 16
@@ -42,7 +42,7 @@ code    segment
 	repz	scasb			; skip blanks
 
  	mov	bx,di
-	add	bx,cx	
+	add	bx,cx
 	mov	byte ptr [bx], 0	; terminate s2 with '\0'
 	dec	di			; point to start of second string
 
@@ -64,4 +64,3 @@ error:
 
 code    ends
         end
-

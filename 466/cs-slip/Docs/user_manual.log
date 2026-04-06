@@ -66,20 +66,20 @@ LaTeX Warning: File `viewer.ps' not found on input line 64.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
- ...                                              
-                                                  
+ ...
+
 l.64 \includegraphics{viewer.ps}
-                                
-? 
+
+?
 ! Emergency stop.
- ...                                              
-                                                  
+ ...
+
 l.64 \includegraphics{viewer.ps}
-                                
+
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
- 
+
 Here is how much of TeX's memory you used:
  434 strings out of 10910
  4554 string characters out of 72285

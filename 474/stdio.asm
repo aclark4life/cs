@@ -6,7 +6,7 @@ OUTCH   MOVEM.L         A0-A6/D1-D7,-(A7)
         MOVEM.L         (A7)+,A0-A6/D1-D7
         RTS
 
-GETCH   MOVEM.L         A0-A6/D1-D7,-(A7)   
+GETCH   MOVEM.L         A0-A6/D1-D7,-(A7)
         MOVE.B          #247,D7
         TRAP            #14
         BSR             OUTCH

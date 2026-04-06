@@ -1,9 +1,9 @@
 /*nick russo*/
 /*cs466*/
 /*new! piper.c*/
- 
+
 #include <stdio.h>
- 
+
 FILE *infile,*fin;
 char * read_long();
 char * read_long2();
@@ -24,47 +24,47 @@ pipe(second_fds);
 /*buffer = (char *)malloc(sizeof(char));
 */
 
-switch (fork()) 
+switch (fork())
   {
- 
-  case 0: 
+
+  case 0:
 
     close(0);
     dup(first_fds[0]); /* to sort */
-      
+
     close(1);
     dup(second_fds[1]); /* from sort */
-    
+
 /*    close(first_fds[0]);
     close(first_fds[1]);
-    
+
     close(second_fds[0]);
     close(second_fds[1]);
     */
-    
+
 /*    execlp("sort", NULL); */
 
    execlp("sort", "sort", (char *) 0);
 
      break;
 
-  default :  
-    
+  default :
+
     close(first_fds[0]); /* to sort */
     close(second_fds[1]); /* from sort */
-        
+
   /*  for(i=0;(buffer = read_long())!= NULL;i++)
       {
-       
-	
+
+
 	if(buffer && strlen(buffer) >= 50)
 	  {
 	    write(first_fds[1],buffer,strlen(buffer));
 	  }
       }
-    write(first_fds[1],'\n',2);   
+    write(first_fds[1],'\n',2);
     */
-  
+
 
 
 
@@ -77,26 +77,26 @@ switch (fork())
 	if (strlen(buffer) > 50)
 	  write(first_fds[1], buffer, strlen(buffer));
       }
-    
+
     fclose(infile);
-    
+
     close(first_fds[1]);/*important!*/
-    
-      
+
+
     fin = fdopen(second_fds[0], "r");
-   
- 
+
+
 
    for(i=0;i<10;i++)
-      { 
+      {
 
 	if(fgets(buffer,100, fin) == NULL)
 	  printf("fgets returned NULL!\n");
-	
-	
-	
+
+
+
 	printf("%s", buffer);
-	
+
 
     fclose(fin);
 
@@ -104,14 +104,14 @@ switch (fork())
 
        read(second_fds[1],buffer,100);
        fprintf(stderr,"%s\n",buffer);
-	fclose(fin);	
-  */   		
+	fclose(fin);
+  */
       }
-    
-  
+
+
     break;
-    
-  }      
+
+  }
 
 }
 
@@ -121,10 +121,10 @@ char * read_long()
   int c;
   char *buff;
   int len;
-  
+
   buff = malloc(1);
   *buff = '\0';
-  
+
   for(len = 0; ((c = fgetc(infile)) != '\n'); len++)
     {
       if (c == '\n')
@@ -138,10 +138,10 @@ char * read_long()
           fprintf(stderr, "No Core\n");
           exit(-1);
         }
-      
+
       buff[len] = c;
     }
-  
+
   if (len == 0)
     {
       free(buff);
@@ -151,4 +151,3 @@ char * read_long()
     return(buff);
 }
 /******************************************************************/
-

@@ -6,11 +6,11 @@ string := '+ if := ab'.
 
 string class printNl.
 
-scanner := string asScanner.  
+scanner := string asScanner.
 "(or, equivalently, 'scanner := Scanner new: string')"
 
 '' printNl.
-[token := scanner nextToken. token ~= -1] 
+[token := scanner nextToken. token ~= -1]
     whileTrue: [token print. ' ' print].
 
 0 to: 1 do: ['' printNl].

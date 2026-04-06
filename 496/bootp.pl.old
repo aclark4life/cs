@@ -10,4 +10,3 @@ while((!($line eq "# WebAdditions")) && (!(eof(IN))))
 
 print IN "# Addition!\n";
 exit;
-

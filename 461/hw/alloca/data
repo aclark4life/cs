@@ -7,7 +7,7 @@ sanity:~/461>time alloca
 sanity:~/461>time alloca
 0.35u 0.04s 0:00.45 86.6%
 sanity:~/461>
- 
+
 here's the program with malloc running a few times:
 
 sanity:~/461>time malloc
@@ -18,4 +18,3 @@ sanity:~/461>time malloc
 3.14u 1.70s 0:05.12 94.5%
 
 hmmm... looks like alloca is a LOT faster...
-

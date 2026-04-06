@@ -1,6 +1,6 @@
 import java.applet.Applet;
 import java.awt.*;
-        
+
   public class MyApplet extends Applet implements Runnable
   {
       Thread t;
@@ -21,11 +21,11 @@ import java.awt.*;
 		while (true)
 		{
 			repaint();
-			try 
+			try
 			{
 				t.sleep(10);
-			} 
-			catch (Exception e) 
+			}
+			catch (Exception e)
 			{
 			}
 		}
@@ -33,10 +33,10 @@ import java.awt.*;
 
       public void paint(Graphics g)
       {
-	/*  public abstract void loop() 
+	/*  public abstract void loop()
   	    public abstract void stop()
 	*/
-           g.drawString("A     L     E     X", 230,250 ); 
+           g.drawString("A     L     E     X", 230,250 );
 
 	    for ( i = 0; i < 250 ; i++) {
 
@@ -44,13 +44,13 @@ import java.awt.*;
 	    	g.drawOval(x,y,11,11);
             	x+=1;
 
-	    } 
+	    }
 	   /* x=x+1;y=y+1; */
 	   /* if ((x==230) && (y==250))y=y-1; */
 
 	    if (x==230)x=0;
 	    if (y==230)y=0;
-		
+
 /*	    if (x=250) stop(); */
 /*          while (x<250) repaint();*/
       }

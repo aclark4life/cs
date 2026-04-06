@@ -3,17 +3,17 @@
 <title>LavaMan</title>
 <body bgcolor="#000000" text="red" link="449977" vlink="449977" >
 
-<center> 
+<center>
 
 <table>
-<td><h1>MANAGING IP SERVICES at LOYOLA COLLEGE</h1></td> 
+<td><h1>MANAGING IP SERVICES at LOYOLA COLLEGE</h1></td>
 </table>
 
 <table>
 <td><h2>(Mulvey's Weenie)</h2></td>
-</table>     
+</table>
 </center>
-<hr>  
+<hr>
 <table> <td></td> <td></td>
 <td><li><h1>Install HTTPD Web Server</h1></td>
 </table>
@@ -51,7 +51,7 @@ The MD5 message-digest (one-way hash) utility. MD5 condenses an input of arbitra
 <P>
 </TABLE>
 </CENTER>
-  
+
 
 
 
@@ -64,4 +64,3 @@ The MD5 message-digest (one-way hash) utility. MD5 condenses an input of arbitra
 <td><a href="bootp.html"><img src = "quake.gif"></a></td>
 </table>
 </html>
-

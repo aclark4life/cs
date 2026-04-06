@@ -1,4 +1,4 @@
-class point 
+class point
 {
     protected int x;
     protected int y;
@@ -72,4 +72,3 @@ class square extends shape
 	System.out.println("s = " + s);
     }
 }
-

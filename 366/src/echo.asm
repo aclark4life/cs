@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 14:57:21 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1082      
+Content-Length: 1082
 Status: O
 
 ; echo.asn
@@ -39,10 +39,10 @@ main	proc	near
 
 	mov 	bl,buffer+1
 	xor	bh,bh			; i.e.   mov bh, 0  FAST
-	mov	buffer+2[bx], '$'    
-   
+	mov	buffer+2[bx], '$'
+
         ; add a '$'
-	
+
 	call	crlf
 
         ;mov	ah, 09H
@@ -58,7 +58,7 @@ main	proc	near
 	int	21H
 
 
-	
+
 main	endp
 
 ; input: ds:dx points to a string to print
@@ -103,4 +103,3 @@ crlf	endp
 
 code	ends
 	end
-

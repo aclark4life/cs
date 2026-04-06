@@ -1,13 +1,13 @@
 CS 364                                                       Spring 97
 
                       DUE ___________________
-       
+
                              Assignment 1
 
 In this assignment, you will unblock buffered input records and
 repack the byte data obtained into a new set of blocked files.
 
-The records inside the blocks have varying sizes according the 
+The records inside the blocks have varying sizes according the
 following scheme.
 
    The data types are character (c), string (s), integer (d) and float(f).
@@ -21,12 +21,12 @@ following scheme.
                    and i, j, k and so on are the size indicators.
      The parenthesis symbols, "(" and ")" are part of the format string.
 
-   For instance (s5d3) would mean a string of length 5 followed by 
+   For instance (s5d3) would mean a string of length 5 followed by
    an integer taking up three bytes (as an ascii value).
 
-   Since character data is always length 1, the length indicator is 
-   omitted.  Floating point data is formatted as l.r where l is the 
-   number of decimal places to the left of the decimal and r is the 
+   Since character data is always length 1, the length indicator is
+   omitted.  Floating point data is formatted as l.r where l is the
+   number of decimal places to the left of the decimal and r is the
    number  of places to the right of the decimal point.
 
     A more robust format string might be
@@ -68,10 +68,10 @@ be used to encode the data (WHERE APPROPRIATE!)
 Thus the sample above would be distributed:
 
   string file:    (s5s2s2...)keithxybc....
-               or (s5)keith(s2)xy(s2)bc... 
+               or (s5)keith(s2)xy(s2)bc...
 
   integer file    (d3d3d3d1d1d5...)1239876541213579...
-               or (d35)123(d3)987(d3)654(d1)1(d1)2(d5)13579... 
+               or (d35)123(d3)987(d3)654(d1)1(d1)2(d5)13579...
 
   float file:     (f3.5f1.2...12312345321
                or (f3.5)12312345(f1.2)321
@@ -89,13 +89,13 @@ Assumptions / other issues:
 
 1. The formating digit will be between 1-9, inclusive.
 
-2. No format/data will require more than 2 buffers full to completely 
+2. No format/data will require more than 2 buffers full to completely
    process, but should NOT depend on the value 64, but rather the constant
    BUFFER SIZE.
 
 3. Some sample data is in directory ~kbg/364/Buffer.
 
-This document is in ~kbg/364/adm/buffer  
+This document is in ~kbg/364/adm/buffer
 
 Input:
 

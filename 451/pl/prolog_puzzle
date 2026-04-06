@@ -71,4 +71,3 @@ print_houses([A|B]) :- !,
 	write(A), nl,
 	print_houses(B).
 print_houses([]).
-

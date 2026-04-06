@@ -1,6 +1,6 @@
 
 
-a:	
+a:
 	gcc -c -g m.c
 	gcc m.o -o m
 

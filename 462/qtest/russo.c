@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-static int int_compare(a, b) int *a, *b;
+static int int_compare(a, b)
+int *a, *b;
 {
   if (*a < *b)
     return -1;

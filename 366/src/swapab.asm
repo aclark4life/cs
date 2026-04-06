@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 15:04:07 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 729       
+Content-Length: 729
 Status: O
 
          .radix 16
@@ -49,4 +49,3 @@ setin:
 
 code     ends
          end
-

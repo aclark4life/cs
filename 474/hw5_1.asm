@@ -1,6 +1,6 @@
 * Homework set 5 #1
 * Alex Clark
-  
+
 STDIO   PUBLIC  GETCH,OUTCH,CRLF,CLEAR,OUTSTR
 
 OUTCH   MOVEM.L A0-A6/D1-D7,-(A7)
@@ -39,11 +39,11 @@ CLEAR   MOVEM.L A0-A6/D0-D7,-(A7)
 
 OUTSTR  MOVEM.L A1-A6/D0-D7,-(A7)
 LOOP    MOVE.B  (A0)+,D0
-	CMP.B   #0,D0   
+	CMP.B   #0,D0
 	BEQ     DONE
 	BSR     OUTCH
 	BRA     LOOP
 DONE    MOVEM.L (A7)+,A1-A6/D0-D7
 	RTS
 
-	END     STDIO   
+	END     STDIO

@@ -19,7 +19,7 @@ In April 2026, this repository underwent a "Capstone Refactoring" pass to bring 
 ## 📚 Curriculum & Projects
 
 ### 262: Programming and Data Structures
-Continuation of foundational CS concepts including elementary file handling and abstract data types (lists, stacks, queues, and trees). 
+Continuation of foundational CS concepts including elementary file handling and abstract data types (lists, stacks, queues, and trees).
 - **Featured Project:** A Sparse Matrix implementation using a 2D linked list (`262/list.c`).
 
 ### 295: Discrete Structures

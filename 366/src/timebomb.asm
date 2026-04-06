@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 14:57:26 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1948      
+Content-Length: 1948
 Status: O
 
 ; Time Bomb
@@ -40,7 +40,7 @@ m2	db 'm2!', 0
 
 
 main	proc	near
-	
+
         xor     ax,ax
         mov     es,ax 				; seg of interrupt vector table
 
@@ -58,7 +58,7 @@ main	proc	near
 
         mov     ah, 31H
 	mov     al, STATUS_OK
-	mov     dx, 264H   ; 64 paragraphs = 1K   
+	mov     dx, 264H   ; 64 paragraphs = 1K
 	int	DOS_SERVICE
 
 	exit 	STATUS_OK
@@ -66,7 +66,7 @@ main	endp
 
 
 ;purpose:  replacement interrupt handler
-;input:    active flag and count in CODE segment 
+;input:    active flag and count in CODE segment
 ;output:   nothing (calls update_vogons every TAU interrupts)
 ;destroys: nothing [[ interrupt handlers cannot destroy anything!]]
 new_interrupt_handler proc	near
@@ -97,7 +97,7 @@ print_message	proc	near
 
 	push	cs			; move cs to ds using the stack
 	pop	ds
- 
+
 	push	dx
         mov	dx,0b22H
 	call	locate
@@ -113,4 +113,3 @@ print_message	endp
 
 code	ends
 	end main
-

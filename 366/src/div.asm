@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 14:57:07 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1876      
+Content-Length: 1876
 Status: O
 
 ; div.asm
@@ -71,7 +71,7 @@ lp:						; loop until QUIT character
 	call	print_blank
 
 	xor	dx,dx				; divide 0:N by bx
-	mov	bx,ax				
+	mov	bx,ax
 	mov	ax,N
 	idiv	bx
 	call	printAXhex
@@ -81,7 +81,7 @@ lp:						; loop until QUIT character
 exit_program:
  	mov	ax,hold_div_by_0_cs		; restore timer interrupt
 	mov	bx,hold_div_by_0_ip
-	cli						
+	cli
 	mov     es:0[di], bx
 	mov     es:2[di], ax
 	sti
@@ -130,4 +130,3 @@ hold_div_by_0_ip	dw	?
 hold_div_by_0_cs	dw	?
 data	ends
 	end	main
-

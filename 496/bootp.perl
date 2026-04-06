@@ -23,7 +23,7 @@ read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
 #for each set of name and value pairs
 foreach $pair (@pairs)
 {    ($name, $value) = split(/=/, $pair);
-     
+
      # Un-Webify plus signs and %-encoding
      $value =~ tr/+/ /;
      $value =~ s/%([a-fA-F0-9][a-fA-F0-9])/pack("C", hex($1))/eg;
@@ -40,7 +40,7 @@ foreach $pair (@pairs)
     }
 	 }
      }
-	
+
     $FORM{$name} = $value;
 }
 
@@ -56,11 +56,11 @@ sub mail_form {
 
     print MAIL <<EOM;
 
-                          $title_at_the_top_of_mail_message 
+                          $title_at_the_top_of_mail_message
 -------------------------------------------------------------------------
 
 Name: $FORM{'name'}
-	    
+
 E-Mail: $FORM{'email'}
 
 Comments:
@@ -86,9 +86,3 @@ sub success_message {
     print "<title>Thank You!</title><center><h1>Thank You!</h1><hr size=5><h2>Thank you for your submission, $FORM{'name'}.<br>Your mail has been sent!</h2><hr size=5></center>";
     exit;
 }
-
-
-
-
-
-

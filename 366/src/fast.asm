@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 15:03:45 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 3195      
+Content-Length: 3195
 Status: O
 
 ; FAST.ASM
@@ -19,7 +19,7 @@ Status: O
 ; Might check scrolling on screen one might NOT.
 ; if it does then it cant print to other screens unless
 ; another parm is added (screen number)
-; call would be (string,row,col,screen_number) 
+; call would be (string,row,col,screen_number)
 
 ; ASSUMES: Graphics board, Text window 0, Text mode,?
 ; NOTE other screens can be written to by giving a line number
@@ -74,7 +74,7 @@ crt_start equ  0B800
 
          public fastpr
 fastpr   proc  near
-         push  bp                      
+         push  bp
 	 mov   bp,sp                   ; stdandard entry
 ; Call syntax  fastpr(string,row,col) ;
 ; char *string ;
@@ -143,4 +143,3 @@ fastpr   endp
 
 @CODE	ENDS
          end
-

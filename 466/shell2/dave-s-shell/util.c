@@ -10,7 +10,8 @@ int die(char *s) {
   exit(-1);
 }
 
-char *check_malloc(size) int size;
+char *check_malloc(size)
+int size;
 {
   char *cp, *malloc();
   /*printf("check malloc allocating %d bytes\n", size) ;*/
@@ -29,7 +30,8 @@ void *check_realloc(void *p, int size) {
   return (p);
 }
 
-char *string_copy(s) char *s;
+char *string_copy(s)
+char *s;
 {
   char *s_copy;
 

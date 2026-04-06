@@ -11,7 +11,7 @@ create MyApplet.java
 
   import java.applet.Applet;
   import java.awt.*;
-  
+
   public class MyApplet extends Applet
   {
       public void init()
@@ -19,7 +19,7 @@ create MyApplet.java
 	  Panel childPanel = new Panel();
 	  add(childPanel);
       }
-  
+
       public void paint(Graphics g)
       {
 	  g.drawString("Hello World", 0, 20);
@@ -39,4 +39,3 @@ run applet viewer
 change the string to your name and your half way there :)
 
 - dave
-

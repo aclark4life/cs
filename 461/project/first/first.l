@@ -1,5 +1,5 @@
 %%
-.|\n	{ ECHO; } 
+.|\n	{ ECHO; }
 %%
 
 yywrap()
@@ -8,7 +8,7 @@ yywrap()
 }
 
 
-main() 
+main()
 {
 	int foo;
   	foo = yylex();

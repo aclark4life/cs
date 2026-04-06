@@ -8,7 +8,7 @@ code	segment	byte public 'code'
 	assume cs:code
 
 ;
-; purpose: draw an image 
+; purpose: draw an image
 ; input: dx has the upper left corner's location, si points to the image
 ;        cx has image's length
 ; output: nothing (as a side effect the screen is updated)

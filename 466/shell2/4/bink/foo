@@ -35,7 +35,7 @@ static char **check_handle_pipe(char **tokenv);
 static int  is_background_job(char **tokenv);
 static void kill_job(int job, tJob background_processes[]);
 static void print_jobs(tJob background_processes[]);
-static void record_background_job(char *job_name, 
+static void record_background_job(char *job_name,
 				  tJob background_processes[], int pid);
 static void note_finished_jobs(tJob background_processes[], int pid);
 static void shift_tokenv_by_2(char **tokenv);
@@ -107,7 +107,7 @@ static void external_command(char **tokenv, tJob background_processes[])
 {
     int pid;
     int back_ground = is_background_job(tokenv);  /* removes '&' */
-    
+
     if (tokenv[0] == NULL)			  /* input = "& " */
 	return;
 
@@ -163,8 +163,8 @@ static void external_command(char **tokenv, tJob background_processes[])
 }
 
 
-static void record_background_job(char *job_name,   
-				  tJob background_processes[], 
+static void record_background_job(char *job_name,
+				  tJob background_processes[],
 				  int pid)
 {
     int i;
@@ -195,7 +195,7 @@ static void note_finished_jobs(tJob background_processes[], int pid)
 	if (child_pid == -1)  /* no unwaited for childred */
 	    break;
 
-	if (child_pid != 0) 
+	if (child_pid != 0)
 	{
             int i;
 
@@ -224,7 +224,7 @@ static void check_redirect_stdin(char **tokenv)
 {
     int i;
 
-    for(i=0; tokenv[i] != NULL; i++)  
+    for(i=0; tokenv[i] != NULL; i++)
     {
         if (strcmp("<", tokenv[i]) == 0)
 	{
@@ -241,7 +241,7 @@ static void check_redirect_stdout(char **tokenv)
 {
     int i;
 
-    for(i=0; tokenv[i] != NULL; i++)  
+    for(i=0; tokenv[i] != NULL; i++)
     {
         if (strcmp(">", tokenv[i]) == 0)
 	{
@@ -389,9 +389,9 @@ char *s;
 
 
 
-/* purpose: read a string of indeterminate length 
+/* purpose: read a string of indeterminate length
  * input:  nothing
- * output: string read 
+ * output: string read
  */
 char *read_long()
 {
@@ -420,13 +420,13 @@ char *read_long()
     }
     else
         return(buff);
-} 
+}
 
 
 
 /* purpose: parse string into argument vector
  * input:   the string to parse, str
- * output:  a argument vector (array of pointers to the non-white space 
+ * output:  a argument vector (array of pointers to the non-white space
  *	    strings in str)
  */
 char **tokenize(char *str)
@@ -447,7 +447,7 @@ char **tokenize(char *str)
 
     tokens[tc] = NULL;
     return(tokens);
-} 
+}
 
 
 util.h010064400135600000012000000004520626444110300130360ustar00binkleystaff00002430000005/* util.h */
@@ -472,5 +472,3 @@ void *check_realloc(void *, int);
 char *string_copy(char*);
 
 #endif
-
-

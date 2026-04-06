@@ -21,7 +21,7 @@ grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
 
 motherInLaw(X, Y) :- mother(X, Z), married(Z, Y).
 
-male(X) :- father(X, _).			% a partial truth 
+male(X) :- father(X, _).			% a partial truth
 
 son(X, Y) :- parent(Y, X), male(X).	% gets dave but not chris.  Why?
 
@@ -76,10 +76,10 @@ flatten([X|Xs], Ys) :- flatten(X,Xf), flatten(Xs, Xsf), append(Xf, Xsf, Ys).
 %   nested to any depth in List, but all on one level.
 
 dlflatten([], Link-Link).
-dlflatten([A|L], [A|F]-Link) :- 
+dlflatten([A|L], [A|F]-Link) :-
 	(atomic(A);var(A)), !, dlflatten(L, F-Link).
-dlflatten([A|L], F-Link) :- 
-	dlflatten(A, F-FL), dlflatten(L, FL-Link). 
+dlflatten([A|L], F-Link) :-
+	dlflatten(A, F-FL), dlflatten(L, FL-Link).
 
 
 %   linkify(List, DiffList-Link)

@@ -8,50 +8,38 @@
 //  Uses typedef instead of templates.
 //
 
+#ifndef PQUEUE_H_INCLUDED
+#define PQUEUE_H_INCLUDED
 
-#ifndef  PQUEUE_H_INCLUDED
-#define  PQUEUE_H_INCLUDED
+#include "delcher.h"
 
+const int DEFAULT_HEAP_SIZE = 100;
 
-#include  "delcher.h"
+typedef int KEY_TYPE;
 
-const int  DEFAULT_HEAP_SIZE = 100;
+struct PQ_Entry {
+  KEY_TYPE Key;
+  // Other Data here
 
-typedef  int  KEY_TYPE;
+  //  Define how to compare entries.
+  int operator<(const PQ_Entry &P) const { return (Key < P.Key); }
+  int operator<=(const PQ_Entry &P) const { return (Key <= P.Key); }
+};
 
-struct  PQ_Entry
-  {
-   KEY_TYPE  Key;
-   // Other Data here
+class Priority_Q {
+protected:
+  PQ_Entry *Data;
+  int Entry_Ct;
+  int Size;
 
-   //  Define how to compare entries.
-   int  operator <  (const PQ_Entry & P)  const
-     {
-      return  (Key < P . Key);
-     }
-   int  operator <=  (const PQ_Entry & P)  const
-     {
-      return  (Key <= P . Key);
-     }
-  };
+  void Sift_Down(int i);
 
-
-class  Priority_Q
-  {
-  protected:
-   PQ_Entry  * Data;
-   int  Entry_Ct;
-   int  Size;
-
-   void  Sift_Down  (int i);
-
-  public:
-   Priority_Q  (int = DEFAULT_HEAP_SIZE);       // Constructor
-   Priority_Q  (const Priority_Q &);            // Copy constructor
-   ~ Priority_Q  ();                            // Destructor
-   PQ_Entry  Extract_Min  ();
-   void  Insert  (const PQ_Entry &);
-  };
-
+public:
+  Priority_Q(int = DEFAULT_HEAP_SIZE); // Constructor
+  Priority_Q(const Priority_Q &);      // Copy constructor
+  ~Priority_Q();                       // Destructor
+  PQ_Entry Extract_Min();
+  void Insert(const PQ_Entry &);
+};
 
 #endif

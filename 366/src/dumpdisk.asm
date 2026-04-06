@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 15:03:35 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2980      
+Content-Length: 2980
 Status: O
 
          .radix 16
@@ -21,7 +21,7 @@ code     segment
          mov   ds,ax
          mov   es,ax
 
-         mov   dx,0100                 ; check number of sides by 
+         mov   dx,0100                 ; check number of sides by
          mov   cx,0001                 ; reading track zero sector 1
          call  get_sec                 ; read a sector
          jc    single
@@ -147,5 +147,3 @@ errm     db    'Cant read sector ',0dH,0aH,'$'
 data     db    200 dup(?)
 code     ends
          end
-
-

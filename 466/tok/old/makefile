@@ -15,5 +15,5 @@ depend:
 	makedepend $(SRC)
 
 clean:
-	rm *.o; 
+	rm *.o;
 # DO NOT DELETE THIS LINE -- make depend depends on it.

@@ -35,10 +35,9 @@ clear	movem.l	a0-a6/d1-d7,-(a7)
 
 outstr	movem.l	a0-a6/d1-d7,-(a7)
 loop	move.b	(a0)+,d0
-	cmp.b	#0,d0	
+	cmp.b	#0,d0
 	beq	done
 	outch
 	bra	loop
 done	movem.l (a7)+,a0-a6/d1-d7
 	rts
-

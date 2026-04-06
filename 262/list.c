@@ -47,7 +47,8 @@ struct element *insert_row(struct element *new_node, struct element *head) {
     current = current->next_row;
     if (new_node->row == current->row && new_node->col == current->col) {
       current->value = new_node->value;
-      free(new_node); /* Node already exists, just update value and free the temp node */
+      free(new_node); /* Node already exists, just update value and free the
+                         temp node */
       return (NULL);
     }
     if (new_node->row < current->row) {
@@ -434,7 +435,8 @@ void menu() {
       printf("DEVELOPER NOTES:\n");
 
       printf("- Significant time spent on insert_node logic.\n");
-      printf("- Current implementation is complex and could be refactored into smaller functions.\n");
+      printf("- Current implementation is complex and could be refactored into "
+             "smaller functions.\n");
       printf("- do_col function is currently a stub.\n");
       printf("- Only capitalized menu options are currently functional.\n");
 

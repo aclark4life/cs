@@ -1,3 +1,4 @@
-; image.h
+;
+image.h
 
-	extrn image_draw:near
+    extrn image_draw : near

@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 14:57:11 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 1654      
+Content-Length: 1654
 Status: O
 
 ; dollar.asm
@@ -66,7 +66,7 @@ lp:						; read and echo until QUIT character
 
  	mov	ax,hold_timer_cs		; restore timer interrupt
 	mov	bx,hold_timer_ip
-	cli						
+	cli
 	mov     es:0[di], bx
 	mov     es:2[di], ax
 	sti
@@ -106,4 +106,3 @@ new_interrupt_handler endp
 
 code	ends
 	end main
-

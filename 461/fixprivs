@@ -1,23 +1,23 @@
-> 
-> After you are done working in the jc directory, be sure to run 
+>
+> After you are done working in the jc directory, be sure to run
 >       ~mbrannig/bin/fixprivs
 > to fix the permissions.  A nice automated way would be to add it to your
 > .logout file.
 
 how about adding this to the makefile
 
-like 
+like
    make fixprivs
 
 - dave
-> 
+>
 > matt
-> -- 
+> --
 > --------------------------Matthew Aloysious Brannigan-------------------------
 > |				mab@acm.org				     |
 > |                     http://www.cs.loyola.edu/~mbrannig                     |
 > ---- "The average hacker could....." Me --------------------------------------
-> 
+>
 
 
 From mab@justice.loyola.edu Wed Feb  5 08:45:36 1997
@@ -38,15 +38,14 @@ Content-Type: text
 Content-Length: 454
 Status: OR
 
-After you are done working in the jc directory, be sure to run 
+After you are done working in the jc directory, be sure to run
       ~mbrannig/bin/fixprivs
 to fix the permissions.  A nice automated way would be to add it to your
 .logout file.
 
 matt
--- 
+--
 --------------------------Matthew Aloysious Brannigan-------------------------
 |				mab@acm.org				     |
 |                     http://www.cs.loyola.edu/~mbrannig                     |
 ---- "The average hacker could....." Me --------------------------------------
-

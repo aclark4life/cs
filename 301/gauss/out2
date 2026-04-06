@@ -1,8 +1,8 @@
 
-p.s. will that correction work for a 
+p.s. will that correction work for a
 case where there is more than one instance of solutions
-after free variables ? 
-like this: 
+after free variables ?
+like this:
 1.000000 0.000000 -2.000000 0.000000 0.000000 0.000000 0.000000
 0.000000 1.000000 3.000000 0.000000 0.000000 0.000000 0.000000
 0.000000 0.000000 0.000000 1.000000 3.000000 0.000000 0.000000
@@ -13,7 +13,3 @@ c=free
 d=0.000000 - 3.000000e
 e=free
 f=0.000000
-
-
-
-

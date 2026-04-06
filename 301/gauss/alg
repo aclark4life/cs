@@ -7,7 +7,7 @@
            None found;
            Mark j as a free variable;
            continue;
-          } 
+          }
         else
           {
            if  (i != k)
@@ -25,8 +25,7 @@
         for  (Each row)
           {
            The variable repesented by the first non-zero entry
-           in that row is equal to the last column minus all  
-           the other non-zero entries in that row times their 
+           in that row is equal to the last column minus all
+           the other non-zero entries in that row times their
            corresponding free variable.
           }
-

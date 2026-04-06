@@ -52,7 +52,7 @@ typedef struct s_node {
   int level;
   int *path;
   float bound;
-} * t_node;
+} *t_node;
 
 t_node give_birth();
 t_node give_path(t_node parent, t_node kid);
@@ -86,8 +86,9 @@ void get_distances() // perform distance formula on all
       if (i == j) {
         // do nothing
       } else {
-        //				printf ("  let's do %f %f\n",f1[i] , f2[i])
-        //; 				printf ("  and %f %f\n",f1[j] , f2[j]) ; 				printf ("  the dist is
+        //				printf ("  let's do %f %f\n",f1[i] ,
+        // f2[i]) ; 				printf ("  and %f %f\n",f1[j] ,
+        // f2[j]) ; 				printf ("  the dist is
         //%f\n",cmp_distances( f1[i], f2[i], f1[j], f2[j] )  );
         f[i][j] = cmp_distances(f1[i], f2[i], f1[j], f2[j]);
       }
@@ -119,7 +120,7 @@ void init() {
     best_path[i] = 0;
   }
   //	for (i=1;i<=d;i++) { 	printf("%d %f %f\n",i,f1[i],f2[i]) ; } //echo
-  //input
+  // input
 }
 t_node give_birth(t_node parent) {
   t_node n;

@@ -3,7 +3,7 @@ ID_CHAR			[a-zA-Z_]
 %{
 #include <stdio.h>
 %}
- 
+
 %%
 "stego"		{ printf("FOUND: stego\n"); return("stego"); }
 {ID_CHAR}({ID_CHAR})* { printf("IDENTIFIER\n"); return(0); }
@@ -27,4 +27,3 @@ main()
 	 }
 	return(0);
 }
-

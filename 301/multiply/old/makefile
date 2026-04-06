@@ -3,6 +3,6 @@ m:
 n:
 	gcc -g n.c -o n
 all:	m n
-clean:  
+clean:
 	rm n;
 	rm m;

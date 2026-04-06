@@ -114,7 +114,7 @@ main()
 
 int Table_Lookup(struct KeywordToken Table[])
      /* input: Table of tokens
-      * returns TokenCode of keyword if matched or 
+      * returns TokenCode of keyword if matched or
 	IDENTIFIER if no match is found */
 {
   struct KeywordToken *Curr;
@@ -199,7 +199,7 @@ Escape                  \\[ntbrf\\'"]
 
 \/\/.*$			{}
 \/\*(.$)*\*\\		{}
-\/\*\*(\/|.*($)?\*\\)	{}		
+\/\*\*(\/|.*($)?\*\\)	{}
 
 "("     { return (OPEN_PAREN_TOKEN); }
 ")"     { return (CLOSE_PAREN_TOKEN); }
@@ -277,7 +277,7 @@ main()
 
 int Table_Lookup(struct KeywordToken Table[])
      /* input: Table of tokens
-      * returns TokenCode of keyword if matched or 
+      * returns TokenCode of keyword if matched or
 	IDENTIFIER if no match is found */
 {
   struct KeywordToken *Curr;
@@ -314,4 +314,3 @@ loop:
                 putchar(c1);
 }
 #endif
-

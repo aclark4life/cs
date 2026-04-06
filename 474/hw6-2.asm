@@ -22,23 +22,23 @@ START   MOVE.W          #$2700,SR
         MOVE.L          D7,$100
 
         MOVE.B          #$41,D0
-        
+
         MOVE.B          #$A1,TCR(A0)
         MOVE.B          #$01,TSR(A0)
         MOVE.L          #$000009C4,D2
         MOVEP.L         D2,CNTR(A0)
 
         MOVE.W          #$2000,SR
-        
+
 LOOP_O  MOVE.B          #$00,D1
 
 LOOP_T  CMP.B           #100,D1
         BNE             LOOP_T
-        
+
         BSR             OUTCH
         ADD.B           #1,D0
         CMP.B           #$5B,D0
         BNE             LOOP_O
-        
+
         WORD            $4AFB
         END             START

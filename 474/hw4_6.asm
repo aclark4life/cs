@@ -1,9 +1,9 @@
 * Homework 4 #6
 * Alex Clark
- 
+
 
 	ORG 	$2000
-BUFFER	DS	48	
+BUFFER	DS	48
 	ORG	$3000
 LABEL   LEA 	BUFFER,A3
 	MOVE.B  #247,D7
@@ -21,4 +21,3 @@ LOOP2	ADD.B	#1,D2
 	BNE	LOOP2
 	WORD	$4AFB
 	END	LABEL
-

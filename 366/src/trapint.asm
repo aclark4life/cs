@@ -10,7 +10,7 @@ To: aclark (J. Alexander Clark), bduncan (Cousin Brucie), bwu (Bin Wu),
 Date: Fri, 8 Dec 1995 15:04:11 -0500 (EST)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 5814      
+Content-Length: 5814
 Status: O
 
      .radix 16
@@ -82,7 +82,7 @@ nocr:
          pop   ds
          pop   es
          pop   ss                      ; token ss never changed
-  
+
 ;        mov   sp,sp_sav               ; force correct stack
 
          mov   byte ptr cs:active,true          ; re-activate
@@ -217,7 +217,7 @@ loop:
 
          mov   ah,01                   ; get char
 	 int   21
-         rcr   al,1                    ; hold bit in carry 
+         rcr   al,1                    ; hold bit in carry
 	 rcl   di,1                    ; build bit string into di
          inc   bx
          inc   bx
@@ -246,4 +246,3 @@ buff db 03,0,0,0,0
 
 code     ends
 	 end
-

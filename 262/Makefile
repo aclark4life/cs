@@ -41,4 +41,3 @@ test: all
 	@echo "1 2 3" | ./avg 3
 
 .PHONY: all clean rebuild test
-

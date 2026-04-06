@@ -4,7 +4,7 @@
 ; input:   nothing
 ; output:  nothing (screen is updated)
 ;
-; 
+;
 ;  A rock looks like this
 ;
 ;     ##
@@ -69,13 +69,13 @@ stack	ends
 code	segment	public byte 'code'
 	assume  cs:code, ss:stack
 
-; data in the code segment so it can be referenced as 
+; data in the code segment so it can be referenced as
 ; cs:currently_active and cs:count
 
 currently_active	db	?
 count			dw	?
 
-main	proc	near 
+main	proc	near
 	mov	ax, seg data
 	mov	ds, ax
 	assume	ds:data
@@ -104,7 +104,7 @@ init_loop:
 	xchg	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
 	xchg	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
 	sti				; interrupts back on
-	
+
 	mov	hold_timer_ip, bx
 	mov	hold_timer_cs, ax
 
@@ -136,7 +136,7 @@ finish:
 	mov	ax, hold_timer_cs
 	mov	bx, hold_timer_ip
 
-	cli	
+	cli
 	mov	es:[TIMER_INT_LOCATION+SEGMENT_PART], ax
 	mov	es:[TIMER_INT_LOCATION+OFFSET_PART], bx
 	sti
@@ -165,7 +165,7 @@ new_interrupt_handler	proc	near
 
 done:
 	iret
-new_interrupt_handler	endp	
+new_interrupt_handler	endp
 
 
 ;
@@ -212,8 +212,8 @@ new_rock_check	proc	near
 
 	...
 	; find a non-active rock then set it to active with
-	; a random x location on the top of the screen 
-	
+	; a random x location on the top of the screen
+
 no_new_rock:
 	pop	di
 	pop	cx
@@ -223,7 +223,7 @@ new_rock_check	endp
 
 
 ;
-; purpose:  move the rocks 
+; purpose:  move the rocks
 ; input:    nothing
 ; output:   nothing (rocks array and screen are updated)
 ; destroys: nothing
@@ -322,7 +322,7 @@ going_down:
 store:
 	inc	dl
 	mov	upper_left_corner[di], dx
-	
+
 	pop	dx
 	pop	cx
 	ret

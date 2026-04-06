@@ -11,8 +11,8 @@
 
 FYI I am sending the solution to last years assignment 3 (64 bit multiply).
 
-Just as your learn to write engligh by reading english, you can learn to 
-write assembler by reading some.  
+Just as your learn to write engligh by reading english, you can learn to
+write assembler by reading some.
 
 HAVE FUN
 - dave
@@ -22,7 +22,7 @@ HAVE FUN
 ; product64.asm
 ;
 ; Solution to assignment 3
-; CS366 
+; CS366
 ; Fall 1994
 ;
 ; This program computes the product of two 64 bit numbers read from the keyboard
@@ -53,7 +53,7 @@ string		db	24 dup(?)		; input buffer
 overflow_msg	db	'overflow', CR, LF, '$'
 final_msg	db	'product is = $'
 data		ends
-  
+
 stack	segment stack
 	db 256 dup(?)
 stack	ends
@@ -113,7 +113,7 @@ add64	proc near
 	jnc  ok
 
 	push dx
-	lea  dx,overflow_msg			
+	lea  dx,overflow_msg
 	mov  ah,DOS_PRINT
 	int  DOS_SERVICE
 	pop  dx
@@ -129,7 +129,7 @@ add64	endp
 ; output:   hex digit in al
 ; destroys: nothing
 ;
-convert_digit	proc near 	
+convert_digit	proc near
 	cmp  al,'9'
         jle  small2
         and  al,0dfH  				; [[ ask me ]]
@@ -159,16 +159,16 @@ is_zero	proc near
 	jnz  nz					; exit with zero bit clear
 	cmp  ax,6[si]				; leaves zero bit correct
 
-nz:	
+nz:
 	pop  ax
 	ret
 is_zero	endp
 
 
 ;
-; purpose:  left shift a 64 bit number by 1 bit 
+; purpose:  left shift a 64 bit number by 1 bit
 ; input:    si points to the number
-; output:   [si] = [si] shifted left 1 bit, 
+; output:   [si] = [si] shifted left 1 bit,
 ;           carry flag set to bit shifted out
 ; destroys: nothing
 ;
@@ -202,8 +202,8 @@ left_shiftcx64	endp
 
 ;
 ; purpose:  multiply two 64 bit numbers
-; input:    si, bx point to the input numbers, 
-;           di points the product's location 
+; input:    si, bx point to the input numbers,
+;           di points the product's location
 ; output:   [di] = [si] * [bx]
 ; destroys: AX
 ;
@@ -217,7 +217,7 @@ multiply64 proc near
         mov  6[di], cx
 
 
-multiply_loop:                                  
+multiply_loop:
 
 	test word ptr 6[si], 01                 ; if n1 is odd
 ; [[ test byte ptr uses 6 (not 7) why ? in test byte ptr 6[si], 01]]
@@ -236,11 +236,11 @@ even:
 	call left_shift64                       ; shifts number pointed to by si
 	pop  si
 	jnc  multiply_loop
-	
+
 	push dx
-	lea  dx,overflow_msg                    
+	lea  dx,overflow_msg
 	mov  ah,DOS_PRINT
-	int  DOS_SERVICE   
+	int  DOS_SERVICE
 	pop  dx
 	jmp  multiply_loop
 
@@ -251,8 +251,8 @@ multiply64 endp
 
 
 ;
-; purpose:  print a 64 bit number 
-; input:    si points to the number 
+; purpose:  print a 64 bit number
+; input:    si points to the number
 ; output:   nothing (number is printed to the screen)
 ; destroys: nothing
 ;
@@ -277,8 +277,8 @@ print_64	endp
 
 
 ;
-; purpose:  read a 64 bit number 
-; input:    di points to the location for the number 
+; purpose:  read a 64 bit number
+; input:    di points to the location for the number
 ; output:   [di] = the number read
 ; destroys: AX
 ;
@@ -293,7 +293,7 @@ read_number proc	near
 
 	lea  si,string+1			; convert string at [si]
 	call string_to_number
- 
+
         pop  dx
         pop  si
 	ret
@@ -301,8 +301,8 @@ read_number endp
 
 
 ;
-; purpose:  right shift a 64 bit number by 1 bit 
-; input:    si points to the number 
+; purpose:  right shift a 64 bit number by 1 bit
+; input:    si points to the number
 ; output:   [si] = [si] right shifted by 1 bit
 ; destroys: nothing
 ;
@@ -327,9 +327,9 @@ right_shift64	endp
 
 ;
 ;
-; purpose:  convert a string to a hex number 
-; input:    si points to the string (first byte is the strings length), 
-;           di points to the location to place the number 
+; purpose:  convert a string to a hex number
+; input:    si points to the string (first byte is the strings length),
+;           di points to the location to place the number
 ; output:   [di] = the number in hex
 ; destroys: nothing
 ;
@@ -356,9 +356,9 @@ next_digit:
 	call left_shiftcx64			; shift number pointed to by si
         xchg si,di				; recover si and di
         pop  cx
-	or   6[di], al				; or in new low nibble 
+	or   6[di], al				; or in new low nibble
         loop next_digit
-        
+
 	pop  cx
 	pop  si
 	ret
@@ -366,4 +366,3 @@ string_to_number	endp
 
 code	ends
 	end main
-

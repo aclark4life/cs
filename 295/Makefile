@@ -50,4 +50,3 @@ test: factorial
 	./factorial 10
 
 .PHONY: all clean rebuild test
-

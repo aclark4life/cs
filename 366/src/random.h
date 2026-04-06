@@ -1,3 +1,4 @@
-; random.h
+;
+random.h
 
-	extrn	random:near
+    extrn random : near

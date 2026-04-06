@@ -22,7 +22,7 @@ code	segment	public byte 'code'
 ;
 ; purpose:  check if a rock hit a shield
 ; input:    dx = lower left corner of rock, cl = rock width
-; output:   zr flag set if hit, clear otherwise.  
+; output:   zr flag set if hit, clear otherwise.
 ; destroys: nothing
 ;
 shield_p1_hit	proc	near
@@ -37,8 +37,8 @@ hit:
 	...
 
 	test	al, 0				; hit!  set ZF = 1
-	
-no_hit:						; for jumps, ZF = 0 
+
+no_hit:						; for jumps, ZF = 0
 	pop	si
 	pop	dx
 	pop	ax
@@ -49,7 +49,7 @@ shield_p1_hit	endp
 ;
 ; purpose:  move player one's shield to the left
 ; input:    nothing
-; output:   nothing (player 1's shield location is updated and is screen) 
+; output:   nothing (player 1's shield location is updated and is screen)
 ; destroys: nothing
 ;
 shield_p1_left	proc	near
@@ -78,7 +78,7 @@ shield_p1_left	endp
 ;
 ; purpose:  move player one's shield to the right
 ; input:    nothing
-; output:   nothing (player 1's shield location is updated and is screen) 
+; output:   nothing (player 1's shield location is updated and is screen)
 ; destroys: nothing
 ;
 shield_p1_right	proc	near

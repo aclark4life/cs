@@ -31,22 +31,22 @@ fun factorial2 n = factorial_helper n 1
 (*
  * ML (like Scheme) has first class functions.  Thus, functions are values just
  * like integers, booleans, etc.. For example, the following function converts
- * a binary function into a unary one by supplying one argument.  Note that 
+ * a binary function into a unary one by supplying one argument.  Note that
  * this function takes a function as an argument and returns a function as its
  * result.
  *)
 
-fun fix_first_argument bi_func constant argument = 
-    let 
+fun fix_first_argument bi_func constant argument =
+    let
 	val p = (constant, argument)
-    in 
-	bi_func p 
+    in
+	bi_func p
     end
   ;
 
 fun addp (x,y) = x+y:int;
 
-val increment = fix_first_argument addp 1 ; 
+val increment = fix_first_argument addp 1 ;
 
 (* actually, because functions are curried, fix_first_argument is unnecessary.
  * For examples, try the following

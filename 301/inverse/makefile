@@ -1,2 +1,2 @@
 m:
-	gcc -g m.c -o m 
+	gcc -g m.c -o m

@@ -26,7 +26,7 @@ Status: OR
 
 
 
-CS 364                                                           Spring 97 
+CS 364                                                           Spring 97
 
                               Assignment 2
 
@@ -45,7 +45,7 @@ Write a C program that accepts the name of a file of integers from
 stdin or as a command line argument and then writes each sorted run to a
 separate, distinct file.  A "run" is a sorted subsequence of maximal length.
 
-   
+
 For example, if the file "numbers" has the contents 1 2 3 1 2 4 1 2 1 2,
 the output would be to 4 files with contents 1 2 3; 1 2 3; 1 2; and 1 2.
 You will not know how many runs are in a file until the processing is completed.
@@ -54,7 +54,7 @@ The program can be run in two distinct modes:
 
  1. splitter < numbers
 
-or 
+or
 
  2. splitter numbers
 
@@ -80,7 +80,7 @@ For example, if the files are as follows:
 
 An intermediate output, combing f1 and f2, would be:
 
-  ???: 2 3 3 4 4 5 6 6 9 
+  ???: 2 3 3 4 4 5 6 6 9
 
 The final output would be one file, named ???, with contents 1 2 3 3 4 4 5 5
 6 6 7 9 9.  Repeats are to managed reasonably.
@@ -89,14 +89,8 @@ The final output would be one file, named ???, with contents 1 2 3 3 4 4 5 5
 Part 2:
 
 Use the program of part 1 to sort a family of files of runs by
-repeated merging. 
+repeated merging.
 
    HINT: Write a shell script.
 
 This document is in ~kbg/364/adm/2.97  rev 2/97
-
-
-
-
-
-

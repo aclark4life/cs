@@ -15,16 +15,16 @@ You can leave the Scheme interpreter by typing "(exit)" or "(quit)".
 	(exit)
 
 will halt the Scheme system; any information that was in the interpreter is
-lost, so this should not be done lightly.  Typing 
+lost, so this should not be done lightly.  Typing
 
 	(quit)
 
-suspends the interpreter.  
+suspends the interpreter.
 
 
 **** Files and Loading
 
-To load files of Scheme code, use the procedure LOAD, 
+To load files of Scheme code, use the procedure LOAD,
 
 	(LOAD-NOISILY '<file-name>)
 
@@ -41,7 +41,7 @@ when syntaxing source code.
 
 ** Load determines whether the file to be loaded is binary or source code, and
 performs the appropriate action.  By convention, files of source code have a
-pathname-type of "scm", and files of binary SCode have pathname-type "bin". 
+pathname-type of "scm", and files of binary SCode have pathname-type "bin".
 Native code binaries have pathname-type "com".
 
 ** If the pathname given to LOAD does not specify the type or version of the
@@ -79,7 +79,7 @@ That prompt normally has the form
 
 The "1" in the prompt is a "level number", which is always a positive
 integer.  This number is incremented under certain circumstances, the most
-common being an error.  For example, here is what you will see if you type 
+common being an error.  For example, here is what you will see if you type
 "f o o RETURN" after starting Scheme:
 
 	1 ]=> foo
@@ -119,9 +119,9 @@ Unix (other systems may have more than two): C-G and C-C.  The C-G key causes
 the current Scheme program to stop immediately and returns you to the top level
 REPL.  C-C prompts you for another character and performs some action based on
 that character.  It is not necessary to type RETURN after C-G or C-C, nor is it
-needed after the character that C-C will ask you for.  
+needed after the character that C-C will ask you for.
 
-
+
 **** PROCEED
 
 Another way of exiting REPLs is to use the PROCEED procedure.  There are two
@@ -181,7 +181,7 @@ the output file, except that the pathname-type is "unf".  If you want
 information files to be generated all the time, set the variable SFU?
 to true -- otherwise they will not be generated unless you supply a
 third argument to SF.
-
+
 * GNU Emacs interface
 
 There is an interface library, called "xscheme", distributed with both

@@ -17,10 +17,10 @@ Content-Transfer-Encoding: 7bit
 Content-Length: 2053
 Status: OR
 
-> 
+>
 > /* dave - tokenc is the real token count- yipee!
 > 	i understand that knowing what the token count
-> 	is important with regard to any recursive call to 
+> 	is important with regard to any recursive call to
 > 	do_pipe. i am currently reflecting on this situation. but
 > 	what is really bothering me is the 'ls | more' problem that
 > 	i am having. i closed the fd[1] like you said. that
@@ -34,23 +34,23 @@ stdout's slot is slot 1.
 > 	is a copy of the file descriptor that is now located at 0.
 > 	since file descriptor 0 is left open for the pipe, then it
 > 	never gets closed right? ie 'more' gets it's input from
-> 	file desc. 0 and it never ends since file desc. 0 never 
+> 	file desc. 0 and it never ends since file desc. 0 never
 > 	gets closed. is this not what is happening?
 
 when the ls process dies, it closes all its open file descriptors.
 
 - dave
 > 	aclark */
-> 
+>
 > #include<stdio.h>
 > #include<unistd.h>
->     
+>
 > do_pipe(char **tokenv,int *tokenc)
 > {
 >    	int fd[2];
 >    	int pid;
 > 	int *stat_loc;
-> 
+>
 >  	free(tokenv[(*tokenc)-1]);
 >        	tokenv[(*tokenc)-1]=NULL;
 >        	if(tokenv[(*tokenc)]==NULL)
@@ -68,9 +68,9 @@ when the ls process dies, it closes all its open file descriptors.
 >                	switch(pid)
 >                 {
 >                 	case 0:        	/*tokenv=tokenv+(*tokenc); */
->                                         close(0); 
+>                                         close(0);
 > 					dup(fd[1]);
-> 					close(fd[1]); 
+> 					close(fd[1]);
 >                                         execvp(tokenv[(*tokenc)],tokenv);
 >                                         perror(tokenv[(*tokenc)]);
 >                                         break;
@@ -80,9 +80,7 @@ when the ls process dies, it closes all its open file descriptors.
 >                                         perror(tokenv[0]);
 >                                         break;
 >                 }
->  
->       	} 
+>
+>       	}
 > }
-> 
-
-
+>

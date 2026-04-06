@@ -11,13 +11,14 @@ typedef void *tHashTable;
 
 /* exported functions */
 
-tHashTable ht_initialize(int, int (*compare_function)(),int(*hash_function)());
-void       ht_free(tHashTable);
-void       ht_insert(tHashTable, void*);
-void       ht_delete(tHashTable, void*);
-void      *ht_lookup(tHashTable, void*);
+tHashTable ht_initialize(int, int (*compare_function)(),
+                         int (*hash_function)());
+void ht_free(tHashTable);
+void ht_insert(tHashTable, void *);
+void ht_delete(tHashTable, void *);
+void *ht_lookup(tHashTable, void *);
 
 /* for debugging */
-void       ht_print(tHashTable, void (*print_function)());
+void ht_print(tHashTable, void (*print_function)());
 
 #endif

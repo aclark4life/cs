@@ -8,7 +8,7 @@
 
 Introduction
 
-  Part  1: 
+  Part  1:
      Implement a "token ring" by passing a "token" via sockets.
 
      Make the token a 8 bit value with an 8 bit value field.
@@ -38,5 +38,3 @@ Extra Credit
        ber seen so far (which should be passed  around  with
        election  tokens);  thus,  they  will  loose the next
        election.
-
-

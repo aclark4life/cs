@@ -5,19 +5,19 @@
 fun add x y = x + y : int;
 fun add2 (x,y) = x + y : int;
 
-fun last lst = 
+fun last lst =
     if null lst then
 	nil
     else
 	let
-	    val head::tail = lst 
+	    val head::tail = lst
 	in
 	    if null tail then
 	        [head]
             else
-	        last tail 
+	        last tail
 	end ;
-fun length lst = 
+fun length lst =
     if null lst then
 	0
     else
@@ -43,7 +43,7 @@ fun reverse nil     = nil
   ;
 
 fun reverse2_helper nil     rsf = rsf
-  | reverse2_helper (x::xs) rsf = reverse2_helper xs (x::rsf) 
+  | reverse2_helper (x::xs) rsf = reverse2_helper xs (x::rsf)
   ;
 
 fun reverse2 x = reverse2_helper x nil

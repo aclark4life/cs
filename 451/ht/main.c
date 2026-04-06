@@ -7,7 +7,7 @@ typedef struct sData {
   int key;
   char name[10];
   int size;
-} * tData;
+} *tData;
 #define DATA_SIZE (sizeof(struct sData))
 
 const int HT_SIZE = 5;
@@ -55,10 +55,12 @@ main() {
   }
 }
 
-int data_compare(a, b) tData a, b;
+int data_compare(a, b)
+tData a, b;
 { return (a->key == b->key); }
 
-int data_hash(d) tData d;
+int data_hash(d)
+tData d;
 { return (d->key); }
 
 void data_print(d) tData d;

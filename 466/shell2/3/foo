@@ -1,7 +1,7 @@
 here it is:
 just the fact that more doesn't end and the prompt
-prints like this * * * * * * * * 
-instead of 
+prints like this * * * * * * * *
+instead of
 *
 *
 *
@@ -11,7 +11,7 @@ should i move it to my root? i forgot to do so...
 
 
 Script started on Tue Mar 04 09:57:39 1997
-[1;7mcsmaster:~/os/2/shell3>[mash
+[1;7mcsmaster:~/os/2/shell3>[mash
 * ls | more
 Makefile
 ash

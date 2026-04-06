@@ -27,7 +27,7 @@ random	proc	near
 ok:
 	mov	bx,ax				; save N
 
-	mov	ax,seg random_data		; establish addressing 
+	mov	ax,seg random_data		; establish addressing
 	mov	es,ax				; for random's data
 	assume	es:random_data
 
@@ -40,7 +40,7 @@ ok:
 	div	bx
 	inc	dx
 	mov	ax,dx
-	
+
 	pop	es
 	pop	dx
 	pop	bx
@@ -55,4 +55,4 @@ bad_random   db   'Bad random input = $'
 seed	dw	INITIAL_SEED
 random_data	ends
 
-	end 
+	end

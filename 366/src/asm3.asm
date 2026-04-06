@@ -4,10 +4,10 @@ To: aclark (J. Alexander Clark)
 Date: Mon, 23 Oct 1995 06:41:32 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 2922      
+Content-Length: 2922
 Status: OR
 
-; assignment 3 part 1 
+; assignment 3 part 1
 ;
 ; this program adds hex number read from the keyboard until zero is entered.
 ; if a carry occurs it prints a message.
@@ -32,7 +32,7 @@ stack	ends
 
 data	segment	byte public
 sum			dw   0
-number_as_string	db   MAX_READ_LENGTH+1, 
+number_as_string	db   MAX_READ_LENGTH+1,
 actual_length		db   ?
 buffer			db   MAX_READ_LENGTH+1 dup(?)
 oops_carry_message	db   'Oops carry',CR,LF,'$'
@@ -44,7 +44,7 @@ data	ends
 
 code	segment public byte 'code'
 	assume 	cs:code, ds:data, ss:stack
-	
+
 main	proc	near
 	mov	ax,seg data
 	mov	ds,ax
@@ -59,7 +59,7 @@ loop:
 
 	lea	dx,oops_carry_message
 	mov	ah, DOS_PRINT
-	int	DOS_SERVICE	
+	int	DOS_SERVICE
 
 print_number:
 	mov	ax,sum
@@ -107,7 +107,7 @@ read_number	endp
 ; output:   hex digit in al
 ; destroys: nothing
 ;
-convert_digit	proc near 	
+convert_digit	proc near
 	cmp	al,'9'
         jle	small2
         and	al,0dfH  			; [[ ask me ]]
@@ -140,10 +140,10 @@ read_string endp
 
 
 ;
-; purpose:  convert a string to a hex number 
+; purpose:  convert a string to a hex number
 ; input:    si points to the string (first byte is the strings length,
 ;           which number be <= 4)
-; output:   hex number in AX  
+; output:   hex number in AX
 ; destroys: nothing
 ;
 string_to_number	proc near
@@ -151,7 +151,7 @@ string_to_number	proc near
 	push	cx
 	push	bx
 
-        mov	cl,[si]				; get string length 
+        mov	cl,[si]				; get string length
 	xor	ch,ch				; unsigned convert cl to cx
 	inc	si				; point past length
 	xor	bx,bx				; [[ fast zero BX ]]
@@ -163,9 +163,9 @@ next_digit:
         pop 	cx
 	lodsb
 	call	convert_digit
-	or  	bl, al				; or in new low nibble 
+	or  	bl, al				; or in new low nibble
         loop	next_digit
-        
+
 	mov	ax,bx
 	pop	bx
 	pop 	cx
@@ -182,7 +182,7 @@ To: aclark (J. Alexander Clark)
 Date: Mon, 23 Oct 1995 06:41:42 -0400 (EDT)
 X-Mailer: ELM [version 2.4 PL22]
 Content-Type: text
-Content-Length: 3624      
+Content-Length: 3624
 Status: OR
 
 ; assignment 3 part 2
@@ -223,7 +223,7 @@ data	ends
 
 code	segment public byte 'code'
 	assume  cs:code, ds:data, ss:stack
-	
+
 main	proc	near
 	mov	ax,seg data
 	mov	ds,ax
@@ -236,7 +236,7 @@ loop:
 	add	sum,ax
 	jno	print_number			; jmp no overflow
 
-        js 	overflow			; pos + pos results in neg 
+        js 	overflow			; pos + pos results in neg
 						; sign bit on = neg number
 
 	lea	dx,oops_underflow_message
@@ -246,7 +246,7 @@ overflow:
 	lea	dx,oops_overflow_message
 print_message:
 	mov	ah, DOS_PRINT
-	int	DOS_SERVICE	
+	int	DOS_SERVICE
 
 print_number:
 	mov	ax,sum
@@ -294,7 +294,7 @@ read_number	endp
 ; output:   hex digit in al
 ; destroys: nothing
 ;
-convert_digit	proc near 	
+convert_digit	proc near
 	cmp	al,'9'
         jle	small2
         and	al,0dfH  			; [[ ask me ]]
@@ -327,10 +327,10 @@ read_string endp
 
 
 ;
-; purpose:  convert a string to a hex number 
+; purpose:  convert a string to a hex number
 ; input:    si points to the string (first byte is the strings length,
 ;           which number be <= 4)
-; output:   hex number in AX  
+; output:   hex number in AX
 ; destroys: nothing
 ;
 ; should check the a 5 digit number is not entered
@@ -341,7 +341,7 @@ string_to_number	proc near
 	push	dx
 	push	si
 
-        mov 	cl,[si]				; get string length 
+        mov 	cl,[si]				; get string length
 	xor 	ch,ch				; unsigned convert cl to cx
 	inc 	si				; point past length
 	xor 	bx,bx				; [[ fast zero AX ]]
@@ -366,14 +366,14 @@ next_digit:
         pop 	cx
 	lodsb
 	call	convert_digit
-	or  	bl, al				; or in new low nibble 
+	or  	bl, al				; or in new low nibble
         loop	next_digit
-        
+
 	mov	ax,bx
 	cmp	dx,-1				; change sign?
 	jne	no
 	neg	ax				; 2's comp!
-no:	
+no:
 	pop 	si
 	pop	dx
 	pop 	cx
@@ -383,4 +383,3 @@ string_to_number	endp
 
 code	ends
 	end 	main
-

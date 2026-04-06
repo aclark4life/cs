@@ -29,13 +29,13 @@ asScanner
 
 
 skipWhite: startFrom
-    [(startFrom <= (self size)) and: [((self at: startFrom) isWhite)]] 
+    [(startFrom <= (self size)) and: [((self at: startFrom) isWhite)]]
 	whileTrue: [ startFrom := startFrom + 1].
     ^startFrom
 !
 
 skipNonWhite: startFrom
-    [(startFrom > (self size)) or: [(self at: startFrom) isWhite]] 
+    [(startFrom > (self size)) or: [(self at: startFrom) isWhite]]
 	whileFalse: [startFrom := startFrom + 1].
     ^startFrom
 !
@@ -45,7 +45,7 @@ subString: start stopAt: stop
 
     len := stop - start.
     tmp := String new: len.
-    1 to: len do: 
+    1 to: len do:
 	[:i | tmp at: i put: (self at: start + i - 1)].
     ^tmp
 !!

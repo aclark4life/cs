@@ -57,7 +57,8 @@ void ht_free(ht) tHashTable ht;
  * input:
  * output:
  */
-tHashTable ht_initialize(size, compare_function, hash_function) int size;
+tHashTable ht_initialize(size, compare_function, hash_function)
+int size;
 int (*compare_function)(), (*hash_function)();
 {
   int i;
@@ -97,7 +98,8 @@ void *n;
  * input:
  * output:
  */
-void *ht_lookup(ht, n) tHashTable ht;
+void *ht_lookup(ht, n)
+tHashTable ht;
 void *n;
 {
   tBucket *tmp;
