@@ -21,6 +21,28 @@ A 2D linked-list implementation of a sparse matrix. Each non-zero element is sto
 with row/column coordinates, linked both horizontally and vertically to enable efficient traversal
 without allocating memory for zero entries.
 
+For example, the matrix::
+
+       col0  col1  col2  col3
+  row0 [  0     0     3     0  ]
+  row1 [  0     0     0     0  ]
+  row2 [  7     0     0     0  ]
+  row3 [  0     0     0     5  ]
+
+is stored as three nodes linked in two dimensions:
+
+.. code-block:: text
+
+                     HEAD
+                    /    \
+             (row=0,col=2,val=3) ──next_row──▶ (row=2,col=0,val=7) ──next_row──▶ (row=3,col=3,val=5)
+                    │                                  │                                  │
+               next_col                          next_col                           next_col
+                    │                                  │                                  │
+                   NULL                              NULL                               NULL
+
+Only the three non-zero entries are allocated; all zero cells consume no memory.
+
 .. code-block:: c
 
    struct element {
