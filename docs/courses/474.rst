@@ -1,0 +1,23 @@
+474: Advanced Assembly Programming
+====================================
+
+In-depth study of x86 assembly language, covering hardware interfacing and low-level I/O.
+
+Topics
+------
+
+- x86 register architecture and addressing modes
+- Procedure calls, stack frames, and calling conventions
+- String and array operations using REP prefixes
+- Interrupt-driven I/O
+- Interfacing assembly routines with C
+
+Projects
+--------
+
+Homework Series (``474/hw4_*.asm``, ``474/hw5_*.asm``, ``474/hw6_*.asm``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A progressive series of assembly assignments covering arithmetic, logical operations,
+string manipulation, and hardware I/O using DOS/BIOS interrupts. Includes a custom
+``stdio.asm`` utility module implementing formatted output routines.

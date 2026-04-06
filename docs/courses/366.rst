@@ -1,0 +1,30 @@
+366: Systems Level Programming
+================================
+
+Low-level programming targeting DOS and x86 hardware, including device drivers and real-mode assembly.
+
+Topics
+------
+
+- x86 real-mode assembly (NASM/MASM)
+- DOS interrupt services (INT 21h, INT 10h)
+- Device driver architecture (block and character drivers)
+- Video memory-mapped I/O
+- Keyboard and timer interrupt handling
+
+Projects
+--------
+
+Missile Command Game (``366/src/rocks.asm``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A "Missile Command"-style arcade game written entirely in x86 assembly. Uses INT 10h for
+video mode switching and direct VGA frame-buffer writes to animate missiles and explosions
+in real time.
+
+DOS Block Device Driver (``366/src/blkdrv.asm``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A dummy block device driver implemented as a DOS ``.SYS`` file. Demonstrates the DOS
+device driver header structure, strategy/interrupt routines, and the request packet protocol
+used by the DOS kernel to communicate with drivers.

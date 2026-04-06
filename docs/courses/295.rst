@@ -1,0 +1,14 @@
+295: Discrete Structures
+========================
+
+Foundations of mathematical reasoning for computer science.
+
+Topics
+------
+
+- Boolean algebra and logic gates
+- Combinatorics and counting principles
+- Graph theory
+- Inductive and deductive proofs
+- Recurrence relations
+- Finite state machines (FSMs)

@@ -1,0 +1,14 @@
+462: Algorithm Analysis
+========================
+
+Complexity analysis and design of advanced algorithmic strategies.
+
+Topics
+------
+
+- Asymptotic notation: O, Ω, Θ
+- Divide-and-conquer algorithms
+- Dynamic programming
+- Greedy algorithms
+- Graph algorithms (shortest path, MST, topological sort)
+- NP-completeness and reduction proofs

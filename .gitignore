@@ -12,5 +12,8 @@ trapezoid
 *.com
 *.exe
 
+# Sphinx build output
+docs/_build/
+
 # OS generated files
 .DS_Store

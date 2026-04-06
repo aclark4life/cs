@@ -1,0 +1,34 @@
+466: Operating Systems
+=======================
+
+Principles of operating system design, including process management, IPC, and networking.
+
+Topics
+------
+
+- Process and thread management
+- Scheduling algorithms
+- Memory management and virtual memory
+- File systems
+- Inter-process communication (pipes, signals, sockets)
+- Unix system call interface
+
+Projects
+--------
+
+Custom Unix Shell (``466/shell2/4/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The final iteration of a multi-stage shell project. Implements a POSIX-style command
+interpreter with:
+
+- Input/output redirection (``<``, ``>``, ``>>``)
+- Pipes (``|``) chaining arbitrary commands
+- Background execution (``&``)
+- Built-in commands: ``cd``, ``exit``
+
+Socket Programming Utilities (``466/tok/socket.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Low-level network programming examples using BSD sockets. Demonstrates TCP client/server
+setup, ``connect``/``accept`` lifecycle, and streaming data over a socket.

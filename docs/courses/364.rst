@@ -1,0 +1,12 @@
+364: File and Data Structures
+==============================
+
+Advanced data organization and persistent storage techniques.
+
+Topics
+------
+
+- Sequential, indexed, and hashed file organization
+- B-trees and indexed sequential access method (ISAM)
+- External sorting algorithms
+- Record-level locking and concurrency basics

@@ -1,0 +1,21 @@
+301: Computational Linear Algebra
+==================================
+
+Numerical methods for solving linear systems, with implementations in C.
+
+Topics
+------
+
+- Matrix operations and factorization
+- Gaussian elimination and back-substitution
+- Iterative solvers
+- Numerical stability and pivoting
+
+Projects
+--------
+
+Gauss-Jordan Elimination (``301/gauss/g.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Solves arbitrary MxN linear systems using Gauss-Jordan elimination with partial pivoting.
+Reads a matrix from standard input and outputs the reduced row echelon form and solution vector.

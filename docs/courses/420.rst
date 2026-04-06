@@ -1,0 +1,18 @@
+420: Computer Science Research
+================================
+
+Independent research in Software Construction Methods under Dr. Keith Gallagher.
+
+Topics
+------
+
+- Clean-room software development methodology
+- Rapid prototyping and iterative development
+- Formal methods and correctness proofs
+- Survey and critique of industry development practices
+
+Notes
+-----
+
+This course produced a written survey comparing clean-room and rapid-prototyping methodologies,
+evaluating their applicability to real-world software projects.

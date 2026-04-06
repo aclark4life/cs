@@ -1,0 +1,24 @@
+461: Compiler Construction
+===========================
+
+Theory and practice of designing and implementing a compiler front-end.
+
+Topics
+------
+
+- Formal language theory (regular and context-free grammars)
+- Lexical analysis and finite automata
+- Top-down and bottom-up parsing (LL, LR)
+- Abstract syntax trees and semantic analysis
+- Symbol tables and type checking
+
+Projects
+--------
+
+Lexical Analyzer (``461/project/prac/scan.l``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A lexer written using the Flex tool (``lex``-compatible). Tokenizes a custom language,
+recognizing keywords, identifiers, integer/float literals, operators, and comments.
+Demonstrates the use of regular expressions to define token patterns and associated
+semantic actions.

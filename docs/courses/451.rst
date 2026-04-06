@@ -1,0 +1,13 @@
+451: Programming Languages
+===========================
+
+Comparative study of programming language paradigms, design principles, and implementation strategies.
+
+Topics
+------
+
+- Syntax, semantics, and pragmatics of programming languages
+- Imperative, functional, logic, and object-oriented paradigms
+- Type systems: static vs. dynamic, strong vs. weak
+- Scoping rules, closures, and parameter passing
+- Language runtime models and memory management

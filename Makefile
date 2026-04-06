@@ -18,4 +18,10 @@ rebuild: clean all
 test-262:
 	$(MAKE) -C 262 test
 
-.PHONY: all clean rebuild test-262
+docs:
+	$(MAKE) -C docs html
+
+docs-clean:
+	$(MAKE) -C docs clean
+
+.PHONY: all clean rebuild test-262 docs docs-clean

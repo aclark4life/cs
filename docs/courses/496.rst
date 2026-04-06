@@ -1,0 +1,35 @@
+496: Advanced Networking and Web Systems
+=========================================
+
+Capstone-level exploration of network protocols, server configuration, and early web technologies.
+
+Topics
+------
+
+- TCP/IP networking: BOOTP and DHCP protocol implementation
+- HTTP server configuration (Apache ``httpd``)
+- CGI scripting with Perl
+- Network boot infrastructure
+
+Projects
+--------
+
+BOOTP/DHCP Client (``496/bootp.c``, ``496/bootp.pl``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Implements a BOOTP/DHCP client in both C and Perl. Constructs and broadcasts UDP discovery
+packets, parses server responses to obtain IP addresses, subnet masks, and gateway
+information, and applies the configuration to the local interface.
+
+CGI Web Forms (``496/form.pl``, ``496/search.pl``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Early CGI scripts written in Perl to handle HTML form submissions and implement basic
+search functionality. Demonstrates the CGI request/response cycle, query-string parsing,
+and dynamic HTML generation predating modern web frameworks.
+
+Apache Configuration (``496/httpd.conf``, ``496/access.conf``, ``496/srm.conf``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configuration files for an Apache 1.x HTTP server, including virtual host setup,
+directory access control, and MIME type mappings.

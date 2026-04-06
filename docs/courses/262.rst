@@ -1,0 +1,22 @@
+262: Programming and Data Structures
+=====================================
+
+Continuation of foundational CS concepts, covering elementary file handling and abstract data types.
+
+Topics
+------
+
+- Linked lists, stacks, queues, and trees
+- Abstract data type (ADT) design
+- File I/O in C
+- Dynamic memory management
+
+Projects
+--------
+
+Sparse Matrix (``262/list.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A 2D linked-list implementation of a sparse matrix. Each non-zero element is stored as a node
+with row/column coordinates, linked both horizontally and vertically to enable efficient traversal
+without allocating memory for zero entries.
