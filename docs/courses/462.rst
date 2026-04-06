@@ -12,3 +12,37 @@ Topics
 - Greedy algorithms
 - Graph algorithms (shortest path, MST, topological sort)
 - NP-completeness and reduction proofs
+
+Projects
+--------
+
+Travelling Salesman Problem (``462/tsp/tsp.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Solves the Travelling Salesman Problem using branch-and-bound search. Reads city coordinates
+from stdin, computes pairwise distances, and finds the shortest tour with a bounding function
+to prune the search tree.
+
+Floyd-Warshall All-Pairs Shortest Path (``462/floyd/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Two implementations (``floyd1.c``, ``floyd2.c``) of the Floyd-Warshall algorithm on a
+5-node weighted graph, computing shortest paths between every pair of vertices in O(V³) time.
+
+Quicksort (``462/sorting/quicksort.c``, ``462/sorting/sort_main.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A partition-based quicksort implementation alongside a driver (``sort_main.c``) that reads
+integer arrays from stdin, sorts them, and outputs the result.
+
+Priority Queue / Binary Heap (``462/sorting/pq.cpp``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A C++ binary min-heap implementation with ``insert`` and ``extract-min`` operations,
+demonstrating the heap data structure underlying efficient priority queues and heap sort.
+
+Pascal's Triangle (``462/pasc/pascals_triangle.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generates Pascal's triangle using dynamic programming, illustrating how combinatorial
+identities (binomial coefficients) can be computed iteratively in O(n²) time and space.

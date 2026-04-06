@@ -11,6 +11,25 @@ Topics
 - Formal methods and correctness proofs
 - Survey and critique of industry development practices
 
+Projects
+--------
+
+Triangle Classifier (``420/tri/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A clean-room development exercise producing a triangle classification program. Given three
+side lengths, the program validates input, determines if a valid triangle can be formed, and
+classifies it as equilateral, isosceles, or scalene. The project was developed iteratively
+under Dr. Gallagher's clean-room methodology, with separate modules for input validation
+(``prelim_check.c``), triangle testing (``is_triangle.c``), and type classification.
+
+Knockout Tournament (``420/ko/ko.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A rapid-prototype exercise implementing a knockout (single-elimination) tournament scheduler.
+Demonstrates how clean-room and prototyping methodologies differ in practice by tracking
+multiple development iterations.
+
 Notes
 -----
 

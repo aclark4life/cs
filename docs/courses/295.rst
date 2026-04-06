@@ -12,3 +12,38 @@ Topics
 - Inductive and deductive proofs
 - Recurrence relations
 - Finite state machines (FSMs)
+
+Projects
+--------
+
+Finite-State Automaton (``295/fsa.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Implements a three-state FSA that accepts a stream of binary integers and transitions between
+states according to a fixed transition table, demonstrating the connection between formal
+automata theory and executable code.
+
+Tower of Hanoi (``295/hanoi.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generates the move sequence for the Tower of Hanoi problem, illustrating recursive problem
+decomposition and exponential time complexity.
+
+Factorial (``295/factorial.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Recursive implementation of the factorial function — a canonical example of inductive definition
+and base-case reasoning.
+
+Compound Interest (``295/compound.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Recursively computes compound interest at 5.5% annual growth, demonstrating recurrence
+relations applied to a real-world financial formula.
+
+Sorting Algorithm Comparison (``295/improved_bubble.c``, ``295/sort.c``, ``295/time.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Three programs exploring optimized bubble sort: ``improved_bubble.c`` implements early-termination
+bubble sort, ``sort.c`` compares it against the naive version on large arrays, and ``time.c``
+measures wall-clock execution time using ``ftime``.

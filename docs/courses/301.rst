@@ -19,3 +19,33 @@ Gauss-Jordan Elimination (``301/gauss/gauss_jordan.c``)
 
 Solves arbitrary MxN linear systems using Gauss-Jordan elimination with partial pivoting.
 Reads a matrix from standard input and outputs the reduced row echelon form and solution vector.
+
+Matrix Determinant (``301/determinant/determinant.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Calculates the determinant of a matrix using direct formulas for the 1×1, 2×2, and 3×3 cases,
+with a recursive cofactor expansion stub for larger matrices.
+
+Matrix Inverse (``301/inverse/matrix_inverse.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Applies Gauss-Jordan elimination to an augmented ``[A | I]`` matrix to compute the inverse of
+a square matrix, outputting the resulting identity-augmented solution.
+
+Matrix Multiplication (``301/multiply/matrix_multiply.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Multiplies two user-supplied matrices of dimensions M×P and P×N using the standard
+triple-nested-loop algorithm, reading input from stdin.
+
+Matrix I/O (``301/generic/matrix.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Reads an M×N integer matrix from stdin and echoes it — a utility for verifying matrix
+parsing used across the linear algebra projects.
+
+Orthonormal Basis (``301/ortho/ortho.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Reads a set of vectors and begins the Gram-Schmidt orthonormalization process to construct
+an orthonormal basis for the spanned subspace.

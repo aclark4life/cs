@@ -11,3 +11,27 @@ Topics
 - Type systems: static vs. dynamic, strong vs. weak
 - Scoping rules, closures, and parameter passing
 - Language runtime models and memory management
+
+Projects
+--------
+
+Hash Table (``451/ht/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A complete hash table implementation in C with separate chaining. ``ht.c`` provides
+insert, delete, lookup, and free operations; ``main.c`` provides an interactive REPL
+for testing. Explores how dynamic dispatch and ADT design differ across language paradigms.
+
+Symbol Table with Scoping (``451/ht2/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Extends the hash table into a scoped symbol table (``main2.c``, ``symbol.c``) supporting
+nested scopes with ``add``, ``lookup``, and ``close`` operations — a direct implementation
+of the environment model used by block-structured languages.
+
+Prolog / Logic Programming (``451/pl/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Prolog source files (``examples.pl``, ``ms.pl``) demonstrating the logic programming paradigm:
+facts, rules, unification, list operations, and difference lists. Contrasts the declarative
+style of Prolog with the imperative and object-oriented examples elsewhere in the course.

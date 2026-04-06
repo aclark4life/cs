@@ -22,3 +22,23 @@ A lexer written using the Flex tool (``lex``-compatible). Tokenizes a custom lan
 recognizing keywords, identifiers, integer/float literals, operators, and comments.
 Demonstrates the use of regular expressions to define token patterns and associated
 semantic actions.
+
+Scan Exercises (``461/project/scan/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A progression of four Flex lexers (``scan1.l`` through ``scan4.l``) of increasing complexity,
+exploring whitespace handling, multi-character tokens, and state-based scanning.
+
+Memory Allocation Exercises (``461/hw/alloca/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Low-level homework programs (``alloca.c``, ``alloca2.c``, ``malloc.c``) stress-testing memory
+allocation by calling ``malloc`` in tight loops, illustrating heap behavior and the cost of
+dynamic allocation within a compiler runtime context.
+
+File Statistics (``461/hw/stat/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A series of programs (``stat.c`` through ``stat6.c``) progressively building a utility that
+uses ``stat(2)`` to query file metadata, then reads and prints file contents — an exercise in
+POSIX system calls used by compiler toolchains.

@@ -10,3 +10,42 @@ Topics
 - B-trees and indexed sequential access method (ISAM)
 - External sorting algorithms
 - Record-level locking and concurrency basics
+
+Projects
+--------
+
+Merge Sort (``364/merge.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Merges two pre-sorted input files into a single sorted output file, illustrating external
+merge-sort — the classical technique for sorting data too large to fit in memory.
+
+File Splitter (``364/split.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Reads a stream of integers and splits it into separate files whenever the sequence decreases,
+producing pre-sorted runs suitable for external merge sort.
+
+Random Number Generator (``364/rng.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generates N pseudo-random integers to stdout, used to produce test data for the sort and
+merge programs.
+
+Temporary File Manager (``364/tmpnam.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Creates and manages a series of temporary files, each holding a segment of monotonically
+increasing integers — demonstrating POSIX temporary file creation and file-based data staging.
+
+Buffer Formatter (``364/buffer.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Processes binary format strings through a buffer, demonstrating low-level data formatting
+and buffer management techniques used in record-oriented file I/O.
+
+Knockout Tournament (``364/ko.c``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Implements a knockout (single-elimination) tournament bracket algorithm, exploring indexed
+record access and structured file organization.
