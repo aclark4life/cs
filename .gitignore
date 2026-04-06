@@ -8,6 +8,17 @@ counter
 list
 roach
 trapezoid
+compound
+factorial
+fsa
+hanoi
+improved_bubble
+sort
+swap
+time
+301/*/m
+462/t/m
+462/t/t
 *.bin
 *.com
 *.exe
