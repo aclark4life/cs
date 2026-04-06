@@ -29,30 +29,6 @@ struct element *create_head_node(struct element *anchor) {
 };
 
 /*****************************************************************************/
-struct element *do_col(struct element *new_node, struct element *head) {
-  struct element *current;
-  struct element *prev;
-
-  current = head;
-  prev = head;
-
-  while (current->next_col != head) {
-
-    current = current->next_col;
-
-    if (new_node->col < current->col) {
-      new_node->next_col = current;
-      prev->next_col = new_node;
-      return (head);
-    }
-    prev = current;
-  }
-  current->next_col = new_node;
-  new_node->next_col = head;
-  return (head);
-}
-
-/*****************************************************************************/
 struct element *add_matrix(struct element *head1, struct element *head2) {
 
   struct element *temp1;
@@ -63,174 +39,63 @@ struct element *add_matrix(struct element *head1, struct element *head2) {
 
 /*****************************************************************************/
 
+struct element *insert_row(struct element *new_node, struct element *head) {
+  struct element *current = head;
+  struct element *prev = head;
+
+  while (current->next_row != head) {
+    current = current->next_row;
+    if (new_node->row == current->row && new_node->col == current->col) {
+      current->value = new_node->value;
+      free(new_node); /* Node already exists, just update value and free the temp node */
+      return (NULL);
+    }
+    if (new_node->row < current->row) {
+      new_node->next_row = current;
+      prev->next_row = new_node;
+      return (new_node);
+    }
+    prev = current;
+  }
+  current->next_row = new_node;
+  new_node->next_row = head;
+  return (new_node);
+}
+
+struct element *insert_col(struct element *new_node, struct element *head) {
+  struct element *current = head;
+  struct element *prev = head;
+
+  while (current->next_col != head) {
+    current = current->next_col;
+    if (new_node->col < current->col) {
+      new_node->next_col = current;
+      prev->next_col = new_node;
+      return (new_node);
+    }
+    prev = current;
+  }
+  current->next_col = new_node;
+  new_node->next_col = head;
+  return (new_node);
+}
+
+/*****************************************************************************/
+
 struct element *insert_node(struct element *new_node, struct element *head) {
+  struct element *inserted;
 
-  /* this is a BIG mess, but it works... */
+  /* Insert into row list first */
+  inserted = insert_row(new_node, head);
 
-  struct element *current;
-  struct element *prev;
-
-  if (head->next_row->row == -1) {
-
-    head->next_row = new_node; /*FIRST TIME!!!!!!!!!!!!!!*/
-    new_node->next_row = head;
-
-    head->next_col = new_node;
-    new_node->next_col = head;
-    return (head);
-
+  /* If insert_row returned NULL, it means we updated an existing node */
+  if (inserted != NULL) {
+    /* Now insert into column list */
+    insert_col(inserted, head);
   }
 
-  else { /*NOT THE FIRST TIME!!!!!!!!!!!!!!!!!!!!!!!!*/
-    current = head;
-    prev = head;
-
-    while (current->next_row != head) {
-
-      current = current->next_row;
-      if (new_node->row < current->row) {
-
-        /*insert NEW_NODE->ROW*/
-        new_node->next_row = current;
-        prev->next_row = new_node;
-
-        /*do_col(head, new_node);*/
-
-        /******************************************************/
-        current = head;
-        prev = head;
-
-        while (current->next_col != head) {
-
-          current = current->next_col;
-
-          if (new_node->col < current->col) {
-
-            /*insert NEW_NODE->COL*/
-            new_node->next_col = current;
-            prev->next_col = new_node;
-            return (head);
-          }
-
-          /**************************************************************/
-          if (new_node->col == current->col) {
-
-            /*insert NEW_NODE->COL*/
-            new_node->next_col = current;
-            prev->next_col = new_node;
-            return (head);
-          }
-          /**************************************************************/
-
-          prev = current;
-        }
-
-        /*insert NEW_NODE->COL at end of list*/
-        current->next_col = new_node;
-        new_node->next_col = head;
-        return (head);
-      }
-
-      /**************************************************************/
-      if ((new_node->row == current->row) && (new_node->col == current->col)) {
-
-        current->value = new_node->value;
-        return (head);
-      }
-      /**************************************************************/
-
-      if (new_node->row == current->row) {
-
-        /*insert NEW_NODE->ROW*/
-        new_node->next_row = current;
-        prev->next_row = new_node;
-
-        /*do_col(head, new_node);*/
-
-        /******************************************************/
-        current = head;
-        prev = head;
-
-        while (current->next_col != head) {
-
-          current = current->next_col;
-
-          if (new_node->col < current->col) {
-
-            /*insert NEW_NODE->COL*/
-            new_node->next_col = current;
-            prev->next_col = new_node;
-            return (head);
-          }
-          prev = current;
-
-          /**************************************************************/
-          if (new_node->col == current->col) {
-
-            /*insert NEW_NODE->COL*/
-            new_node->next_col = current;
-            prev->next_col = new_node;
-            return (head);
-          }
-          /**************************************************************/
-        }
-
-        /*insert NEW_NODE->COL at end of list*/
-        current->next_col = new_node;
-        new_node->next_col = head;
-        return (head);
-      }
-
-      prev = current;
-
-    } /*END while(current->next_row != head)*/
-
-    /*insert NEW_NODE->ROW at the end of list*/
-    current->next_row = new_node;
-    new_node->next_row = head;
-
-    /*do_col(head, new_node);*/
-
-    /******************************************************/
-    current = head;
-    prev = head;
-
-    while (current->next_col != head) {
-
-      current = current->next_col;
-
-      if (new_node->col < current->col) {
-
-        /*insert NEW_NODE->COL*/
-        new_node->next_col = current;
-        prev->next_col = new_node;
-        return (head);
-      }
-
-      /**************************************************************/
-      if (new_node->col == current->col) {
-
-        /*insert NEW_NODE->COL*/
-        new_node->next_col = current;
-        prev->next_col = new_node;
-        return (head);
-      }
-      /**************************************************************/
-
-      prev = current;
-    }
-
-    /*insert NEW_NODE->COL at end of list*/
-    current->next_col = new_node;
-    new_node->next_col = head;
-    return (head);
-
-    /******************************************************/
-
-    return (head);
-
-  } /*END else*/
-} /*END insert_node*/
+  return (head);
+}
 
 /*****************************************************************************/
 
