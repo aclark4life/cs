@@ -77,21 +77,47 @@ Principles of OS design, process management, and networking.
 ```
 .
 ├── 262 (Data Structures)
-│   ├── list.c (Sparse Matrix)
-│   └── ...
+│   ├── list.c (Sparse Matrix)
+│   └── ...
+├── 295 (Discrete Structures)
+│   ├── fsa.c (Finite State Automaton)
+│   ├── factorial.c
+│   ├── hanoi.c
+│   └── ...
 ├── 301 (Linear Algebra)
-│   ├── gauss/ (Gauss-Jordan Elimination)
-│   └── ...
+│   ├── gauss/ (Gauss-Jordan Elimination)
+│   └── ...
+├── 364 (File and Data Structures)
+│   ├── bootp.c
+│   ├── dhcp/
+│   └── ...
 ├── 366 (Systems Programming)
-│   ├── src/ (x86 Assembly Projects)
-│   └── ...
+│   ├── src/ (x86 Assembly Projects)
+│   └── ...
+├── 420 (CS Research)
+│   └── ...
+├── 451 (Programming Languages)
+│   ├── java/
+│   ├── ml/
+│   ├── pl/
+│   ├── scheme/
+│   └── ...
 ├── 461 (Compiler Construction)
-│   ├── project/ (Lexer/Parser logic)
-│   └── ...
+│   ├── project/ (Lexer/Parser logic)
+│   └── ...
+├── 462 (Algorithm Analysis)
+│   └── ...
 ├── 466 (Operating Systems)
-│   ├── shell2/ (Custom Shell)
-│   ├── tok/ (Socket Programming)
-│   └── ...
+│   ├── shell/ (Custom Shell)
+│   ├── tok/ (Socket Programming)
+│   └── ...
+├── 474 (Assembly Programming)
+│   └── ...
+├── 496 (Capstone / Networking)
+│   ├── bootp.pl
+│   ├── dhcp/
+│   ├── httpd/
+│   └── ...
 └── README.md
 ```
 
