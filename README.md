@@ -67,7 +67,7 @@ Complexity analysis and advanced algorithmic strategies.
 
 ### 466: Operating Systems
 Principles of OS design, process management, and networking.
-- **Featured Project:** A custom Unix-like shell with redirection and piping support (`466/shell2/4/`).
+- **Featured Project:** A custom Unix-like shell with redirection and piping support (`466/shell2/4/`). This was the final iteration of the "shell2" project series.
 - **Featured Project:** Socket-level network programming utilities (`466/tok/socket.c`).
 
 ---
