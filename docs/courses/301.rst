@@ -20,6 +20,26 @@ Gauss-Jordan Elimination (``301/gauss/gauss_jordan.c``)
 Solves arbitrary MxN linear systems using Gauss-Jordan elimination with partial pivoting.
 Reads a matrix from standard input and outputs the reduced row echelon form and solution vector.
 
+.. code-block:: c
+
+   void gaussj() {
+     int i, j, k;
+     for (i = j = 1; i <= m + 1 && j < n; j++) {
+       for (k = i; k <= m && A[k][j] == 0; k++)
+         ;
+       if (k == m + 1) {
+         solution = FREE;
+         mark[j] = j;
+       } else {
+         if (i != k) swap(i, k);
+         divide(i, j);
+         for (k = 1; k <= m; k++)
+           if (k != i) subtract(i, j, k);
+         i++;
+       }
+     }
+   }
+
 Matrix Determinant (``301/determinant/determinant.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -22,6 +22,28 @@ A "Missile Command"-style arcade game written entirely in x86 assembly. Uses INT
 video mode switching and direct VGA frame-buffer writes to animate missiles and explosions
 in real time.
 
+.. code-block:: nasm
+
+   MAX_ROCKS       equ  5        ; maximum rocks on screen at a time
+   NEW_ROCK_CHANCE equ  10
+   TAU             equ  8        ; controls fall speed (4=fast, 12=slow)
+   ROCK_MAX_Y      equ  20
+   TIMER_INT       equ  1ch
+   TIMER_INT_LOCATION equ 4*TIMER_INT
+
+   ; A rock record (struct): x, y, active flag, momentum
+   upper_left_x  equ  0   ; byte
+   upper_left_y  equ  1   ; byte
+   active        equ  2   ; byte
+   momentum      equ  3   ; byte
+   ROCK_SIZE     equ  4
+
+   ; Hook the timer interrupt to drive game animation
+   mov  ax, 3500h + TIMER_INT   ; DOS get interrupt vector
+   int  21h
+   mov  [old_timer_seg], es
+   mov  [old_timer_off], bx
+
 DOS Block Device Driver (``366/src/blkdrv.asm``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

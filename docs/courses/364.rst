@@ -20,6 +20,24 @@ Merge Sort (``364/merge.c``)
 Merges two pre-sorted input files into a single sorted output file, illustrating external
 merge-sort — the classical technique for sorting data too large to fit in memory.
 
+.. code-block:: c
+
+   fscanf(infile1, "%d", &i);
+   fscanf(infile2, "%d", &j);
+
+   while (!feof(infile1) && !feof(infile2)) {
+     if (i <= j) {
+       fprintf(outfile, "%d\n", i);
+       fscanf(infile1, "%d", &i);
+     } else {
+       fprintf(outfile, "%d\n", j);
+       fscanf(infile2, "%d", &j);
+     }
+   }
+   /* flush remaining elements from whichever file is not exhausted */
+   while (fscanf(infile1, "%d", &i) != EOF) fprintf(outfile, "%d\n", i);
+   while (fscanf(infile2, "%d", &j) != EOF) fprintf(outfile, "%d\n", j);
+
 File Splitter (``364/split.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

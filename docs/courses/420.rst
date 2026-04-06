@@ -23,6 +23,21 @@ classifies it as equilateral, isosceles, or scalene. The project was developed i
 under Dr. Gallagher's clean-room methodology, with separate modules for input validation
 (``prelim_check.c``), triangle testing (``is_triangle.c``), and type classification.
 
+.. code-block:: c
+
+   void is_triangle(unsigned long a, unsigned long b, unsigned long c) {
+     if ((a + b) > c && (a + c) > b && (b + c) > a) {
+       if (a == b && b == c)
+         printf("%lu %lu %lu: equilateral\n", a, b, c);
+       else if (a == b || b == c || a == c)
+         printf("%lu %lu %lu: isosceles\n", a, b, c);
+       else
+         printf("%lu %lu %lu: scalene\n", a, b, c);
+     } else {
+       printf("%lu %lu %lu: not a triangle\n", a, b, c);
+     }
+   }
+
 Knockout Tournament (``420/ko/ko.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

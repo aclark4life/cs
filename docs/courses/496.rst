@@ -28,6 +28,31 @@ Early CGI scripts written in Perl to handle HTML form submissions and implement 
 search functionality. Demonstrates the CGI request/response cycle, query-string parsing,
 and dynamic HTML generation predating modern web frameworks.
 
+.. code-block:: perl
+
+   #!/usr/local/bin/perl
+
+   print "Content-type: text/html\n\n";
+
+   # Read POST body from stdin
+   read(STDIN, $buffer, $ENV{'CONTENT_LENGTH'});
+
+   # Split into name=value pairs and URL-decode each value
+   foreach $pair (split(/&/, $buffer)) {
+     ($name, $value) = split(/=/, $pair);
+     $value =~ tr/+/ /;
+     $value =~ s/%([a-fA-F0-9]{2})/pack("C", hex($1))/eg;
+     $form{$name} = $value;
+   }
+
+   # Validate required fields before processing
+   foreach $var (@required_vars) {
+     if (!$form{$var}) {
+       print "<h1>Error: please fill in the '$var' field.</h1>\n";
+       exit;
+     }
+   }
+
 Apache Configuration (``496/httpd.conf``, ``496/access.conf``, ``496/srm.conf``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

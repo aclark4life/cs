@@ -22,6 +22,26 @@ A complete hash table implementation in C with separate chaining. ``ht.c`` provi
 insert, delete, lookup, and free operations; ``main.c`` provides an interactive REPL
 for testing. Explores how dynamic dispatch and ADT design differ across language paradigms.
 
+.. code-block:: c
+
+   void ht_delete(tHashTable ht, void *n) {
+     tBucket *tmp, *last;
+     int hash_value = abs((*ht->hash)(n)) % ht->size;
+
+     for (tmp = ht->table[hash_value], last = tmp;
+          tmp != NULL;
+          last = tmp, tmp = tmp->next) {
+       if ((*ht->compare)(tmp->data, n)) break;
+     }
+     if (tmp != NULL) {
+       if (tmp == last)
+         ht->table[hash_value] = tmp->next;
+       else
+         last->next = tmp->next;
+       free(tmp);
+     }
+   }
+
 Symbol Table with Scoping (``451/ht2/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -23,6 +23,23 @@ Implements a three-state FSA that accepts a stream of binary integers and transi
 states according to a fixed transition table, demonstrating the connection between formal
 automata theory and executable code.
 
+.. code-block:: c
+
+   int state = 0;
+   int input = 0;
+
+   while (input != -1) {
+     scanf("%d", &input);
+     if (state == 0) {
+       state = (input == 0) ? 1 : 0;
+     } else if (state == 1) {
+       state = (input == 0) ? 2 : 0;
+     } else if (state == 2) {
+       state = (input == 0) ? 2 : 0;
+     }
+     printf("state = %d\n", state);
+   }
+
 Tower of Hanoi (``295/hanoi.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

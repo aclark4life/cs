@@ -23,6 +23,24 @@ recognizing keywords, identifiers, integer/float literals, operators, and commen
 Demonstrates the use of regular expressions to define token patterns and associated
 semantic actions.
 
+.. code-block:: text
+
+   ID_CHAR   [a-zA-Z_]
+
+   %%
+   "stego"               { printf("FOUND: stego\n"); return("stego"); }
+   {ID_CHAR}({ID_CHAR})* { printf("IDENTIFIER\n"); return(0); }
+   "asinine"             { printf("FOUND: asinine\n"); return("asinine"); }
+   .                     { /* ignore unrecognised characters */ }
+   %%
+
+   yywrap() { return(1); }
+
+   main() {
+     int i = yylex();
+     while (i > 0) i = yylex();
+   }
+
 Scan Exercises (``461/project/scan/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

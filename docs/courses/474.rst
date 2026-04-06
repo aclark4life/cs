@@ -21,3 +21,27 @@ Homework Series (``474/hw4_*.asm``, ``474/hw5_*.asm``, ``474/hw6_*.asm``)
 A progressive series of assembly assignments covering arithmetic, logical operations,
 string manipulation, and hardware I/O using DOS/BIOS interrupts. Includes a custom
 ``stdio.asm`` utility module implementing formatted output routines.
+
+.. code-block:: nasm
+
+   ; stdio.asm — reusable I/O routines for the homework series
+   STDIO   PUBLIC  OUTCH, GETCH, CRLF, CLEAR, OUTSTR
+
+   OUTCH   MOVEM.L A0-A6/D1-D7,-(A7)   ; save registers
+           MOVE.B  #248,D7              ; output character in D0
+           TRAP    #14
+           MOVEM.L (A7)+,A0-A6/D1-D7   ; restore registers
+           RTS
+
+   GETCH   MOVEM.L A0-A6/D1-D7,-(A7)
+           MOVE.B  #247,D7              ; read character into D0
+           TRAP    #14
+           BSR     OUTCH                ; echo to screen
+           MOVEM.L (A7)+,A0-A6/D1-D7
+           RTS
+
+   CRLF    MOVEM.L A0-A6/D1-D7,-(A7)
+           MOVE.B  #227,D7              ; output CR+LF
+           TRAP    #14
+           MOVEM.L (A7)+,A0-A6/D1-D7
+           RTS

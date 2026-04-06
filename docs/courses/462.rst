@@ -23,6 +23,38 @@ Solves the Travelling Salesman Problem using branch-and-bound search. Reads city
 from stdin, computes pairwise distances, and finds the shortest tour with a bounding function
 to prune the search tree.
 
+.. code-block:: c
+
+   typedef struct s_node {
+     int   level;
+     int  *path;
+     float bound;
+   } *t_node;
+
+   float best_length = FLT_MAX;
+   int  *best_path;
+
+   t_node give_birth(t_node parent);
+   t_node give_path(t_node parent, t_node kid);
+   float  get_bound(t_node n);
+
+   /* branch-and-bound: prune subtrees whose lower bound exceeds best known tour */
+   void search(t_node node) {
+     if (node->bound >= best_length) return;
+     if (node->level == d) {
+       if (node->bound < best_length) {
+         best_length = node->bound;
+         memcpy(best_path, node->path, d * sizeof(int));
+       }
+       return;
+     }
+     for (int i = 0; i < d; i++) {
+       t_node child = give_birth(node);
+       give_path(node, child);
+       search(child);
+     }
+   }
+
 Floyd-Warshall All-Pairs Shortest Path (``462/floyd/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

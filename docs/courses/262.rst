@@ -21,6 +21,39 @@ A 2D linked-list implementation of a sparse matrix. Each non-zero element is sto
 with row/column coordinates, linked both horizontally and vertically to enable efficient traversal
 without allocating memory for zero entries.
 
+.. code-block:: c
+
+   struct element {
+     int value;
+     int row;
+     int col;
+     struct element *next_row;
+     struct element *next_col;
+   };
+
+   struct element *insert_row(struct element *new_node, struct element *head) {
+     struct element *current = head;
+     struct element *prev = head;
+
+     while (current->next_row != head) {
+       current = current->next_row;
+       if (new_node->row == current->row && new_node->col == current->col) {
+         current->value = new_node->value;
+         free(new_node);
+         return (NULL);
+       }
+       if (new_node->row < current->row) {
+         new_node->next_row = current;
+         prev->next_row = new_node;
+         return (new_node);
+       }
+       prev = current;
+     }
+     current->next_row = new_node;
+     new_node->next_row = head;
+     return (new_node);
+   }
+
 Statistics Calculator (``262/avg.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

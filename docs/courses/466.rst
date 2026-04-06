@@ -27,6 +27,26 @@ interpreter with:
 - Background execution (``&``)
 - Built-in commands: ``cd``, ``exit``
 
+.. code-block:: c
+
+   int main(void) {
+     char **tokenv;
+     char *s;
+     int tokenc;
+
+     s = prompt();
+     while (s != NULL) {
+       tokenv = tokenize(s, &tokenc);
+       if (tokenv[0] != NULL) {
+         handle_tokens(tokenv, &tokenc);  /* dispatch: fork, pipe, redir, builtins */
+       }
+       free(tokenv);
+       free(s);
+       s = prompt();
+     }
+     return EXIT_SUCCESS;
+   }
+
 Socket Programming Utilities (``466/tok/socket.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
