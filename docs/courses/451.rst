@@ -49,9 +49,45 @@ Extends the hash table into a scoped symbol table (``main2.c``, ``symbol.c``) su
 nested scopes with ``add``, ``lookup``, and ``close`` operations — a direct implementation
 of the environment model used by block-structured languages.
 
+.. code-block:: c
+
+   /* Search from innermost to outermost scope */
+   int st_lookup(tSymbolTable st, void *symbol) {
+       for (int i = st->current_scope; i >= 0; i--)
+           if (ht_lookup(st->scopes[i], symbol))
+               return i;   /* returns scope depth where found */
+       return -1;          /* not found */
+   }
+
+   int st_add(tSymbolTable st, void *symbol) {
+       if (st_lookup(st, symbol) != st->current_scope) {
+           ht_insert(st->scopes[st->current_scope], symbol);
+           return 1;   /* success */
+       }
+       return -1;      /* duplicate in current scope */
+   }
+
 Prolog / Logic Programming (``451/pl/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Prolog source files (``examples.pl``, ``ms.pl``) demonstrating the logic programming paradigm:
 facts, rules, unification, list operations, and difference lists. Contrasts the declarative
 style of Prolog with the imperative and object-oriented examples elsewhere in the course.
+
+.. code-block:: prolog
+
+   % facts
+   father(dave, erin).   mother(judy, erin).
+   married(dave, judy).
+
+   % rules
+   married(X, Y) :- married(Y, X).
+   parent(X, Y)  :- father(X, Y).
+   parent(X, Y)  :- mother(X, Y).
+   grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+   % list operations
+   append([], X, X).
+   append([X|Xs], Ys, [X|Zs]) :- append(Xs, Ys, Zs).
+   member(X, [X|_]).
+   member(X, [_|Xs]) :- member(X, Xs).

@@ -46,11 +46,29 @@ Tower of Hanoi (``295/hanoi.c``)
 Generates the move sequence for the Tower of Hanoi problem, illustrating recursive problem
 decomposition and exponential time complexity.
 
+.. code-block:: c
+
+   /* M(k) = 2·M(k-1) + 1 minimum moves for k discs */
+   int m[64];
+   for (k = 1; k < 64; k++)
+       m[k] = 2 * m[k - 1] + 1;
+
+   for (i = 0; i < 64; i++)
+       printf("m[%d]=%d\n", i, m[i]);
+
 Factorial (``295/factorial.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Recursive implementation of the factorial function — a canonical example of inductive definition
 and base-case reasoning.
+
+.. code-block:: c
+
+   int Factorial(int n) {
+       if (n <= 1)
+           return 1;
+       return n * Factorial(n - 1);
+   }
 
 Compound Interest (``295/compound.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,9 +76,32 @@ Compound Interest (``295/compound.c``)
 Recursively computes compound interest at 5.5% annual growth, demonstrating recurrence
 relations applied to a real-world financial formula.
 
+.. code-block:: c
+
+   float amount(int t) {
+       if (t == 0)
+           return 1000.0;            /* principal */
+       return amount(t - 1) * 1.055; /* 5.5% annual growth */
+   }
+
 Sorting Algorithm Comparison (``295/improved_bubble.c``, ``295/sort.c``, ``295/time.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Three programs exploring optimized bubble sort: ``improved_bubble.c`` implements early-termination
 bubble sort, ``sort.c`` compares it against the naive version on large arrays, and ``time.c``
 measures wall-clock execution time using ``ftime``.
+
+.. code-block:: c
+
+   void improvedbubble(int a[], int n) {
+       int pass = 1, sorted = 0, temp;
+       while (!sorted) {
+           sorted = 1;
+           for (int i = 0; i < n - pass; i++)
+               if (a[i] > a[i + 1]) {
+                   temp = a[i]; a[i] = a[i+1]; a[i+1] = temp;
+                   sorted = 0;
+               }
+           pass++;
+       }
+   }

@@ -21,6 +21,27 @@ Implements a BOOTP/DHCP client in both C and Perl. Constructs and broadcasts UDP
 packets, parses server responses to obtain IP addresses, subnet masks, and gateway
 information, and applies the configuration to the local interface.
 
+.. code-block:: perl
+
+   #!/usr/local/bin/perl
+   # Perl BOOTP client — broadcast request, parse reply
+
+   $BOOTP_PORT = 67;
+   $socket = IO::Socket::INET->new(Proto => 'udp', Broadcast => 1);
+
+   # Build a minimal BOOTP request packet (RFC 951)
+   $packet = pack("CCCCNnna4a4a4a4a16a64a128",
+       1,          # op:    BOOTREQUEST
+       1,          # htype: Ethernet
+       6,          # hlen:  MAC address length
+       0,          # hops
+       $xid,       # transaction ID
+       0, 0,       # secs, flags
+       $ciaddr, $yiaddr, $siaddr, $giaddr,
+       $chaddr, $sname, $file
+   );
+   send($socket, $packet, 0, $broadcast);
+
 CGI Web Forms (``496/form.pl``, ``496/search.pl``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -58,3 +79,22 @@ Apache Configuration (``496/httpd.conf``, ``496/access.conf``, ``496/srm.conf``)
 
 Configuration files for an Apache 1.x HTTP server, including virtual host setup,
 directory access control, and MIME type mappings.
+
+.. code-block:: apacheconf
+
+   # httpd.conf — core server settings (NCSA HTTPd / Apache 1.x)
+   ServerType  standalone
+   Port        90
+   ServerRoot  /usr/local/etc/httpd
+
+   # srm.conf — resource map
+   DocumentRoot   /usr/local/etc/httpd/htdocs
+   DirectoryIndex index.html
+
+   # access.conf — directory access control
+   <Directory /usr/local/etc/httpd/htdocs>
+       Options Indexes FollowSymLinks
+       AllowOverride None
+       order allow,deny
+       allow from all
+   </Directory>

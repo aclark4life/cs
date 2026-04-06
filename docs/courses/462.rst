@@ -61,11 +61,32 @@ Floyd-Warshall All-Pairs Shortest Path (``462/floyd/``)
 Two implementations (``floyd1.c``, ``floyd2.c``) of the Floyd-Warshall algorithm on a
 5-node weighted graph, computing shortest paths between every pair of vertices in O(V³) time.
 
+.. code-block:: c
+
+   /* D[i][j] = shortest path i→j; P[i][j] = intermediate vertex */
+   for (k = 1; k <= N; k++)
+       for (i = 1; i <= N; i++)
+           for (j = 1; j <= N; j++)
+               if (D[i][k] + D[k][j] < D[i][j]) {
+                   D[i][j] = D[i][k] + D[k][j];
+                   P[i][j] = k;
+               }
+
 Quicksort (``462/sorting/quicksort.c``, ``462/sorting/sort_main.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A partition-based quicksort implementation alongside a driver (``sort_main.c``) that reads
 integer arrays from stdin, sorts them, and outputs the result.
+
+.. code-block:: c
+
+   void quicksort(int lo, int hi) {
+       if (lo < hi) {
+           int pivot = partition(lo, hi);
+           quicksort(lo, pivot - 1);
+           quicksort(pivot + 1, hi);
+       }
+   }
 
 Priority Queue / Binary Heap (``462/sorting/pq.cpp``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,8 +94,29 @@ Priority Queue / Binary Heap (``462/sorting/pq.cpp``)
 A C++ binary min-heap implementation with ``insert`` and ``extract-min`` operations,
 demonstrating the heap data structure underlying efficient priority queues and heap sort.
 
+.. code-block:: cpp
+
+   PQ_Entry Priority_Q::Extract_Min() {
+       assert(Entry_Ct > 0);
+       PQ_Entry result = Data[1];     /* root is the minimum */
+       Data[1] = Data[Entry_Ct--];    /* move last element to root */
+       Sift_Down(1);                  /* restore heap property */
+       return result;
+   }
+
 Pascal's Triangle (``462/pasc/pascals_triangle.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Generates Pascal's triangle using dynamic programming, illustrating how combinatorial
 identities (binomial coefficients) can be computed iteratively in O(n²) time and space.
+
+.. code-block:: c
+
+   /* Each row reuses array b[], updating right-to-left */
+   for (i = 0; i <= n; i++) {
+       for (j = i; j >= 0; j--) {
+           b[j] = (j == 0 || j == i) ? 1 : b[j] + b[j - 1];
+           printf("%d ", b[j]);
+       }
+       printf("\n");
+   }

@@ -46,11 +46,44 @@ Matrix Determinant (``301/determinant/determinant.c``)
 Calculates the determinant of a matrix using direct formulas for the 1×1, 2×2, and 3×3 cases,
 with a recursive cofactor expansion stub for larger matrices.
 
+.. code-block:: c
+
+   double Det(double **a) {
+       if (N <= 3) {
+           get_easy();  /* closed-form formula for small N */
+       } else {
+           /* cofactor expansion along row 1 (stub for N > 3) */
+           ans = 0;
+           for (i = 1; i <= N; i++) {
+               p = (i % 2 == 0) ? -1 : 1;
+               ans += a[1][i] * p * Det(minor(a, 1, i));
+           }
+       }
+       return ans;
+   }
+
 Matrix Inverse (``301/inverse/matrix_inverse.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Applies Gauss-Jordan elimination to an augmented ``[A | I]`` matrix to compute the inverse of
 a square matrix, outputting the resulting identity-augmented solution.
+
+.. code-block:: c
+
+   /* Build the augmented matrix [A | I] */
+   void gauss_jord() {
+       for (i = 1; i <= n; i++) {
+           for (j = 1; j <= n * 2; j++) {
+               if (j <= n)
+                   ANS[i][j] = A[i][j];           /* copy A */
+               else
+                   ANS[i][j] = (i + n == j) ? 1 : 0; /* identity block */
+               printf("%d ", ANS[i][j]);
+           }
+           printf("\n");
+       }
+       /* Gauss-Jordan reduction leaves A⁻¹ in the right half */
+   }
 
 Matrix Multiplication (``301/multiply/matrix_multiply.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,14 +91,55 @@ Matrix Multiplication (``301/multiply/matrix_multiply.c``)
 Multiplies two user-supplied matrices of dimensions M×P and P×N using the standard
 triple-nested-loop algorithm, reading input from stdin.
 
+.. code-block:: c
+
+   /* C[j][i] = Σ A[j][k] * B[k][i]  for k = 1..p */
+   void mul_matrices() {
+       int i, j, k, s;
+       for (i = 1; i <= n; i++)
+           for (j = 1; j <= m; j++) {
+               s = 0;
+               for (k = 1; k <= p; k++)
+                   s += A[j][k] * B[k][i];
+               C[j][i] = s;
+           }
+   }
+
 Matrix I/O (``301/generic/matrix.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reads an M×N integer matrix from stdin and echoes it — a utility for verifying matrix
 parsing used across the linear algebra projects.
 
+.. code-block:: c
+
+   void get_mtrx() {
+       char *tok, *line = malloc(1024);
+       for (i = 1; i <= m; i++) {
+           fgets(line, 1024, stdin);
+           tok = strtok(line, " ");
+           for (j = 1; tok != NULL; j++) {
+               A[i][j] = atoi(tok);
+               printf("%d ", A[i][j]);
+               tok = strtok(NULL, " ");
+           }
+           printf("\n");
+       }
+   }
+
 Orthonormal Basis (``301/ortho/ortho.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reads a set of vectors and begins the Gram-Schmidt orthonormalization process to construct
 an orthonormal basis for the spanned subspace.
+
+.. code-block:: c
+
+   /* Input: first line is "m n" (m vectors of length n),
+    * followed by m rows of n integers.
+    * The program echoes the input as a correctness check
+    * before applying Gram-Schmidt. */
+   void get_mn() {
+       scanf("%d %d\n", &m, &n);
+       printf("%d %d\n", m, n);
+   }

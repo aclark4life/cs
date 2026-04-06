@@ -53,12 +53,47 @@ Socket Programming Utilities (``466/tok/socket.c``)
 Low-level network programming examples using BSD sockets. Demonstrates TCP client/server
 setup, ``connect``/``accept`` lifecycle, and streaming data over a socket.
 
+.. code-block:: c
+
+   int create_socket(u_short portnum) {
+       struct sockaddr_in sa;
+       gethostname(myname, MAXHOSTNAMELEN);
+       hp = gethostbyname(myname);
+
+       sa.sin_family = hp->h_addrtype;
+       sa.sin_port   = htons(portnum);
+
+       s = socket(AF_INET, SOCK_STREAM, 0);
+       bind(s, (struct sockaddr *)&sa, sizeof sa);
+       listen(s, 3);
+       return s;
+   }
+
+   int wait_for_connection(int s) {
+       struct sockaddr_in isa;
+       int len = sizeof isa;
+       return accept(s, (struct sockaddr *)&isa, &len);
+   }
+
 Token Ring Election (``466/tok/tok.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Implements a distributed token ring leader-election algorithm using BSD sockets. Processes
 communicate in a ring topology, passing tokens to elect a coordinator — demonstrating
 socket setup, process coordination, and distributed consensus.
+
+.. code-block:: c
+
+   typedef union {
+       char  as_char[2];
+       short as_short;
+   } tToken;                          /* 16-bit token value */
+
+   #define NO_TOKEN  ((tToken)(short)-1)
+   #define send_token(s, t) { tToken _t = t; write(s, &_t, sizeof(_t)); }
+
+   /* Each process passes the token to the next in the ring;
+    * a process keeps the token only if its ID is the highest seen. */
 
 External Sort via Fork/Exec (``466/sort/main.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,8 +102,37 @@ Forks a child process and uses ``exec`` to pipe file input through the system ``
 utility, demonstrating the Unix process model, file descriptor manipulation, and
 ``fork``/``exec``/``wait`` patterns.
 
+.. code-block:: c
+
+   pipe(a);   /* parent → child (input to sort) */
+   pipe(b);   /* child → parent (output from sort) */
+
+   if (fork() == 0) {
+       /* child: wire stdin/stdout to the pipes, then exec sort */
+       dup2(a[0], STDIN_FILENO);
+       dup2(b[1], STDOUT_FILENO);
+       execvp("sort", (char *[]){ "sort", NULL });
+   } else {
+       /* parent: write lines, then read sorted output */
+       while (fgets(line, sizeof line, infile))
+           write(a[1], line, strlen(line));
+       close(a[1]);   /* signal EOF to sort */
+       FILE *fin = fdopen(b[0], "r");
+       while (fgets(buf, sizeof buf, fin))
+           printf("%s", buf);
+   }
+
 Directory Reader (``466/dir/main.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reads and prints a file character-by-character using low-level POSIX I/O, an introductory
 exercise in file descriptor usage and the ``read`` system call.
+
+.. code-block:: c
+
+   FILE *dir = fopen("dir", "r");
+   char c;
+
+   /* Read one byte at a time and print char + its ASCII value */
+   while ((c = fgetc(dir)) != EOF)
+       printf("%c %d\n", c, (unsigned char)c);

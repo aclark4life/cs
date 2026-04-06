@@ -45,6 +45,14 @@ A rapid-prototype exercise implementing a knockout (single-elimination) tourname
 Demonstrates how clean-room and prototyping methodologies differ in practice by tracking
 multiple development iterations.
 
+.. code-block:: c
+
+   /* Prototype entry point — functionality stubbed for first iteration */
+   int main(void) {
+       do_something();
+       return 0;
+   }
+
 Notes
 -----
 

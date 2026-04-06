@@ -44,11 +44,30 @@ File Splitter (``364/split.c``)
 Reads a stream of integers and splits it into separate files whenever the sequence decreases,
 producing pre-sorted runs suitable for external merge sort.
 
+.. code-block:: c
+
+   outfile = fopen(tempnam(OUTFILE_DIR, s), "w");
+   while (fscanf(infile, "%d", &j) != EOF) {
+       if (i >= j) {
+           /* sequence decreased — start a new sorted run */
+           fclose(outfile);
+           outfile = fopen(tempnam(OUTFILE_DIR, s), "w");
+       }
+       fprintf(outfile, "%d\n", j);
+       i = j;
+   }
+
 Random Number Generator (``364/rng.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Generates N pseudo-random integers to stdout, used to produce test data for the sort and
 merge programs.
+
+.. code-block:: c
+
+   int x = atoi(argv[1]);
+   for (i = 0; i < x; i++)
+       printf("%ld\n", random());
 
 Temporary File Manager (``364/tmpnam.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,14 +75,47 @@ Temporary File Manager (``364/tmpnam.c``)
 Creates and manages a series of temporary files, each holding a segment of monotonically
 increasing integers — demonstrating POSIX temporary file creation and file-based data staging.
 
+.. code-block:: c
+
+   printf("L_tmpnam = %d\n", L_tmpnam);
+   printf("TMP_MAX  = %d\n", TMP_MAX);
+
+   for (i = 0; i < j; i++)
+       printf("%s\n", tmpnam(s));  /* generate a unique temp filename */
+
 Buffer Formatter (``364/buffer.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Processes binary format strings through a buffer, demonstrating low-level data formatting
 and buffer management techniques used in record-oriented file I/O.
 
+.. code-block:: c
+
+   #define BUF_SIZE 700
+
+   /* Dispatch on format specifier and write typed data into output buffer */
+   void do_string(int length, char ***buf, int fd, char out[BUF_SIZE],
+                  int *data_idx, int *s_idx, int *which, int *data_which);
+   void do_int   (int length, char ***buf, int fd, char out[BUF_SIZE],
+                  int *data_idx, int *d_idx, int *which, int *data_which);
+   void do_float (int len1, int len2, char ***buf, int fd, char out[BUF_SIZE],
+                  int *data_idx, int *f_idx, int *which, int *data_which);
+
 Knockout Tournament (``364/ko.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Implements a knockout (single-elimination) tournament bracket algorithm, exploring indexed
 record access and structured file organization.
+
+.. code-block:: c
+
+   struct node {
+       int winner, loser;
+       int index, lindex;
+       int winner_index, loser_index;
+   };
+
+   /* Allocate bracket array: max_row rounds × max_col*2 match slots */
+   temp_array = (int **)malloc((max_row + 1) * sizeof(int *));
+   for (i = 0; i < max_row + 1; i++)
+       temp_array[i] = (int *)malloc(max_col * 2 * sizeof(int));

@@ -47,6 +47,19 @@ Scan Exercises (``461/project/scan/``)
 A progression of four Flex lexers (``scan1.l`` through ``scan4.l``) of increasing complexity,
 exploring whitespace handling, multi-character tokens, and state-based scanning.
 
+.. code-block:: text
+
+   D  [0-9]
+   L  [a-zA-Z_]
+   H  [a-fA-F0-9]
+
+   %%
+   {L}({L}|{D})*    { return Table_Lookup(Table); }  /* identifier */
+   0[xX]{H}+        { return CONSTANT; }             /* hex literal */
+   {D}+             { return CONSTANT; }             /* decimal     */
+   {D}*"."{D}+      { return CONSTANT; }             /* float       */
+   %%
+
 Memory Allocation Exercises (``461/hw/alloca/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -54,9 +67,29 @@ Low-level homework programs (``alloca.c``, ``alloca2.c``, ``malloc.c``) stress-t
 allocation by calling ``malloc`` in tight loops, illustrating heap behavior and the cost of
 dynamic allocation within a compiler runtime context.
 
+.. code-block:: c
+
+   /* Stress-test the heap: allocate one int per iteration, 1 million times */
+   int call_alloca(void) {
+       return (int)(intptr_t)malloc(sizeof(int));
+   }
+
+   for (i = 0; i < 1000000; i++)
+       call_alloca();
+
 File Statistics (``461/hw/stat/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A series of programs (``stat.c`` through ``stat6.c``) progressively building a utility that
 uses ``stat(2)`` to query file metadata, then reads and prints file contents — an exercise in
 POSIX system calls used by compiler toolchains.
+
+.. code-block:: c
+
+   struct stat *buf = malloc(sizeof(struct stat));
+   stat(argv[1], buf);   /* query file metadata */
+
+   /* allocate a buffer the exact size of the file, then read it */
+   char *buffer = malloc(buf->st_size);
+   fread(buffer, 1, buf->st_size, infile);
+   printf("%s", buffer);
