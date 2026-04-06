@@ -1,9 +1,9 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
-main(int argc, char *argv[])
+#include <stdlib.h>
 
-{
+int main(int argc, char *argv[]) {
   FILE *infile;
   char letter, ch;
   float p[26];

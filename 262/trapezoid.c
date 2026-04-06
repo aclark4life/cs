@@ -1,9 +1,8 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-main(int argc, char *argv[])
-
-{
+int main(int argc, char *argv[]) {
   float a, b, c, x;
   float b1, b2, h1, h2;
   float base, oldtrap, newtrap, answer, distance;
@@ -37,5 +36,5 @@ main(int argc, char *argv[])
   }
   printf("AREA OF TRAPEZOID: ");
   printf("%f\n", answer);
-  exit();
+  exit(0);
 }

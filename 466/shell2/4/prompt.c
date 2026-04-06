@@ -1,6 +1,10 @@
+#include "shell.h"
 #include <stdio.h>
 #define PROMPT "* "
-prompt() {
+
+extern char *read_long(void);
+
+char *prompt(void) {
   printf(PROMPT);
   return (read_long());
 }
