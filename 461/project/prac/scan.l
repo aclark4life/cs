@@ -1,16 +1,14 @@
-L			[a-zA-Z_]
-I_HATE_THIS		[a-zA-Z_]
+ID_CHAR			[a-zA-Z_]
 
 %{
 #include <stdio.h>
-printf ("this_is_gay\n");
 %}
  
 %%
-"stego"		{ printf("I found a stego!\n"); return("stego"); }
-{I_HATE_THIS}({I_HATE_THIS})* { printf("this is gay!\n"); return(0); }
-"assinine"	{ printf("this is asinine\n"); return("asinine"); }
-{L}({L})*       { return(yytext);}
+"stego"		{ printf("FOUND: stego\n"); return("stego"); }
+{ID_CHAR}({ID_CHAR})* { printf("IDENTIFIER\n"); return(0); }
+"asinine"	{ printf("FOUND: asinine\n"); return("asinine"); }
+{ID_CHAR}({ID_CHAR})*       { return(yytext);}
 .		{ /* ignore bad characters */ }
 
 %%

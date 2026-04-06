@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern "C" yylex(); // yylex() was complied in C
+extern "C" yylex(); // yylex() was compiled in C
 
 main() {
   int total = 0;

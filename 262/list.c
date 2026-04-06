@@ -261,26 +261,26 @@ void print_matrix(struct element *head) {
 void print_menu() {
 
   system("clear"); /*clear the screen*/
-  printf("\n JOHNNY LINK A LIST (UNDER CONSTRUCTION)\n\n");
+  printf("\n SPARSE MATRIX TOOL\n\n");
   printf("****************************************************************\n");
   printf(" 1) CREATE MATRIX ONE\n");
   printf(" 2) CREATE MATRIX TWO\n");
   printf(" 3) PRINT MATRIX\n");
-  printf(" 4) add matrix\n");
-  printf(" 5) subtract matrix\n");
-  printf(" 6) multiply matrices\n");
-  printf(" 7) transpose a matrix\n");
-  printf(" 8) NOTE TO KBG\n");
+  printf(" 4) ADD MATRIX\n");
+  printf(" 5) SUBTRACT MATRIX\n");
+  printf(" 6) MULTIPLY MATRICES\n");
+  printf(" 7) TRANSPOSE A MATRIX\n");
+  printf(" 8) DEVELOPER NOTES\n");
   printf("****************************************************************\n");
   printf("(q = QUIT)\n");
-  printf("\nJOHNNY_SAYS> ");
+  printf("\nSAYS> ");
 }
 
 /*****************************************************************************/
 
 void menu() {
-  int gaurd1 = 0;
-  int gaurd2 = 0;
+  int guard1 = 0;
+  int guard2 = 0;
   char print = 0;
   char add = 0;
   char foo = 0;
@@ -320,7 +320,7 @@ void menu() {
       printf("(0 < MAX_COL <= 20)\n");
       printf("(0 < NUMBER_OF_NODES <= 20)\n\n");
 
-      gaurd1 = 1;
+      guard1 = 1;
 
       printf("MAX_ROW>");
       scanf("%d", &max_row1);
@@ -400,7 +400,7 @@ void menu() {
 
       system("clear");
 
-      gaurd2 = 1;
+      guard2 = 1;
 
       printf("(0 < MAX_ROW <= 20)\n");
       printf("(0 < MAX_COL <= 20)\n");
@@ -482,18 +482,18 @@ void menu() {
       system("clear");
       while (print != 'q') {
         system("clear");
-        printf("\n JOHNNY PRINT MATRIX\n\n");
+        printf("\n PRINT MATRIX\n\n");
         printf("********************************************************\n");
         printf(" 1) PRINT MATRIX ONE\n");
         printf(" 2) PRINT MATRIX TWO\n");
         printf("********************************************************\n");
         printf("(q = QUIT)\n");
-        printf("\nJOHNNY_SAYS> ");
+        printf("\nSAYS> ");
         scanf("%c", &print);
         rewind(stdin);
         switch (print) {
         case '1': {
-          if (gaurd1 == 1) {
+          if (guard1 == 1) {
 
             system("clear");
             print_matrix(head1);
@@ -503,7 +503,7 @@ void menu() {
         }
         case '2': {
 
-          if (gaurd2 == 1) {
+          if (guard2 == 1) {
 
             system("clear");
             print_matrix(head2);
@@ -524,80 +524,54 @@ void menu() {
     case '4': {
       system("clear");
 
-      printf(" JOHNNY ADD MATRIX (UNDER CONSTRUCTION)\n");
+      printf(" ADD MATRIX (UNDER CONSTRUCTION)\n");
       printf("**************************************************\n");
       printf(" 1) MATRIX ONE + MATRIX TWO = MATRIX ONE\n");
       printf(" 2) MATRIX TWO + MATRIX ONE = MATRIX TWO\n");
       printf("**************************************************\n");
-      printf("\nJOHNNY_SAYS> ");
+      printf("\nSAYS> ");
 
       getchar();
-
-      /*
-         scanf("%c", &add);
-
-         switch(add)
-         {
-         case '1':{
-         add_matrix(head1,head2);
-
-              break;
-              }
-              case '2':{
-
-              break;
-              }
-
-
-              }
-
-              }*/
 
       break;
     }
     case '5': {
       system("clear");
-      printf(" JOHNNY SUB MATRIX (UNDER CONSTRUCTION)\n\n");
+      printf(" SUB MATRIX (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
-      printf("\nJOHNNY_SAYS> ");
+      printf("\nSAYS> ");
       getchar();
       break;
     }
     case '6': {
       system("clear");
-      printf(" JOHNNY MULTIPLY (UNDER CONSTRUCTION)\n\n");
+      printf(" MULTIPLY (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
-      printf("\nJOHNNY_SAYS> ");
+      printf("\nSAYS> ");
       getchar();
 
       break;
     }
     case '7': {
       system("clear");
-      printf(" JOHNNY TRANSPOSE (UNDER CONSTRUCTION)\n\n");
+      printf(" TRANSPOSE (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
-      printf("\nJOHNNY_SAYS> ");
+      printf("\nSAYS> ");
       getchar();
       break;
     }
 
     case '8': {
       system("clear");
-      printf("kbg- spent many hours working on insert.\n");
+      printf("DEVELOPER NOTES:\n");
 
-      printf("it turned out to be real messy and complicated.\n");
-      printf("i don't think it was the best way to do it but,\n");
-      printf("i think it works correctly for every case.\n");
-      printf("the function do_col is incomplete because i\n");
-      printf("couldn't figure out how to pass to it. what i need is\n");
-      printf("to put things in functions to reduce the code.\n");
-      printf("also, only CAPITALIZED options work. i haven't\n");
-      printf("figured out how to implement the rest of the options\n");
-      printf("with the code i've written.\n");
-      printf("HAPPY HOLIDAYS...\n");
+      printf("- Significant time spent on insert_node logic.\n");
+      printf("- Current implementation is complex and could be refactored into smaller functions.\n");
+      printf("- do_col function is currently a stub.\n");
+      printf("- Only capitalized menu options are currently functional.\n");
 
       getchar();
       break;
