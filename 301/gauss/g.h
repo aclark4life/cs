@@ -9,6 +9,7 @@ void Input();
 void gaussj();
 void Output();
 void Solution();
+void Cleanup();
 void divide(int i, int j);
 void subtract(int i, int j, int k);
 void swap(int i, int j);

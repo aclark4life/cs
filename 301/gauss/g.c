@@ -97,36 +97,73 @@ void subtract(int I, int J, int K) {
   }
 }
 void swap(int a, int b) {
-  int i, j;
-  float *temp = (float *)malloc(n * sizeof(float));
+  int i;
+  double *temp = (double *)malloc((n + 1) * sizeof(double));
+  if (temp == NULL) {
+    fprintf(stderr, "Memory allocation failed in swap\n");
+    exit(EXIT_FAILURE);
+  }
   for (i = 1; i <= n; i++) {
     temp[i] = A[a][i];
     A[a][i] = A[b][i];
     A[b][i] = temp[i];
   }
+  free(temp);
 }
 void Input() {
   int i, j;
   char *tok, *line = (char *)malloc(1024 * sizeof(char));
+  if (line == NULL) {
+    fprintf(stderr, "Memory allocation failed for input line\n");
+    exit(EXIT_FAILURE);
+  }
+  if (scanf("%d %d\n", &m, &n) != 2) {
+    fprintf(stderr, "Failed to read matrix dimensions\n");
+    exit(EXIT_FAILURE);
+  }
   A = (double **)malloc((m + 1) * sizeof(double *));
-  scanf("%d %d\n", &m, &n);
-  mark = (int *)malloc((n) * sizeof(int));
-  markED = (int *)malloc((n) * sizeof(int));
+  mark = (int *)malloc((n + 1) * sizeof(int));
+  markED = (int *)malloc((n + 1) * sizeof(int));
+  if (A == NULL || mark == NULL || markED == NULL) {
+    fprintf(stderr, "Memory allocation failed for matrix data\n");
+    exit(EXIT_FAILURE);
+  }
   for (i = 1; i <= m; i++) {
-    A[i] = (double *)malloc((n) * sizeof(double));
+    A[i] = (double *)malloc((n + 1) * sizeof(double));
+    if (A[i] == NULL) {
+      fprintf(stderr, "Memory allocation failed for matrix row %d\n", i);
+      exit(EXIT_FAILURE);
+    }
   }
   for (i = 1; i <= n; i++) {
     mark[i] = 0;
     markED[i] = 0;
   }
   for (i = 1; i <= m; i++) {
-    fgets(line, 1024, stdin);
-    tok = strtok(line, " ");
-    for (j = 1; tok != NULL; j++) {
-      A[i][j] = atoi(tok);
-      tok = strtok(NULL, " ");
+    if (fgets(line, 1024, stdin) != NULL) {
+      tok = strtok(line, " ");
+      for (j = 1; tok != NULL && j <= n; j++) {
+        A[i][j] = atof(tok);
+        tok = strtok(NULL, " ");
+      }
     }
   }
+  free(line);
+}
+void Cleanup() {
+  int i;
+  if (A != NULL) {
+    for (i = 1; i <= m; i++) {
+      if (A[i] != NULL) {
+        free(A[i]);
+      }
+    }
+    free(A);
+  }
+  if (mark != NULL)
+    free(mark);
+  if (markED != NULL)
+    free(markED);
 }
 void Output() {
   int i, j;
@@ -145,5 +182,6 @@ void main(int argc) {
     gaussj();
     Output();
     Solution();
+    Cleanup();
   }
 }
