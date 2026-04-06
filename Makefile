@@ -12,16 +12,12 @@ clean:
 		$(MAKE) -C $$dir clean; \
 	done
 
-rebuild: clean all
-
-# Run specific project tests
-test-262:
-	$(MAKE) -C 262 test
-
 docs:
 	$(MAKE) -C docs html
 
 docs-clean:
 	$(MAKE) -C docs clean
 
-.PHONY: all clean rebuild test-262 docs docs-clean
+rebuild: clean all
+
+.PHONY: all clean rebuild docs docs-clean
