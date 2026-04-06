@@ -16,7 +16,7 @@ struct element *create_anchor_node(int row, int col) {
   a->row = row;
   a->col = col;
   return (a);
-};
+}
 
 struct element *create_head_node(struct element *anchor) {
   struct element *a = (struct element *)malloc(sizeof(struct element));
@@ -26,15 +26,11 @@ struct element *create_head_node(struct element *anchor) {
   a->row = -1;
   a->col = -1;
   return (a);
-};
+}
 
 /*****************************************************************************/
-struct element *add_matrix(struct element *head1, struct element *head2) {
-
-  struct element *temp1;
-  struct element *temp2;
-
-  return (temp1);
+struct element *add_matrix(struct element *head1 __attribute__((unused)), struct element *head2 __attribute__((unused))) {
+  return (NULL);
 }
 
 /*****************************************************************************/
@@ -124,7 +120,7 @@ void print_matrix(struct element *head) {
 
 /*****************************************************************************/
 
-void print_menu() {
+void print_menu(void) {
 
   system("clear"); /*clear the screen*/
   printf("\n SPARSE MATRIX TOOL\n\n");
@@ -144,14 +140,13 @@ void print_menu() {
 
 /*****************************************************************************/
 
-void menu() {
+void menu(void) {
   int guard1 = 0;
   int guard2 = 0;
   char print = 0;
-  char add = 0;
   char foo = 0;
-  int max_row1;
-  int max_col1;
+  int max_row1 = 0;
+  int max_col1 = 0;
   int i;
   int col1 = 0;
   int row1 = 0;
@@ -192,7 +187,6 @@ void menu() {
       scanf("%d", &max_row1);
 
       if ((max_row1 > 0) && (max_row1 <= 20)) {
-        max_col1 = max_col1;
       } else {
         exit(-1);
       }
@@ -201,7 +195,6 @@ void menu() {
       scanf("%d", &max_col1);
 
       if ((max_col1 > 0) && (max_col1 <= 20)) {
-        max_col1 = max_col1;
       } else {
         exit(-1);
       }
@@ -213,7 +206,6 @@ void menu() {
       scanf("%d", &number_of_nodes);
 
       if ((number_of_nodes > 0) && (number_of_nodes <= 20)) {
-        number_of_nodes = number_of_nodes;
       } else {
         exit(-1);
       }
@@ -228,7 +220,6 @@ void menu() {
         scanf("%d", &row1);
 
         if ((row1 > 0) && (row1 <= max_row1)) {
-          row1 = row1;
         } else {
           exit(-1);
         }
@@ -237,7 +228,6 @@ void menu() {
         scanf("%d", &col1);
 
         if ((col1 > 0) && (col1 <= max_col1)) {
-          col1 = col1;
         } else {
           exit(-1);
         }
@@ -276,7 +266,6 @@ void menu() {
       scanf("%d", &max_row1);
       rewind(stdin);
       if ((max_row1 > 0) && (max_row1 <= 20)) {
-        max_row1 = max_row1;
       } else {
       }
 
@@ -284,7 +273,6 @@ void menu() {
       scanf("%d", &max_col1);
 
       if ((max_col1 > 0) && (max_col1 <= 20)) {
-        max_col1 = max_col1;
       } else {
       }
 
@@ -295,8 +283,6 @@ void menu() {
       scanf("%d", &number_of_nodes);
 
       if ((number_of_nodes > 0) && (number_of_nodes <= 20)) {
-
-        number_of_nodes = number_of_nodes;
       } else {
         exit(-1);
       };
@@ -310,7 +296,6 @@ void menu() {
         scanf("%d", &row1);
 
         if ((row1 > 0) && (row1 <= max_row1)) {
-          row1 = row1;
         } else {
           exit(-1);
         }
@@ -319,7 +304,6 @@ void menu() {
         scanf("%d", &col1);
 
         if ((col1 > 0) && (col1 <= max_col1)) {
-          col1 = col1;
         } else {
           exit(-1);
         }

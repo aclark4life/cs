@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]) {
   FILE *infile;
-  char letter, ch;
+  char letter;
   float p[26];
   int s[26], a[26], i, j, t, x, sum = 0;
   if (argc == 2) {
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   for (; (fscanf(infile, "%c", &letter)) != EOF;) {
     letter = toupper(letter);
     letter = letter - 'A';
-    a[letter]++;
+    a[(unsigned char)letter]++;
   }
   for (i = 0; i < 26; i++)
     sum = sum + a[i];
