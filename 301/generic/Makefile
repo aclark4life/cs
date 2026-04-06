@@ -1,7 +1,7 @@
 all:
-	gcc -g m.c -o m
+	gcc -g matrix.c -o matrix
 
 clean:
-	rm -f m
+	rm -f matrix
 
 .PHONY: all clean

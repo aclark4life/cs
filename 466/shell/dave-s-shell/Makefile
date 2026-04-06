@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c99 -pedantic -D_POSIX_C_SOURCE=200809L
 TARGET = shell
 
 # Source files
-SRCS = t.c run.c l.c s.c util.c
+SRCS = sleep_long.c run.c file_reader.c sleep_test.c util.c
 OBJS = $(SRCS:.c=.o)
 
 # Header files

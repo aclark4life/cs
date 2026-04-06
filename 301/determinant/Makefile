@@ -1,7 +1,7 @@
 all:
-	gcc -g m.c -o m
+	gcc -g determinant.c -o determinant
 
 clean:
-	rm -f m
+	rm -f determinant
 
 .PHONY: all clean

@@ -6,7 +6,7 @@ TARGET = gauss
 
 all: $(TARGET)
 
-$(TARGET): g.c
+$(TARGET): gauss_jordan.c
 	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $(TARGET)
 
 clean:

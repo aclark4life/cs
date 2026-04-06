@@ -1,7 +1,7 @@
 all:
-	gcc -g m.c -o m
+	gcc -g matrix_inverse.c -o matrix_inverse
 
 clean:
-	rm -f m
+	rm -f matrix_inverse
 
 .PHONY: all clean

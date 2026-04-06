@@ -16,9 +16,13 @@ improved_bubble
 sort
 swap
 time
-301/*/m
-462/t/m
-462/t/t
+301/determinant/determinant
+301/generic/matrix
+301/inverse/matrix_inverse
+301/multiply/matrix_multiply
+301/ortho/ortho
+462/tsp/matrix_input
+462/tsp/tsp
 *.bin
 *.com
 *.exe

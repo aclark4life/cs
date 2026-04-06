@@ -1,7 +1,7 @@
 all:
-	gcc -g m.c -o m
+	gcc -g matrix_multiply.c -o matrix_multiply
 
 clean:
-	rm -f m
+	rm -f matrix_multiply
 
 .PHONY: all clean

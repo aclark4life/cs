@@ -1,7 +1,7 @@
 all:
-	gcc -g m.c -o m
+	gcc -g ortho.c -o ortho
 
 clean:
-	rm -f m
+	rm -f ortho
 
 .PHONY: all clean

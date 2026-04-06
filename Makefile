@@ -9,7 +9,7 @@ SUBDIRS = \
 	301/inverse \
 	301/multiply \
 	301/ortho \
-	462/t \
+	462/tsp \
 	466/shell
 
 all:

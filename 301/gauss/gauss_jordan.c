@@ -17,7 +17,7 @@
  *
  *
  */
-#include "g.h"
+#include "gauss_jordan.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
