@@ -2,6 +2,7 @@
    Alex Clark - August 1998 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int **A, **ID, **ANS, n;
@@ -11,7 +12,7 @@ void get_matrx();
 void setup_ident();
 void gauss_jord();
 
-void main(int argc) {
+int main(int argc, char *argv[] __attribute__((unused))) {
   if (argc != 1) {
     exit(-1);
   } else {
@@ -19,6 +20,7 @@ void main(int argc) {
     setup_ident();
     gauss_jord();
   }
+  return 0;
 }
 
 void gauss_jord() {

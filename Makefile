@@ -1,6 +1,16 @@
 # Top-level Makefile for CS Coursework Portfolio
 
-SUBDIRS = 262 301/gauss 466/shell
+SUBDIRS = \
+	262 \
+	295 \
+	301/determinant \
+	301/gauss \
+	301/generic \
+	301/inverse \
+	301/multiply \
+	301/ortho \
+	462/t \
+	466/shell
 
 all:
 	@for dir in $(SUBDIRS); do \

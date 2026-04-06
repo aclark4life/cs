@@ -13,7 +13,7 @@ void get_mn();
 void get_mem();
 void get_mtrx();
 
-void main(int argc) {
+int main(int argc, char *argv[] __attribute__((unused))) {
   if (argc != 1) {
     exit(-1);
   } else {
@@ -21,6 +21,7 @@ void main(int argc) {
     get_mem();
     get_mtrx();
   }
+  return 0;
 }
 void get_mn() {
   int i, j;

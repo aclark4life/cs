@@ -14,7 +14,7 @@ void get_matrices();
 void mul_matrices();
 void print_ans();
 
-void main(int argc) {
+int main(int argc, char *argv[] __attribute__((unused))) {
   if (argc != 1) {
     exit(-1);
   } else {
@@ -24,6 +24,7 @@ void main(int argc) {
     mul_matrices();
     print_ans();
   }
+  return 0;
 }
 void get_mpn() { scanf("%d %d %d\n", &m, &n, &p); }
 void get_mem() {

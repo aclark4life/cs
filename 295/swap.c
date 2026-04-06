@@ -3,7 +3,6 @@
 
 int main(int argc, char *argv[]) {
 
-  int a = 1000;
   int asub = 0;
 
   if (argc != 2)

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   FILE *file;
   char *string;
   int d;
@@ -13,4 +13,5 @@ void main(int argc, char *argv[]) {
     scanf("%d", &d);
     printf("%d", d);
   }
+  return 0;
 }

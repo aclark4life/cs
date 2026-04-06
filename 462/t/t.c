@@ -40,6 +40,7 @@
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int d;                       // d is size of input
 float *f1, *f2;              // hold x and y
@@ -54,7 +55,7 @@ typedef struct s_node {
   float bound;
 } *t_node;
 
-t_node give_birth();
+t_node give_birth(t_node parent);
 t_node give_path(t_node parent, t_node kid);
 float get_bound(t_node n);
 float get_length(t_node n);
@@ -250,7 +251,7 @@ float get_bound(t_node n) {
 
   return 0;
 }
-void main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   int i;
   if (argc != 1) {
     printf("Sorry, i don't take command line arguments.\n");
@@ -275,5 +276,6 @@ void main(int argc, char *argv[]) {
   printf("%f\n", best_length);
   for (i = 1; i <= d; i++) {
     printf("%f %f\n", f1[best_path[i]], f2[best_path[i]]);
-  } // echo best path
+  }
+  return 0;
 }

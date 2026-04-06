@@ -1,8 +1,9 @@
-#include </usr/sys/h/timeb.h>
+#include <sys/timeb.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define number 1000
-int ImprovedBubble(int a[], int n) {
+void ImprovedBubble(int a[], int n) {
   int i, pass = 1, sorted = 0;
   int temp;
   while (sorted == 0) {
@@ -18,11 +19,10 @@ int ImprovedBubble(int a[], int n) {
   }
 }
 
-int main() {
+int main(void) {
 
   int a[number];
   int i;
-  int j;
   int r;
   struct timeb t1, t2;
   double difftime;
@@ -44,4 +44,5 @@ int main() {
   printf("thousandths of a second: %d\n", t1.millitm);
   difftime = (double)t2.time - t1.time + (t2.millitm - t1.millitm) / 1000.0;
   printf("elapsed time = %.3f seconds\n", difftime);
+  return 0;
 }

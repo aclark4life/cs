@@ -1,9 +1,9 @@
-#include </usr/sys/h/timeb.h>
+#include <sys/timeb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int improvedbubble(int a[], int n) {
+void improvedbubble(int a[], int n) {
   int i, pass = 1, sorted = 0;
   int temp;
   while (sorted == 0) {
@@ -35,7 +35,6 @@ int main(void) {
 
   int a[10000];
   int i;
-  int j;
   int r;
   struct timeb t1, t2;
   double difftime;
@@ -47,13 +46,13 @@ int main(void) {
     a[i] = r;
   }
 
-  printf("seconds since 1/1/1970 gmt: %1d\n", t1.time);
+  printf("seconds since 1/1/1970 gmt: %1ld\n", t1.time);
   printf("thousandths of a second: %d\n", t1.millitm);
   ftime(&t1);
   improvedbubble(a, 10000);
 
   ftime(&t2);
-  printf("seconds since 1/1/1970 gmt: %1d\n", t1.time);
+  printf("seconds since 1/1/1970 gmt: %1ld\n", t1.time);
   printf("thousandths of a second: %d\n", t1.millitm);
 
   difftime = (double)t2.time - t1.time + (t2.millitm - t1.millitm) / 1000.0;
@@ -65,4 +64,5 @@ int main(void) {
     fprintf(stderr, "a[%d] = %d\n", i, a[i]);
 
   printf("elapsed time = %.3f seconds\n", difftime);
+  return 0;
 }

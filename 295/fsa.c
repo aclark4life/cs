@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
   int state = 0;
   int input = 0;
   printf("A Finite-State Automaton!\n");

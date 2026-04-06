@@ -1,4 +1,4 @@
-#include </usr/sys/h/timeb.h>
+#include <sys/timeb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -9,14 +9,14 @@ void ImprovedBubble(int a[], int num) {
   while (sorted == 0) {
     sorted = 1;
     for (j = 0; j < num - pass; j++)
-      if (a[j] = a[j + 1]) {
+      if (a[j] > a[j + 1]) {
+        temp = a[j];
         a[j] = a[j + 1];
         a[j + 1] = temp;
         sorted = 0;
       }
     pass++;
   }
-  return;
 }
 
 int bubblesort(int a[], int n) {
@@ -29,19 +29,19 @@ int bubblesort(int a[], int n) {
         a[i] = a[j];
         a[j] = t;
       }
+  return 0;
 }
 
 int main(void) {
-  int j, i;
   struct timeb t1, t2;
   double difftime;
   ftime(&t1);
 
-  printf("seconds since 1/1/1970 gmt: %1d\n", t1.time);
+  printf("seconds since 1/1/1970 gmt: %1ld\n", t1.time);
   printf("thousandths of a second: %d\n", t1.millitm);
 
   ftime(&t2);
-  printf("seconds since 1/1/1970 gmt: %1d\n", t1.time);
+  printf("seconds since 1/1/1970 gmt: %1ld\n", t1.time);
   printf("thousandths of a second: %d\n", t1.millitm);
 
   difftime = (double)t2.time - t1.time + (t2.millitm - t1.millitm) / 1000.0;

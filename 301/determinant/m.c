@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int N;
@@ -13,9 +14,10 @@ void get_easy();
 double Det(double **A);
 double **get_mem(double **A);
 
-void main() {
+int main(void) {
   get_matrx();
   Ans = Det(A);
+  return 0;
 }
 double Det(double **a) {
   int c, i, k, j, p;

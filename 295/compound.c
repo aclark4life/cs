@@ -14,11 +14,11 @@ float amount(int t) {
 
 int main(int argc, char *argv[]) {
   int t = 0;
-  int i = 0;
   if (argc != 2)
     exit(-1);
   else {
     t = atoi(argv[1]);
     printf("amount: %1.2f\n", amount(t));
   }
+  return 0;
 }
