@@ -1,5 +1,5 @@
 /* read-long.c: read a string of indeterminate length */
-static char *cr = "copyright (c) David Binkley 1993";
+static char *cr __attribute__((unused)) = "copyright (c) David Binkley 1993";
 
 /*char *realloc(), *check_malloc(); */
 
