@@ -1,7 +1,7 @@
 # Build artifacts
 *.o
 *.dSYM/
-shell
+466/*/shell
 gauss
 avg
 counter

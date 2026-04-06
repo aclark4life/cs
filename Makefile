@@ -1,6 +1,6 @@
 # Top-level Makefile for CS Coursework Portfolio
 
-SUBDIRS = 262 301/gauss 466/shell2/4
+SUBDIRS = 262 301/gauss 466/shell
 
 all:
 	@for dir in $(SUBDIRS); do \

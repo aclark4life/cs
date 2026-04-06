@@ -16,7 +16,7 @@ Topics
 Projects
 --------
 
-Custom Unix Shell (``466/shell2/4/``)
+Custom Unix Shell (``466/shell/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The final iteration of a multi-stage shell project. Implements a POSIX-style command
