@@ -4,6 +4,8 @@
 
 This repository contains a collection of coursework, research projects, and experimental code from my undergraduate Computer Science studies (circa 1995-1999). It serves as a historical archive of my early journey into systems programming, data structures, and compiler construction.
 
+The curriculum and course descriptions are based on the [Loyola University Maryland Computer Science major requirements (archived 1998)](https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/).
+
 ## 🚀 Recent Maintenance & Refactoring (2026)
 
 In April 2026, this repository underwent a "Capstone Refactoring" pass to bring the code into a professional maintenance mode.
