@@ -49,8 +49,8 @@ Advanced data organization and storage techniques.
 
 ### 366: Systems Level Programming
 Low-level programming, including DOS device drivers and 16-bit Assembly games.
-- **Featured Project:** A "Missile Command" style game written in x86 Assembly (`366/src/rocks.asm`).
-- **Featured Project:** A dummy block device driver for DOS (`366/src/blkdrv.asm`).
+- **Featured Project:** A "Missile Command" style game written in x86 Assembly (`366/rocks.asm`).
+- **Featured Project:** A dummy block device driver for DOS (`366/blkdrv.asm`).
 
 ### 420: Computer Science Research
 Research in Software Construction Methods under Dr. Keith Gallagher. Surveyed development methodologies including clean-room and rapid prototyping.
@@ -92,7 +92,7 @@ Principles of OS design, process management, and networking.
 │   ├── dhcp/
 │   └── ...
 ├── 366 (Systems Programming)
-│   ├── src/ (x86 Assembly Projects)
+│   ├── x86 Assembly Projects
 │   └── ...
 ├── 420 (CS Research)
 │   └── ...
