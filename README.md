@@ -1,6 +1,19 @@
 # Computer Science Portfolio: 1995-1999
 
-<img src="me.jpg" alt="Jeffrey 'Alex' Clark, 1998" width="481" />
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="me.jpg" alt="Jeffrey 'Alex' Clark, 1998" width="481" />
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <em>Jeffrey 'Alex' Clark in front of a Sun SPARCstation (circa 1998)</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
 This repository contains a collection of coursework, research projects, and experimental code from my undergraduate Computer Science studies (circa 1995-1999). It serves as a historical archive of my early journey into systems programming, data structures, and compiler construction.
 
