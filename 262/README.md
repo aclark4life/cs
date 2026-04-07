@@ -40,7 +40,7 @@ gcc list.c -o list
 ```
 
 ### roach.c
-Simulates a cockroach performing a random walk on an `n×m` grid. Runs until every cell has been visited or 50,000 moves have elapsed, then prints the visit count for each cell and the total number of moves made.
+Simulates a cockroach performing a random walk on a `cols×rows` grid. Runs until every cell has been visited or 50,000 moves have elapsed, then prints the visit count for each cell and the total number of moves made.
 
 **Usage:**
 ```bash
