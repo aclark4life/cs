@@ -12,20 +12,20 @@ struct element {
 };
 
 struct element *create_anchor_node(int row, int col) {
-  struct element *a = (struct element *)malloc(sizeof(struct element));
-  a->row = row;
-  a->col = col;
-  return (a);
+  struct element *node = (struct element *)malloc(sizeof(struct element));
+  node->row = row;
+  node->col = col;
+  return (node);
 }
 
 struct element *create_head_node(struct element *anchor) {
-  struct element *a = (struct element *)malloc(sizeof(struct element));
-  anchor->next_row = a;
-  a->next_row = a;
-  a->next_col = a;
-  a->row = -1;
-  a->col = -1;
-  return (a);
+  struct element *node = (struct element *)malloc(sizeof(struct element));
+  anchor->next_row = node;
+  node->next_row = node;
+  node->next_col = node;
+  node->row = -1;
+  node->col = -1;
+  return (node);
 }
 
 /*****************************************************************************/
@@ -98,22 +98,22 @@ struct element *insert_node(struct element *new_node, struct element *head) {
 
 void print_matrix(struct element *head) {
 
-  struct element *e;
+  struct element *elem;
   printf("PRINT_BY_ROW>\n\n");
-  for (e = head->next_row; e->row != -1; e = e->next_row) {
+  for (elem = head->next_row; elem->row != -1; elem = elem->next_row) {
 
-    printf("ROW> %d           ", e->row);
-    printf("COL> %d           ", e->col);
-    printf("VALUE> %d\n", e->value);
+    printf("ROW> %d           ", elem->row);
+    printf("COL> %d           ", elem->col);
+    printf("VALUE> %d\n", elem->value);
   }
 
   printf("\n");
   printf("PRINT_BY_COLUMN>\n\n");
-  for (e = head->next_col; e->col != -1; e = e->next_col) {
+  for (elem = head->next_col; elem->col != -1; elem = elem->next_col) {
 
-    printf("COL> %d           ", e->col);
-    printf("ROW> %d           ", e->row);
-    printf("VALUE> %d\n", e->value);
+    printf("COL> %d           ", elem->col);
+    printf("ROW> %d           ", elem->row);
+    printf("VALUE> %d\n", elem->value);
   }
   printf("\n>");
 }
@@ -143,8 +143,8 @@ void print_menu(void) {
 void menu(void) {
   int guard1 = 0;
   int guard2 = 0;
-  char print = 0;
-  char foo = 0;
+  char print_input = 0;
+  char menu_input = 0;
   int max_row1 = 0;
   int max_col1 = 0;
   int i;
@@ -166,12 +166,12 @@ void menu(void) {
   head1 = create_head_node(anchor1);
   head2 = create_head_node(anchor2);
 
-  while (foo != 'q') {
+  while (menu_input != 'q') {
 
     print_menu();
-    scanf("%c", &foo);
+    scanf("%c", &menu_input);
     rewind(stdin);
-    switch (foo) {
+    switch (menu_input) {
     /*********************************************************************/
     case '1': /*MATRIX 1*/
 
@@ -330,7 +330,7 @@ void menu(void) {
     case '3': {
 
       system("clear");
-      while (print != 'q') {
+      while (print_input != 'q') {
         system("clear");
         printf("\n PRINT MATRIX\n\n");
         printf("********************************************************\n");
@@ -339,9 +339,9 @@ void menu(void) {
         printf("********************************************************\n");
         printf("(q = QUIT)\n");
         printf("\nSAYS> ");
-        scanf("%c", &print);
+        scanf("%c", &print_input);
         rewind(stdin);
-        switch (print) {
+        switch (print_input) {
         case '1': {
           if (guard1 == 1) {
 
@@ -367,7 +367,7 @@ void menu(void) {
         } /*switch*/
         rewind(stdin);
       }
-      print = 0;
+      print_input = 0;
       break;
     }
 

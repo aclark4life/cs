@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
   int move, imove[7], jmove[7];
   int **count;
   int ibug, jbug;
-  int i, n, m, j;
+  int i, cols, rows, j;
   float counter = 0;
   int imaybe = 0, jmaybe = 0;
   int iteration = 0;
@@ -37,21 +37,21 @@ int main(int argc, char *argv[])
     exit(-1);
 
   } else {             /*create multi-dimensional array*/
-    n = atoi(argv[1]); /*columns*/
-    m = atoi(argv[2]); /*rows*/
+    cols = atoi(argv[1]); /*columns*/
+    rows = atoi(argv[2]); /*rows*/
     ibug = atoi(argv[3]);
     jbug = atoi(argv[4]);
 
-    if (((ibug < 0) || (ibug >= n)) || ((jbug < 0) || (jbug >= m)))
+    if (((ibug < 0) || (ibug >= cols)) || ((jbug < 0) || (jbug >= rows)))
       exit(-1); /*if entry not valid then exit*/
     else {
-      count = (int **)malloc(n * sizeof(int));
+      count = (int **)malloc(cols * sizeof(int));
       /*malloc array*/
-      for (i = 0; i < n; i++)
-        count[i] = (int *)malloc(m * sizeof(int));
+      for (i = 0; i < cols; i++)
+        count[i] = (int *)malloc(rows * sizeof(int));
 
-      for (i = 0; i < n; i++) { /*initialize array*/
-        for (j = 0; j < m; j++) {
+      for (i = 0; i < cols; i++) { /*initialize array*/
+        for (j = 0; j < rows; j++) {
           count[i][j] = 0;
         }
       }
@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
       count[ibug][jbug] = 1;
       counter = 1; /*increment counter and array for first move*/
 
-      while ((counter != n * m) && (iteration < 50000)) { /*begin while*/
+      while ((counter != cols * rows) && (iteration < 50000)) { /*begin while*/
         move = random() % 8;
         imaybe = ibug + imove[move]; /*choose random move*/
         jmaybe = jbug + jmove[move];
-        if ((imaybe >= 0) && (imaybe < n) && (jmaybe >= 0) &&
-            (jmaybe < m)) { /*check validity*/
+        if ((imaybe >= 0) && (imaybe < cols) && (jmaybe >= 0) &&
+            (jmaybe < rows)) { /*check validity*/
 
           ibug = imaybe;
           jbug = jmaybe; /*if valid do these things*/
@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
         }
         iteration++; /*increment iteration*/
       }              /*end while*/
-      for (i = 0; i < n; i++) {
-        for (j = 0; j < m; j++) {
+      for (i = 0; i < cols; i++) {
+        for (j = 0; j < rows; j++) {
           printf("count[%d][%d] = %d\n", i, j, count[i][j]);
         }
       }

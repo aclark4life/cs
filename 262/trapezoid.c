@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
   float a, b, c, x;
-  float b1, b2, h1, h2;
+  float lower_bound, upper_bound, left_height, right_height;
   float base, oldtrap, newtrap, answer, distance;
   int count, number;
 
@@ -16,21 +16,21 @@ int main(int argc, char *argv[]) {
   a = atof(argv[1]);
   b = atof(argv[2]);
   c = atof(argv[3]);
-  b1 = atof(argv[4]);
-  b2 = atof(argv[5]);
+  lower_bound = atof(argv[4]);
+  upper_bound = atof(argv[5]);
   number = atof(argv[6]);
 
-  distance = b2 - b1;
+  distance = upper_bound - lower_bound;
   base = distance / number;
   oldtrap = 0;
   for (count = 0; count < number; count++) {
-    x = b1;
+    x = lower_bound;
 
-    h1 = a * pow(x, 2) + b * x + c;
-    x = b1 + base;
-    h2 = a * pow(x, 2) + b * x + c;
-    b1 = x;
-    newtrap = (distance) / number * (h1 + h2) / 2;
+    left_height = a * pow(x, 2) + b * x + c;
+    x = lower_bound + base;
+    right_height = a * pow(x, 2) + b * x + c;
+    lower_bound = x;
+    newtrap = (distance) / number * (left_height + right_height) / 2;
     answer = newtrap + oldtrap;
     oldtrap = answer;
   }

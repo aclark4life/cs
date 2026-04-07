@@ -6,8 +6,8 @@
 int main(int argc, char *argv[]) {
   FILE *infile;
   char letter;
-  float p[26];
-  int s[26], a[26], i, j, t, x, sum = 0;
+  float percentages[26];
+  int char_codes[26], counts[26], i, j, temp_count, temp_char, sum = 0;
   if (argc == 2) {
     infile = fopen(argv[1], "r");
     if (infile == NULL) {
@@ -19,33 +19,33 @@ int main(int argc, char *argv[]) {
     exit(-1);
   }
   for (i = 0; i < 26; i++) {
-    a[i] = 0;
-    p[i] = 0;
-    s[i] = 0;
+    counts[i] = 0;
+    percentages[i] = 0;
+    char_codes[i] = 0;
   }
   for (; (fscanf(infile, "%c", &letter)) != EOF;) {
     letter = toupper(letter);
     letter = letter - 'A';
-    a[(unsigned char)letter]++;
+    counts[(unsigned char)letter]++;
   }
   for (i = 0; i < 26; i++)
-    sum = sum + a[i];
+    sum = sum + counts[i];
   for (i = 0; i < 26; i++) {
-    s[i] = i + 64;
-    s[i]++;
+    char_codes[i] = i + 64;
+    char_codes[i]++;
   }
   for (i = 0; i < 26; i++)
     for (j = i + 1; j < 26; j++)
-      if (a[i] < a[j]) {
-        t = a[i];
-        x = s[i];
-        a[i] = a[j];
-        s[i] = s[j];
-        a[j] = t;
-        s[j] = x;
+      if (counts[i] < counts[j]) {
+        temp_count = counts[i];
+        temp_char = char_codes[i];
+        counts[i] = counts[j];
+        char_codes[i] = char_codes[j];
+        counts[j] = temp_count;
+        char_codes[j] = temp_char;
       }
   for (i = 0; i < 26; i++)
-    p[i] = ((float)a[i] / sum) * 100;
+    percentages[i] = ((float)counts[i] / sum) * 100;
   for (i = 0; i < 26; i++)
-    fprintf(stderr, "%c = %5.2f\n", s[i], p[i]);
+    fprintf(stderr, "%c = %5.2f\n", char_codes[i], percentages[i]);
 }

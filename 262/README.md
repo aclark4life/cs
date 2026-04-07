@@ -22,27 +22,54 @@ gcc avg.c -lm -o avg
 - Proper error handling
 
 ### counter.c
-Basic counter program.
+Reads a text file and counts the frequency of each letter (A–Z), then prints each letter and its percentage share of total letters, sorted from most to least frequent.
+
+**Usage:**
+```bash
+gcc counter.c -o counter
+./counter somefile.txt
+```
 
 ### list.c
-Linked list implementation.
+Interactive sparse matrix tool backed by a doubly-linked circular list (one list per row, one per column). Supports creating two matrices, inserting nodes by row/col/value, and printing by row or column order.
+
+**Usage:**
+```bash
+gcc list.c -o list
+./list
+```
 
 ### roach.c
-Roach simulation program.
+Simulates a cockroach performing a random walk on an `n×m` grid. Runs until every cell has been visited or 50,000 moves have elapsed, then prints the visit count for each cell and the total number of moves made.
+
+**Usage:**
+```bash
+gcc roach.c -o roach
+./roach <cols> <rows> <start_col> <start_row>
+# E.g.: ./roach 5 5 2 2
+```
 
 ### trapezoid.c
-Trapezoid area calculation using numerical integration.
+Approximates the definite integral of `ax² + bx + c` over `[lower_bound, upper_bound]` using the trapezoidal rule with a given number of intervals.
+
+**Usage:**
+```bash
+gcc trapezoid.c -lm -o trapezoid
+./trapezoid <a> <b> <c> <lower_bound> <upper_bound> <num_intervals>
+# E.g.: ./trapezoid 1 0 0 0 1 1000
+```
 
 ## Building
 
-All programs can be compiled with:
+A `Makefile` is provided — just run:
 ```bash
-gcc <filename>.c -o <program_name>
+make
 ```
 
-For programs using math functions (like avg.c):
+Or compile individually:
 ```bash
-gcc <filename>.c -lm -o <program_name>
+gcc <filename>.c -o <program_name>          # most programs
+gcc <filename>.c -lm -o <program_name>      # avg.c and trapezoid.c require -lm
 ```
 
 ## Notes
