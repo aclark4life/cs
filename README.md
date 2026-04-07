@@ -1,5 +1,7 @@
 # Computer Science Portfolio: 1995-1999
 
+[![Documentation Status](https://readthedocs.org/projects/aclark4life-cs/badge/?version=latest)](https://aclark4life-cs.readthedocs.io/en/latest/?badge=latest)
+
 <div align="center">
   <table>
     <tr>
