@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
   if (argc != 7) {
     printf("usage: %s a b c base1 base2 x\n", argv[0]);
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
 
   a = atof(argv[1]);

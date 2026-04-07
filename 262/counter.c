@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
     infile = fopen(argv[1], "r");
     if (infile == NULL) {
       printf("Unable to open the input file.\n");
-      exit(-1);
+      exit(EXIT_FAILURE);
     }
   } else {
     printf("usage: %s file\n", argv[0]);
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
   for (i = 0; i < 26; i++) {
     counts[i] = 0;

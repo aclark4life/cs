@@ -188,7 +188,7 @@ void menu(void) {
 
       if ((max_row1 > 0) && (max_row1 <= 20)) {
       } else {
-        exit(-1);
+        exit(EXIT_FAILURE);
       }
 
       printf("MAX_COL>");
@@ -196,7 +196,7 @@ void menu(void) {
 
       if ((max_col1 > 0) && (max_col1 <= 20)) {
       } else {
-        exit(-1);
+        exit(EXIT_FAILURE);
       }
 
       anchor1 = (struct element *)create_anchor_node(max_row1, max_col1);
@@ -207,7 +207,7 @@ void menu(void) {
 
       if ((number_of_nodes > 0) && (number_of_nodes <= 20)) {
       } else {
-        exit(-1);
+        exit(EXIT_FAILURE);
       }
 
       system("clear");
@@ -221,7 +221,7 @@ void menu(void) {
 
         if ((row1 > 0) && (row1 <= max_row1)) {
         } else {
-          exit(-1);
+          exit(EXIT_FAILURE);
         }
 
         printf("COL>");
@@ -229,7 +229,7 @@ void menu(void) {
 
         if ((col1 > 0) && (col1 <= max_col1)) {
         } else {
-          exit(-1);
+          exit(EXIT_FAILURE);
         }
 
         printf("VALUE>");
@@ -284,7 +284,7 @@ void menu(void) {
 
       if ((number_of_nodes > 0) && (number_of_nodes <= 20)) {
       } else {
-        exit(-1);
+        exit(EXIT_FAILURE);
       };
       system("clear");
 
@@ -297,7 +297,7 @@ void menu(void) {
 
         if ((row1 > 0) && (row1 <= max_row1)) {
         } else {
-          exit(-1);
+          exit(EXIT_FAILURE);
         }
 
         printf("COL>");
@@ -305,7 +305,7 @@ void menu(void) {
 
         if ((col1 > 0) && (col1 <= max_col1)) {
         } else {
-          exit(-1);
+          exit(EXIT_FAILURE);
         }
 
         printf("VALUE>");
@@ -444,7 +444,7 @@ void menu(void) {
 int main(int argc, char *argv[]) {
   if (argc != 1) {
     printf("USAGE: %s\n\n", argv[0]);
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
 
   else {

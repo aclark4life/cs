@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
   if (argc != 5) {
     printf("usage: %s n m ibug jbug\n", argv[0]);
 
-    exit(-1);
+    exit(EXIT_FAILURE);
 
   } else {             /*create multi-dimensional array*/
     cols = atoi(argv[1]); /*columns*/
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     jbug = atoi(argv[4]);
 
     if (((ibug < 0) || (ibug >= cols)) || ((jbug < 0) || (jbug >= rows)))
-      exit(-1); /*if entry not valid then exit*/
+      exit(EXIT_FAILURE); /*if entry not valid then exit*/
     else {
       count = (int **)malloc(cols * sizeof(int));
       /*malloc array*/
