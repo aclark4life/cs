@@ -83,13 +83,13 @@ Reads a list of integers from a file or stdin and computes the mean and standard
 
 .. code-block:: c
 
-   for (i = 0; i < n; i++)
-       sum += a[i];
-   mean = sum / n;
+   for (i = 0; i < num_values; i++)
+       sum += values[i];
+   mean = sum / num_values;
 
-   for (i = 0; i < n; i++)
-       sum_sq_diff += pow(a[i] - mean, 2);
-   stdev = sqrt(sum_sq_diff / (n - 1));
+   for (i = 0; i < num_values; i++)
+       sum_sq_diff += pow(values[i] - mean, 2);
+   stdev = sqrt(sum_sq_diff / (num_values - 1));
 
    printf("Mean: %f\n", mean);
    printf("Standard Deviation: %f\n", stdev);
@@ -104,18 +104,18 @@ frequency — an early exploration of frequency analysis.
 
    /* count letters */
    for (; (fscanf(infile, "%c", &letter)) != EOF;)
-       a[(unsigned char)(toupper(letter) - 'A')]++;
+       counts[(unsigned char)(toupper(letter) - 'A')]++;
 
    /* sort by frequency (selection sort) */
    for (i = 0; i < 26; i++)
        for (j = i + 1; j < 26; j++)
-           if (a[i] < a[j]) {
-               t = a[i]; a[i] = a[j]; a[j] = t;
-               x = s[i]; s[i] = s[j]; s[j] = x;
+           if (counts[i] < counts[j]) {
+               temp_count = counts[i]; counts[i] = counts[j]; counts[j] = temp_count;
+               temp_char = char_codes[i]; char_codes[i] = char_codes[j]; char_codes[j] = temp_char;
            }
 
    for (i = 0; i < 26; i++)
-       fprintf(stderr, "%c = %5.2f\n", s[i], ((float)a[i] / sum) * 100);
+       fprintf(stderr, "%c = %5.2f\n", char_codes[i], ((float)counts[i] / sum) * 100);
 
 Roach Simulator (``262/roach.c``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -134,7 +134,7 @@ Demonstrates random number generation, 2D arrays, and simulation loops.
        move = rand() % 7;
        imaybe = ibug + imove[move];
        jmaybe = jbug + jmove[move];
-   } while (imaybe < 0 || imaybe >= n || jmaybe < 0 || jmaybe >= m);
+   } while (imaybe < 0 || imaybe >= cols || jmaybe < 0 || jmaybe >= rows);
 
    count[imaybe][jmaybe]++;
    ibug = imaybe;
@@ -148,12 +148,12 @@ how continuous mathematics can be approximated computationally.
 
 .. code-block:: c
 
-   /* integrate ax² + bx + c from b1 to b2 in `number` sub-intervals */
-   base = (b2 - b1) / number;
+   /* integrate ax² + bx + c from lower_bound to upper_bound in `number` sub-intervals */
+   base = (upper_bound - lower_bound) / number;
    for (count = 0; count < number; count++) {
-       h1 = a * pow(b1, 2)        + b * b1        + c;
-       h2 = a * pow(b1 + base, 2) + b * (b1+base) + c;
-       answer += base * (h1 + h2) / 2.0;
-       b1 += base;
+       left_height  = a * pow(lower_bound, 2)        + b * lower_bound        + c;
+       right_height = a * pow(lower_bound + base, 2) + b * (lower_bound+base) + c;
+       answer += base * (left_height + right_height) / 2.0;
+       lower_bound += base;
    }
    printf("AREA OF TRAPEZOID: %f\n", answer);
