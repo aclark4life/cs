@@ -14,10 +14,8 @@ Topics
 Projects
 --------
 
-Sparse Matrix (``262/list.c``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`list.c <https://github.com/aclark4life/cs/blob/main/262/list.c>`_
+Sparse Matrix (`262/list.c <https://github.com/aclark4life/cs/blob/main/262/list.c>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A 2D linked-list implementation of a sparse matrix. Each non-zero element is stored as a node
 with row/column coordinates, linked both horizontally and vertically to enable efficient traversal
@@ -78,10 +76,8 @@ Only the three non-zero entries are allocated; all zero cells consume no memory.
      return (new_node);
    }
 
-Statistics Calculator (``262/avg.c``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`avg.c <https://github.com/aclark4life/cs/blob/main/262/avg.c>`_
+Statistics Calculator (`262/avg.c <https://github.com/aclark4life/cs/blob/main/262/avg.c>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reads a list of integers from a file or stdin and computes the mean and standard deviation.
 
@@ -98,10 +94,8 @@ Reads a list of integers from a file or stdin and computes the mean and standard
    printf("Mean: %f\n", mean);
    printf("Standard Deviation: %f\n", stdev);
 
-Character Frequency Counter (``262/counter.c``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`counter.c <https://github.com/aclark4life/cs/blob/main/262/counter.c>`_
+Character Frequency Counter (`262/counter.c <https://github.com/aclark4life/cs/blob/main/262/counter.c>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Reads a text file and counts the frequency of each letter, outputting percentages sorted by
 frequency — an early exploration of frequency analysis.
@@ -123,10 +117,8 @@ frequency — an early exploration of frequency analysis.
    for (i = 0; i < 26; i++)
        fprintf(stderr, "%c = %5.2f\n", char_codes[i], ((float)counts[i] / sum) * 100);
 
-Roach Simulator (``262/roach.c``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`roach.c <https://github.com/aclark4life/cs/blob/main/262/roach.c>`_
+Roach Simulator (`262/roach.c <https://github.com/aclark4life/cs/blob/main/262/roach.c>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Simulates a random walk of a "roach" on a 2D grid, tracking which squares have been visited.
 Demonstrates random number generation, 2D arrays, and simulation loops.
@@ -148,10 +140,8 @@ Demonstrates random number generation, 2D arrays, and simulation loops.
    ibug = imaybe;
    jbug = jmaybe;
 
-Trapezoidal Integration (``262/trapezoid.c``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`trapezoid.c <https://github.com/aclark4life/cs/blob/main/262/trapezoid.c>`_
+Trapezoidal Integration (`262/trapezoid.c <https://github.com/aclark4life/cs/blob/main/262/trapezoid.c>`_)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Implements numerical integration of a quadratic function using the trapezoidal rule, illustrating
 how continuous mathematics can be approximated computationally.
