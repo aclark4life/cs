@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*****************************************************************************/
 
 struct element {
   int value;
@@ -28,12 +27,10 @@ struct element *create_head_node(struct element *anchor) {
   return (node);
 }
 
-/*****************************************************************************/
 struct element *add_matrix(struct element *head1 __attribute__((unused)), struct element *head2 __attribute__((unused))) {
   return (NULL);
 }
 
-/*****************************************************************************/
 
 struct element *insert_row(struct element *new_node, struct element *head) {
   struct element *current = head;
@@ -77,7 +74,6 @@ struct element *insert_col(struct element *new_node, struct element *head) {
   return (new_node);
 }
 
-/*****************************************************************************/
 
 struct element *insert_node(struct element *new_node, struct element *head) {
   struct element *inserted;
@@ -94,7 +90,6 @@ struct element *insert_node(struct element *new_node, struct element *head) {
   return (head);
 }
 
-/*****************************************************************************/
 
 void print_matrix(struct element *head) {
 
@@ -118,7 +113,6 @@ void print_matrix(struct element *head) {
   printf("\n>");
 }
 
-/*****************************************************************************/
 
 void print_menu(void) {
 
@@ -138,7 +132,6 @@ void print_menu(void) {
   printf("\nSAYS> ");
 }
 
-/*****************************************************************************/
 
 void menu(void) {
   int guard1 = 0;
@@ -172,7 +165,6 @@ void menu(void) {
     scanf("%c", &menu_input);
     rewind(stdin);
     switch (menu_input) {
-    /*********************************************************************/
     case '1': /*MATRIX 1*/
 
     {
@@ -212,7 +204,6 @@ void menu(void) {
 
       system("clear");
 
-      /*********************************************************************/
 
       for (i = 1; i <= number_of_nodes; i++) { /*MATRIX 1*/
 
@@ -237,7 +228,6 @@ void menu(void) {
         scanf("%d", &value);
         system("clear");
 
-        /*******************************************************************/
 
         node1 = (struct element *)malloc(sizeof(struct element));
         node1->row = row1;
@@ -251,7 +241,6 @@ void menu(void) {
       break;
     }
 
-    /***********************************************************************/
     case '2': {
 
       system("clear");
@@ -288,7 +277,6 @@ void menu(void) {
       };
       system("clear");
 
-      /*********************************************************************/
 
       for (i = 1; i <= number_of_nodes; i++) { /*MATRIX 2*/
 
@@ -313,7 +301,6 @@ void menu(void) {
         scanf("%d", &value);
         system("clear");
 
-        /*******************************************************************/
 
         node2 = (struct element *)malloc(sizeof(struct element));
         node2->row = row1;
@@ -325,7 +312,6 @@ void menu(void) {
 
       break;
     }
-      /***********************************************************************/
 
     case '3': {
 
@@ -439,7 +425,6 @@ void menu(void) {
   } /*END while (foo != 'q')*/
 }
 
-/*********************************************************************/
 
 int main(int argc, char *argv[]) {
   if (argc != 1) {
