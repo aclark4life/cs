@@ -2,7 +2,13 @@
 # Assembles and links one or more 366/*.asm files using the original
 # Turbo Assembler/Linker (tasm.exe/tlink.exe) via DOSBox Staging.
 #
-# Usage: dosbox-build.sh <output-name> <file1.asm> [file2.asm ...]
+# Usage: dosbox-build.sh [--watch] <output-name> <file1.asm> [file2.asm ...]
+#
+# By default the build runs headless (fast, output logged and printed
+# after the fact) - the DOSBox window flashes open and closes on its
+# own. Pass --watch as the first argument to instead keep the DOSBox
+# window open and show tasm/tlink running live on-screen; it pauses at
+# the end so you can read the output before closing the window.
 #
 # Multiple input files are linked together in the given order (mirrors
 # the "+"-joined tlink syntax used by the original 366/link.bat, e.g.
@@ -15,8 +21,14 @@ DOSBOX="/Applications/DOSBox Staging.app/Contents/MacOS/dosbox"
 DIR="$(cd "$(dirname "$0")" && pwd)"
 WORK="$DIR/bin"
 
+watch=0
+if [ "${1:-}" = "--watch" ]; then
+    watch=1
+    shift
+fi
+
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <output-name> <file1.asm> [file2.asm ...]" >&2
+    echo "Usage: $0 [--watch] <output-name> <file1.asm> [file2.asm ...]" >&2
     exit 1
 fi
 
@@ -44,24 +56,38 @@ for f in "$@"; do
 done
 
 conf="$(mktemp /tmp/dosbox-build-XXXX.conf)"
-{
-    echo "[autoexec]"
-    echo "mount c \"$DIR\""
-    echo "c:"
-    echo "cd bin"
-    for n in "${names[@]}"; do
-        echo "tasm $n.asm >> build.log"
-    done
-    joined="$(IFS=+; echo "${names[*]}")"
-    echo "tlink $joined; >> build.log"
-    echo "exit"
-} > "$conf"
-
-rm -f "$WORK/build.log"
-"$DOSBOX" -conf "$conf" -fastlaunch >/dev/null 2>&1
+if [ "$watch" -eq 1 ]; then
+    {
+        echo "[autoexec]"
+        echo "mount c \"$DIR\""
+        echo "c:"
+        echo "cd bin"
+        for n in "${names[@]}"; do
+            echo "tasm $n.asm"
+        done
+        joined="$(IFS=+; echo "${names[*]}")"
+        echo "tlink $joined;"
+        echo "pause"
+    } > "$conf"
+    "$DOSBOX" -conf "$conf"
+else
+    {
+        echo "[autoexec]"
+        echo "mount c \"$DIR\""
+        echo "c:"
+        echo "cd bin"
+        for n in "${names[@]}"; do
+            echo "tasm $n.asm >> build.log"
+        done
+        joined="$(IFS=+; echo "${names[*]}")"
+        echo "tlink $joined; >> build.log"
+        echo "exit"
+    } > "$conf"
+    rm -f "$WORK/build.log"
+    "$DOSBOX" -conf "$conf" -fastlaunch >/dev/null 2>&1
+    cat "$WORK/build.log" 2>/dev/null || true
+fi
 rm -f "$conf"
-
-cat "$WORK/build.log" 2>/dev/null || true
 
 first="${names[0]}"
 result="$(find "$WORK" -maxdepth 1 -iname "${first}.exe" | head -1)"

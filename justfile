@@ -17,6 +17,7 @@
 #   just cs364-split 364/somefile.in                # split a stream into sorted runs
 #   just cs364-ko out.txt run1.txt run2.txt run3.txt # N-way knock-out-tree merge
 #   just dosbox-build hello hello.asm               # assemble/link 366/hello.asm via DOSBox
+#   just dosbox-build-watch hello hello.asm         # same, but keep the DOSBox window open to watch
 
 subdirs := "262 295 364 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
 
@@ -98,5 +99,10 @@ cs364-split *args: (run "364" "split" args)
 # screen.asm random.asm printhex.asm` for multi-module projects.
 dosbox-build output *files:
     ./366/dosbox-build.sh {{output}} {{files}}
+
+# Same as dosbox-build, but keeps the DOSBox window open so you can
+# watch tasm/tlink run live, e.g. `just dosbox-build-watch hello hello.asm`
+dosbox-build-watch output *files:
+    ./366/dosbox-build.sh --watch {{output}} {{files}}
 
 cs366-hello: (dosbox-build "hello" "hello.asm")
