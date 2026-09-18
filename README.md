@@ -79,8 +79,8 @@ Principles of OS design, process management, and networking.
 │   ├── gauss/ (Gauss-Jordan Elimination)
 │   └── ...
 ├── 364 (File and Data Structures)
-│   ├── bootp.c
-│   ├── dhcp/
+│   ├── ko.c (Knock-Out Tree Merge)
+│   ├── split.c / merge.c / rng.c
 │   └── ...
 ├── 366 (Systems Programming)
 │   ├── x86 Assembly Projects
