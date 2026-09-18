@@ -3,6 +3,7 @@
 SUBDIRS = \
 	262 \
 	295 \
+	420/ko \
 	301/determinant \
 	301/gauss \
 	301/generic \
