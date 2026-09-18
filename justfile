@@ -1,6 +1,22 @@
 # justfile for the CS Coursework Portfolio
 # Build and run the programs for each class with `just <recipe>`.
 # Run `just --list` to see all available recipes.
+#
+# Example runs:
+#   just cs262-avg 3                              # average of 3 ints (then type them)
+#   just cs262-counter 262/counter.c               # letter-frequency count of a file
+#   just cs262-roach 10 10 3 3                      # roach sim: n m ibug jbug
+#   just cs262-trapezoid 0 1 2 5 10 0.5             # trapezoidal-rule integration
+#   just cs295-factorial 5                          # 5!
+#   just cs295-hanoi                                # Towers of Hanoi (no args)
+#   just run 301/gauss gauss < 301/gauss/in/sample1.in     # Gauss-Jordan elimination
+#   just run 301/generic matrix < 301/generic/sample.in    # generic matrix ops
+#   just run 462/tsp tsp < 462/tsp/sample.in        # travelling-salesman search
+#   just run 466/shell shell                        # interactive custom Unix-like shell
+#   just cs364-rng 5                                # 5 pseudo-random numbers
+#   just cs364-split 364/somefile.in                # split a stream into sorted runs
+#   just cs364-ko out.txt run1.txt run2.txt run3.txt # N-way knock-out-tree merge
+#   just dosbox-build hello hello.asm               # assemble/link 366/hello.asm via DOSBox
 
 subdirs := "262 295 364 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
 
