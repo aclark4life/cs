@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   char s[L_tmpnam];
   int i, j;
 

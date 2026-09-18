@@ -2,7 +2,7 @@
 # Build and run the programs for each class with `just <recipe>`.
 # Run `just --list` to see all available recipes.
 
-subdirs := "262 295 420/ko 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
+subdirs := "262 295 364 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
 
 # Show available recipes
 default:
@@ -69,5 +69,8 @@ cs462-tsp *args: (run "462/tsp" "tsp" args)
 # --- 466: Operating Systems ---
 cs466-shell *args: (run "466/shell" "shell" args)
 
-# --- 420: Computer Science Research ---
-cs420-ko *args: (run "420/ko" "ko" args)
+# --- 364: File and Data Structures ---
+cs364-ko *args: (run "364" "ko" args)
+cs364-merge *args: (run "364" "merge" args)
+cs364-rng *args: (run "364" "rng" args)
+cs364-split *args: (run "364" "split" args)

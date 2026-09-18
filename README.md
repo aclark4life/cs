@@ -48,6 +48,7 @@ Implementation of numerical methods for linear systems.
 
 ### 364: File and Data Structures
 Advanced data organization and storage techniques.
+- **Featured Project:** An N-way "knock-out tree" (heap) merge of an arbitrary number of sorted run files (`364/ko.c`), preceded by run-splitting (`364/split.c`) and a pairwise merge (`364/merge.c`).
 
 ### 366: Systems Level Programming
 Low-level programming, including DOS device drivers and 16-bit Assembly games.
