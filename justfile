@@ -1,0 +1,70 @@
+# justfile for the CS Coursework Portfolio
+# Build and run the programs for each class with `just <recipe>`.
+# Run `just --list` to see all available recipes.
+
+subdirs := "262 295 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
+
+# Show available recipes
+default:
+    @just --list
+
+# Build every program in every class
+build-all:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for d in {{subdirs}}; do
+        echo "==> Building $d"
+        make -C "$d"
+    done
+
+# Build all programs in one class, e.g. `just build 262`
+build class:
+    make -C {{class}}
+
+# Remove build artifacts for one class, e.g. `just clean 262`
+clean class:
+    make -C {{class}} clean
+
+# Remove build artifacts for every class
+clean-all:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for d in {{subdirs}}; do
+        make -C "$d" clean
+    done
+
+# Build (if needed) and run a single program, e.g. `just run 262 avg 3`
+run class program *args:
+    @make -C {{class}}
+    ./{{class}}/{{program}} {{args}}
+
+# --- 262: Programming and Data Structures ---
+cs262-avg *args: (run "262" "avg" args)
+cs262-counter *args: (run "262" "counter" args)
+cs262-list *args: (run "262" "list" args)
+cs262-roach *args: (run "262" "roach" args)
+cs262-trapezoid *args: (run "262" "trapezoid" args)
+
+# --- 295: Discrete Structures ---
+cs295-compound *args: (run "295" "compound" args)
+cs295-factorial *args: (run "295" "factorial" args)
+cs295-fsa *args: (run "295" "fsa" args)
+cs295-hanoi *args: (run "295" "hanoi" args)
+cs295-improved-bubble *args: (run "295" "improved_bubble" args)
+cs295-sort *args: (run "295" "sort" args)
+cs295-swap *args: (run "295" "swap" args)
+cs295-time *args: (run "295" "time" args)
+
+# --- 301: Computational Linear Algebra ---
+cs301-determinant *args: (run "301/determinant" "determinant" args)
+cs301-gauss *args: (run "301/gauss" "gauss" args)
+cs301-generic *args: (run "301/generic" "matrix" args)
+cs301-inverse *args: (run "301/inverse" "matrix_inverse" args)
+cs301-multiply *args: (run "301/multiply" "matrix_multiply" args)
+cs301-ortho *args: (run "301/ortho" "ortho" args)
+
+# --- 462: Algorithm Analysis ---
+cs462-tsp *args: (run "462/tsp" "tsp" args)
+
+# --- 466: Operating Systems ---
+cs466-shell *args: (run "466/shell" "shell" args)
