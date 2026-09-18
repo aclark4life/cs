@@ -21,7 +21,7 @@ This repository contains a collection of coursework, research projects, and expe
 
 The curriculum and course descriptions are based on the [Loyola University Maryland Computer Science major requirements (archived 1998)](https://web.archive.org/web/19980524213843/http://www.cs.loyola.edu/courses/major/).
 
-## 🚀 Recent Maintenance & Refactoring (2026)
+## 🚀 Maintenance & Refactoring
 
 In April 2026, this repository underwent a "Capstone Refactoring" pass to bring the code into a professional maintenance mode.
 
