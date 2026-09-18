@@ -134,18 +134,26 @@ void Input() {
       fprintf(stderr, "Memory allocation failed for matrix row %d\n", i);
       exit(EXIT_FAILURE);
     }
+    for (j = 0; j <= n; j++)
+      A[i][j] = 0.0;
   }
   for (i = 1; i <= n; i++) {
     mark[i] = 0;
     markED[i] = 0;
   }
   for (i = 1; i <= m; i++) {
-    if (fgets(line, 1024, stdin) != NULL) {
-      tok = strtok(line, " ");
-      for (j = 1; tok != NULL && j <= n; j++) {
-        A[i][j] = atof(tok);
-        tok = strtok(NULL, " ");
-      }
+    if (fgets(line, 1024, stdin) == NULL) {
+      fprintf(stderr, "Failed to read matrix row %d\n", i);
+      exit(EXIT_FAILURE);
+    }
+    tok = strtok(line, " ");
+    for (j = 1; tok != NULL && j <= n; j++) {
+      A[i][j] = atof(tok);
+      tok = strtok(NULL, " ");
+    }
+    if (j <= n) {
+      fprintf(stderr, "Row %d has fewer than %d values\n", i, n);
+      exit(EXIT_FAILURE);
     }
   }
   free(line);

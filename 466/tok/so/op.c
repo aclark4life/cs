@@ -4,7 +4,7 @@ main(int argc, char *argv[]) {
   short port_num = atoi(argv[2]);
   int s = 0;
   int t = 0;
-  char *buf = (char *)malloc(12 * sizeof(char));
+  char *buf = (char *)malloc(13 * sizeof(char)); /* 12 chars + NUL */
 
   strcpy(buf, "hello world!");
   s = create_socket(port_num);

@@ -101,14 +101,15 @@ void init() {
   float x, y;
 
   scanf("%d", &d); // get input //	printf ("d is %d\n",d);
-  f1 = (float *)malloc((d) * sizeof(float)); // take care of arrays
-  f2 = (float *)malloc((d) * sizeof(float));
+  /* Arrays are 1-indexed (index 0 unused), so allocate d+1 elements. */
+  f1 = (float *)malloc((d + 1) * sizeof(float)); // take care of arrays
+  f2 = (float *)malloc((d + 1) * sizeof(float));
 
-  best_path = (int *)malloc((d) * sizeof(int));
+  best_path = (int *)malloc((d + 1) * sizeof(int));
 
-  f = (float **)malloc(d * sizeof(float *));
+  f = (float **)malloc((d + 1) * sizeof(float *));
   for (i = 1; i <= d; i++) {
-    f[i] = (float *)malloc(d * sizeof(float));
+    f[i] = (float *)malloc((d + 1) * sizeof(float));
   }
 
   for (i = 1; i <= d; i++) // get some more input
@@ -117,7 +118,7 @@ void init() {
     f1[i] = x;
     f2[i] = y;
   }
-  for (i = 1; i < d; i++) {
+  for (i = 1; i <= d; i++) {
     best_path[i] = 0;
   }
   //	for (i=1;i<=d;i++) { 	printf("%d %f %f\n",i,f1[i],f2[i]) ; } //echo
@@ -130,7 +131,9 @@ t_node give_birth(t_node parent) {
   //	printf ( "parentn->level = %d\n",parent->level ) ;
   //	printf ( "n->level = %d\n",n->level ) ;
   n->bound = get_bound(n);
-  n->path = (int *)malloc((d) * sizeof(int));
+  /* path is indexed 1..d, and briefly 1..d+1 while closing a tour, so
+   * allocate d+2 elements (index 0 unused). */
+  n->path = (int *)malloc((d + 2) * sizeof(int));
   return n;
 }
 int in_path(int node, t_node n) {
@@ -235,6 +238,8 @@ void get_paths(t_node node) {
             get_paths(child);
             //						printf ("OUT ");
           }
+          free(child->path);
+          free(child);
         }
       }
     }
@@ -262,11 +267,13 @@ int main(int argc, char *argv[]) {
     get_distances();
 
     n = (t_node)malloc(sizeof(struct s_node));
-    n->path = (int *)malloc(d * sizeof(int));
+    n->path = (int *)malloc((d + 2) * sizeof(int));
     n->path[1] = 1;
     n->level = 1;
     n->bound = get_bound(n);
     get_paths(n);
+    free(n->path);
+    free(n);
   }
   ////printf ( "\n");
   //	printf ("\n");

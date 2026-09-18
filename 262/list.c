@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Clear the terminal screen, warning (but not aborting) if the shell
+ * command could not be run. */
+static void clear_screen(void) {
+  if (system("clear") != 0) {
+    fprintf(stderr, "Warning: failed to clear screen\n");
+  }
+}
 
 struct element {
   int value;
@@ -116,7 +123,7 @@ void print_matrix(struct element *head) {
 
 void print_menu(void) {
 
-  system("clear"); /*clear the screen*/
+  clear_screen(); /*clear the screen*/
   printf("\n SPARSE MATRIX TOOL\n\n");
   printf("****************************************************************\n");
   printf(" 1) CREATE MATRIX ONE\n");
@@ -168,7 +175,7 @@ void menu(void) {
     case '1': /*MATRIX 1*/
 
     {
-      system("clear");
+      clear_screen();
       printf("(0 < MAX_ROW <= 20)\n");
       printf("(0 < MAX_COL <= 20)\n");
       printf("(0 < NUMBER_OF_NODES <= 20)\n\n");
@@ -202,7 +209,7 @@ void menu(void) {
         exit(EXIT_FAILURE);
       }
 
-      system("clear");
+      clear_screen();
 
 
       for (i = 1; i <= number_of_nodes; i++) { /*MATRIX 1*/
@@ -226,7 +233,7 @@ void menu(void) {
         printf("VALUE>");
 
         scanf("%d", &value);
-        system("clear");
+        clear_screen();
 
 
         node1 = (struct element *)malloc(sizeof(struct element));
@@ -243,7 +250,7 @@ void menu(void) {
 
     case '2': {
 
-      system("clear");
+      clear_screen();
 
       guard2 = 1;
 
@@ -275,7 +282,7 @@ void menu(void) {
       } else {
         exit(EXIT_FAILURE);
       };
-      system("clear");
+      clear_screen();
 
 
       for (i = 1; i <= number_of_nodes; i++) { /*MATRIX 2*/
@@ -299,7 +306,7 @@ void menu(void) {
         printf("VALUE>");
 
         scanf("%d", &value);
-        system("clear");
+        clear_screen();
 
 
         node2 = (struct element *)malloc(sizeof(struct element));
@@ -315,9 +322,9 @@ void menu(void) {
 
     case '3': {
 
-      system("clear");
+      clear_screen();
       while (print_input != 'q') {
-        system("clear");
+        clear_screen();
         printf("\n PRINT MATRIX\n\n");
         printf("********************************************************\n");
         printf(" 1) PRINT MATRIX ONE\n");
@@ -331,7 +338,7 @@ void menu(void) {
         case '1': {
           if (guard1 == 1) {
 
-            system("clear");
+            clear_screen();
             print_matrix(head1);
             getchar();
             break;
@@ -341,7 +348,7 @@ void menu(void) {
 
           if (guard2 == 1) {
 
-            system("clear");
+            clear_screen();
             print_matrix(head2);
             getchar();
           }
@@ -358,7 +365,7 @@ void menu(void) {
     }
 
     case '4': {
-      system("clear");
+      clear_screen();
 
       printf(" ADD MATRIX (UNDER CONSTRUCTION)\n");
       printf("**************************************************\n");
@@ -372,7 +379,7 @@ void menu(void) {
       break;
     }
     case '5': {
-      system("clear");
+      clear_screen();
       printf(" SUB MATRIX (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
@@ -381,7 +388,7 @@ void menu(void) {
       break;
     }
     case '6': {
-      system("clear");
+      clear_screen();
       printf(" MULTIPLY (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
@@ -391,7 +398,7 @@ void menu(void) {
       break;
     }
     case '7': {
-      system("clear");
+      clear_screen();
       printf(" TRANSPOSE (UNDER CONSTRUCTION)\n\n");
       printf("**********************************************************\n\n");
       printf("**********************************************************\n\n");
@@ -401,7 +408,7 @@ void menu(void) {
     }
 
     case '8': {
-      system("clear");
+      clear_screen();
       printf("DEVELOPER NOTES:\n");
 
       printf("- Significant time spent on insert_node logic.\n");

@@ -23,7 +23,7 @@ main() {
 
     /*scruf[i]=realloc(scruf[i],((strlen(buf)+1)*sizeof(char *)));    */
 
-    scruf = (char **)realloc(scruf, sizeof(char *) + n + 1);
+    scruf = (char **)realloc(scruf, sizeof(char *) * (n + 1));
     scruf[n - 1] = (char *)malloc((strlen(buf) + 1) * sizeof(char));
 
     /*scruf[i]=buf; 	<----- a big mistake 	*/

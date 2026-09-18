@@ -50,7 +50,7 @@ void get_matrices() {
   for (i = 1; i <= m; i++) {
     fgets(string, 1024, stdin);
     token = strtok(string, " ");
-    for (j = 1; token != NULL; j++) {
+    for (j = 1; token != NULL && j <= p; j++) {
       A[i][j] = atoi(token);
       token = strtok(NULL, " ");
     }
@@ -58,11 +58,12 @@ void get_matrices() {
   for (i = 1; i <= p; i++) {
     fgets(string, 1024, stdin);
     token = strtok(string, " ");
-    for (j = 1; token != NULL; j++) {
+    for (j = 1; token != NULL && j <= n; j++) {
       B[i][j] = atoi(token);
       token = strtok(NULL, " ");
     }
   }
+  free(string);
 }
 void mul_matrices() {
   int i, j, k, s;

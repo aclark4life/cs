@@ -67,13 +67,14 @@ void get_matrx() {
   for (i = 1; i <= N; i++) {
     fgets(line, 1024, stdin);
     tok = strtok(line, " ");
-    for (j = 1; tok != NULL; j++) {
+    for (j = 1; tok != NULL && j <= N; j++) {
       A[i][j] = atoi(tok);
       // printf ("%f ",A[i][j]);
       tok = strtok(NULL, " ");
     } // printf ("\n");
   }
   // printf ("\n");
+  free(line);
 }
 double **get_mem(double **a) {
   int i;

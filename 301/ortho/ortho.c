@@ -41,11 +41,12 @@ void get_mtrx() {
   for (i = 1; i <= m; i++) {
     fgets(line, 1024, stdin);
     tok = strtok(line, " ");
-    for (j = 1; tok != NULL; j++) {
+    for (j = 1; tok != NULL && j <= n; j++) {
       A[i][j] = atoi(tok);
       printf("%d ", A[i][j]);
       tok = strtok(NULL, " ");
     }
     printf("\n");
   }
+  free(line);
 }

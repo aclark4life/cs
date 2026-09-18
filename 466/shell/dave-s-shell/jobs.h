@@ -6,3 +6,5 @@ typedef struct {
   int pid;
   char *name;
 } tJob;
+
+void run(char **tokenv, tJob background_processes[]);
