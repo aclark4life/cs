@@ -74,3 +74,13 @@ cs364-ko *args: (run "364" "ko" args)
 cs364-merge *args: (run "364" "merge" args)
 cs364-rng *args: (run "364" "rng" args)
 cs364-split *args: (run "364" "split" args)
+
+# --- 366: Systems Level Programming (x86 Assembly, via DOSBox) ---
+# Assemble/link one or more 366/*.asm files with the original Turbo
+# Assembler/Linker, e.g. `just dosbox-build hello hello.asm` or
+# `just dosbox-build rocks rocks.asm shield.asm cities.asm image.asm
+# screen.asm random.asm printhex.asm` for multi-module projects.
+dosbox-build output *files:
+    ./366/dosbox-build.sh {{output}} {{files}}
+
+cs366-hello: (dosbox-build "hello" "hello.asm")
