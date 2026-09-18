@@ -25,11 +25,12 @@ The curriculum and course descriptions are based on the [Loyola University Maryl
 
 In April 2026, this repository underwent a "Capstone Refactoring" pass to bring the code into a professional maintenance mode.
 
-**Co-authored with Gemini CLI:**
+**Co-authored with Gemini CLI and GitHub Copilot CLI:**
 - **Codebase Professionalization:** Scrubbed informal comments and placeholder strings from lexers and data structures.
 - **Structural Cleanup:** Renamed files and directories to follow professional naming conventions (e.g., `462/t/hello.c`, `462/f/stuff`).
 - **Memory & Logic Improvements:** Ongoing efforts to address legacy memory leaks (Gauss-Jordan) and refactor complex legacy insertion logic (Sparse Matrices).
 - **Modern Build Standards:** Unifying build processes and documentation.
+- **Security & Correctness Review:** Found and fixed heap overflows, uninitialized reads, and leaks across the 301/462/466 projects; added a `justfile` task runner; finished the long-unsolved CS 364 `ko` knock-out-merge assignment and consolidated it out of its misfiled home under `420/`.
 
 ---
 
