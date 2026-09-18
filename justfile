@@ -105,4 +105,5 @@ dosbox-build output *files:
 dosbox-build-watch output *files:
     ./366/dosbox-build.sh --watch {{output}} {{files}}
 
+# Assemble/link 366/hello.asm via DOSBox (smoke test for the DOS toolchain)
 cs366-hello: (dosbox-build "hello" "hello.asm")
