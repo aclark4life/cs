@@ -1,6 +1,3 @@
-import java.applet.Applet;
-import java.awt.*;
-
 abstract class shape {
   protected point center;            // an attribute
   void translate(int x_by, int y_by) // a method

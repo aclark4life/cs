@@ -1,14 +1,6 @@
-import java.applet.Applet;
-import java.awt.*;
-
-public class point extends Applet {
+public class point {
   protected int x;
   protected int y;
-
-  public void init() {
-    Panel childPanel = new Panel();
-    add(childPanel);
-  }
 
   point add(point p2) {
     return (new point(x + p2.x, y + p2.y));
@@ -30,4 +22,5 @@ public class point extends Applet {
     y += p.y;
   }
 }
+
 
