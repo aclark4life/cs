@@ -19,7 +19,7 @@
 #   just dosbox-build hello hello.asm               # assemble/link 366/hello.asm via DOSBox
 #   just dosbox-build-watch hello hello.asm         # same, but keep the DOSBox window open to watch
 
-subdirs := "262 295 364 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 462/tsp 466/shell"
+subdirs := "262 295 364 301/determinant 301/gauss 301/generic 301/inverse 301/multiply 301/ortho 451/java 461/hw/java 462/tsp 466/shell"
 
 # Show available recipes
 default:
