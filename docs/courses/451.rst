@@ -42,10 +42,10 @@ for testing. Explores how dynamic dispatch and ADT design differ across language
      }
    }
 
-Symbol Table with Scoping (``451/ht2/``)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Symbol Table with Scoping (``451/st/``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Extends the hash table into a scoped symbol table (``main2.c``, ``symbol.c``) supporting
+Extends the hash table into a scoped symbol table (``main.c``, ``symbol.c``) supporting
 nested scopes with ``add``, ``lookup``, and ``close`` operations — a direct implementation
 of the environment model used by block-structured languages.
 
