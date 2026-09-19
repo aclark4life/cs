@@ -147,20 +147,26 @@ draw_city	endp
 ; destroys: nothing
 ;
 cities_hit_check	proc	near
+	push	bx
 	push	cx
 	push	si
 
+	mov	bl, cl			; bl = rock width (cx becomes the loop counter next)
 	lea	si, cities
 	mov	cx, MAX_CITIES
 
 check_loop:
+	push	cx
+	mov	cl, bl			; restore rock width for this call
 	call	city_check_hit
+	pop	cx
 
 	add	si, CITY_SIZE
 	loop	check_loop
 
 	pop	si
 	pop	cx
+	pop	bx
 	ret
 cities_hit_check	endp
 
@@ -173,18 +179,36 @@ cities_hit_check	endp
 ; destroys: nothing
 ;
 city_check_hit	proc	near
+	push	ax
 	push	bx
 	push	dx
 
-	...
+	mov	ax, LOCATION[si]	; ah = city row, al = city left col
+
+	cmp	dh, ah			; rock in the same row as this city?
+	jne	no_hit
+
+	mov	bl, al			; bl = city left col
+	add	al, CITY_WIDTH-1
+	mov	bh, al			; bh = city right col
+
+	mov	al, dl			; al = rock's left col
+	add	al, cl
+	dec	al			; al = rock's right col (dl + cl - 1)
+
+	cmp	dl, bh			; rock starts past the city's right edge?
+	jg	no_hit
+	cmp	al, bl			; rock ends before the city's left edge?
+	jl	no_hit
 
 hit:
-	...
+	inc	word ptr HIT_COUNT[si]
 	call	cities_draw
 
 no_hit:
 	pop	dx
 	pop	bx
+	pop	ax
 	ret
 city_check_hit	endp
 

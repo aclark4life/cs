@@ -44,6 +44,10 @@ shift
 mkdir -p "$WORK"
 rm -f "$WORK"/*
 
+# Headers (already 8.3-safe: dos.h, screen.h, etc.) are shared via
+# `include` directives - copy them all so multi-module builds resolve.
+cp "$DIR"/*.h "$WORK"/ 2>/dev/null || true
+
 # DOS 8.3 filenames: copy each source into bin/ under an 8-char-safe
 # name so tasm/tlink never choke on long filenames or ~1-mangling.
 names=()

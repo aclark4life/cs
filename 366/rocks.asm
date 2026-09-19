@@ -210,9 +210,22 @@ new_rock_check	proc	near
 	mov	cx, MAX_ROCKS		; for cx = MAX_ROCKS to 1
 	lea	di, rocks
 
-	...
-	; find a non-active rock then set it to active with
-	; a random x location on the top of the screen
+find_free_rock:
+	cmp	byte ptr active[di], FALSE
+	je	activate_rock
+	add	di, ROCK_SIZE
+	loop	find_free_rock
+	jmp	no_new_rock		; all rocks active - nothing to do
+
+activate_rock:
+	mov	byte ptr active[di], TRUE
+	mov	byte ptr momentum[di], 1	; start falling down
+	mov	byte ptr upper_left_y[di], 0	; start at the top of the screen
+
+	mov	ax, ROCK_MAX_X
+	call	random			; ax = 1..ROCK_MAX_X
+	dec	ax			; make it 0-based
+	mov	upper_left_x[di], al
 
 no_new_rock:
 	pop	di

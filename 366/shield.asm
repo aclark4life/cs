@@ -27,20 +27,36 @@ code	segment	public byte 'code'
 ;
 shield_p1_hit	proc	near
 	push	ax
+	push	bx
+	push	cx
 	push	dx
 	push	si
 
-	...
+	mov	ax, p1_shield_location	; ah = shield row, al = shield left col
+	mov	bl, al			; bl = shield left col
+	add	al, SHIELD_WIDTH-1	; al = shield right col
+	mov	bh, al			; bh = shield right col
 
+	cmp	dh, ah			; rock in the same row as the shield?
+	jne	no_hit
+
+	mov	al, dl			; al = rock's left col
+	add	al, cl
+	dec	al			; al = rock's right col (dl + cl - 1)
+
+	cmp	dl, bh			; rock starts past the shield's right edge?
+	jg	no_hit
+	cmp	al, bl			; rock ends before the shield's left edge?
+	jl	no_hit
 
 hit:
-	...
-
 	test	al, 0				; hit!  set ZF = 1
 
 no_hit:						; for jumps, ZF = 0
 	pop	si
 	pop	dx
+	pop	cx
+	pop	bx
 	pop	ax
 	ret
 shield_p1_hit	endp
