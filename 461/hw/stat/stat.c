@@ -1,19 +1,17 @@
-
-
 #include <stdio.h>
 
-main(int argc, char *argv[])
+main(int argc, char *argv[]) {
 
-{
-  FILE *infile;
-  int j;
+  /*	int n;
 
-  infile = stdin;
-  printf("Input from stdin.\n");
-
-  scanf(*infile);
-
-  /* for (; (fscanf (infile, "%d", &j))!= EOF ;)
-     printf("%d\n", j);
+          n=scanf("stdin:", stdin);
+          printf("n=%c",n);
   */
+
+  int i, n;
+  float x;
+  char name[50]; /* from man page on scanf */
+  n = scanf("%d%f%s", &i, &x, name);
+
+  printf("n=%d", n);
 }
