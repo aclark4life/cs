@@ -1,17 +1,16 @@
 #include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
-main(int argc, char *argv[]) {
+main() {
 
-  /*	int n;
+  /*  	int stat(const char *path, struct stat *buf);
+   */
 
-          n=scanf("stdin:", stdin);
-          printf("n=%c",n);
-  */
+  int s;
 
-  int i, n;
-  float x;
-  char name[50]; /* from man page on scanf */
-  n = scanf("%d%f%s", &i, &x, name);
-
-  printf("n=%d", n);
+  int n;
+  char string[50];
+  n = scanf("%s", string);
+  printf("string=%s", string);
 }
