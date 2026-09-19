@@ -109,3 +109,12 @@ dosbox-build-watch output *files:
 
 # Assemble/link 366/hello.asm via DOSBox (smoke test for the DOS toolchain)
 cs366-hello: (dosbox-build "hello" "hello.asm")
+
+# Launch a built 366/*.exe in the DOSBox Staging GUI app, e.g.
+# `just dosbox-run rocks` (runs 366/rocks.exe)
+dosbox-run exe:
+    open -a "DOSBox Staging" --args -c 'mount c {{justfile_directory()}}/366' -c c: -c {{exe}}.exe
+
+# Build (if needed) and launch the "rocks" game in the DOSBox Staging GUI app
+cs366-rocks: (dosbox-build "rocks" "rocks.asm" "shield.asm" "cities.asm" "image.asm" "screen.asm" "random.asm" "printhex.asm")
+    just dosbox-run rocks
