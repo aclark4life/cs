@@ -4,71 +4,48 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#define BUF_SIZE 1000
 
 main() {
   int a[2], b[2], pid, i;
-  FILE *infile, *outfile, *temp;
-  char **tokenv = (char **)malloc(sizeof(char *));
-  char **prog = (char **)malloc(sizeof(char *) * 2);
-  char *s;
+  FILE *infile;
+  char **stringv = (char **)malloc(sizeof(char *));
+  char *string = (char *)malloc(sizeof(char));
+  char *buf = (char *)malloc(sizeof(char) * BUF_SIZE);
+  char **programv = (char **)malloc(sizeof(char *) * 2);
 
-  /*	char buf[1];  */
-
-  char *buf = (char *)malloc(sizeof(char));
-  /*	char *q=(char *)malloc(sizeof(char)*1024); */
-
-  int count;
-  /*	*buf='\0'; */
   infile = fopen("infile", "r");
-  prog[0] = "cat";
-  prog[1] = NULL;
-  /*for(i=0;i < 1; i++) buf[i]=NULL;   */
-
   pipe(a);
   pipe(b);
+  programv[0] = "cat";
+  programv[1] = NULL;
   pid = fork();
   switch (pid) {
   case 0:
-    close(0);  /*close stdin */
-    dup(a[0]); /*0 == pipe instead of stdin */
-
-    close(1);  /*close stdout */
-    dup(b[1]); /* 1 == pipe instead of stdout */
-
-    /*	write(1,"hello",5);   */
-    execvp(prog[0], prog); /* exec sort */
+    close(0);                      /*close stdin */
+    dup(a[0]);                     /*0 == pipe (a[0]) instead of stdin */
+    close(1);                      /*close stdout */
+    dup(b[1]);                     /* 1 == pipe (b[1]) instead of stdout */
+    execvp(programv[0], programv); /* exec sort */
 
     break;
   default:
     close(1);  /*close stdout*/
     dup(a[1]); /*write to pipe instead of stdout*/
 
-    for (i = 0; (s = fread_long(infile)) != NULL; i++) {
-      /*	if (strlen(s) >= 50)
-              {
-                      tokenv = realloc(tokenv,sizeof(char*)*(i+2));
-                      tokenv[i]=s;
-                      write(1,tokenv[i],strlen(s));
-              }
-              */
-      write(1, tokenv[i], 2);
+    for (i = 0; (string = fread_long(infile)) != NULL; i++) {
+      if (strlen(string) >= 50) {
+        stringv = realloc(stringv, sizeof(char *) * (i + 2));
+        stringv[i] = string;
+        write(1, stringv[i], strlen(string));
+      }
     }
+
     close(0);  /*close stdin*/
-    dup(b[0]); /*read from pipe instead of stdin*/
+    dup(b[0]); /*0 == pipe instead of stdin*/
+    read(0, buf, BUF_SIZE);
+    write(2, buf, BUF_SIZE);
 
-    read(0, buf, 5);
-    write(2, buf, 5);
-
-    /*	for(; ( count = read(0,q,1024) ) != 0 ;  )
-            {
-                    int buflen=strlen(buf);
-                    fprintf(stderr,"q=%s\n",q);
-                    buf=(char*)realloc (buf,sizeof(char)*(buflen+count+1));
-                    strncat(buf+buflen,q,count);
-                    buf[buflen+count]='\0';
-
-            }
-            */
     break;
   }
 }
