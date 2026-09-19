@@ -44,7 +44,7 @@ semantic actions.
 Scan Exercises (``461/project/scan/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A progression of four Flex lexers (``scan1.l`` through ``scan4.l``) of increasing complexity,
+A Flex lexer (``scan.l``), evolved through several iterations of increasing complexity,
 exploring whitespace handling, multi-character tokens, and state-based scanning.
 
 .. code-block:: text
@@ -63,7 +63,7 @@ exploring whitespace handling, multi-character tokens, and state-based scanning.
 Memory Allocation Exercises (``461/hw/alloca/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Low-level homework programs (``alloca.c``, ``alloca2.c``, ``malloc.c``) stress-testing memory
+Low-level homework programs (``alloca.c``, ``malloc.c``) stress-testing memory
 allocation by calling ``malloc`` in tight loops, illustrating heap behavior and the cost of
 dynamic allocation within a compiler runtime context.
 
@@ -80,7 +80,7 @@ dynamic allocation within a compiler runtime context.
 File Statistics (``461/hw/stat/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A series of programs (``stat.c`` through ``stat6.c``) progressively building a utility that
+A program (``stat.c``), evolved through several iterations, builds a utility that
 uses ``stat(2)`` to query file metadata, then reads and prints file contents — an exercise in
 POSIX system calls used by compiler toolchains.
 

@@ -58,8 +58,8 @@ to prune the search tree.
 Floyd-Warshall All-Pairs Shortest Path (``462/floyd/``)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Two implementations (``floyd1.c``, ``floyd2.c``) of the Floyd-Warshall algorithm on a
-5-node weighted graph, computing shortest paths between every pair of vertices in O(V³) time.
+An implementation (``floyd.c``) of the Floyd-Warshall algorithm on a weighted graph,
+computing shortest paths between every pair of vertices in O(V³) time.
 
 .. code-block:: c
 
