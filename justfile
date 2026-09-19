@@ -50,6 +50,7 @@ clean-all:
         make -C "$d" clean
     done
     find . -name "*.class" -delete
+    find . -name "*.dSYM" -type d -exec rm -rf {} +
 
 # Build (if needed) and run a single program, e.g. `just run 262 avg 3`
 run class program *args:
