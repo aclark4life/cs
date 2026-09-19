@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
   FILE *infile2;
   FILE *outfile;
 
-  int i, j, k, l;
+  int i, j;
 
   if (argc != 4) {
     printf("usage: %s infile1 infile2 outfile\n", argv[0]);

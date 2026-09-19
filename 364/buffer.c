@@ -16,8 +16,8 @@
 #define SWITCH WHICH = !WHICH
 /*******************************************************************/
 
-void create_outfiles();
-void close_files();
+void create_outfiles(void);
+void close_files(void);
 void malloc_buffer(char ***m_buffer);
 void init_buffer_index(int *s_index, int *d_index, int *f_index, int *c_index);
 void write_buff(char buff[BUF_SIZE], int fd);
@@ -48,9 +48,9 @@ int main(int argc, char *argv[]) {
   char f_buffer[BUF_SIZE];
   char c_buffer[BUF_SIZE];
 
-  int n, m, i, j, s, d, f, c;
+  int j, s, d, f, c;
   int s_index, d_index, f_index, c_index;
-  int s_length, d_length, f_length1, f_length2, c_length;
+  int s_length, d_length, f_length1, f_length2;
   int format_index;
   int format_count;
   int data_index;
@@ -139,6 +139,8 @@ int main(int argc, char *argv[]) {
 void init_start_values(char ***buffer, int *data_index, int *format_index,
                        int *format_count, int *which, int *data_which) {
   int i, j;
+  (void)format_index;
+  (void)which;
   /* found EOF */
   for (i = 0; i < BUF_SIZE; i++) {
     for (j = 0; j < (BUF_SIZE); j++) {
@@ -160,6 +162,7 @@ void do_string(int length, char ***in, int fd, char s_buffer[BUF_SIZE],
                int *data_which) {
   int i, j;
   int stop;
+  (void)which;
   if ((*data_index) == BUF_SIZE) {
     (*data_index) = 0;
     (*data_which) = !(*data_which);
@@ -196,6 +199,7 @@ void do_int(int length, char ***in, int fd, char d_buffer[BUF_SIZE],
   int i;
   int j;
   int stop;
+  (void)which;
 
   if ((*data_index) == BUF_SIZE) {
     (*data_index) = 0;
@@ -233,6 +237,7 @@ void do_float(int length1, int length2, char ***in, int fd,
               int *which, int *data_which) {
   int i, j, stop1, stop2;
   // *f_buffer_index;
+  (void)which;
 
   if ((*data_index) == BUF_SIZE) {
     (*data_index) = 0;
@@ -322,7 +327,6 @@ void check_buff(int *output_buffer_index, char output_buff[BUF_SIZE],
 
                               must flush buffer...
                               */
-  int i;
   if ((*output_buffer_index) == BUF_SIZE) {
     write_buff(output_buff, *fd);
     flush_buff(output_buff);
@@ -353,19 +357,20 @@ int get_read_fd(char *file) {
 }
 /*******************************************************************/
 void get_write_fd(int *a, int *b, int *c, int *d) {
+  (void)d;
   *a = open("s.out", O_WRONLY, PERMS);
   *b = open("d.out", O_WRONLY, PERMS);
   *c = open("f.out", O_WRONLY, PERMS);
 }
 /*******************************************************************/
-void create_outfiles() {
+void create_outfiles(void) {
   creat("s.out", PERMS);
   creat("d.out", PERMS);
   creat("f.out", PERMS);
   creat("c.out", PERMS);
 }
 /*******************************************************************/
-void close_files() {
+void close_files(void) {
   close(*"s.out");
   close(*"d.out");
   close(*"f.out");
@@ -375,7 +380,6 @@ void close_files() {
 int find_char_bjubb(char find_me, char ***buffer, int position,
                     int *data_which) {
   int i = position;
-  int count = 0;
   while (i < BUF_SIZE) {
     if ((*buffer)[*data_which][i] == find_me)
       return (i);
