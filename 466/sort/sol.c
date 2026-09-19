@@ -1,12 +1,10 @@
 #include "stdio.h"
 
 main() {
-  int toSort[2], fromSort[2];
+  int Sort[2];
 
-  if (pipe(toSort) == -1)
+  if (pipe(Sort) == -1)
     perror("pipe1");
-  if (pipe(fromSort) == -1)
-    perror("pipe2");
 
   switch (fork()) {
   case -1:
@@ -16,19 +14,15 @@ main() {
   case 0: {
     if (close(0) == -1)
       perror("close 1");
-    if (dup(toSort[0]) != 0)
+    if (dup(Sort[0]) != 0)
       perror("dup1");
 
     close(1);
-    dup(fromSort[1]);
+    dup(Sort[0]);
 
-    close(toSort[0]);
-    close(toSort[1]);
+    close(Sort[0]);
+    close(Sort[1]);
 
-    close(fromSort[0]);
-    close(fromSort[1]);
-
-    /*execvp("/bin/date", "date", (char *) 0);*/
     execlp("sort", "sort", (char *)0);
     perror("execvp!");
   }
@@ -38,24 +32,23 @@ main() {
     char buf[255];
     int i;
 
-    close(toSort[0]);
-    close(fromSort[1]);
+    close(Sort[0]);
 
-    f = fopen("infile", "r");
+    f = fopen("foo", "r");
     if (f == NULL) {
       printf("can't open foo");
       exit(-1);
     }
     while (fgets(buf, 100, f) != NULL) {
       if (strlen(buf) > 50)
-        write(toSort[1], buf, strlen(buf));
+        write(Sort[1], buf, strlen(buf));
     }
     fclose(f);
 
-    close(toSort[1]); /* this ones improtant */
-                      /* done writing, close stuff then read results */
+    /*close(Sort[1]);  /* this ones improtant */
+    /* done writing, close stuff then read results */
 
-    fin = fdopen(fromSort[0], "r");
+    fin = fdopen(Sort[1], "r");
     for (i = 0; i < 10; i++) {
       if (fgets(buf, 100, fin) == NULL)
         printf("fgets returned NULL!\n");
