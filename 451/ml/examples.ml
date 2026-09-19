@@ -1,54 +1,56 @@
-(* 'cs451/ml/examples.ml' contains the following ML functions.
+(*
+ * 'cs451/ml/examples2.ml' contains the following ML examples
  * Also see the file 'cs451/ml/example.ml.run'.
  *)
 
-fun add x y = x + y : int;
-fun add2 (x,y) = x + y : int;
 
-fun last lst =
-    if null lst then
-	nil
-    else
-	let
-	    val head::tail = lst
-	in
-	    if null tail then
-	        [head]
-            else
-	        last tail
-	end ;
-fun length lst =
-    if null lst then
-	0
-    else
-	1 + length (tl lst) ;
-(* this is the length function written in ML using a "Scheme style" *)
-
-(* now declare the length function in an "ML style" *)
-fun length nil     = 0
-  | length (x::xs) = 1 + length xs    (* notice that x is not used *)
-  ;
-
-(* or better yet (notice the "_" in the second line) *)
-fun length nil     = 0
+fun length nil     = 0		(* repeat *)
   | length (_::xs) = 1 + length xs
   ;
 
-fun append nil     y = y
-  | append (x::xs) y = x::append xs y
+fun length2_helper nil     rsf = rsf
+  | length2_helper (x::xs) rsf = length2_helper xs 1+rsf
   ;
 
-fun reverse nil     = nil
-  | reverse (x::xs) = append (reverse xs) [x]
+fun length2 x = length2_helper x 0
   ;
 
-fun reverse2_helper nil     rsf = rsf
-  | reverse2_helper (x::xs) rsf = reverse2_helper xs (x::rsf)
+(* for problem 7.2  			(DO PART a FOR HOMEWORK) *)
+(* problem 7.2c *)
+fun factorial1 1 = 1
+  | factorial1 n = n * factorial1 n-1
   ;
 
-fun reverse2 x = reverse2_helper x nil
+fun factorial_helper 1 rsf = rsf
+  | factorial_helper n rsf = factorial_helper (n-1) n*rsf
   ;
 
-fun map f nil = nil
-  | map f (x::xs) = f x::map f xs
+fun factorial2 n = factorial_helper n 1
   ;
+
+(*
+ * ML (like Scheme) has first class functions.  Thus, functions are values just
+ * like integers, booleans, etc.. For example, the following function converts
+ * a binary function into a unary one by supplying one argument.  Note that
+ * this function takes a function as an argument and returns a function as its
+ * result.
+ *)
+
+fun fix_first_argument bi_func constant argument =
+    let
+	val p = (constant, argument)
+    in
+	bi_func p
+    end
+  ;
+
+fun addp (x,y) = x+y:int;
+
+val increment = fix_first_argument addp 1 ;
+
+(* actually, because functions are curried, fix_first_argument is unnecessary.
+ * For examples, try the following
+ *)
+val plus2 = add 2;
+
+(* can you explain the difference between add and addp? *)
