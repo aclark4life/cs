@@ -49,6 +49,7 @@ clean-all:
     for d in {{subdirs}}; do
         make -C "$d" clean
     done
+    find . -name "*.class" -delete
 
 # Build (if needed) and run a single program, e.g. `just run 262 avg 3`
 run class program *args:
