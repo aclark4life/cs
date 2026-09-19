@@ -28,64 +28,55 @@ US                      (u|U)
 {D}*"."{D}+({E})?{LS}?  { return(CONSTANT); }
 {D}+"."{D}*({E})?{LS}?  { return(CONSTANT); }
 
+"("     { return (OPEN_PAREN_TOKEN) }
 
-"("     { return (OPEN_PAREN_TOKEN); }
-")"     { return (CLOSE_PAREN_TOKEN); }
-"{"     { return (OPEN_BRACE_TOKEN); }
-"}"     { return (CLOSE_BRACE_TOKEN); }
-"["     { return (OPEN_BRACKET_TOKEN); }
-"]"     { return (CLOSE_BRACKET_TOKEN); }
-";"     { return (SEMICOLON_TOKEN); }
-","     { return (COMMA_TOKEN); }
-"."     { return (PERIOD_TOKEN); }
-"="     { return (ASSIGNS_TOKEN); }
-">"     { return (GREATER_TOKEN); }
-"<"     { return (LESS_TOKEN); }
-"!"     { return (NOT_TOKEN); }
-"~"     { return (TILDE_TOKEN); }
-"?"     { return (CONDITIONAL_TOKEN); }
-":"     { return (COLON_TOKEN); }
-"=="    { return (EQ_TOKEN); }
-"<="    { return (LE_TOKEN); }
-">="    { return (GE_TOKEN); }
-"!="    { return (NE_OP_TOKEN); }
-"||"    { return (LOGICAL_OR_TOKEN); }
-"&&"    { return (LOGICAL_AND_TOKEN); }
-"++"    { return (INC_TOKEN); }
-"--"    { return (DEC_TOKEN); }
-"+"     { return (PLUS_TOKEN); }
-"-"     { return (MINUS_TOKEN); }
-"*"     { return (MUL_TOKEN); }
-"/"     { return (DIV_TOKEN); }
-"&"     { return (AND_TOKEN); }
+"("     { return (OPEN_PAREN_TOKEN) }
+"{"     { return (OPEN_BRACE_TOKEN) }
+"}"     { return (CLOSE_BRACE_TOKEN) }
+"["     { return (OPEN_BRACKET_TOKEN) }
+  {"]", CLOSE_BRACKET_TOKEN },
+  {";", SEMICOLON_TOKEN },
+  {",", COMMA_TOKEN },
+  {".", PERIOD_TOKEN },
+  {"=", ASSIGNS_TOKEN },
+  {">", GREATER_TOKEN },
+  {"<", LESS_TOKEN },
+  {"!", NOT_TOKEN },
+  {"~", TILDE_TOKEN },
+  {"?", CONDITIONAL_TOKEN },
+  {":", COLON_TOKEN },
+  {"==", EQ_TOKEN },
+  {"<=", LE_TOKEN },
+  {">=", GE_TOKEN },
+  {"!=", NE_OP_TOKEN },
+  {"||", LOGICAL_OR_TOKEN },
+  {"&&", LOGICAL_AND_TOKEN },
+  {"++", INC_TOKEN },
+  {"--", DEC_TOKEN },
+  {"+", PLUS_TOKEN },
+  {"-", MINUS_TOKEN },
+  {"*", MUL_TOKEN },
+  {"/", DIV_TOKEN },
+  {"&", AND_TOKEN },
+ {"|", OR_TOKEN },
+  {"^", XOR_TOKEN },
+  {"%", MOD_TOKEN },
+  {"<<", SHL_TOKEN },
+  {">>", SAR_TOKEN },
+  {">>>", SHL_TOKEN },
+  {"+=", ADD_ASSIGN_TOKEN },
+  {"-=", SUB_ASSIGN_TOKEN },
+  {"*=", MUL_ASSIGN_TOKEN },
+  {"/=", DIV_ASSIGN_TOKEN },
+  {"&=", AND_ASSIGN_TOKEN },
+  {"|=",  OR_ASSIGN_TOKEN },
+  {"^=", XOR_ASSIGN_TOKEN },
+  {"%=", MOD_ASSIGN_TOKEN },
+  {"<<=", SHL_ASSIGN_TOKEN },
+  {">>=", SAR_ASSIGN_TOKEN },
+  {">>>=", SHR_ASSIGN_TOKEN },
+  {"", -1 }
 
-"||"    { return (LOGICAL_OR_TOKEN); }
-"&&"    { return (LOGICAL_AND_TOKEN); }
-"++"    { return (INC_TOKEN); }
-"--"    { return (DEC_TOKEN); }
-"+"     { return (PLUS_TOKEN); }
-"-"     { return (MINUS_TOKEN); }
-"*"     { return (MUL_TOKEN); }
-"/"     { return (DIV_TOKEN); }
-"&"     { return (AND_TOKEN); }
-
-"|"     { return (OR_TOKEN); }
-"^"     { return (XOR_TOKEN); }
-"%"     { return (MOD_TOKEN); }
-"<<"    { return (SHL_TOKEN); }
-">>"    { return (SAR_TOKEN); }
-">>>"   { return (SHL_TOKEN); }
-"+="    { return (ADD_ASSIGN_TOKEN); }
-"-="    { return (SUB_ASSIGN_TOKEN); }
-"*="    { return (MUL_ASSIGN_TOKEN); }
-"/="    { return (DIV_ASSIGN_TOKEN); }
-"&="    { return (AND_ASSIGN_TOKEN); }
-"|="    { return (OR_ASSIGN_TOKEN); }
-"^="    { return (XOR_ASSIGN_TOKEN); }
-"%="    { return (MOD_ASSIGN_TOKEN); }
-"<<="   { return (SHL_ASSIGN_TOKEN); }
-">>="   { return (SAR_ASSIGN_TOKEN); }
-">>>="  { return (SHR_ASSIGN_TOKEN); }
 
 \"(\\.|[^\\"])*\"       { return(STRING_LITERAL); }
 
@@ -125,8 +116,7 @@ int Table_Lookup(struct KeywordToken Table[])
   for (Curr = Table; Curr->Keyword != ""; Curr++)
     if (strcmp(Curr->Keyword,yytext)==0)
       {
-        return (Curr->TokenCode);
+       return (Curr->TokenCode);
       }
-
   return -1;
 }
