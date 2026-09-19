@@ -9,58 +9,66 @@ main() {
   int a[2], b[2], pid, i;
   FILE *infile, *outfile, *temp;
   char **tokenv = (char **)malloc(sizeof(char *));
-  char **token = (char **)malloc(sizeof(char *));
+  char **prog = (char **)malloc(sizeof(char *) * 2);
   char *s;
-  char *buf = (char *)malloc(sizeof(char));
 
+  /*	char buf[1];  */
+
+  char *buf = (char *)malloc(sizeof(char));
+  /*	char *q=(char *)malloc(sizeof(char)*1024); */
+
+  int count;
+  /*	*buf='\0'; */
   infile = fopen("infile", "r");
-  outfile = fopen("outfile", "ab");
-  temp = fopen("temp", "ab");
-  tokenv[0] = "sort";
-  token[0] = "cat";
+  prog[0] = "cat";
+  prog[1] = NULL;
+  /*for(i=0;i < 1; i++) buf[i]=NULL;   */
+
   pipe(a);
   pipe(b);
   pid = fork();
   switch (pid) {
   case 0:
-    close(0);  /* close stdin */
-    dup(a[0]); /* 'execvp sort' to the pipe instead of stdin */
-    close(1);  /* close stdout */
-    dup(b[0]); /* send the result of sort to the pipe instead of stdout */
-    /*close(a[0]);*/
-    execvp(tokenv[0], tokenv); /* exec sort */
+    close(0);  /*close stdin */
+    dup(a[0]); /*0 == pipe instead of stdin */
+
+    close(1);  /*close stdout */
+    dup(b[1]); /* 1 == pipe instead of stdout */
+
+    /*	write(1,"hello",5);   */
+    execvp(prog[0], prog); /* exec sort */
+
     break;
   default:
-    close(1);  /* close stdout */
-    dup(a[1]); /* printf to the pipe instead of stdout */
-    /*close(a[1]);*/
+    close(1);  /*close stdout*/
+    dup(a[1]); /*write to pipe instead of stdout*/
+
     for (i = 0; (s = fread_long(infile)) != NULL; i++) {
-      if (strlen(s) >= 50) {
-        tokenv = realloc(tokenv, sizeof(char *) * (i + 2));
-        tokenv[i] = s;
-        write(1, tokenv[i], strlen(s));
-      }
+      /*	if (strlen(s) >= 50)
+              {
+                      tokenv = realloc(tokenv,sizeof(char*)*(i+2));
+                      tokenv[i]=s;
+                      write(1,tokenv[i],strlen(s));
+              }
+              */
+      write(1, tokenv[i], 2);
     }
-    close(0);  /* close stdin */
-    dup(b[1]); /* pipe takes the place of stdin */
-    execvp(token[0],
-           tokenv); /* exec 'cat' on sorted data to prove pipe works */
+    close(0);  /*close stdin*/
+    dup(b[0]); /*read from pipe instead of stdin*/
 
-    /*	for ( buf=read_long(); buf!=NULL; s=read_long() ){
-                    printf("%s\n",buf);
-            } */
+    read(0, buf, 5);
+    write(2, buf, 5);
 
-    /*		read(b[1],buf,strlen(s));
-                    printf("%s\n",buf);
-                    */
+    /*	for(; ( count = read(0,q,1024) ) != 0 ;  )
+            {
+                    int buflen=strlen(buf);
+                    fprintf(stderr,"q=%s\n",q);
+                    buf=(char*)realloc (buf,sizeof(char)*(buflen+count+1));
+                    strncat(buf+buflen,q,count);
+                    buf[buflen+count]='\0';
 
-    /* cheating ? */
-    /*
-    system("head -n 10 temp >> outfile");
-    system("/usr/xpg4/bin/tail -n 10 temp >> outfile");
-    fprintf(outfile,"Happy Birthday!\n");
-    */
-
+            }
+            */
     break;
   }
 }
