@@ -42,6 +42,7 @@ OUT="$1"
 shift
 
 mkdir -p "$WORK"
+rm -f "$WORK"/*
 
 # DOS 8.3 filenames: copy each source into bin/ under an 8-char-safe
 # name so tasm/tlink never choke on long filenames or ~1-mangling.
@@ -61,6 +62,7 @@ if [ "$watch" -eq 1 ]; then
         echo "[autoexec]"
         echo "mount c \"$DIR\""
         echo "c:"
+        echo "set path=%path%;c:\\"
         echo "cd bin"
         for n in "${names[@]}"; do
             echo "tasm $n.asm"
@@ -75,6 +77,7 @@ else
         echo "[autoexec]"
         echo "mount c \"$DIR\""
         echo "c:"
+        echo "set path=%path%;c:\\"
         echo "cd bin"
         for n in "${names[@]}"; do
             echo "tasm $n.asm >> build.log"
@@ -100,8 +103,8 @@ else
     status=1
 fi
 
-# Clean up intermediate DOS build artifacts, keep the tools.
-find "$WORK" -maxdepth 1 -type f \
-    ! -iname 'tasm.exe' ! -iname 'tlink.exe' -delete
+# Clean up intermediate DOS build artifacts; tasm.exe/tlink.exe live
+# directly under 366/, not bin/, so the whole scratch dir can be emptied.
+rm -f "$WORK"/*
 
 exit "$status"

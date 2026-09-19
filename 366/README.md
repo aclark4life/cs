@@ -24,7 +24,7 @@ Miscellaneous serial-port, timer, and shared header/macro files used by the abov
 
 ## Building
 
-Requires a DOS environment (or emulator). `bin/tasm.exe` and `bin/tlink.exe` are the original Turbo Assembler/Linker; `dosbox-build.sh` and `link.bat` automate assembling/linking under DOSBox.
+Requires a DOS environment (or emulator). `tasm.exe` and `tlink.exe` are the original Turbo Assembler/Linker; `dosbox-build.sh` and `link.bat` automate assembling/linking under DOSBox. `bin/` is a scratch build directory that `dosbox-build.sh` populates and clears on each run.
 ```bash
 ./dosbox-build.sh rocks.asm
 ```
